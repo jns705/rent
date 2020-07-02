@@ -22,7 +22,7 @@
 				<br><br><br>
 				
 				<div class="form-group">
-					<label class="control-label col-sm-2">아이디ss</label>
+					<label class="control-label col-sm-2">아이디</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" name="id" size="10" placeholder="아이디를 입력하세요"/>
 					</div>
