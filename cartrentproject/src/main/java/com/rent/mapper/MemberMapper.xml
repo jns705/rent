@@ -14,5 +14,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(#{id}, #{password}, #{name}, now(), #{tel}, #{address}, #{date_of_birth})
 	</insert>
 	
+	<!-- 회원가입 -->	
+	<select id="accountCheck" parameterType="String" resultType="String">
+		SELECT 	PASSWORD
+		FROM	MEMBER
+		WHERE	ID = #{ID}
+	</select>
+	
 	
 </mapper>

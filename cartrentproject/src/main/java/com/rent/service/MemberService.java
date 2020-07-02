@@ -1,5 +1,7 @@
 package com.rent.service;
 
+import java.util.HashMap;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -13,7 +15,13 @@ public class MemberService {
 	@Resource(name="com.rent.mapper.MemberMapper")
 	MemberMapper mapper;
 	
+	//회원가입
 	public int insertProc(MemberVO member)throws Exception{
 		return mapper.insertProc(member);
+	}
+	
+	//계정 체크
+	public String accountCheck(String id)throws Exception{
+		return mapper.accountCheck(id);
 	}
 }

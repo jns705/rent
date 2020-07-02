@@ -2,9 +2,13 @@ package com.rent.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rent.domain.MemberVO;
 import com.rent.service.MemberService;
@@ -40,5 +44,30 @@ public class MemberController {
 		member.setTel(request.getParameter("tel1")+"|"+request.getParameter("tel2")+"|"+request.getParameter("tel3"));
 		mMemberService.insertProc(member);
 		return "/member/loginForm";
+	}
+	
+	@RequestMapping("/loginProc")
+	public String loginProc(@RequestParam String id, @RequestParam String password, HttpSession session, Model model)throws Exception{
+		String login_msg = "";
+		if(mMemberService.accountCheck(id)==null)
+			login_msg = "아이디가 틀렸습니다.";
+		else if(!mMemberService.accountCheck(id).equals(password))
+			login_msg = "비밀번호가 틀렸습니다.";
+		else if(mMemberService.accountCheck(id).equals(password))
+			session.setAttribute("id", id);
+		model.addAttribute("msg", login_msg);
+		
+		return "/member/memberAlert";
+	}
+	
+	@RequestMapping("/memberAlert")
+	public String memberAlert() {
+		return "/member/memberAlert";
+	}
+	
+	@RequestMapping("/logOut")
+	public String logOut(HttpSession session) {
+		session.invalidate();
+		return "/main";
 	}
 }

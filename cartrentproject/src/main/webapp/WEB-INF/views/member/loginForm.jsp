@@ -10,12 +10,16 @@
 <title>솔렌트카 로그인 페이지</title>
 </head>
 <body>
-	
+	<c:if test="${sessionScope.id != null}">
+		<script type="text/javascript">
+			location.href='${path}/main';
+		</script>
+	</c:if>
 	<div class="container">
 	<br>
-	<label class="control-label"><font size="+3"><b>이메일 로그인</b></font></label><br>
+	<label class="control-label"><font size="+3"><b>이메일 로그인${sessionScope.wd}</b></font></label><br>
 	<label class="control-label">본인 견적이력 확인 / 상담요청 내역 확인 / 월렌트 예약용</label><br><br><br>
-		<form class="form-horizontal" action="${path}/loginProc" method="get">
+		<form class="form-horizontal" action="${path}/member/loginProc" method="get">
 			<div class="panel panel-default">
 				<div class="container">
 				<br><br><br>
