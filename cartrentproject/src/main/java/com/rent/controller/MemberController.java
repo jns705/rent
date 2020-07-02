@@ -6,14 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.rent.Service.MemberService;
 import com.rent.domain.MemberVO;
+import com.rent.service.MemberService;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 	
-	@Resource(name="com.rent.Service.MemberService")
+	@Resource(name="com.rent.service.MemberService")
 	MemberService mMemberService;	
 	
 	//로그인 홈페이지

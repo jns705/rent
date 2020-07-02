@@ -6,13 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.rent.mapper.MemberMapper">
 		
 	
-	<!-- 댓글 목록 추출 -->
-	<select id="commentList" resultType="com.edu.sboard.domain.CommentVO" parameterType="int">
-		SELECT	*
-		FROM	COMMENT
-		WHERE	BNO = #{bno}
-	</select>
-	
+	<!-- 회원가입 -->	
 	<insert id="insertProc" parameterType="com.rent.domain.MemberVO">
 		INSERT INTO MEMBER
 		(ID, PASSWORD, NAME, REG_DATE, TEL, ADDRESS, DATE_OF_BIRTH)

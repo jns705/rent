@@ -2,9 +2,12 @@ package com.rent.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.rent.domain.BuyVO;
 import com.rent.domain.RentVO;
 
+@Repository("com.rent.mapper.RentMapper")
 public interface RentMapper {
 	
 	//차량 등록
