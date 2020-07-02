@@ -9,7 +9,7 @@ import com.rent.mapper.RentImageMapper;
 @Service("com.rent.service.RentImageService")
 public class RentImageService {
 
-	@Resource(name="com.rent.service.RentImageMapper")
+	@Resource(name="com.rent.mapper.RentImageMapper")
 	RentImageMapper mapper;
 	
 	

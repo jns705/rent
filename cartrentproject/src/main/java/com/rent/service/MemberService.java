@@ -9,6 +9,6 @@ import com.rent.mapper.MemberMapper;
 @Service("com.rent.service.MemberService")
 public class MemberService {
 	
-	@Resource(name="com.rent.service.MemberMapper")
+	@Resource(name="com.rent.mapper.MemberMapper")
 	MemberMapper mapper;
 }

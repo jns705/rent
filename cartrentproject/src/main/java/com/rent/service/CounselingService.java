@@ -9,7 +9,7 @@ import com.rent.mapper.CounselingMapper;
 @Service("com.rent.service.CounselingService")
 public class CounselingService {
 	
-	@Resource(name="com.rent.service.CounselingMapper")
+	@Resource(name="com.rent.mapper.CounselingMapper")
 	CounselingMapper mapper;
 	
 	

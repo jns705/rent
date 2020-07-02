@@ -9,7 +9,7 @@ import com.rent.mapper.QNAMapper;
 @Service("com.rent.service.QNAService")
 public class QNAService {
 	
-	@Resource(name="com.rent.service.QNAMapper")
+	@Resource(name="com.rent.mapper.QNAMapper")
 	QNAMapper mapper;
 	
 	

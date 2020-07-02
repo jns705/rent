@@ -9,7 +9,7 @@ import com.rent.mapper.CommentMapper;
 @Service("com.rent.service.CommentService")
 public class CommentService {
 	
-	@Resource(name="com.rent.service.CommentMapper")
+	@Resource(name="com.rent.mapper.CommentMapper")
 	CommentMapper mapper;
 	
 	
