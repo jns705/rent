@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class RentPrice {
+public class RentPriceVO {
 	private int rentPrice_id;
 	private int rent_id;
 	private String rent_kind;
