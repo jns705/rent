@@ -6,7 +6,7 @@
 
 	    <!-- header 시작 -->
     <nav class="navbar navbar-default">
-    	<a class="navbar-brand" href="/">
+    	<a class="navbar-brand" href="${path}/main">
     		<!-- <img alt="Brand" src="/resources/images/toplogo_w.png" /> -->
     		<img alt="Brand" src="http://localhost:8082/static/img/logo2.png"  style="margin-top:-10px;" height="50" width="70px;"/>
     	</a>
@@ -31,7 +31,7 @@
                     
                     <li class="nav-menu nav-call primary" id="company"><a data-toggle="modal" data-target="#contact-modal" href="#"><span class="glyphicon glyphicon-earphone"></span>&nbsp;간편상담</a></li>
                     
-						<li class="nav-menu nav-login"><a href="#" onclick="javascript:go_login();"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
+						<li class="nav-menu nav-login <c:if test="${fn : contains(URL, 'login')}"> active</c:if> "><a href="${path}/member/loginForm"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
 						<!-- <li class="nav-menu nav-login"><a href="/login?param=Y"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li> -->
 					
                     <!--
