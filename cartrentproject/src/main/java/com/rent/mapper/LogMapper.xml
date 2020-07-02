@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- LogMapper.java 파일의 주소를 네임스페이스를 기술한다. -->
+<mapper namespace="com.rent.mapper.LogMapper">
+	
+	<!-- 로그 메시지 등록 -->
+	<insert id="insertLog" parameterType="String">
+		insert into 테이블이름
+				(변수명, 변수명)
+		values(#{content}, now())
+	</insert>
+	
+	
+    
+</mapper>
+
