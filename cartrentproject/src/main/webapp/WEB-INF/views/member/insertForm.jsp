@@ -16,7 +16,7 @@
 	<div class="container">
 	<br>
 	<label class="control-label"><font size="+3"><b>간편 회원가입</b></font></label><br><br>
-		<form class="form-horizontal" action="${path}/insertProc" method="get">
+		<form class="form-horizontal" action="${path}/member/insertProc" method="get">
 			<div class="panel panel-default">
 				<div class="container">
 				<br><br><br>
