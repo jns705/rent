@@ -36,7 +36,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label col-sm-2">비밀번호 확인</label>
+					<label class="control-label col-sm-2">비밀번호 확인z</label>
 					<div class="col-sm-4">
 						<input type="password" class="form-control" name="rePassword" size="10" placeholder="비밀번호를 입력하세요"/>
 					</div>
