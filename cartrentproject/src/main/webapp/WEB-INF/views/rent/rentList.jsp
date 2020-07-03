@@ -324,11 +324,7 @@
 	<div style="float:left;width:100%;">
 		<!-- <span style="float:left;">※ 보증금 20% 기준 (단, 차가 4500만원 초과 시 25%)</span>
 		<span style="float:left; padding-left: 20%;">※ 연간 약정운행거리 : 1,0000km 기준</span> -->
-		
 		<span style="float:right;">2020년 07월 현재 </span>
-		
-		
-		
 	</div>
 	<!-- 리스트 -->
 	<table class="rent-list tablesorter sticky-enabled main-list" id="attachments">
@@ -347,24 +343,690 @@
 			<col width="7%"/>			
 		</colgroup>
 		<thead>
-			<tr class="rent-list-title" style="background-color: #F6F6F6; border-top: 0px;" onmouseover="this.style.cursor='default'">
-				<th colspan="16" class="rent-list-title">
-					<div style="float:left;width:100%;">
-						<!-- <span style="float:left;">※ 보증금 20% 기준 (단, 차가 4500만원 초과 시 25%)</span> -->
-						<!-- <span style="float:left;">※ 보증금 20% 기준 ( 보증금에 따라 대여요금이 변동됨,&nbsp;&nbsp;<span class="label label-success label-green" onmouseover="this.style.cursor='default'">상세보기</span>&nbsp;&nbsp;참조 )</span> -->
-						<span style="float:left;">※ 보증금 20% 기준 ( 보증금에 따라 대여요금이 변동됨,&nbsp;&nbsp;상세페이지&nbsp;참조 )</span>
-						
-							<span style="float:right;">※ 연간 약정운행거리 : 10,000km 기준 ( 1,000km 단위로 조정 가능 )</span>
-							
-						
-						
-						
+			<tr class="rent-list-title" style="background-color: #F6F6F6; border-top: 0px; cursor: default;" onmouseover="this.style.cursor='default'">
+				<th colspan="16" class="rent-list-title one">
+					<div style="float:left;width:100%;" class="one">
+						<span style="float:left;" class="one">※ 보증금 20% 기준 ( 보증금에 따라 대여요금이 변동됨,&nbsp;&nbsp;상세페이지&nbsp;참조 )</span>
+						<span style="float:right;" class="one">※ 연간 약정운행거리 : 10,000km 기준 ( 1,000km 단위로 조정 가능 )</span>
 					</div>
 				</th>
 			</tr>
-			</thead>
-			</table>
+			<tr class="rent-list-sub-head rent-list-title sticky" onmouseover="this.style.cursor='default'">
+				<th colspan="5" class="rent-list-rightest-item two">차량 정보</th>
+				<th colspan="11" class="two">장기렌트 월대여료(원, VAT 별도)</th>
+			</tr>
+			<tr class="rent-list-title sticky"  onmouseover="this.style.cursor='default'">
+				<th rowspan="2" class="thr">차명</th>
+				<th rowspan="2" class="thr">구분</th>
+				<th rowspan="2" class="thr">변속기</th>
+				<th rowspan="2" class="thr">연료</th>
+				<th rowspan="2" class="rent-list-rightest-item thr">차량가격<br/>(만원)</th>
+				<th colspan="3" class="rent-list-rightest-item thr">정비 미포함(기본식)&nbsp;&nbsp;
+					<span data-toggle="modal" data-target="#info-modal" class="glyphicon glyphicon-question-sign info-modal-btn" value="2"></span>
+				</th>
+				<th colspan="3" class="thr">정비 포함(일반식)&nbsp;&nbsp;
+					<span data-toggle="modal" data-target="#info-modal" class="glyphicon glyphicon-question-sign info-modal-btn" value="1"></span>
+				</th>
+				<th class="rent-list-rightest-item thr"></th>
+			</tr>
+			<tr class="rent-list-title sticky" onmouseover="this.style.cursor='default'">
+				<th class="sorter-false fou" >60개월</th>
+				<th class="sorter-false fou">48개월</th>
+				<th class="sorter-false rent-list-rightest-item fou">36개월</th>
+				<th class="sorter-false fou">60개월</th> <!-- sorter-false 해야 sorting 비활성화됨  -->
+				<th class="sorter-false fou">48개월</th>
+				<th class="sorter-false fou">36개월</th>
+				<th width="50px;" class="fou"></th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			
+			
+				
+					<tr>
+						<td param="217:HP 000028386781" onmouseover="this.style.cursor='default'" onclick="event.cancelBubble=true">							
+							
+							
+							
+								<div style="padding-bottom: 10px;">									
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/medal_1.png" style="width: 20px; height: 20px;">
+										&nbsp;인기
+									</span>
+									&nbsp;
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/new_2.png" style="width: 20px; height: 20px;">
+										&nbsp;신규차종
+									</span>
+								</div>
+							
+							제네시스 G80 (RG3)
+							<input type="hidden" class="list-comp-nm" value="현대">
+							
+						</td>
+						<td class="text-left">가솔린 2.5 터보</td>
+						<td>오토</td>
+						<td>휘발유</td>
+						<td class="rent-list-rightest-item-light">5,291</td>
+						<td id="HP 0000283867825" class="list-price" style="color: #16519c !important;">642,600</td>
+						<td id="HP 0000283867829" class="list-price">676,600</td>
+						<td id="" class="list-price rent-list-rightest-item-light">734,700</td>
+						
+						<td id="HP 000028386788" class="list-price" style="color: #16519c !important;">
+							
+								
+								681,400
+							
+						</td>
+						<td id="HP 000028386783" class="list-price">
+							
+								
+								712,100
+							
+						</td>
+						<td id="HP 000028386782" class="list-price">
+							
+								
+								766,800
+							
+						</td>
+						<td>
+							<span class="detail-span detail-new" param="217:HP 000028386781">
+								<!-- <img src="/resources/images/right-arrow.png" title="상세보기" /> -->
+								<!-- <span style="color: green; font-weight: bold; font-size: 12px;" >[상세보기]</span> -->
+								<span class="label label-success label-green">상세보기</span>							
+							</span>
+						</td>
+					</tr>				
+				
+					<tr>
+						<td param="218:HP 000028386841" onmouseover="this.style.cursor='default'" onclick="event.cancelBubble=true">							
+							
+							
+							
+								<div style="padding-bottom: 10px;">									
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/medal_1.png" style="width: 20px; height: 20px;">
+										&nbsp;인기
+									</span>
+									&nbsp;
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/new_2.png" style="width: 20px; height: 20px;">
+										&nbsp;신규차종
+									</span>
+								</div>
+							
+							제네시스 G80 (RG3)
+							<input type="hidden" class="list-comp-nm" value="현대">
+							
+						</td>
+						<td class="text-left">가솔린 3.5 터보</td>
+						<td>오토</td>
+						<td>휘발유</td>
+						<td class="rent-list-rightest-item-light">5,939</td>
+						<td id="HP 0000283868418" class="list-price" style="color: #16519c !important;">742,300</td>
+						<td id="HP 0000283868422" class="list-price">785,000</td>
+						<td id="" class="list-price rent-list-rightest-item-light">860,300</td>
+						
+						<td id="HP 0000283868429" class="list-price" style="color: #16519c !important;">
+							
+								
+								783,400
+							
+						</td>
+						<td id="HP 0000283868423" class="list-price">
+							
+								
+								822,700
+							
+						</td>
+						<td id="HP 0000283868412" class="list-price">
+							
+								
+								894,300
+							
+						</td>
+						<td>
+							<span class="detail-span detail-new" param="218:HP 000028386841">
+								<!-- <img src="/resources/images/right-arrow.png" title="상세보기" /> -->
+								<!-- <span style="color: green; font-weight: bold; font-size: 12px;" >[상세보기]</span> -->
+								<span class="label label-success label-green">상세보기</span>							
+							</span>
+						</td>
+					</tr>				
+				
+					<tr>
+						<td param="840:HP 000028395481" onmouseover="this.style.cursor='default'" onclick="event.cancelBubble=true">							
+							
+							
+							
+								<div style="padding-bottom: 10px;">									
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/medal_1.png" style="width: 20px; height: 20px;">
+										&nbsp;인기
+									</span>
+									&nbsp;
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/new_2.png" style="width: 20px; height: 20px;">
+										&nbsp;신규차종
+									</span>
+								</div>
+							
+							쏘렌토 MQ4
+							<input type="hidden" class="list-comp-nm" value="기아">
+							
+						</td>
+						<td class="text-left">2.2 디젤 프레스티지 5인승</td>
+						<td>오토</td>
+						<td>경유</td>
+						<td class="rent-list-rightest-item-light">3,308</td>
+						<td id="HP 0000283954825" class="list-price" style="color: #16519c !important;">437,100</td>
+						<td id="HP 0000283954829" class="list-price">459,600</td>
+						<td id="" class="list-price rent-list-rightest-item-light">499,200</td>
+						
+						<td id="HP 000028395488" class="list-price" style="color: #16519c !important;">
+							
+								
+								471,500
+							
+						</td>
+						<td id="HP 000028395483" class="list-price">
+							
+								
+								491,100
+							
+						</td>
+						<td id="HP 000028395482" class="list-price">
+							
+								
+								527,700
+							
+						</td>
+						<td>
+							<span class="detail-span detail-new" param="840:HP 000028395481">
+								<!-- <img src="/resources/images/right-arrow.png" title="상세보기" /> -->
+								<!-- <span style="color: green; font-weight: bold; font-size: 12px;" >[상세보기]</span> -->
+								<span class="label label-success label-green">상세보기</span>							
+							</span>
+						</td>
+					</tr>				
+				
+					<tr>
+						<td param="841:HP 000028395541" onmouseover="this.style.cursor='default'" onclick="event.cancelBubble=true">							
+							
+							
+							
+								<div style="padding-bottom: 10px;">									
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/medal_1.png" style="width: 20px; height: 20px;">
+										&nbsp;인기
+									</span>
+									&nbsp;
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/new_2.png" style="width: 20px; height: 20px;">
+										&nbsp;신규차종
+									</span>
+								</div>
+							
+							쏘렌토 MQ4
+							<input type="hidden" class="list-comp-nm" value="기아">
+							
+						</td>
+						<td class="text-left">2.2 디젤 노블레스 5인승</td>
+						<td>오토</td>
+						<td>경유</td>
+						<td class="rent-list-rightest-item-light">3,603</td>
+						<td id="HP 0000283955425" class="list-price" style="color: #16519c !important;">472,500</td>
+						<td id="HP 0000283955429" class="list-price">498,100</td>
+						<td id="" class="list-price rent-list-rightest-item-light">542,300</td>
+						
+						<td id="HP 000028395548" class="list-price" style="color: #16519c !important;">
+							
+								
+								508,400
+							
+						</td>
+						<td id="HP 000028395543" class="list-price">
+							
+								
+								531,000
+							
+						</td>
+						<td id="HP 000028395542" class="list-price">
+							
+								
+								572,000
+							
+						</td>
+						<td>
+							<span class="detail-span detail-new" param="841:HP 000028395541">
+								<!-- <img src="/resources/images/right-arrow.png" title="상세보기" /> -->
+								<!-- <span style="color: green; font-weight: bold; font-size: 12px;" >[상세보기]</span> -->
+								<span class="label label-success label-green">상세보기</span>							
+							</span>
+						</td>
+					</tr>				
+				
+					<tr>
+						<td param="842:HP 000028395601" onmouseover="this.style.cursor='default'" onclick="event.cancelBubble=true">							
+							
+							
+							
+								<div style="padding-bottom: 10px;">									
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/medal_1.png" style="width: 20px; height: 20px;">
+										&nbsp;인기
+									</span>
+									&nbsp;
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/new_2.png" style="width: 20px; height: 20px;">
+										&nbsp;신규차종
+									</span>
+								</div>
+							
+							쏘렌토 MQ4
+							<input type="hidden" class="list-comp-nm" value="기아">
+							
+						</td>
+						<td class="text-left">2.2 디젤 프레스티지 6인승</td>
+						<td>오토</td>
+						<td>경유</td>
+						<td class="rent-list-rightest-item-light">3,387</td>
+						<td id="HP 0000283956018" class="list-price" style="color: #16519c !important;">440,200</td>
+						<td id="HP 000028395606" class="list-price">462,100</td>
+						<td id="" class="list-price rent-list-rightest-item-light">500,900</td>
+						
+						<td id="HP 0000283956014" class="list-price" style="color: #16519c !important;">
+							
+								
+								475,000
+							
+						</td>
+						<td id="HP 000028395607" class="list-price">
+							
+								
+								494,000
+							
+						</td>
+						<td id="HP 0000283956012" class="list-price">
+							
+								
+								529,700
+							
+						</td>
+						<td>
+							<span class="detail-span detail-new" param="842:HP 000028395601">
+								<!-- <img src="/resources/images/right-arrow.png" title="상세보기" /> -->
+								<!-- <span style="color: green; font-weight: bold; font-size: 12px;" >[상세보기]</span> -->
+								<span class="label label-success label-green">상세보기</span>							
+							</span>
+						</td>
+					</tr>				
+				
+					<tr>
+						<td param="843:HP 000028395661" onmouseover="this.style.cursor='default'" onclick="event.cancelBubble=true">							
+							
+							
+							
+								<div style="padding-bottom: 10px;">									
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/medal_1.png" style="width: 20px; height: 20px;">
+										&nbsp;인기
+									</span>
+									&nbsp;
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/new_2.png" style="width: 20px; height: 20px;">
+										&nbsp;신규차종
+									</span>
+								</div>
+							
+							쏘렌토 MQ4
+							<input type="hidden" class="list-comp-nm" value="기아">
+							
+						</td>
+						<td class="text-left">2.2 디젤 노블레스 6인승</td>
+						<td>오토</td>
+						<td>경유</td>
+						<td class="rent-list-rightest-item-light">3,721</td>
+						<td id="HP 0000283956618" class="list-price" style="color: #16519c !important;">479,400</td>
+						<td id="HP 000028395666" class="list-price">503,900</td>
+						<td id="" class="list-price rent-list-rightest-item-light">547,400</td>
+						
+						<td id="HP 0000283956614" class="list-price" style="color: #16519c !important;">
+							
+								
+								515,900
+							
+						</td>
+						<td id="HP 000028395667" class="list-price">
+							
+								
+								537,300
+							
+						</td>
+						<td id="HP 0000283956612" class="list-price">
+							
+								
+								577,600
+							
+						</td>
+						<td>
+							<span class="detail-span detail-new" param="843:HP 000028395661">
+								<!-- <img src="/resources/images/right-arrow.png" title="상세보기" /> -->
+								<!-- <span style="color: green; font-weight: bold; font-size: 12px;" >[상세보기]</span> -->
+								<span class="label label-success label-green">상세보기</span>							
+							</span>
+						</td>
+					</tr>				
+				
+					<tr>
+						<td param="847:HP 000028395841" onmouseover="this.style.cursor='default'" onclick="event.cancelBubble=true">							
+							
+							
+							
+								<div style="padding-bottom: 10px;">									
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/medal_1.png" style="width: 20px; height: 20px;">
+										&nbsp;인기
+									</span>
+									&nbsp;
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/new_2.png" style="width: 20px; height: 20px;">
+										&nbsp;신규차종
+									</span>
+								</div>
+							
+							쏘렌토 MQ4 하이브리드
+							<input type="hidden" class="list-comp-nm" value="기아">
+							
+						</td>
+						<td class="text-left">1.6 터보 프레스티지 5인승</td>
+						<td>오토</td>
+						<td>휘발유</td>
+						<td class="rent-list-rightest-item-light">3,693</td>
+						<td id="HP 0000283958425" class="list-price" style="color: #16519c !important;">464,000</td>
+						<td id="HP 0000283958429" class="list-price">487,300</td>
+						<td id="" class="list-price rent-list-rightest-item-light">529,700</td>
+						
+						<td id="HP 000028395848" class="list-price" style="color: #16519c !important;">
+							
+								
+								502,100
+							
+						</td>
+						<td id="HP 000028395843" class="list-price">
+							
+								
+								522,200
+							
+						</td>
+						<td id="HP 000028395842" class="list-price">
+							
+								
+								561,300
+							
+						</td>
+						<td>
+							<span class="detail-span detail-new" param="847:HP 000028395841">
+								<!-- <img src="/resources/images/right-arrow.png" title="상세보기" /> -->
+								<!-- <span style="color: green; font-weight: bold; font-size: 12px;" >[상세보기]</span> -->
+								<span class="label label-success label-green">상세보기</span>							
+							</span>
+						</td>
+					</tr>				
+				
+					<tr>
+						<td param="848:HP 000028395901" onmouseover="this.style.cursor='default'" onclick="event.cancelBubble=true">							
+							
+							
+							
+								<div style="padding-bottom: 10px;">									
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/medal_1.png" style="width: 20px; height: 20px;">
+										&nbsp;인기
+									</span>
+									&nbsp;
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/new_2.png" style="width: 20px; height: 20px;">
+										&nbsp;신규차종
+									</span>
+								</div>
+							
+							쏘렌토 MQ4 하이브리드
+							<input type="hidden" class="list-comp-nm" value="기아">
+							
+						</td>
+						<td class="text-left">1.6 터보 노블레스 5인승</td>
+						<td>오토</td>
+						<td>휘발유</td>
+						<td class="rent-list-rightest-item-light">3,973</td>
+						<td id="HP 0000283959025" class="list-price" style="color: #16519c !important;">496,700</td>
+						<td id="HP 0000283959029" class="list-price">523,000</td>
+						<td id="" class="list-price rent-list-rightest-item-light">569,900</td>
+						
+						<td id="HP 000028395908" class="list-price" style="color: #16519c !important;">
+							
+								
+								536,300
+							
+						</td>
+						<td id="HP 000028395903" class="list-price">
+							
+								
+								559,300
+							
+						</td>
+						<td id="HP 000028395902" class="list-price">
+							
+								
+								602,600
+							
+						</td>
+						<td>
+							<span class="detail-span detail-new" param="848:HP 000028395901">
+								<!-- <img src="/resources/images/right-arrow.png" title="상세보기" /> -->
+								<!-- <span style="color: green; font-weight: bold; font-size: 12px;" >[상세보기]</span> -->
+								<span class="label label-success label-green">상세보기</span>							
+							</span>
+						</td>
+					</tr>				
+				
+					<tr>
+						<td param="849:HP 000028395961" onmouseover="this.style.cursor='default'" onclick="event.cancelBubble=true">							
+							
+							
+							
+								<div style="padding-bottom: 10px;">									
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/medal_1.png" style="width: 20px; height: 20px;">
+										&nbsp;인기
+									</span>
+									&nbsp;
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/new_2.png" style="width: 20px; height: 20px;">
+										&nbsp;신규차종
+									</span>
+								</div>
+							
+							쏘렌토 MQ4 하이브리드
+							<input type="hidden" class="list-comp-nm" value="기아">
+							
+						</td>
+						<td class="text-left">1.6 터보 프레스티지 6인승</td>
+						<td>오토</td>
+						<td>휘발유</td>
+						<td class="rent-list-rightest-item-light">3,773</td>
+						<td id="HP 0000283959625" class="list-price" style="color: #16519c !important;">465,700</td>
+						<td id="HP 0000283959629" class="list-price">487,400</td>
+						<td id="" class="list-price rent-list-rightest-item-light">530,100</td>
+						
+						<td id="HP 000028395968" class="list-price" style="color: #16519c !important;">
+							
+								
+								504,200
+							
+						</td>
+						<td id="HP 000028395963" class="list-price">
+							
+								
+								522,800
+							
+						</td>
+						<td id="HP 000028395962" class="list-price">
+							
+								
+								562,100
+							
+						</td>
+						<td>
+							<span class="detail-span detail-new" param="849:HP 000028395961">
+								<!-- <img src="/resources/images/right-arrow.png" title="상세보기" /> -->
+								<!-- <span style="color: green; font-weight: bold; font-size: 12px;" >[상세보기]</span> -->
+								<span class="label label-success label-green">상세보기</span>							
+							</span>
+						</td>
+					</tr>				
+				
+					<tr>
+						<td param="850:HP 000028396021" onmouseover="this.style.cursor='default'" onclick="event.cancelBubble=true">							
+							
+							
+							
+								<div style="padding-bottom: 10px;">									
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/medal_1.png" style="width: 20px; height: 20px;">
+										&nbsp;인기
+									</span>
+									&nbsp;
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/new_2.png" style="width: 20px; height: 20px;">
+										&nbsp;신규차종
+									</span>
+								</div>
+							
+							쏘렌토 MQ4 하이브리드
+							<input type="hidden" class="list-comp-nm" value="기아">
+							
+						</td>
+						<td class="text-left">1.6 터보 노블레스 6인승</td>
+						<td>오토</td>
+						<td>휘발유</td>
+						<td class="rent-list-rightest-item-light">4,093</td>
+						<td id="HP 0000283960225" class="list-price" style="color: #16519c !important;">502,200</td>
+						<td id="HP 0000283960229" class="list-price">527,000</td>
+						<td id="" class="list-price rent-list-rightest-item-light">573,600</td>
+						
+						<td id="HP 000028396028" class="list-price" style="color: #16519c !important;">
+							
+								
+								542,300
+							
+						</td>
+						<td id="HP 000028396023" class="list-price">
+							
+								
+								563,800
+							
+						</td>
+						<td id="HP 000028396022" class="list-price">
+							
+								
+								606,800
+							
+						</td>
+						<td>
+							<span class="detail-span detail-new" param="850:HP 000028396021">
+								<!-- <img src="/resources/images/right-arrow.png" title="상세보기" /> -->
+								<!-- <span style="color: green; font-weight: bold; font-size: 12px;" >[상세보기]</span> -->
+								<span class="label label-success label-green">상세보기</span>							
+							</span>
+						</td>
+					</tr>				
+				
+					<tr>
+						<td param="844:HP 000028395721" onmouseover="this.style.cursor='default'" onclick="event.cancelBubble=true">							
+							
+							
+							
+								<div style="padding-bottom: 10px;">									
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/medal_1.png" style="width: 20px; height: 20px;">
+										&nbsp;인기
+									</span>
+									&nbsp;
+									<span style="font-size: 9px; font-style: italic; font-weight: bold;">
+										<img src="/resources/images/new_2.png" style="width: 20px; height: 20px;">
+										&nbsp;신규차종
+									</span>
+								</div>
+							
+							쏘렌토 MQ4
+							<input type="hidden" class="list-comp-nm" value="기아">
+							
+						</td>
+						<td class="text-left">2.2 디젤 프레스티지 7인승</td>
+						<td>오토</td>
+						<td>경유</td>
+						<td class="rent-list-rightest-item-light">3,377</td>
+						<td id="HP 0000283957218" class="list-price" style="color: #16519c !important;">437,700</td>
+						<td id="HP 000028395726" class="list-price">460,600</td>
+						<td id="" class="list-price rent-list-rightest-item-light">501,100</td>
+						
+						<td id="HP 0000283957214" class="list-price" style="color: #16519c !important;">
+							
+								
+								472,400
+							
+						</td>
+						<td id="HP 000028395727" class="list-price">
+							
+								
+								492,500
+							
+						</td>
+						<td id="HP 0000283957212" class="list-price">
+							
+								
+								529,900
+							
+						</td>
+						<td>
+							<span class="detail-span detail-new" param="844:HP 000028395721">
+								<!-- <img src="/resources/images/right-arrow.png" title="상세보기" /> -->
+								<!-- <span style="color: green; font-weight: bold; font-size: 12px;" >[상세보기]</span> -->
+								<span class="label label-success label-green">상세보기</span>							
+							</span>
+						</td>
+					</tr>
+			
+		</tbody>
+	</table>
 			
 </body>
+<style>
+
+.one {
+ 	background-color: gray;
+  	position: sticky;
+  	top: 0px;
+}
+.two {
+	background-color: gray;
+  	position: sticky;
+  	top: 20px;
+}
+.thr {
+	background-color: gray;
+  	position: sticky;
+  	top: 40px;
+}
+
+.fou {
+	background-color: gray;
+  	position: sticky;
+  	top: 61px;
+}
+</style>
 </html>
 </layoutTag:layout>
