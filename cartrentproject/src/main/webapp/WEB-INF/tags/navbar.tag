@@ -52,7 +52,7 @@
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
-        </div>
+        </div>s
     </nav>
     <!-- header 끝 -->
     
