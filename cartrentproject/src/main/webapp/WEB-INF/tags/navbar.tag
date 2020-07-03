@@ -39,9 +39,9 @@
 					<c:if test="${sessionScope.id eq 'master'}">
                     <li class="nav-menu nav-estimate primary dropdown" id="estimate-span">
                     <a href="${path}/admin"class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;관리자 메뉴<span class="caret"></a>
+                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;관리자 메뉴&nbsp;<span class="caret"></span></a>
 				 	<ul class="dropdown-menu" role="menu">
-				 		<li><a href="${path}/admin/carInsertForm">차량등록</a></li>
+				 		<li><a href="${path}/admin/carInsert">차량등록</a></li>
 				 		<li><a href="${path}/admin/rentInsertForm">렌트등록</a></li>
 				 		<li><a href="${path}/admin/carList">차량리스트</a></li>
 				 		<li class="divider"></li>
@@ -52,7 +52,7 @@
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
-        </div>s
+        </div>
     </nav>
     <!-- header 끝 -->
     
