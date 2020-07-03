@@ -1007,23 +1007,19 @@
 <style>
 
 .one {
- 	background-color: gray;
   	position: sticky;
   	top: 0px;
 }
 .two {
-	background-color: gray;
   	position: sticky;
   	top: 20px;
 }
 .thr {
-	background-color: gray;
   	position: sticky;
   	top: 40px;
 }
 
 .fou {
-	background-color: gray;
   	position: sticky;
   	top: 61px;
 }
