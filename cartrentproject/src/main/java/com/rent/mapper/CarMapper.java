@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.rent.domain.CarColor;
 import com.rent.domain.CarVO;
+import com.rent.domain.OptionCarVO;
 
-@Repository("com.rent.mapper.CarMapper")
+@Repository(value = "com.rent.mapper.CarMapper")
 public interface CarMapper {
 	
 	/**
@@ -14,6 +16,12 @@ public interface CarMapper {
 	 * @param CarTable
 	 */
 	public int carInsert(CarVO car) throws Exception;
+	
+	//차량색상 등록
+	public int colorInsert(CarColor file) throws Exception;
+	
+	//차량 옵션 등록
+	public int optionInsert(OptionCarVO option)throws Exception;
 	
 	/**
 	 * 차량 수정
@@ -44,6 +52,18 @@ public interface CarMapper {
 	 * @param CarTable
 	 */
 	public CarVO carDetail(String car_id) throws Exception;
+	
+	//차량 색상 상세 조회
+	public CarVO carColorDetail(String car_id) throws Exception;
+	
+	//차량 옵션 상세 조회
+	public CarVO carOptionDetail(String car_id) throws Exception;
+	
+	//차량 색상 조회
+	public List<CarVO> carColorList() throws Exception;
+	
+	//차량 옵션 조회
+	public List<CarVO> carOptionList() throws Exception;
 	
 	//차목록(조건검색)
 	//public List<CarVO> carListSelect(String 월대여료, 차명, 연료...) throws Exception;
