@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse"
                 id="bs-example-navbar-collapse-1" style="width: 1000px;">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-menu <c:if test="${fn : contains(URL, 'list')}">active</c:if> " id="longRent"><a href="#">장기렌트</a></li>
+                    <li class="nav-menu <c:if test="${fn : contains(URL, 'List')}">active</c:if> " id="longRent"><a href="${path}/rent/rentList">장기렌트</a></li>
                     <li class="nav-menu" id="lease">
                     	<a href="/lease/domestic">
                     		<span>리스 </span>
@@ -26,7 +26,6 @@
                     
                     <li class="nav-menu" id="month"><a href="#">월렌트</a></li>
                     
-                    <!-- <li class="nav-menu nav-estimate primary" onclick="window.open('/estimate/smart/step1','esti_popup','width=1200,height=1200,top=0,left=0,scrollbars=yes')" ><a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;실시간견적</a></li> -->
                     <li class="nav-menu nav-estimate primary" id="estimate-span"><a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;실시간 견적</a></li>
                     
                     <li class="nav-menu nav-call primary" id="company"><a data-toggle="modal" data-target="#contact-modal" href="#"><span class="glyphicon glyphicon-earphone"></span>&nbsp;간편상담</a></li>
@@ -36,12 +35,20 @@
                     	<c:if test="${sessionScope.id != null}">
 						<li class="nav-menu nav-login <c:if test="${fn : contains(URL, 'login')}"> active</c:if> "><a href="${path}/member/logOut"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
 						</c:if>
-						<!-- <li class="nav-menu nav-login"><a href="/login?param=Y"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li> -->
-					
-                    <!--
-                     	
-		                    <li><a href="/login"><button type="button" class="login-btn">로그인</button></a></li>
-	                 -->
+						
+					<c:if test="${sessionScope.id eq 'master'}">
+                    <li class="nav-menu nav-estimate primary dropdown" id="estimate-span">
+                    <a href="${path}/admin"class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;관리자 메뉴<span class="caret"></a>
+				 	<ul class="dropdown-menu" role="menu">
+				 		<li><a href="${path}/admin/carInsertForm">차량등록</a></li>
+				 		<li><a href="${path}/admin/rentInsertForm">렌트등록</a></li>
+				 		<li><a href="${path}/admin/carList">차량리스트</a></li>
+				 		<li class="divider"></li>
+				 		<li><a href="#">Exit</a></li>
+				 	</ul>
+                    </li>
+                    </c:if>	
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -51,11 +58,6 @@
     
 <style>
 @charset "UTF-8";
-@import url(https://cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css);
-@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
-@import url(https://www.amazoncar.co.kr/resources/stylesheets/library/font-awesome.css);
-@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
 * {
   font-family: Noto Sans KR,sans-serif;
   font-weight: 300; }
