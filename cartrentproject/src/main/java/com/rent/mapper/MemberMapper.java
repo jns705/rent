@@ -1,7 +1,5 @@
 package com.rent.mapper;
 
-import java.util.HashMap;
-
 import org.springframework.stereotype.Repository;
 
 import com.rent.domain.MemberVO;
