@@ -9,7 +9,7 @@ import com.rent.mapper.CarOptionMapper;
 @Service("com.rent.service.CarOptionService")
 public class CarOptionService {
 	
-	@Resource(name="com.rent.service.CarOptionMapper")
+	@Resource(name="com.rent.mapper.CarOptionMapper")
 	CarOptionMapper mapper;
 	
 	
