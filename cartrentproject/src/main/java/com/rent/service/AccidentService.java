@@ -20,19 +20,19 @@ public class AccidentService {
 		System.out.println("accidentInsert() 실행중. . .");
 		return mapper.accidentInsert(accident);
 	}
-	/*
+	
 	//사고이력 수정
 	public int accidentUpdate(AccidentVO accident) throws Exception{
 		System.out.println("accidentUpdate() 실행중. . .");
 		return mapper.accidentUpdate(accident);
 	}
-	
+	/*
 	//사고이력 삭제
 	public int accidentDelete(int accident_id) throws Exception{
 		System.out.println("accidentDelete() 실행중. . .");
 		return mapper.accidentDelete(accident_id);
 	}
-	
+	*/
 	//전체목록
 	public List<AccidentVO> accidentList() throws Exception{
 		System.out.println("accidentList() 실행중. . .");
@@ -44,5 +44,5 @@ public class AccidentService {
 		System.out.println("accidentDetail() 실행중. . .");
 		return mapper.accidentDetail(accident_id);
 	}
-	*/
+	
 }

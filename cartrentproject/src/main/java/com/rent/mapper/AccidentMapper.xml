@@ -8,36 +8,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 사고이력 등록 -->
 	<insert id="accidentInsert" parameterType="com.rent.domain.AccidentVO">
 		insert into accident
-		 (accident_id, accident_date, accident_content, accident_price, special_note)
+		 (accident_id, accident_date, accident_content, accident_price, special_note, rent_id)
 		values
-		 (#{accident_id}, #{accident_date}, #{accident_content}, #{accident_price}, #{special_note})
+		 (#{accident_id}, #{accident_date}, #{accident_content}, #{accident_price}, #{special_note}, #{rent_id})
 	</insert>
-<!--  
-	 사고이력 수정
+ 
+	<!-- 사고이력 수정 -->
 	<update id="accidentUpdate" parameterType="com.rent.domain.AccidentVO">
 		update accident
-		set set accident_date = #{accident_date}, accident_content = #{accident_content},
-				accident_price = #{accident_price}, special_note = #{special_note}
+		set 	accident_date = #{accident_date}, accident_content = #{accident_content},
+				accident_price = #{accident_price}, special_note = #{special_note}, rent_id = #{rent_id}
 		where accident_id = #{accident_id}
 	</update>
-	
+<!-- 
 	사고이력 삭제
 	<delete id="accidentDelete" parameterType="int">
 		delete from accident
 		where accident_id = #{accident_id}
 	</delete>
-	
-	사고이력 전체목록 
+-->
+	<!-- 사고이력 전체목록 -->
 	<select id="accidentList" resultType="com.rent.domain.AccidentVO">
 		select * 
 		from accident
 	</select>
-	
-	사고이력 상세조회 
+
+	<!-- 사고이력 상세조회 -->
 	<select id="accidentDetail" parameterType="int" resultType="com.rent.domain.AccidentVO">
 		select *
 		from accident
 		where accident_id = #{accident_id}
 	</select>
--->		
+	
 </mapper>
