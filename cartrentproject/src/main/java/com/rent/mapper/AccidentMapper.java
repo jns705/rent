@@ -10,17 +10,18 @@ import com.rent.domain.AccidentVO;
 public interface AccidentMapper {
 	
 	//사고이력 등록
-	public int accidentInsert() throws Exception;
-	
+	public int accidentInsert(AccidentVO accident) throws Exception;
+	/*
 	//사고이력 수정
-	public int accidentUpdate() throws Exception;
+	public int accidentUpdate(AccidentVO accident) throws Exception;
 	
 	//사고이력 삭제
-	public int accidentDelete() throws Exception;
+	public int accidentDelete(int accident_id) throws Exception;
 	
 	//전체목록
 	public List<AccidentVO> accidentList() throws Exception;
 	
 	//상세조회
-	public AccidentVO accidentDetail(String accident_id) throws Exception;
+	public AccidentVO accidentDetail(int accident_id) throws Exception;
+	*/
 }
