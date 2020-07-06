@@ -89,7 +89,7 @@
 					var str = "";
 					$.each(data, function(key, value){
 						str += '<tr><td>'+ value.color +'</td><td>'+ value.color_image.substring(32);
-						str += '</td><img src='+ value.color_url + value.color_image + '></tr>';
+						str += '</td><td><img src="'+ value.color_url + value.color_image + '"with=150 height=70></td></tr>';
 					});
 					$('.image').html(str);
 				},
