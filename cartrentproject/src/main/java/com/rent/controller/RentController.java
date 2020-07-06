@@ -9,6 +9,6 @@ public class RentController {
 	
 	@RequestMapping("/rentList")
 	public String rentList() {
-		return "/rent/rentList";
+		return "/rent/skList";
 	}
 }
