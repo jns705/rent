@@ -38,15 +38,15 @@ public class CarService {
 	}
 	
 	
-	public CarVO carOptionDetail(String id) throws Exception{
-		return mapper.carOptionDetail(id);
+	public List<OptionCarVO> carOptionDetail(String rent_id) throws Exception{
+		return mapper.carOptionDetail(rent_id);
 	}
 	
 	public List<CarVO> carColorList() throws Exception{
 		return mapper.carColorList();
 	}
 	
-	public List<CarVO> carOptionList() throws Exception{
+	public List<OptionCarVO> carOptionList() throws Exception{
 		return mapper.carOptionList();
 	}
 }

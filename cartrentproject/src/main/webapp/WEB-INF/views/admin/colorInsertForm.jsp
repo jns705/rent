@@ -52,7 +52,7 @@
 				<div>
 					<table class="table">
 						<thead>
-							<tr class="info">
+							<tr class="info" align="center">
 								<th align="center">색상</th>
 								<th align="center">파일이름</th>
 								<th align="center">사진</th>
@@ -88,8 +88,9 @@
 				success : function(data){
 					var str = "";
 					$.each(data, function(key, value){
-						str += '<tr><td>'+ value.color +'</td><td>'+ value.color_image.substring(32);
-						str += '</td><img src='+ value.color_url + value.color_image + '></tr>';
+						console.log('</td><img src="http://localhost:8082/static/upload/'+value.color_image+'"></tr>');
+						str += '<tr align=center><td>'+ value.color +'</td><td>'+ value.color_image.substring(32);
+						str += '</td><td><img src="' + value.color_url + value.color_image + '"with=150 height=70></td></tr>';
 					});
 					$('.image').html(str);
 				},

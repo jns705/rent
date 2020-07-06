@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rent.mapper.RentMapper">
+		
+	
+	<!-- 렌트카 등록 -->	
+	<insert id="rentCarInsert" parameterType="com.rent.domain.RentVO">
+		INSERT INTO RENT
+		(car_id, color, milage, REG_DATE, location, special_note, Max_month, price, car_number)
+		VALUES
+		(#{car_id}, #{color}, #{milage}, now(), #{location}, #{special_note}, #{Max_month}, #{price}, #{car_number})
+	</insert>
+	
+	
+</mapper>

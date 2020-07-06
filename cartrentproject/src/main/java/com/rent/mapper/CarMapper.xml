@@ -31,9 +31,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 	<!-- 옵션 등록 -->
 	<insert id="optionInsert" parameterType="com.rent.domain.OptionCarVO">
 		INSERT INTO OPTIONCAR
-		(car_id, option_name, option_price, option_content)
+		(rent_id, option_name, option_price, option_content)
 		VALUES
-		(#{car_id}, #{option_name}, #{option_price}, #{option_content})
+		(#{rent_id}, #{option_name}, #{option_price}, #{option_content})
 	</insert>
 	
 		<!-- 차량 세부 조회 -->
@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 	<select id="carOptionDetail" parameterType="String" resultType="com.rent.domain.OptionCarVO">
 		SELECT	*
 		FROM	OPTIONCAR
-		WHERE	CAR_ID = #{car_id}
+		WHERE	RENT_ID = #{rent_id}
 	</select>
 	
 		<!-- 차량 색상 세부 조회 -->

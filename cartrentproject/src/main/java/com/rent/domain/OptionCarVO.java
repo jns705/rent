@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class OptionCarVO {
 	
-	private int car_id;
+	private int rent_id;
 	private String option_name;
 	private int option_price;
 	private String option_content;
