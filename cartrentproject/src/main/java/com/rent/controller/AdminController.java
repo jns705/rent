@@ -1,6 +1,7 @@
 package com.rent.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -12,12 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.rent.domain.CarColor;
 import com.rent.domain.CarVO;
 import com.rent.domain.OptionCarVO;
+import com.rent.domain.RentVO;
+import com.rent.service.CarColorService;
 import com.rent.service.CarService;
+import com.rent.service.RentService;
 
 
 @Controller
@@ -27,46 +32,36 @@ public class AdminController {
 	@Resource(name = "com.rent.service.CarService")
 	CarService carService;
 	
+	@Resource(name = "com.rent.service.CarColorService")
+	CarColorService colorService;
+	
+	@Resource(name = "com.rent.service.RentService")
+	RentService rentService;
 	
 	
+	//차량 등록
 	@RequestMapping("/carInsert")
-	public String carInsertForm()throws Exception{
+	public String carInsertForm(Model model)throws Exception{
 		return "/admin/carInsertForm";
 	}
 	
 	@RequestMapping("/carInsertProc")
-	public String carInsertForm(HttpServletRequest request)throws Exception{
-		
-		//게시글 등록 화면에서 입력한 값들을 실어나르기 위한 BoardVO를 생성한다.
-		CarVO 	 car 		= 	new CarVO();
-		
-		car.setCar_price		(Integer.parseInt(request.getParameter("car_price")));
-		car.setExhaust_volume	(Integer.parseInt(request.getParameter("exhaust_volume")));
-		car.setCar_kind			(request.getParameter("car_kind"));
-		car.setCar_name			(request.getParameter("car_name"));
-		car.setCar_number		(request.getParameter("car_name"));
-		car.setCar_year			(request.getParameter("car_year"));
-		car.setContent			(request.getParameter("content"));
-		car.setFuel				(request.getParameter("fuel"));
-		car.setMade_country		(request.getParameter("made_country"));
-		car.setManufacturer		(request.getParameter("manufacturer"));
-		car.setTransmission		(request.getParameter("transmission"));
-
+	public String carInsertForm(CarVO car)throws Exception{
 			carService.carInsert(car);
-
 		return "redirect:/admin/colorInsertForm/"+car.getCar_id();
-		
 	}
 	
+	//차 등록
 	@RequestMapping("/colorInsertForm/{id}")
 	public String colorInsertForm(Model model, @PathVariable String id) throws Exception{
 		model.addAttribute("list", carService.carList());
 		model.addAttribute("car_id", id);
+		model.addAttribute("option", carService.carOptionList());
 		return "/admin/colorInsertForm";
 	}
 	
 	@RequestMapping("/carColorProc")
-	public String carColorProc(@RequestParam(defaultValue = "1") int car_id, Model model, HttpServletRequest request, @RequestPart MultipartFile files)throws Exception{
+	public String carColorProc(@RequestParam(defaultValue = "1") int car_id, @RequestParam String color, Model model, @RequestPart MultipartFile files)throws Exception{
 		
 		//게시글 등록 화면에서 입력한 값들을 실어나르기 위한 BoardVO를 생성한다.
 		CarColor file		=	new CarColor();
@@ -83,14 +78,13 @@ public class AdminController {
 		}while(destinationFile.exists());
 		
 		//MultipartFile.transferTo() : 요청 시점의 임시 파일을 로컬 파일 시스템에 영구적으로 복사해준다.
-		
 		destinationFile.getParentFile().mkdir();
 		files.transferTo(destinationFile);
 		
-		file.setCar_id(car_id);
-		file.setColor(request.getParameter("color"));
-		file.setColor_image(destinationFileName);
-		file.setColor_url("http://localhost:8082/static/img/");
+		file.setCar_id		(car_id);
+		file.setColor		(color);
+		file.setColor_image	(destinationFileName);
+		file.setColor_url	("http://localhost:8082/static/upload/");
 		
 		carService.colorInsert(file);
 		}
@@ -98,31 +92,40 @@ public class AdminController {
 		return "redirect:/admin/colorInsertForm/"+car_id;
 	}
 	
-	@RequestMapping("/optionForm/{id}")
-	public String optionForm(Model model, @PathVariable String id) throws Exception{
+	//옵션 등록
+	@RequestMapping("/optionForm")
+	public String optionForm(Model model) throws Exception{
 		model.addAttribute("list", carService.carList());
-		model.addAttribute("car_id", id);
 		return "/admin/optionForm";
 	}
 	
 	@RequestMapping("/optionProc")
-	public String optionProc(@RequestParam int car_id, HttpServletRequest request)throws Exception{
+	public String optionProc(HttpServletRequest request)throws Exception{
 		OptionCarVO option = new OptionCarVO();
-		option.setCar_id(car_id);
+		option.setRent_id(0);
 		option.setOption_content(request.getParameter("option_content"));
 		option.setOption_name(request.getParameter("option_name"));
 		option.setOption_price(Integer.parseInt(request.getParameter("option_price")));
 		carService.optionInsert(option);
 		
-		return "redirect:/admin/optionForm/"+car_id;
+		return "redirect:/admin/optionForm";
 	}
 	
+	//옵션 전체 조회
+	@RequestMapping("/optionList")
+	@ResponseBody
+	public List<OptionCarVO> optionList()throws Exception{
+		return carService.carOptionList();
+	}
+	
+	//차량 목록
 	@RequestMapping("/carList")
 	public String carList(Model model)throws Exception{
 		model.addAttribute("list", carService.carList());
 		return "/admin/carList";
 	}
 	
+	//차량 상세정보
 	@RequestMapping("/carDetail/{id}")
 	public String carDetail(@PathVariable String id, Model model)throws Exception{
 		model.addAttribute("detail", carService.carDetail(id));
@@ -130,4 +133,35 @@ public class AdminController {
 		model.addAttribute("option", carService.carOptionList());
 		return "/admin/carDetail";
 	}
+	
+	//id에 따른 차량 색상 조회
+	@RequestMapping("/colorList")
+	@ResponseBody
+	public List<CarColor> colorList(@RequestParam String car_id)throws Exception{
+		System.out.println(car_id);
+		return colorService.carColorDetail(car_id);
+	}
+	
+	//렌트 입력 폼
+	@RequestMapping("/rentInsertForm")
+	public String rentInsertForm(Model model)throws Exception{
+		model.addAttribute("car", carService.carList());
+		model.addAttribute("option", carService.carOptionDetail("1"));
+		return "/admin/rentInsertForm";
+	}
+	
+	@RequestMapping("/getColor")
+	@ResponseBody
+	public List<CarColor> getColor(@RequestParam String car_id)throws Exception{
+		System.out.println(colorService.carColorDetail(car_id));
+		return colorService.carColorDetail(car_id);
+	}
+	
+	
+	 @RequestMapping("/rentInsertProc") 
+	 public String rentInsertProc(RentVO rent, Model model)throws Exception{ 
+		 rentService.rentCarInsert(rent); 
+		 return "/admin/rentInsertForm"; 
+	 }
+	 
 }

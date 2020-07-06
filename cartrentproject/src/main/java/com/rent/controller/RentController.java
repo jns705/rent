@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/rent")
 public class RentController {
 	
+	//렌트목록
 	@RequestMapping("/rentList")
 	public String rentList() {
 		return "/rent/skList";

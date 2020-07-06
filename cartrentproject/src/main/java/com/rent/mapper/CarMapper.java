@@ -57,13 +57,13 @@ public interface CarMapper {
 	public CarVO carColorDetail(String car_id) throws Exception;
 	
 	//차량 옵션 상세 조회
-	public CarVO carOptionDetail(String car_id) throws Exception;
+	public List<OptionCarVO> carOptionDetail(String rent_id) throws Exception;
 	
 	//차량 색상 조회
 	public List<CarVO> carColorList() throws Exception;
 	
 	//차량 옵션 조회
-	public List<CarVO> carOptionList() throws Exception;
+	public List<OptionCarVO> carOptionList() throws Exception;
 	
 	//차목록(조건검색)
 	//public List<CarVO> carListSelect(String 월대여료, 차명, 연료...) throws Exception;

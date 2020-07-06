@@ -8,6 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>차량 리스트</title>
+<style type="text/css">
+	  thead td {
+      position: sticky;
+      top: -1px;
+      background: red;
+  }
+</style>
 </head>
 <body>
 	

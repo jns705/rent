@@ -32,9 +32,7 @@
 						<select class="form-control" name="manufacturer">
 							<option value="현대">현대</option>
 							<option value="기아">기아</option>
-							<option value="한국GM(쉐보레)">한국GM(쉐보레)</option>
-							<option value="쌍용">쌍용</option>
-							<option value="르노삼성">르노삼성</option>
+							<option value="삼성">삼성</option>
 						</select>
 					</div>
 				</div>
@@ -50,14 +48,13 @@
 					<label class="control-label col-sm-2">차종</label>
 					<div class="col-sm-4">
 						<select class="form-control" name="car_kind">
-							<option value="중형·소형승용(LPG)">중형·소형승용(LPG)</option>
-							<option value="대형승용(LPG)">대형승용(LPG)</option>
-							<option value="소형승용/경승용(가솔린,디젤)">소형승용/경승용(가솔린,디젤)</option>
-							<option value="쌍용">쌍용</option>
-							<option value="중형승용(가솔린,디젤)">중형승용(가솔린,디젤)</option>
-							<option value="대형승용(가솔린,디젤)">대형승용(가솔린,디젤)</option>
+							<option value="소형">소형</option>
+							<option value="대형승용">대형승용</option>
+							<option value="준중형">준중형</option>
+							<option value="중형">중형</option>
+							<option value="대형">대형</option>
 							<option value="RV">RV</option>
-							<option value="화물/승합">화물/승합</option>
+							<option value="화물">화물</option>
 							<option value="친환경차">친환경차</option>
 						</select>
 					</div>
@@ -70,6 +67,7 @@
 							<option value="휘발유">휘발유</option>
 							<option value="경유">경유</option>
 							<option value="전기+휘발유">전기+휘발유</option>
+							<option value="LPG">LPG</option>
 						</select>
 						</div>
 				</div>
@@ -117,18 +115,6 @@
 				
 				<br><hr><br>
 				
-				<!-- 옵션창은 라디오 버튼으로 추가로 만들 예정 -->
-				
-				<br><hr><br>
-				<div class="form-group">
-					<label class="control-label col-sm-2">옵션</label>
-						<div class="col-sm-4">
-						<select class="form-control" name="made_country">
-							<option value="국산">국산</option>
-							<option value="수입">수입</option>
-						</select>
-						</div>
-				</div>
 				
 				<br><br>
 				<div align="center">

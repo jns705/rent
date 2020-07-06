@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace= "com.rent.mapper.CarColorMapper">
+		
+	
+	<!-- car_id에 따른 차량 색상 조회 -->	
+	<select id="carColorDetail" resultType="com.rent.domain.CarColor" parameterType="String">
+		SELECT	*
+		FROM	COLOR
+		WHERE	CAR_ID = #{car_id}
+	</select>
+	
+	
+	
+</mapper>
