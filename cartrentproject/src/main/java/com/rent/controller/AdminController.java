@@ -1,6 +1,7 @@
 package com.rent.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -12,11 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.rent.domain.CarColor;
 import com.rent.domain.CarVO;
 import com.rent.domain.OptionCarVO;
+import com.rent.service.CarColorService;
 import com.rent.service.CarService;
 
 
@@ -26,6 +29,9 @@ public class AdminController {
 
 	@Resource(name = "com.rent.service.CarService")
 	CarService carService;
+	
+	@Resource(name = "com.rent.service.CarColorService")
+	CarColorService colorService;
 	
 	
 	//차량 등록
@@ -72,7 +78,7 @@ public class AdminController {
 		file.setCar_id		(car_id);
 		file.setColor		(color);
 		file.setColor_image	(destinationFileName);
-		file.setColor_url	("http://localhost:8082/static/img/");
+		file.setColor_url	("http://localhost:8082/static/upload/");
 		
 		carService.colorInsert(file);
 		}
@@ -114,5 +120,13 @@ public class AdminController {
 		model.addAttribute("color",  carService.carColorList());
 		model.addAttribute("option", carService.carOptionList());
 		return "/admin/carDetail";
+	}
+	
+	//id에 따른 차량 색상 조회
+	@RequestMapping("/colorList")
+	@ResponseBody
+	public List<CarColor> colorList(@RequestParam String car_id)throws Exception{
+		System.out.println(car_id);
+		return colorService.carColorDetail(car_id);
 	}
 }

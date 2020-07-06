@@ -37,9 +37,6 @@ public class CarService {
 		return mapper.carDetail(id);
 	}
 	
-	public CarVO carColorDetail(String id) throws Exception{
-		return mapper.carColorDetail(id);
-	}
 	
 	public CarVO carOptionDetail(String id) throws Exception{
 		return mapper.carOptionDetail(id);

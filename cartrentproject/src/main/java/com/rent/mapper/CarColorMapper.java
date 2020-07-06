@@ -1,5 +1,7 @@
 package com.rent.mapper;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.rent.domain.CarColor;
@@ -15,4 +17,7 @@ public interface CarColorMapper {
 	
 	//삭제
 	public int colorDelete(String color_id) throws Exception;
+	
+	//조회
+	public List<CarColor> carColorDetail(String car_id)throws Exception;
 }
