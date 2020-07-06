@@ -69,5 +69,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		FROM	OPTIONCAR
 	</select>
 	
+		<!-- 차정보 수정 -->
+	<update id="carUpdate" parameterType="com.rent.domain.CarVO">
+		UPDATE	CAR
+		SET		manufacturer 	= #{manufacturer}
+				,car_name	  	= #{car_name} 
+				,exhaust_volume = #{exhaust_volume} 
+				,car_kind 		= #{car_kind} 
+				,fuel 			= #{fuel} 
+				,transmission 	= #{transmission} 
+				,car_price 		= #{car_price} 
+				,made_country 	= #{made_country} 
+				,content 		= #{content} 
+				,car_year 		= #{car_year}
+		WHERE	CAR_ID 			= #{car_id}
+	</update>
+	
 	
 </mapper>

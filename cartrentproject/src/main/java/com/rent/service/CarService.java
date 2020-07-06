@@ -49,4 +49,8 @@ public class CarService {
 	public List<OptionCarVO> carOptionList() throws Exception{
 		return mapper.carOptionList();
 	}
+	
+	public int carUpdate(CarVO car)throws Exception{
+		return mapper.carUpdate(car);
+	}
 }

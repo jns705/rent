@@ -22,7 +22,7 @@
 	<div align="center">
 	<label class="control-label"><font size="+3"><b>차량리스트</b></font></label><br><br>
 	</div><br>
-				<div class="container">
+				<div class="container-fluid">
 				
 				<table class="table table-bordered table-hover table-striped naum">
 					<thead>
@@ -38,12 +38,14 @@
 							<td>제조국가</td>
 							<td>모델연도</td>
 							<td>기타사항</td>
+							<td>정보수정</td>
+							<td>색상수정</td>
 						</tr>
 					</thead>
 					
 					<tbody>
 						<c:forEach items="${list}" var="list" varStatus="status">
-						<tr align="center" onclick="location.href='${path}/admin/carDetail/${list.car_id}'">
+						<tr align="center">
 							<td width="10">${status.index+1}</td>
 							<td>${list.car_name}</td>
 							<td>${list.manufacturer}</td>
@@ -54,7 +56,14 @@
 							<td>${String.format('%,d',list.car_price)}만원</td>
 							<td>${list.made_country}</td>
 							<td>${list.car_year}</td>
-							<td>${list.content}</td>
+							<c:if test="${list.content.length() > 20 }">
+							<td onclick="location.href='${path}/admin/carDetail/${list.car_id}'">${list.content.substring(0,20)}...</td>
+							</c:if>
+							<c:if test="${list.content.length() <= 20 }">
+							<td onclick="location.href='${path}/admin/carDetail/${list.car_id}'">${list.content}</td>
+							</c:if>
+							<td><button class="btn" onclick="location.href='/admin/carUpdateForm/${list.car_id}'">정보수정</button></td>
+							<td><button class="btn" onclick="location.href='/admin/colorInsertForm/${list.car_id}'">색상수정</button></td>
 						</tr>
 						</c:forEach>
 							

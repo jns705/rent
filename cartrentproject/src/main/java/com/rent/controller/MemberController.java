@@ -35,7 +35,6 @@ public class MemberController {
 	//회원가입
 	@RequestMapping("/insertProc")
 	public String insertProc(HttpServletRequest request, MemberVO member) throws Exception{
-		member.setDate_of_birth(request.getParameter("birth1")+"-"+request.getParameter("birth2")+"-"+request.getParameter("birth3"));
 		member.setTel(request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3"));
 		mMemberService.insertProc(member);
 		return "/member/loginForm";

@@ -20,4 +20,7 @@ public interface CarColorMapper {
 	
 	//조회
 	public List<CarColor> carColorDetail(String car_id)throws Exception;
+	
+	//조회
+	public CarColor carColor(CarColor color)throws Exception;
 }

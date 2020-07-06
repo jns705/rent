@@ -13,6 +13,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		WHERE	CAR_ID = #{car_id}
 	</select>
 	
+	<select id="carColor" resultType="com.rent.domain.CarColor" parameterType="com.rent.domain.CarColor">
+		SELECT	*
+		FROM	COLOR
+		WHERE	CAR_ID = #{car_id} and COLOR = #{color}
+	</select>
+	
 	
 	
 </mapper>
