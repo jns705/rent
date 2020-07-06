@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 <mapper namespace= "com.rent.mapper.CarMapper">
 		
 	
-	<!-- 차량 인서트 -->	
+	<!-- 차량 등록 -->	
 	<insert id="carInsert" parameterType="com.rent.domain.CarVO" useGeneratedKeys="true" keyProperty="car_id">
 		INSERT INTO CAR
 		(manufacturer, car_name, exhaust_volume, car_kind, fuel, transmission, car_price, made_country, content, car_year)
@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		(#{manufacturer}, #{car_name}, #{exhaust_volume}, #{car_kind}, #{fuel}, #{transmission}, #{car_price}, #{made_country}, #{content}, #{car_year})
 	</insert>
 	
-	<!-- 차량 색상 인서트 -->
+	<!-- 차량 색상 등록 -->
 	<insert id="colorInsert" parameterType="com.rent.domain.CarColor" useGeneratedKeys="true" keyProperty="car_id">
 		INSERT INTO COLOR
 		(car_id, color, color_image, color_url)
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		FROM	CAR
 	</select>
 	
-	<!-- 옵션 인서트 -->
+	<!-- 옵션 등록 -->
 	<insert id="optionInsert" parameterType="com.rent.domain.OptionCarVO">
 		INSERT INTO OPTIONCAR
 		(car_id, option_name, option_price, option_content)

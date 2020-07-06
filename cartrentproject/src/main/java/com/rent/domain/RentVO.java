@@ -19,6 +19,7 @@ public class RentVO {
 	private String special_note;
 	private String Max_month;
 	private String situation;
+	private int price;
 	private int standby_personnel;
 
 }

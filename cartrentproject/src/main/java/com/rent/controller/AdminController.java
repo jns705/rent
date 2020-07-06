@@ -28,36 +28,19 @@ public class AdminController {
 	CarService carService;
 	
 	
-	
+	//차량 등록
 	@RequestMapping("/carInsert")
 	public String carInsertForm()throws Exception{
 		return "/admin/carInsertForm";
 	}
 	
 	@RequestMapping("/carInsertProc")
-	public String carInsertForm(HttpServletRequest request)throws Exception{
-		
-		//게시글 등록 화면에서 입력한 값들을 실어나르기 위한 BoardVO를 생성한다.
-		CarVO 	 car 		= 	new CarVO();
-		
-		car.setCar_price		(Integer.parseInt(request.getParameter("car_price")));
-		car.setExhaust_volume	(Integer.parseInt(request.getParameter("exhaust_volume")));
-		car.setCar_kind			(request.getParameter("car_kind"));
-		car.setCar_name			(request.getParameter("car_name"));
-		car.setCar_number		(request.getParameter("car_name"));
-		car.setCar_year			(request.getParameter("car_year"));
-		car.setContent			(request.getParameter("content"));
-		car.setFuel				(request.getParameter("fuel"));
-		car.setMade_country		(request.getParameter("made_country"));
-		car.setManufacturer		(request.getParameter("manufacturer"));
-		car.setTransmission		(request.getParameter("transmission"));
-
+	public String carInsertForm(CarVO car)throws Exception{
 			carService.carInsert(car);
-
 		return "redirect:/admin/colorInsertForm/"+car.getCar_id();
-		
 	}
 	
+	//차 색상 등록
 	@RequestMapping("/colorInsertForm/{id}")
 	public String colorInsertForm(Model model, @PathVariable String id) throws Exception{
 		model.addAttribute("list", carService.carList());
@@ -66,7 +49,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/carColorProc")
-	public String carColorProc(@RequestParam(defaultValue = "1") int car_id, Model model, HttpServletRequest request, @RequestPart MultipartFile files)throws Exception{
+	public String carColorProc(@RequestParam(defaultValue = "1") int car_id, @RequestParam String color, Model model, @RequestPart MultipartFile files)throws Exception{
 		
 		//게시글 등록 화면에서 입력한 값들을 실어나르기 위한 BoardVO를 생성한다.
 		CarColor file		=	new CarColor();
@@ -83,14 +66,13 @@ public class AdminController {
 		}while(destinationFile.exists());
 		
 		//MultipartFile.transferTo() : 요청 시점의 임시 파일을 로컬 파일 시스템에 영구적으로 복사해준다.
-		
 		destinationFile.getParentFile().mkdir();
 		files.transferTo(destinationFile);
 		
-		file.setCar_id(car_id);
-		file.setColor(request.getParameter("color"));
-		file.setColor_image(destinationFileName);
-		file.setColor_url("http://localhost:8082/static/img/");
+		file.setCar_id		(car_id);
+		file.setColor		(color);
+		file.setColor_image	(destinationFileName);
+		file.setColor_url	("http://localhost:8082/static/img/");
 		
 		carService.colorInsert(file);
 		}
@@ -98,6 +80,7 @@ public class AdminController {
 		return "redirect:/admin/colorInsertForm/"+car_id;
 	}
 	
+	//옵션 등록
 	@RequestMapping("/optionForm/{id}")
 	public String optionForm(Model model, @PathVariable String id) throws Exception{
 		model.addAttribute("list", carService.carList());
@@ -117,12 +100,14 @@ public class AdminController {
 		return "redirect:/admin/optionForm/"+car_id;
 	}
 	
+	//차량 목록
 	@RequestMapping("/carList")
 	public String carList(Model model)throws Exception{
 		model.addAttribute("list", carService.carList());
 		return "/admin/carList";
 	}
 	
+	//차량 상세정보
 	@RequestMapping("/carDetail/{id}")
 	public String carDetail(@PathVariable String id, Model model)throws Exception{
 		model.addAttribute("detail", carService.carDetail(id));
