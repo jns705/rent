@@ -8,13 +8,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>중고차 or 신차 리스트 페이지</title>
-	<link href="../css/co.css" rel="stylesheet" type="text/css" >
-	<link href="../css/fo.css" rel="stylesheet" type="text/css" >
-	<link href="../css/sa.css" rel="stylesheet" type="text/css" >
-	<link href="../css/sk.css" rel="stylesheet" type="text/css" >
 </head>
-
 <body>
+
 	<div class="container">
 		<div class="breadcrumbs">
 			<h2 class="tit">장기렌트카 리스트</h2>
@@ -262,7 +258,11 @@
 				</div>
 			</div>
 		</article>
+		
+		
+		
 	</div>
 </body>
+
 </html>
 </layoutTag:layout>
