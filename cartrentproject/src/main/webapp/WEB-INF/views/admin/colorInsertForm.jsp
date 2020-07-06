@@ -79,23 +79,26 @@
 </body>
 
 	<script type="text/javascript">
+	colorSelect();
+	function colorSelect(){
+		var car_id = $('[name=car_id]').val();
+		$.ajax({
+			url 	: '${path}/admin/colorList',
+			data    : {'car_id' : car_id},
+			type 	: 'get',
+			success : function(data){
+				var str = "";
+				$.each(data, function(key, value){
+					str += '<tr align=center><td>'+ value.color +'</td><td>'+ value.color_image.substring(32);
+					str += '</td><td><img src="' + value.color_url + value.color_image + '"with=150 height=70></td></tr>';
+				});
+				$('.image').html(str);
+			},
+			error   : function(data){alert("오류");}
+		});
+	}
 		$('[name=car_id]').change(function(){
-			var car_id = $('[name=car_id]').val();
-			$.ajax({
-				url 	: '${path}/admin/colorList',
-				data    : {'car_id' : car_id},
-				type 	: 'get',
-				success : function(data){
-					var str = "";
-					$.each(data, function(key, value){
-						console.log('</td><img src="http://localhost:8082/static/upload/'+value.color_image+'"></tr>');
-						str += '<tr align=center><td>'+ value.color +'</td><td>'+ value.color_image.substring(32);
-						str += '</td><td><img src="' + value.color_url + value.color_image + '"with=150 height=70></td></tr>';
-					});
-					$('.image').html(str);
-				},
-				error   : function(data){alert("오류");}
-			});
+			colorSelect();
 		});
 	</script>
 </html>

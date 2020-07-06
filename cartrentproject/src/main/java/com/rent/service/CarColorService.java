@@ -18,4 +18,8 @@ public class CarColorService {
 	public List<CarColor> carColorDetail(String car_id) throws Exception{
 		return mapper.carColorDetail(car_id);
 	}
+	
+	public CarColor carColor(CarColor color) throws Exception{
+		return mapper.carColor(color);
+	}
 }

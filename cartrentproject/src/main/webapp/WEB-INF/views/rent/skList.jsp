@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <link href="http://localhost:8082/static/css/total.css" rel="stylesheet" type="text/css"/>
 	<meta charset="UTF-8">
 	<title>중고차 or 신차 리스트 페이지</title>
 </head>

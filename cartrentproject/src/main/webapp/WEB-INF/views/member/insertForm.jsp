@@ -74,31 +74,10 @@
 					</div>
 				</div>
 				
-				<fmt:formatDate value="${now }" pattern="yyyy" var="year" />
 				<div class="form-group">
 					<label class="control-label col-sm-2">생년월일</label>
-						<div class="col-lg-1">
-							<select class="form-control" size="+1" name="birth1">
-							<c:forEach begin="${year-50}" end="${year}" var="i">
-								<option value="${i}">${i}&nbsp;&nbsp;</option>
-							</c:forEach>
-							</select>
-						</div>
-						
-						<div class="col-sm-1">
-							<select class="form-control" name="birth2">
-							<c:forEach begin="1" end="12" var="i">
-								<option value="${i}">${i}</option>
-							</c:forEach>
-							</select>
-						</div>
-						
-						<div class="form-group col-sm-1">
-							<select class="form-control" name="birth3">
-							<c:forEach begin="1" end="31" var="i">
-								<option value="${i}">${i}</option>
-							</c:forEach>
-							</select>
+						<div class="col-sm-4">
+							<input type="date" class="form-control" name="date_of_birth">
 						</div>
 				</div>
 				

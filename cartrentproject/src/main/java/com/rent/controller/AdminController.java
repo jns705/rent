@@ -71,7 +71,7 @@ public class AdminController {
 		File 	destinationFile;
 		String	destinationFileName;
 		// fileUrl="uploadFiles 폴더의 위치"
-		String	fileUrl = "C:/cha/rent/cartrentproject/src/main/resources/static/upload/";
+		String	fileUrl = "C:/Git/rent/cartrentproject/src/main/resources/static/upload";
 		do {
 			destinationFileName = RandomStringUtils.randomAlphabetic(32) + sourceFileName;
 			destinationFile		= new File(fileUrl + destinationFileName);
@@ -125,12 +125,24 @@ public class AdminController {
 		return "/admin/carList";
 	}
 	
+	//차량 수정
+	@RequestMapping("/carUpdateForm/{id}")
+	public String carUpdateForm(Model model,@PathVariable String id)throws Exception{
+		model.addAttribute("car", carService.carDetail(id));
+		return "/admin/carUpdateForm";
+	}
+	
+	@RequestMapping("/carUpdateProc")
+	public String carUpdateProc(CarVO car)throws Exception{
+		carService.carUpdate(car);
+		return "redirect:/admin/carList";
+	}
+	
 	//차량 상세정보
 	@RequestMapping("/carDetail/{id}")
 	public String carDetail(@PathVariable String id, Model model)throws Exception{
 		model.addAttribute("detail", carService.carDetail(id));
-		model.addAttribute("color",  carService.carColorList());
-		model.addAttribute("option", carService.carOptionList());
+		model.addAttribute("color",  colorService.carColorDetail(id));
 		return "/admin/carDetail";
 	}
 	
@@ -155,6 +167,13 @@ public class AdminController {
 	public List<CarColor> getColor(@RequestParam String car_id)throws Exception{
 		System.out.println(colorService.carColorDetail(car_id));
 		return colorService.carColorDetail(car_id);
+	}
+	
+	@RequestMapping("/color")
+	@ResponseBody
+	public CarColor color(CarColor car)throws Exception{
+		System.out.println(colorService.carColor(car));
+		return colorService.carColor(car);
 	}
 	
 	
