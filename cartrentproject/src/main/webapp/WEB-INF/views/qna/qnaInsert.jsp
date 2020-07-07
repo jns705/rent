@@ -45,7 +45,7 @@
 		<label>비밀글로 작성</label><br>
 		<button type="submit" class="btn btn-primary">등록</button>
 	</form>
-		
+		<a href="${path}/qna/list" class="btn btn-danger">목록가기</a>
 </div>
 </body>
 <script>
