@@ -16,7 +16,7 @@ public interface CarOptionMapper {
 	public int optionUpdate(OptionCarVO option) throws Exception;
 	
 	//차옵션 삭제
-	public int optionDelete(String car_id) throws Exception;
+	public int optionDelete(String rent_id) throws Exception;
 	
 	//차옵션 전체목록
 	public List<OptionCarVO> optionList() throws Exception;

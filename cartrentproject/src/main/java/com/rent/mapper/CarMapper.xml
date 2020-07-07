@@ -92,6 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		WHERE	CAR_ID 			= #{car_id}
 	</update>
 	
+	
 	<select id="selectName" parameterType="String" resultType="com.rent.domain.OptionCarVO">
 		SELECT	*
 		FROM	OPTIONCAR
@@ -105,5 +106,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 				,option_price 	= #{option_price} 
 				,option_content = #{option_content} 
 		WHERE	option_name		= #{option_name}
+		AND		rent_id			= #{rent_id}
 	</update>
 </mapper>

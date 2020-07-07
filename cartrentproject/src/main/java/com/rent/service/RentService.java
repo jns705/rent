@@ -23,6 +23,22 @@ public class RentService {
 		return mapper.rentList();
 	}
 	
+	//id에따른 렌트 목록
+	public RentVO rentListId(String rent_id) throws Exception{
+		return mapper.rentListId(rent_id);
+	}
+	
+	//렌트 수정
+	public int rentCarUpdate(RentVO rent) throws Exception{
+		return mapper.rentCarUpdate(rent);
+	}
+	
+	
+	//렌트 삭제
+	public int rentCarDelete(String id) throws Exception{
+		return mapper.rentCarDelete(id);
+	}
+	
 	
 	
 	

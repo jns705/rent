@@ -37,6 +37,8 @@
 							<td>지점</td>
 							<td>예약여부</td>
 							<td>차량번호</td>
+							<td>수정</td>
+							<td>삭제</td>
 						</tr>
 					</thead>
 					
@@ -53,6 +55,8 @@
 							<td>${rent.location}</td>
 							<td>${rent.situation}</td>
 							<td>${rent.car_number}</td>
+							<td><button class="btn" onclick="location.href='/admin/rentUpdateForm/${rent.rent_id}'">수정</button></td>
+							<td><button class="btn btn_danger" onclick="location.href='/admin/rentCarDelete/${rent.rent_id}'">삭제</button></td>
 						</tr>
 						</c:forEach>
 							

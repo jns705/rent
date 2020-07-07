@@ -12,7 +12,9 @@ public class CarOptionService {
 	@Resource(name="com.rent.mapper.CarOptionMapper")
 	CarOptionMapper mapper;
 	
-	
+	public int optionDelete(String rent_id)throws Exception{
+		return mapper.optionDelete(rent_id);
+	}
 	
 	
 }

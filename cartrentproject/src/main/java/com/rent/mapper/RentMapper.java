@@ -13,11 +13,14 @@ public interface RentMapper {
 	//차량 등록
 	public int rentCarInsert(RentVO rent) throws Exception;
 	
+	//id에따른 렌트 목록 
+	public RentVO rentListId(String rent_id)throws Exception;
+	
 	//차량 수정
 	public int rentCarUpdate(RentVO rent) throws Exception;
 	
 	//차량 삭제
-	public int rentCarDelete(RentVO rent) throws Exception;
+	public int rentCarDelete(String id) throws Exception;
 	
 	//차량 전체 목록
 	public List<RentVO> rentList() throws Exception;
@@ -33,4 +36,5 @@ public interface RentMapper {
 	
 	//구매한 차량 정보들을 buy 테이블에 넣는다.
 	public int buyInsert(BuyVO buy) throws Exception;
+	
 }

@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +25,7 @@ import com.rent.domain.OptionCarVO;
 import com.rent.domain.RentVO;
 import com.rent.service.AccidentService;
 import com.rent.service.CarColorService;
+import com.rent.service.CarOptionService;
 import com.rent.service.CarService;
 import com.rent.service.RentService;
 
@@ -42,6 +45,9 @@ public class AdminController {
 	
 	@Resource(name="com.rent.service.AccidentService")
 	AccidentService accService;
+	
+	@Resource(name="com.rent.service.CarOptionService")
+	CarOptionService opService;
 	
 	//차량 등록
 	@RequestMapping("/carInsert")
@@ -190,7 +196,11 @@ public class AdminController {
 	//렌트 등록 프로세스
 	 @RequestMapping("/rentInsertProc") 
 	 public String rentInsertProc(RentVO rent, Model model, HttpServletRequest request)throws Exception{ 
+		 if(rent.getColor()!=null) 
 		 rentService.rentCarInsert(rent);
+		 else
+		 opService.optionDelete(Integer.toString(rent.getRent_id()));
+		 
 		 List<OptionCarVO> list = carService.carOptionDetail("0");
 		 for(OptionCarVO olist : list) {
 			 if(request.getParameter(olist.getOption_name())!=null) {
@@ -199,7 +209,11 @@ public class AdminController {
 				 carService.optionInsert(olist);
 			 }
 		 }
-		 return "redirect:/admin/rentInsertForm"; 
+		 
+		 if(rent.getColor()==null)
+			 return "redirect:/admin/rentDetail/"+rent.getRent_id();
+		 
+		 return "redirect:/admin/rentList"; 
 	 }
 	 
 	 //렌트 리스트
@@ -219,6 +233,26 @@ public class AdminController {
 	 public String rentDetail(@PathVariable String id, Model model)throws Exception{
 		 model.addAttribute("option", 	carService.carOptionDetail(id));
 		 model.addAttribute("accident", accService.accidentListId(id));
+		 model.addAttribute("rent_id", 	id);
 		 return "/admin/rentDetail";
+	 }
+	 
+	 @RequestMapping("/rentUpdateForm/{id}")
+	 public String rentUpdateForm(@PathVariable String id, Model model)throws Exception{
+		 model.addAttribute("rent",rentService.rentListId(id));
+		 model.addAttribute("car" ,carService.carList());
+		 return "/admin/rentUpdateForm";
+	 }
+	 
+	 @RequestMapping("/rentUpdateProc")
+	 public String rentUpdateProc(RentVO rent)throws Exception{
+		 rentService.rentCarUpdate(rent);
+		 return "redirect:/admin/rentList";
+	 }
+	 
+	 @RequestMapping("/rentCarDelete/{id}")
+	 public String rentCarDelete(@PathVariable String id)throws Exception{
+		 rentService.rentCarDelete(id);
+		 return "redirect:/admin/rentList";
 	 }
 }

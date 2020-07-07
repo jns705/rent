@@ -20,4 +20,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM	RENT
 	</select>
 	
+	<!-- id에 따른 렌트 리스트 -->
+	<select id="rentListId" parameterType="String" resultType="com.rent.domain.RentVO">
+		SELECT	*
+		FROM	RENT
+		WHERE	RENT_ID = #{rent_id}
+	</select>
+	
+	<!-- 렌트 업데이트 -->
+	<update id="rentCarUpdate" parameterType="com.rent.domain.RentVO">
+		UPDATE	RENT
+		SET		color 				= #{color},
+				car_id 				= #{car_id},
+				milage 				= #{milage},
+				location 			= #{location},
+				special_note 		= #{special_note},
+				Max_month 			= #{Max_month},
+				standby_personnel 	= #{standby_personnel},
+				price 				= #{price},
+				car_number 			= #{car_number}
+		WHERE	rent_id 			= #{rent_id}
+	</update>
+	
+	<!-- 렌트삭제 -->
+	<update id="rentCarDelete" parameterType="String">
+		DELETE	
+		FROM	RENT
+		WHERE	RENT_ID = #{rent_id}
+	</update>
 </mapper>

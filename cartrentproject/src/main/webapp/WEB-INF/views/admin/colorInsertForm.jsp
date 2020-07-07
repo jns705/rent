@@ -79,8 +79,8 @@
 </body>
 
 	<script type="text/javascript">
-	colorSelect();
-	function colorSelect(){
+	option();
+	function option(){
 		var car_id = $('[name=car_id]').val();
 		$.ajax({
 			url 	: '${path}/admin/colorList',
@@ -98,7 +98,7 @@
 		});
 	}
 		$('[name=car_id]').change(function(){
-			colorSelect();
+			option();
 		});
 	</script>
 </html>
