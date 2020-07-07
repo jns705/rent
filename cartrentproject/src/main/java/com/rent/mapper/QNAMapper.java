@@ -16,13 +16,13 @@ public interface QNAMapper {
 	public int qnaUpdate(QNAVO qna) throws Exception;
 	
 	//글삭제
-	public int qnaDelete(QNAVO qna) throws Exception;
+	public int qnaDelete(int qna_id) throws Exception;
 	
 	//전체목록
 	public List<QNAVO> qnaList() throws Exception;
 	
 	//상세목록
-	public QNAVO qnaDetail(String qna_id) throws Exception;
+	public QNAVO qnaDetail(int qna_id) throws Exception;
 	
 	//조건검색
 	//public List<QNAVO> qnaList2(String 검색조건) throws Exception;

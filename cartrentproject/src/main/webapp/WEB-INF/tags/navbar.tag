@@ -28,7 +28,7 @@
                     
                     <li class="nav-menu nav-estimate primary" id="estimate-span"><a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;실시간 견적</a></li>
                     
-                    <li class="nav-menu nav-call primary" id="company"><a data-toggle="modal" data-target="#contact-modal" href="#"><span class="glyphicon glyphicon-earphone"></span>&nbsp;간편상담</a></li>
+                    <li class="nav-menu nav-call primary" id="company"><a href="${path}/qna/insert"><span class="glyphicon glyphicon-earphone"></span>&nbsp;간편상담</a></li>
                     	<c:if test="${sessionScope.id eq null}">
 						<li class="nav-menu nav-login <c:if test="${fn : contains(URL, 'login')}"> active</c:if> "><a href="${path}/member/loginForm"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
 						</c:if>
