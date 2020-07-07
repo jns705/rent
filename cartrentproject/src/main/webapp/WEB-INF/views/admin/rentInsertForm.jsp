@@ -93,12 +93,6 @@
 				<div class="form-group">
 					<label class="control-label col-sm-2">옵션 선택</label>
 						<div class="op"></div>
-						<c:forEach items="${option}" var="option">
-						<div class="col-sm-1">
-							<input class="checkbox col-sm-2" type="checkbox" name="${option.option_name}" value="${option.option_name}" />
-							<label class="control-label col-sm-2">${option.option_name}</label>
-						</div>
-						</c:forEach>
 				</div>
 					<button type="button" class="btn col-sm-offset-1" onclick="addOption();">옵션추가하기</button>
 				

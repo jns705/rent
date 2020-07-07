@@ -85,5 +85,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		WHERE	CAR_ID 			= #{car_id}
 	</update>
 	
+	<select id="selectName" parameterType="String" resultType="com.rent.domain.OptionCarVO">
+		SELECT	*
+		FROM	OPTIONCAR
+		WHERE	OPTION_NAME	= #{name} and RENT_ID = 0
+	</select>
 	
+	<update id="carOptionUpdate" parameterType="com.rent.domain.OptionCarVO">
+		UPDATE	OPTIONCAR
+		SET		rent_id 		= #{rent_id}
+				,option_name	= #{option_name} 
+				,option_price 	= #{option_price} 
+				,option_content = #{option_content} 
+		WHERE	option_name		= #{option_name}
+	</update>
 </mapper>

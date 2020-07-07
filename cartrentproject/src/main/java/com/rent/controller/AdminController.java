@@ -1,6 +1,7 @@
 package com.rent.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -115,7 +116,7 @@ public class AdminController {
 	@RequestMapping("/optionList")
 	@ResponseBody
 	public List<OptionCarVO> optionList()throws Exception{
-		return carService.carOptionList();
+		return carService.carOptionDetail("0");
 	}
 	
 	//차량 목록
@@ -157,11 +158,11 @@ public class AdminController {
 	//렌트 입력 폼
 	@RequestMapping("/rentInsertForm")
 	public String rentInsertForm(Model model)throws Exception{
-		model.addAttribute("car", carService.carList());
+		model.addAttribute("car", 	 carService.carList());
 		model.addAttribute("option", carService.carOptionDetail("1"));
 		return "/admin/rentInsertForm";
 	}
-	
+	//car_id에 따른 색상 추출
 	@RequestMapping("/getColor")
 	@ResponseBody
 	public List<CarColor> getColor(@RequestParam String car_id)throws Exception{
@@ -176,11 +177,37 @@ public class AdminController {
 		return colorService.carColor(car);
 	}
 	
-	
+	//렌트 등록 프로세스
 	 @RequestMapping("/rentInsertProc") 
-	 public String rentInsertProc(RentVO rent, Model model)throws Exception{ 
-		 rentService.rentCarInsert(rent); 
-		 return "/admin/rentInsertForm"; 
+	 public String rentInsertProc(RentVO rent, Model model, HttpServletRequest request)throws Exception{ 
+		 rentService.rentCarInsert(rent);
+		 List<OptionCarVO> list = carService.carOptionDetail("0");
+		 for(OptionCarVO olist : list) {
+			 if(request.getParameter(olist.getOption_name())!=null) {
+				 olist = carService.selectName(olist.getOption_name());
+				 olist.setRent_id(rent.getRent_id());
+				 carService.optionInsert(olist);
+			 }
+		 }
+		 return "redirect:/admin/rentInsertForm"; 
 	 }
 	 
+	 //렌트 리스트
+	 @RequestMapping("/rentList")
+	 public String rentList(Model model)throws Exception{
+		 List<CarVO> carList = new ArrayList<CarVO>();
+		 for(RentVO rent : rentService.rentList()) {
+			 carList.add(carService.carDetail(Integer.toString(rent.getCar_id())));
+		 }
+		 System.out.println(rentService.rentList());
+		 model.addAttribute("car", carList);
+		 model.addAttribute("rent", rentService.rentList());
+		 return "/admin/rentList";
+	 }
+	 
+	 @RequestMapping("/rentDetail/{id}")
+	 public String rentDetail(@PathVariable String id, Model model)throws Exception{
+		 model.addAttribute("option", carService.carOptionDetail(id));
+		 return "/admin/rentDetail";
+	 }
 }

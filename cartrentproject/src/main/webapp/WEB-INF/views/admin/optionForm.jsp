@@ -19,16 +19,6 @@
 				<br><br><br>
 				
 				
-<%-- 				<div class="form-group">
-					<label class="control-label col-sm-2">차량 선택</label>
-						<div class="col-sm-4">
-						<select class="form-control" name="car_id">
-							<c:forEach items="${list}" var="list">
-								<option value="${list.car_id}" <c:if test="${car_id eq list.car_id}">selected</c:if> >${list.car_name}</option>
-							</c:forEach>
-						</select>
-						</div>
-				</div> --%>
 				
 				<div class="form-group">
 					<label class="control-label col-sm-2">옵션</label>

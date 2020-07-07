@@ -23,6 +23,12 @@ public interface CarMapper {
 	//차량 옵션 등록
 	public int optionInsert(OptionCarVO option)throws Exception;
 	
+	//이름에 따른 차량 옵션 조회
+	public OptionCarVO selectName(String name)throws Exception;
+	
+	//차 옵션 업데이트
+	public int carOptionUpdate(OptionCarVO option)throws Exception;
+	
 	/**
 	 * 차량 수정
 	 * @param CarTable

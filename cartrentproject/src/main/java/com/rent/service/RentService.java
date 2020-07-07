@@ -1,5 +1,7 @@
 package com.rent.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class RentService {
 		return mapper.rentCarInsert(rent);
 	}
 	
+	public List<RentVO> rentList()throws Exception{
+		return mapper.rentList();
+	}
 	
 	
 	

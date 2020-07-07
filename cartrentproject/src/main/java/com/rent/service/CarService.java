@@ -53,4 +53,12 @@ public class CarService {
 	public int carUpdate(CarVO car)throws Exception{
 		return mapper.carUpdate(car);
 	}
+	
+	public int carOptionUpdate(OptionCarVO option)throws Exception{
+		return mapper.carOptionUpdate(option);
+	}
+	
+	public OptionCarVO selectName(String name)throws Exception{
+		return mapper.selectName(name);
+	}
 }
