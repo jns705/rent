@@ -19,6 +19,8 @@ public interface RentMapper {
 	//차량 수정
 	public int rentCarUpdate(RentVO rent) throws Exception;
 	
+	public int situation(RentVO rent) throws Exception;
+	
 	//차량 삭제
 	public int rentCarDelete(String id) throws Exception;
 	

@@ -255,4 +255,10 @@ public class AdminController {
 		 rentService.rentCarDelete(id);
 		 return "redirect:/admin/rentList";
 	 }
+	 
+	 @RequestMapping("/situation")
+	 @ResponseBody
+	 public void situation(RentVO rent)throws Exception{
+		 rentService.situation(rent);
+	 }
 }

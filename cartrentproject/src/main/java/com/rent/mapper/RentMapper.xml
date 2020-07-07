@@ -48,4 +48,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM	RENT
 		WHERE	RENT_ID = #{rent_id}
 	</update>
+	
+	<update id="situation" parameterType="com.rent.domain.RentVO">
+		UPDATE	RENT	
+		SET		situation 	= #{situation}
+		WHERE	RENT_ID 	= #{rent_id}
+	</update>
 </mapper>

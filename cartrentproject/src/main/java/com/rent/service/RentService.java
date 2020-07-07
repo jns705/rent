@@ -39,6 +39,10 @@ public class RentService {
 		return mapper.rentCarDelete(id);
 	}
 	
+	public int situation(RentVO rent) throws Exception{
+		return mapper.situation(rent);
+	}
+	
 	
 	
 	

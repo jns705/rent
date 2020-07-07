@@ -53,7 +53,14 @@
 							<td>${rent.color}</td>
 							<td>${rent.milage}</td>
 							<td>${rent.location}</td>
-							<td>${rent.situation}</td>
+							<td>
+							<select class="form-control situation${status.index}" onchange="situation(${status.index});">
+								<option <c:if test="${rent.situation eq '예약가능'}">selected</c:if> >예약가능</option>
+								<option <c:if test="${rent.situation eq '상담중'}">selected</c:if> >상담중</option>
+								<option <c:if test="${rent.situation eq '렌트완료'}">selected</c:if> >렌트완료</option>
+							</select>
+							<input class="hidden rent_id${status.index}" value="${rent.rent_id}">
+							</td>
 							<td>${rent.car_number}</td>
 							<td><button class="btn" onclick="location.href='/admin/rentUpdateForm/${rent.rent_id}'">수정</button></td>
 							<td><button class="btn btn_danger" onclick="location.href='/admin/rentCarDelete/${rent.rent_id}'">삭제</button></td>
@@ -67,4 +74,19 @@
 				</div>
 </body>
 </html>
+<script type="text/javascript">
+function situation(i){
+	var situation 	= $('.situation'+i).val();
+	var rent_id 	= $('.rent_id'+i).val();
+	$.ajax({
+		url 	: '${path}/admin/situation',
+		data	:  {'situation' : situation, 'rent_id' : rent_id},
+		type	:  'get',
+		success :  function(data){
+			alert("변경되었습니다.");
+		}
+	});
+	
+}
+</script>
 </layoutTag:layout>
