@@ -67,7 +67,7 @@
 					<a href="#" class="btn btn-color2" id="usedcarSearchButton" >검색</a>
 				</div>
 			</div>
-			<div class="newresult_show_box user-car-search">
+			<div class="newresult_show_box user_car_search">
 				<div class="newresult_show">
 					<div class="step1_box clearfix pat10">
 						<div class="step1  step1_left">

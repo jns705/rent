@@ -71,7 +71,7 @@ public class AdminController {
 		File 	destinationFile;
 		String	destinationFileName;
 		// fileUrl="uploadFiles 폴더의 위치"
-		String	fileUrl = "C:/Git/rent/cartrentproject/src/main/resources/static/upload";
+		String	fileUrl = "C:/Git/rent/cartrentproject/src/main/resources/static/upload/";
 		do {
 			destinationFileName = RandomStringUtils.randomAlphabetic(32) + sourceFileName;
 			destinationFile		= new File(fileUrl + destinationFileName);
