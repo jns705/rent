@@ -39,10 +39,17 @@ public class AccidentService {
 		return mapper.accidentList();
 	}
 	
+	//렌트 아이디에 따른 전체목록
+	public List<AccidentVO> accidentListId(String rent_id) throws Exception{
+		System.out.println("accidentListId() 실행중. . .");
+		return mapper.accidentListId(rent_id);
+	}
+	
 	//상세조회
 	public AccidentVO accidentDetail(int accident_id) throws Exception{
 		System.out.println("accidentDetail() 실행중. . .");
 		return mapper.accidentDetail(accident_id);
 	}
+	
 	
 }

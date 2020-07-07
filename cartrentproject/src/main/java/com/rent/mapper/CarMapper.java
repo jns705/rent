@@ -20,7 +20,6 @@ public interface CarMapper {
 	//차량색상 등록
 	public int colorInsert(CarColor file) throws Exception;
 	
-	//차량 옵션 등록
 	public int optionInsert(OptionCarVO option)throws Exception;
 	
 	//이름에 따른 차량 옵션 조회

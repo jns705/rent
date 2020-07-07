@@ -57,6 +57,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		WHERE	RENT_ID = #{rent_id}
 	</select>
 	
+		<!-- 차량 삭제 -->
+	<delete id="carDelete" parameterType="String">
+		DELETE	
+		FROM	CAR
+		WHERE	CAR_ID = #{car_id}
+	</delete>
+	
 		<!-- 차량 색상 세부 조회 -->
 	<select id="carColorList" resultType="com.rent.domain.CarColor">
 		SELECT	*

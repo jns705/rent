@@ -21,6 +21,7 @@ import com.rent.domain.CarColor;
 import com.rent.domain.CarVO;
 import com.rent.domain.OptionCarVO;
 import com.rent.domain.RentVO;
+import com.rent.service.AccidentService;
 import com.rent.service.CarColorService;
 import com.rent.service.CarService;
 import com.rent.service.RentService;
@@ -39,6 +40,8 @@ public class AdminController {
 	@Resource(name = "com.rent.service.RentService")
 	RentService rentService;
 	
+	@Resource(name="com.rent.service.AccidentService")
+	AccidentService accService;
 	
 	//차량 등록
 	@RequestMapping("/carInsert")
@@ -133,6 +136,13 @@ public class AdminController {
 		return "/admin/carUpdateForm";
 	}
 	
+	//차량 삭제
+	@RequestMapping("/carDeleteProc/{id}")
+	public String carDeleteForm(Model model,@PathVariable String id)throws Exception{
+		model.addAttribute("car", carService.carDelete(id));
+		return "redirect:/admin/carList";
+	}
+	
 	@RequestMapping("/carUpdateProc")
 	public String carUpdateProc(CarVO car)throws Exception{
 		carService.carUpdate(car);
@@ -207,7 +217,8 @@ public class AdminController {
 	 
 	 @RequestMapping("/rentDetail/{id}")
 	 public String rentDetail(@PathVariable String id, Model model)throws Exception{
-		 model.addAttribute("option", carService.carOptionDetail(id));
+		 model.addAttribute("option", 	carService.carOptionDetail(id));
+		 model.addAttribute("accident", accService.accidentListId(id));
 		 return "/admin/rentDetail";
 	 }
 }

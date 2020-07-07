@@ -27,12 +27,36 @@
 					<thead>
 						<tr>
 							<th>옵션리스트</th>
+							<th>가격</th>
+							<th>내용</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${option}" var="option">
 							<tr>
 								<td>${option.option_name}</td>
+								<td>${option.option_price}</td>
+								<td>${option.option_content}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>		
+				
+				<table class="table">
+					<thead>
+						<tr>
+							<th>사고내용</th>
+							<th>발생비용</th>
+							<th>사고날짜</th>
+							<th>비고</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${option}" var="option">
+							<tr>
+								<td>${option.option_name}</td>
+								<td>${option.option_price}</td>
+								<td>${option.option_content}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

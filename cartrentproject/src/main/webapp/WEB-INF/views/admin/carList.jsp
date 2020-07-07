@@ -40,6 +40,7 @@
 							<td>기타사항</td>
 							<td>정보수정</td>
 							<td>색상수정</td>
+							<td>삭제</td>
 						</tr>
 					</thead>
 					
@@ -64,6 +65,7 @@
 							</c:if>
 							<td><button class="btn" onclick="location.href='/admin/carUpdateForm/${list.car_id}'">정보수정</button></td>
 							<td><button class="btn" onclick="location.href='/admin/colorInsertForm/${list.car_id}'">색상수정</button></td>
+							<td><button class="btn btn_danger" onclick="location.href='/admin/carDeleteProc/${list.car_id}'">삭제</button></td>
 						</tr>
 						</c:forEach>
 							

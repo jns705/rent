@@ -32,6 +32,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * 
 		from accident
 	</select>
+	
+	<!-- rent_id에 따른 사고이력 전체목록 -->
+	<select id="accidentListId" resultType="com.rent.domain.AccidentVO" parameterType="String">
+		select * 
+		from accident
+		where rent_id = #{rent_id}
+	</select>
 
 	<!-- 사고이력 상세조회 -->
 	<select id="accidentDetail" parameterType="int" resultType="com.rent.domain.AccidentVO">

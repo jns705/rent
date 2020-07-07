@@ -21,6 +21,10 @@ public class CarService {
 		return mapper.carInsert(car);
 	}
 	
+	public int carDelete(String car_id)throws Exception{
+		return mapper.carDelete(car_id);
+	}
+	
 	public int colorInsert(CarColor file)throws Exception{
 		return mapper.colorInsert(file);
 	}

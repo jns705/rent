@@ -49,7 +49,6 @@
 					<div class="col-sm-4">
 						<select class="form-control" name="car_kind">
 							<option value="소형">소형</option>
-							<option value="대형승용">대형승용</option>
 							<option value="준중형">준중형</option>
 							<option value="중형">중형</option>
 							<option value="대형">대형</option>
@@ -66,6 +65,7 @@
 						<select class="form-control" name="fuel">
 							<option value="휘발유">휘발유</option>
 							<option value="경유">경유</option>
+							<option value="전기">전기</option>
 							<option value="전기+휘발유">전기+휘발유</option>
 							<option value="LPG">LPG</option>
 						</select>
