@@ -11,7 +11,7 @@
 	<title>중고차 or 신차 리스트 페이지</title>
 </head>
 <body>
-
+<div class="content">
 	<div class="container">
 		<div class="breadcrumbs">
 			<h2 class="tit">장기렌트카 리스트</h2>
@@ -29,12 +29,12 @@
 			</ul>
 		</div>
 		
-		<article class="car-search tab-content" id="tab-direct-user-personal" role="search">
+		<article class="car-search tab-content" id="tab-direct-user-personal" role="search" style="display: block;">
 			<div class="car-search__wrapper clearfix">
 				<div class="select-area fl">
 					<div class="select-col col-3">
 						<span class="select-box"> 
-							<select name="usedCarMakerId" id="usedCarMakerId" class="option01">
+							<select name="usedCarMakerId" id="usedCarMakerId" class="select2-selection select2-selection--single option01">
 								<option value="">제조사 선택</option>
 									<option value="HD">현대자동차</option>
 									<option value="KI">기아자동차</option>
@@ -50,14 +50,14 @@
 					</div>
 					<div class="select-col col-3">
 						<span class="select-box"> 
-							<select name="usedCarSgmntTypeCd" id="usedCarSgmntTypeCd" class="option01" >
+							<select name="usedCarSgmntTypeCd" id="usedCarSgmntTypeCd" class="select2-selection select2-selection--single option01" >
 								<option value="">차량 유형 선택</option>
 							</select>
 						</span>
 					</div>
 					<div class="select-col col-3">
 						<span class="select-box"> 
-							<select name="usedCartypeId" id="usedCartypeId" class="option01" >
+							<select name="usedCartypeId" id="usedCartypeId" class="select2-selection select2-selection--single option01" >
 								<option value="">차량 선택</option>
 							</select>
 						</span>
@@ -67,7 +67,8 @@
 					<a href="#" class="btn btn-color2" id="usedcarSearchButton" >검색</a>
 				</div>
 			</div>
-			<div class="newresult_show_box user_car_search">
+			
+			<div class="newresult_show_box user-car-search">
 				<div class="newresult_show">
 					<div class="step1_box clearfix pat10">
 						<div class="step1  step1_left">
@@ -77,7 +78,10 @@
 							</div>
 							
 							<div class="wrap-rangeslider range-duration fl">
-								<div id="divUsedcarCntrPsblTerm" class="rangeslider"></div>
+								<div id="divUsedcarCntrPsblTerm" class="rangeslider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+									<div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 0%;"></div>
+									<span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span>
+								</div>
 							</div>
 							<div class="area-value">
 								<input id="divUsedcarCntrPsblTermAreaValue" type="text" class="range-val duration-val" readonly>개월이상 ~
@@ -98,7 +102,6 @@
 								$('#divUsedcarCntrPsblTermAreaValue').val($('#tab-direct-user-personal .range-duration .rangeslider').slider('value'));
 							})   
 							</script>
-							<!--// 2019-02-12 슬라이드 소스 변경  -->
 						</div>
 						<div class="step1">
 							<p class="result_p_bar fl pl12">월 렌탈료</p>
@@ -107,10 +110,14 @@
 							</div>
 							
 							<div class="wrap-rangeslider range-price fl">
-								<div id="divUsedcarStdRentAmt" class="rangeslider"></div>
+								<div id="divUsedcarStdRentAmt" class="rangeslider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+									<div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div>
+									<span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span>
+									<span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
+								</div>
 							</div>
 							<div id="divUsedcarStdRentAmtAreaValue" class="area-value">
-								<p class="from100">전체</p>
+								<p class="from100" align="right">전체</p>
 							</div>
 							<script>
 									$(function () {
@@ -139,6 +146,7 @@
 							</script>
 						</div>
 					</div>
+					
 					<div class="step1_box clearfix ">
 						<div class="step1 step1_left">
 							<p class="result_p_bar fl">주행거리</p>
@@ -147,15 +155,17 @@
 							</div>
 							
 							<div class="wrap-rangeslider mileage fl">
-								<div id="divUsedcarCurTravelDtc" class="rangeslider"></div>
+								<div id="divUsedcarCurTravelDtc" class="rangeslider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+									<div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div>
+									<span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span>
+									<span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
+								</div>
 							</div>
 							<div id="divUsedcarCurTravelDtcAreaValue" class="area-value">
 								<p class="from100">전체</p>
 							</div>
 							<script>
 									$(function () {
-										
-
 										$('#divUsedcarCurTravelDtc').slider({
 											range: true,
 											min: 0,
@@ -167,21 +177,17 @@
 												{
 													return false;
 												}
-												
-												
 												setViewCurTravelDtc($("#divUsedcarCurTravelDtcAreaValue"),ui.values[ 0 ], ui.values[ 1 ],"usedcar");
-												
 												$( "#tab-direct-user-personal .mileage-val-1" ).val(ui.values[ 0 ] );
 												$( "#tab-direct-user-personal .mileage-val-2" ).val(ui.values[ 1 ] );
 											}
 										});
-
 										$('#tab-direct-user-personal .mileage-val-1').val($('#tab-direct-user-personal .mileage .rangeslider').slider('values',0));
 										$('#tab-direct-user-personal .mileage-val-2').val($('#tab-direct-user-personal .mileage .rangeslider').slider('values',1));
 
 									})
 							</script>
-							<!--// 2019-02-12 슬라이드 소스 변경  -->
+							
 						</div>
 						<div class="step1">
 							<p class="result_p_bar fl pl12">차량등록</p>
@@ -191,7 +197,11 @@
 							</div>
 														
 							<div class="wrap-rangeslider car-model fl">
-								<div id="divUsedcarPrdyr" class="rangeslider"></div>
+								<div id="divUsedcarPrdyr" class="rangeslider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+									<div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div>
+									<span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span>
+									<span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
+								</div>
 							</div>
 							<div id="divUsedcarPrdyrAreaValue" class="area-value">
 								2015년 이상 ~ 2020년 이하
@@ -226,7 +236,7 @@
 					<div class="step2_box pd0">
 						<p class="result_p">연료</p>
 						<ul class="fuel_ul">
-							<li id="USEDCAR_F_ALL"	value="2" class="selected_red" ><a href="#none">전체</a></li>
+							<li id="USEDCAR_F_ALL"	value="2" class="selected_red_font" ><a href="#none">전체</a></li>
 							<li id="USEDCAR_210001" value="1" ><a href="#none">휘발유</a></li>
 							<li id="USEDCAR_210002" value="1" ><a href="#none">경유</a></li>
 							<li id="USEDCAR_210003" value="1" ><a href="#none">LPG</a></li>
@@ -237,7 +247,7 @@
 					<div class="step2_box">
 						<p class="result_p">지역</p>
 						<ul class="city_ul">
-							<li id="USEDCAR_A_ALL"  value="2" class="selected_red" ><a href="#none">전체</a></li>
+							<li id="USEDCAR_A_ALL"  value="2" class="selected_red_font" ><a href="#none">전체</a></li>
 							<li id="USEDCAR_692001" value="1"><a href="#none">서울</a></li>
 							<li id="USEDCAR_692002"	value="1"><a href="#none">경기</a></li>
 							<li id="USEDCAR_692003" value="1"><a href="#none">충청</a></li>
@@ -260,9 +270,8 @@
 			</div>
 		</article>
 		
-		
-		
 	</div>
+</div>
 </body>
 
 </html>
