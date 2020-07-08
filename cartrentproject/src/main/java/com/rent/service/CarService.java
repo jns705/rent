@@ -1,9 +1,12 @@
 package com.rent.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.rent.domain.CarColor;
@@ -64,5 +67,17 @@ public class CarService {
 	
 	public OptionCarVO selectName(String name)throws Exception{
 		return mapper.selectName(name);
+	}
+	
+	public List<String> manufacturer()throws Exception{
+		return mapper.manufacturer();
+	}
+	
+	public List<String> carKind(String manufacturer)throws Exception{
+		return mapper.carKind(manufacturer);
+	}
+	
+	public List<String> selectCar(CarVO car)throws Exception{
+		return mapper.selectCar(car);
 	}
 }

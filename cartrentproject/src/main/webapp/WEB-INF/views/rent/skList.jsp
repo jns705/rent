@@ -34,21 +34,17 @@
 				<div class="select-area fl">
 					<div class="select-col col-3">
 						<span class="select-box"> 
-							<select name="usedCarMakerId" id="usedCarMakerId" class="select2-selection select2-selection--single option01">
+							<select name="usedCarMakerId" id="usedCarMakerId" class="select2-selection select2-selection--single option01" onchange="carKind()">
 								<option value="">제조사 선택</option>
-									<option value="기아">기아</option>
-									<option value="현대">현대</option>
-									<option value="삼성">삼성</option>
-									<option value="BMW">BMW</option>
-									<option value="Benz">Benz</option>
-									<option value="Audi">Audi</option>
-									<option value="Tesla">Tesla</option>
+								<c:forEach items="${manufacturer}" var="manufacturer" varStatus="status">
+									<option>${manufacturer.manufacturer}</option>
+								</c:forEach>
 							</select>
 						</span>
 					</div>
 					<div class="select-col col-3">
 						<span class="select-box"> 
-							<select name="usedCarSgmntTypeCd" id="usedCarSgmntTypeCd" class="select2-selection select2-selection--single option01" >
+							<select name="usedCarSgmntTypeCd" id="usedCarSgmntTypeCd" class="select2-selection select2-selection--single option01"  onchange="selectCar();">
 								<option value="">차량 유형 선택</option>
 							</select>
 						</span>
@@ -60,6 +56,43 @@
 							</select>
 						</span>
 					</div>
+						<script type="text/javascript">
+
+							function selectCar() {
+								var car_kind = $('#usedCarSgmntTypeCd').val();
+								var manufacturer = $('#usedCarMakerId').val();
+								$.ajax({
+									url		: '/rent/selectCar',
+									data	: {'car_kind' : car_kind, 'manufacturer' : manufacturer},
+									type	: 'post',
+									success : function(data){
+										var str = '<option value="">차량 선택</option>';
+										$.each(data.map, function(key, value){
+											str += '<option>'+ value.car_name + '</option>';
+										});
+										$('#usedCartypeId').html(str);
+									}
+								});
+							}
+							
+							function carKind(){
+								var manufacturer = $('#usedCarMakerId').val();
+								$.ajax({
+									url		: '/rent/carKind',
+									data	: {'manufacturer' : manufacturer},
+									type	: 'post',
+									dataType : 'json',
+									success : function(data){
+										var str = '<option value="">차량 유형 선택</option>';
+										$.each(data.map, function(key, value){
+											str += '<option>'+ value.car_kind + '</option>';
+										});
+										$('#usedCarSgmntTypeCd').html(str);
+									},
+									error : function(data){alert("gdss");}
+								});
+							}
+						</script>
 				</div>
 				<div class="btn-wrap fr">
 					<a href="#" class="btn btn-color2" id="usedcarSearchButton" >검색</a>
