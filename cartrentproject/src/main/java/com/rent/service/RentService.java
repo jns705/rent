@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.rent.domain.RentImageVO;
 import com.rent.domain.RentVO;
 import com.rent.mapper.RentMapper;
 
@@ -43,7 +44,12 @@ public class RentService {
 		return mapper.situation(rent);
 	}
 	
+	//렌트 조회
+	public RentVO rentDetail(String rent_id) throws Exception{
+		return mapper.rentDetail(rent_id);
+	}
 	
+
 	
 	
 	
