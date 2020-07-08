@@ -149,6 +149,7 @@ public class AdminController {
 		return "redirect:/admin/carList";
 	}
 	
+	//차량업데이트
 	@RequestMapping("/carUpdateProc")
 	public String carUpdateProc(CarVO car)throws Exception{
 		carService.carUpdate(car);
@@ -261,4 +262,6 @@ public class AdminController {
 	 public void situation(RentVO rent)throws Exception{
 		 rentService.situation(rent);
 	 }
+	 
+	 
 }
