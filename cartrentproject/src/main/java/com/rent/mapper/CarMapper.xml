@@ -123,6 +123,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 	<select id="selectCar" resultType="hashMap" parameterType="com.rent.domain.OptionCarVO">
 		select 	distinct car_name 
 		from 	car 
-		where 	car_kind = #{car_kind} and manufacturer = #{manufacturer}
+		where 	car_kind = #{car_kind} and manufacturer = #{manufacturer}	
 	</select>
 </mapper>
