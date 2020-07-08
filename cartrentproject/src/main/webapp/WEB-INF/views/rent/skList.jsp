@@ -36,15 +36,13 @@
 						<span class="select-box"> 
 							<select name="usedCarMakerId" id="usedCarMakerId" class="select2-selection select2-selection--single option01">
 								<option value="">제조사 선택</option>
-									<option value="HD">현대자동차</option>
-									<option value="KI">기아자동차</option>
-									<option value="DW">GM대우자동차</option>
-									<option value="SM">르노/삼성자동차</option>
-									<option value="SS">쌍용자동차</option>
-									<option value="BM">BMW</option>
-									<option value="BE">벤츠</option>
-									<option value="JE">JEEP</option>
-									<option value="NI">닛산</option>
+									<option value="기아">기아</option>
+									<option value="현대">현대</option>
+									<option value="삼성">삼성</option>
+									<option value="BMW">BMW</option>
+									<option value="Benz">Benz</option>
+									<option value="Audi">Audi</option>
+									<option value="Tesla">Tesla</option>
 							</select>
 						</span>
 					</div>

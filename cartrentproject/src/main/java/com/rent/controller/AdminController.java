@@ -276,7 +276,7 @@ public class AdminController {
 	 @RequestMapping("/rentImageForm/{id}")
 	 public String rentImageForm(@PathVariable String id, Model model)throws Exception{
 		 model.addAttribute("rent", rentService.rentDetail(id));
-		 model.addAttribute("car", 	carService.carDetail(id));
+		 model.addAttribute("car", 	carService.carDetail(Integer.toString(rentService.rentDetail(id).getCar_id())));
 		 return "/admin/rentImageForm";
 	 }
 	 
