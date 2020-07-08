@@ -66,7 +66,7 @@
 							<option value="휘발유">휘발유</option>
 							<option value="경유">경유</option>
 							<option value="전기">전기</option>
-							<option value="전기+휘발유">전기+휘발유</option>
+							<option value="하이브리드">하이브리드</option>
 							<option value="LPG">LPG</option>
 						</select>
 						</div>

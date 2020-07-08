@@ -12,47 +12,77 @@
 <title>QNA 작성 페이지</title>
 </head>
 <body>
-	<div class="container">
-	<h2>QNA 작성</h2>
-	<form class="form-horizontal" action="${path}/qna/insertProc" method="post">
-		
-		<div class="form-group">
-			<label for="writer">작성자</label>
-			<input type="text" class="form-control" id="writer" name="writer" placeholder="이름을 입력하십시오.">
-		</div>
-	
-		<div class="form-group">
-			<label for="subject">제목</label>
-			<input type="text" class="form-control" id="subject" name="subject" placeholder="제목을 입력하십시오.">
-		</div>
-		
-		<div class="form-group">
-			<label for="content">내용</label>
-			<textarea rows="4" cols="100" class="form-control" id="content" name="content" placeholder="내용을 입력하십시오."></textarea>
-		</div>
+<div class="col-sm-9 col-lg-9">
+            <div>
+                <h3>QNA 등록</h3>
+            </div>
+            
+            <div class="table-responsive">
+                <div class="well">
+                    <form class="bs-example form-horizontal" action="${path}/qna/insertProc" method="post">
+                        <fieldset>
+                       		<div class="form-group">
+								<label class="col-lg-2 control-label">작성자</label>
+								 <div class="col-lg-10">
+									<input type="text" class="form-control" id="writer" name="writer" placeholder="이름을 입력하십시오.">
+								 </div>
+							</div>
+                        
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">제목</label>
 
-		<div class="form-group pwd" id="pwd">
-			<div id="pwevt">
-				<!--
-				<label for="qne_password">비밀번호</label>
-				<input type="password" class="form-control masked" id="qne_password" name="qne_password" placeholder="비밀번호를 입력하세요">
-				<button type="button" id="eye"><span class="glyphicon glyphicon glyphicon-eye-open" ></span></button>
-				-->
-			</div>
-		</div>
-				
-		<input type="checkbox" id="check_yn">
-		<label>비밀글로 작성</label><br>
-		<button type="submit" class="btn btn-primary">등록</button>
-	</form>
-		<a href="${path}/qna/list" class="btn btn-danger">목록가기</a>
-</div>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="제목을 입력하십시오.">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">내용</label>
+
+                                <div class="col-lg-10">
+                                    <textarea class="form-control" rows="3" id="content" name="content" placeholder="내용을 입력하십시오."></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                            
+							<div class="form-group pwd" id="pwd">
+								<div id="pwevt">
+								
+								</div>
+							</div>
+							
+                                <label class="col-lg-2 control-label">비밀글</label>
+
+                                <div class="col-lg-10">
+
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" id="check_yn"></label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary">확인</button>
+                                    <button type="reset" class="btn btn-default">취소</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <a href="${path}/qna/list" class="btn btn-danger">목록가기</a>
+                </div>
+            </div>
+            
+        </div>
 </body>
 <script>
 var str ='';
 	str += '<div id="pwevt">';
-    str += '<label for="qne_password">비밀번호</label>';
+    str += '<label class="col-lg-2 control-label">비밀번호</label>';
+    str += '<div class="col-lg-10">';
     str += '<input type="password" class="form-control" id="qne_password" name="qne_password" placeholder="비밀번호를 입력하세요">';
+    str += '</div>';
     str += '</div>';
 
 	$(document).ready(function(){

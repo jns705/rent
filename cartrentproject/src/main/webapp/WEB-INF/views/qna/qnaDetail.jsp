@@ -27,13 +27,19 @@
                     <div class="post">
                         
                          <strong>${detail.writer}(${detail.qna_id})</strong>
-                         &nbsp;<span class="text-muted">${detail.qna_date }</span>
+                         &nbsp;<span class="text-muted"> <fmt:formatDate value="${detail.qna_date}" pattern="yyyy/MM/dd" /></span>
+                        
                          &nbsp;<span class="text-muted">100회 읽음</span>
                             <span class="glyphicon glyphicon-comment" style="padding:10px">댓글수</span>
-                         <a href="${path}/qna/update"
+                            
+                         <c:if test="${detail.qne_password != null && detail.qne_password !='' || sessionScope.id eq 'master'}">
+                             <a href="${path}/qna/update"
                             class="glyphicon glyphicon-cog pull-right" style="padding:10px">수정</a>
-                         <a href="${path}/qna/delete/${qna.qna_id}"
+                            
+                         	<a href="${path}/qna/delete/${detail.qna_id}"
                             class="glyphicon glyphicon-trash pull-right" style="padding:10px">삭제</a>
+                         </c:if>
+                         
                     </div>
                     <br>
                     <p style="padding:20px">
@@ -41,34 +47,47 @@
                     </p>
                     
                    <!-- 저장된 댓글을 보여주는 영역 -->
-                    <table class="table" style="font-size: 13px; padding :20px">
-                        <tr>
-                            <td>
-                                <strong>댓글작성자</strong>
-                            </td>
-                            <td class="text-right">
-                                댓글작성시간
-                                <a class="glyphicon glyphicon-trash" href="#"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p class="txt">댓글</p>
-                            </td>
-                        </tr>
-                    </table>
+                   	
+					
+	                    <table class="table commentList" id="tableList" style="font-size: 13px; padding :20px">
+	                        <tr>
+	                            <td>
+	                                <strong>댓글작성자</strong>
+	                            </td>
+	                            <td class="text-right">
+	                                2020-07-08/
+	                                <a class="glyphicon glyphicon-pencil" href="#"></a>/
+	                                <a class="glyphicon glyphicon-trash" href="#"></a>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td colspan="2">
+	                                <p class="txt">댓글</p>
+	                            </td>
+	                        </tr>
+	                    </table>
+	                <div class="commentList" id="commentList">
+                    </div>
                 </div>
                 
                 <!-- 댓글을 입력하는 영역 -->
                 <div class="panel-footer">
-                    <div class="write_area">
-                        <form>
-                            <div>
-                                <textarea class="input_write_comment" name="comment" placeholder="댓글 내용"></textarea>
-                                <input type="submit" class="comment_submit" value="전송">
-                            </div>
-                        </form>
-                    </div>
+                	<form name="commentInsertForm">
+                		<div class="comment-group">
+		                	<div>
+		                		<label>이름</label>
+		                		<input type="text" id="writer" name="writer" placeholder="이름을 입력하세요">
+		                	</div>
+		                	<br>
+		                    <div class="write_area">
+			                    <div>
+			                    	<input type="hidden" id="qna_id" name="qna_id" value="${detail.qna_id}">
+			                        <textarea class="input_write_comment" id="content" name="content" placeholder="댓글을 입력하세요"></textarea>
+			                        <input type="submit" class="comment_submit" name="commentInsertBtn" value="전송">
+			                    </div>
+		                    </div>
+	                    </div>
+	            	</form>
                 </div>
                
             </div>
@@ -82,5 +101,6 @@
         </div>
     </div>
 </body>
+<%@ include file="commentAction.jsp" %>
 </html>
 </layoutTag:layout>
