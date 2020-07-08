@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -22,11 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.rent.domain.CarColor;
 import com.rent.domain.CarVO;
 import com.rent.domain.OptionCarVO;
+import com.rent.domain.RentImageVO;
 import com.rent.domain.RentVO;
 import com.rent.service.AccidentService;
 import com.rent.service.CarColorService;
 import com.rent.service.CarOptionService;
 import com.rent.service.CarService;
+import com.rent.service.RentImageService;
 import com.rent.service.RentService;
 
 
@@ -48,6 +51,9 @@ public class AdminController {
 	
 	@Resource(name="com.rent.service.CarOptionService")
 	CarOptionService opService;
+	
+	@Resource(name="com.rent.service.RentImageService")
+	RentImageService rentImageService;
 	
 	//차량 등록
 	@RequestMapping("/carInsert")
@@ -220,13 +226,17 @@ public class AdminController {
 	 //렌트 리스트
 	 @RequestMapping("/rentList")
 	 public String rentList(Model model)throws Exception{
+		 int [] imageSize = new int[rentService.rentList().size()];
 		 List<CarVO> carList = new ArrayList<CarVO>();
-		 for(RentVO rent : rentService.rentList()) {
+		 for(int i = 0; i < rentService.rentList().size(); i++) {
+			 RentVO rent = rentService.rentList().get(i);
 			 carList.add(carService.carDetail(Integer.toString(rent.getCar_id())));
+			 imageSize[i] = rentImageService.imageCount(rent.getRent_id());
 		 }
-		 System.out.println(rentService.rentList());
+		 System.out.println(imageSize.toString());
 		 model.addAttribute("car", carList);
 		 model.addAttribute("rent", rentService.rentList());
+		 model.addAttribute("image", imageSize);
 		 return "/admin/rentList";
 	 }
 	 
@@ -262,6 +272,50 @@ public class AdminController {
 	 public void situation(RentVO rent)throws Exception{
 		 rentService.situation(rent);
 	 }
+	 
+	 @RequestMapping("/rentImageForm/{id}")
+	 public String rentImageForm(@PathVariable String id, Model model)throws Exception{
+		 model.addAttribute("rent", rentService.rentDetail(id));
+		 model.addAttribute("car", 	carService.carDetail(id));
+		 return "/admin/rentImageForm";
+	 }
+	 
+		@RequestMapping("/rentImageProc")
+		public String rentImageProc(@RequestParam int rent_id, @RequestParam String rent_image, Model model, @RequestPart MultipartFile files)throws Exception{
+			
+			//게시글 등록 화면에서 입력한 값들을 실어나르기 위한 BoardVO를 생성한다.
+			RentImageVO file		=	new RentImageVO();
+			
+			if(!files.isEmpty()) {
+			String 	sourceFileName = files.getOriginalFilename();
+			File 	destinationFile;
+			String	destinationFileName;
+			String	rent_url;
+			// fileUrl="uploadFiles 폴더의 위치"
+			String	fileUrl = "C:/Git/rent/cartrentproject/src/main/resources/static/rentUpload/";
+			do {
+				destinationFileName = RandomStringUtils.randomAlphabetic(32) + sourceFileName;
+				destinationFile		= new File(fileUrl + destinationFileName);
+			}while(destinationFile.exists());
+			
+			//MultipartFile.transferTo() : 요청 시점의 임시 파일을 로컬 파일 시스템에 영구적으로 복사해준다.
+			destinationFile.getParentFile().mkdir();
+			files.transferTo(destinationFile);
+			
+			file.setRent_id(rent_id);
+			file.setRent_image(rent_image);
+			file.setRent_url("http://localhost:8082/static/rentUpload/" + destinationFileName);
+			
+			rentImageService.imageInsert(file);
+			}
+			return "redirect:/admin/rentImageForm/"+rent_id;
+		}
+		
+		@RequestMapping("/rentImageList")
+		@ResponseBody
+		public List<RentImageVO> rentImageList(@RequestParam int rent_id)throws Exception{
+			return rentImageService.imageList(rent_id);
+		}
 	 
 	 
 }

@@ -54,4 +54,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET		situation 	= #{situation}
 		WHERE	RENT_ID 	= #{rent_id}
 	</update>
+	
+	<!-- 렌트 조회 -->
+	<select id="rentDetail" parameterType="String" resultType="com.rent.domain.RentVO">
+		SELECT	*
+		FROM	RENT
+		WHERE	RENT_ID = #{rent_id}
+	</select>
 </mapper>
