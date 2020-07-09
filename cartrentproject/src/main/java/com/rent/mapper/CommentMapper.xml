@@ -40,6 +40,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
     </delete>
     
     <!-- 대댓글 목록 -->
+    <select id="recommentList" parameterType="int" resultType="com.rent.domain.CommentVO">
+    <!--
+    	select * 
+    	from comment
+    	where comment_id = recomment_id
+    -->
+	    select *
+		from comment a , comment b
+		where a.comment_id = b.recomment_id;
+    	and qna_id = #{qna_id}
+    </select>
     
+    <!-- 대댓글 등록 -->
+    <insert id="recommentInsert" parameterType="com.rent.domain.CommentVO">
+    	insert into comment
+    		(comment_id, qna_id, comment_date, recomment_id, comment_content, comment_writer)
+    	values (#{comment_id}, #{qna_id}, now(), #{recomment_id}, #{comment_content}, #{comment_writer})
+    </insert>
+    
+    <!-- 대댓글 수정 -->
+    <update id="recommentUpdate" parameterType="com.rent.domain.CommentVO">
+  		update comment
+  		set comment_content = #{comment_content}, comment_writer = #{comment_writer}
+  		where comment_id = #{comment_id}
+    </update>
+     
 </mapper>
 

@@ -25,7 +25,7 @@ public interface CommentMapper {
 	public int commentDelete(int comment_id) throws Exception;
 	
 	// 대댓글 목록
-	public List<CommentVO> recommentList(int recomment_id) throws Exception;
+	public List<CommentVO> recommentList(CommentVO comment) throws Exception;
 	
 	// 대댓글 등록
 	public int recommentInsert(CommentVO comment) throws Exception;
@@ -33,6 +33,4 @@ public interface CommentMapper {
 	// 대댓글 수정
 	public int recommentUpdate(CommentVO comment) throws Exception;
 	
-	// 대댓글 삭제
-	public int recommentDelete(int recomment_id) throws Exception;
 }

@@ -41,8 +41,19 @@ public class CommentService {
 	}
 	
 	//대댓글 목록
-	//public List<CommentVO> recommentList() throws Exception {
-	//	return mapper.recommentList();
-	//}
+	public List<CommentVO> recommentList(CommentVO comment) throws Exception {
+		return mapper.recommentList(comment);
+	}
+	
+	// 대댓글 등록
+	public int recommentInsert(CommentVO comment) throws Exception {
+		return mapper.recommentInsert(comment);
+	}
+	
+	// 대댓글 수정
+	public int recommentUpdate(CommentVO comment) throws Exception {
+		return mapper.recommentUpdate(comment);
+	}
+	
 	
 }

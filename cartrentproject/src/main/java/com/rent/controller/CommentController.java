@@ -21,33 +21,68 @@ public class CommentController {
 	@Resource(name="com.rent.service.CommentService")
 	CommentService service;
 	
+	/**
+	 * 댓글 등록
+	 * @param comment - domain
+	 */
 	@RequestMapping("/insert")
 	@ResponseBody
-	private int CommentInsert(@RequestParam int qna_id, @RequestParam String content,  @RequestParam String writer) throws Exception{
+	private int CommentInsert(CommentVO comment) throws Exception{
 		System.out.println("commentInsert()");
-		CommentVO comment = new CommentVO();
-		comment.setQna_id(qna_id);
-		comment.setContent(content);
-		comment.setWriter(writer);
 		return service.commentInsert(comment);
 	}
 	
+	/**
+	 * 댓글 수정
+	 * @param comment - domain
+	 */
 	@RequestMapping("/update")
 	@ResponseBody
-	private int CommentUpdate(@RequestParam CommentVO comment) throws Exception {
+	private int CommentUpdate(CommentVO comment) throws Exception {
 		return service.commentUpdate(comment);
 	}
 	
+	/**
+	 * 댓글 삭제
+	 * @param @PathVariable int comment_id
+	 *	 commentAction.jsp 에서 comment_id의 값을 받아온다.
+	 */
 	@RequestMapping("/delete/{comment_id}")
 	@ResponseBody
-	private int CommentDelete(@PathVariable int comment_id) throws Exception {
+	private int CommentDelete(@PathVariable int comment_id, Model model) throws Exception {
 		return service.commentDelete(comment_id);
 	}
 	
+	/**
+	 * 댓글 목록
+	 * @param @PathVariable int qna_id
+	 * 	commentAction.jsp 에서 qna_id의 값을 받아온다.
+	 */
 	@RequestMapping("/list/{qna_id}")
 	@ResponseBody
-	private List<CommentVO> CommentList(@PathVariable int qna_id, Model model) throws Exception {
+	private List<CommentVO> CommentList(@PathVariable int qna_id) throws Exception {
 		System.out.println("CommentList()");
 		return service.commentList(qna_id);
 	}
+	
+	/**
+	 * 대댓글 등록
+	 */
+	@RequestMapping("/commentInsert")
+	@ResponseBody
+	private int recommentInsert(CommentVO comment) throws Exception {
+		return service.recommentInsert(comment);
+	}
+	
+	@RequestMapping("/commentList")
+	@ResponseBody
+	public List<CommentVO> recommentList(CommentVO comment) throws Exception {
+		return service.recommentList(comment);
+	}
+	
+	
+	
+	
+	
+	
 }
