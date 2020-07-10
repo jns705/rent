@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		select *
 		from comment
 		where qna_id = #{qna_id}
-		order by recomment_id
+		order by recomment_id, comment_id
 	</select>
     
     <!-- 댓글 등록 -->

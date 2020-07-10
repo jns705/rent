@@ -69,6 +69,7 @@ function commentList() {
 					str += '<tr>';
 					str += '<td>';
 					str += '<strong><font color=red></font>'+value.comment_writer+'<font color=red>('+value.writer+')</font></strong>';
+					str += '&nbsp;<a class="glyphicon glyphicon-comment" onclick="recommentInsert('+value.comment_id+','+qna_id+',\''+value.comment_writer+'\','+value.recomment_id+');"></a>';
 					str += '</td>';
 					str += '<td class="text-right">';
 					str += value.comment_date;
@@ -79,6 +80,7 @@ function commentList() {
 					str += '<tr>';
 					str += '<td colspan="2">';
 					str += '<p class="txt recontent'+value.comment_id +'">　　'+value.comment_content+'</p></td></tr>';
+					str += '<div class="recomment_'+value.comment_id+'"></div>'
 					str += '</div>';
 				}
 
