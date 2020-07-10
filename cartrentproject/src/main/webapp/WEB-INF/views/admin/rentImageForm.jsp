@@ -49,7 +49,7 @@
 					<table class="table">
 						<thead>
 							<tr class="info">
-								<th>색상</th>
+								<th>파일명</th>
 								<th >파일이름</th>
 								<th>사진</th>
 							</tr>

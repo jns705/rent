@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.rent.domain.QNAVO;
-import com.rent.service.CommentService;
 import com.rent.service.QNAService;
 
 @Controller
@@ -37,7 +36,6 @@ public class QNAController {
 	
 	@RequestMapping("/detail/{qna_id}")
 	public String qnaDetail(@PathVariable int qna_id,Model model) throws Exception {
-		
 		model.addAttribute("detail", service.qnaDetail(qna_id));
 		return "/qna/qnaDetail";
 	}

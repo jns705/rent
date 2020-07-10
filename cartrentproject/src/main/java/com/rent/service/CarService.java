@@ -28,45 +28,16 @@ public class CarService {
 		return mapper.carDelete(car_id);
 	}
 	
-	public int colorInsert(CarColor file)throws Exception{
-		return mapper.colorInsert(file);
-	}
-	
 	public List<CarVO> carList()throws Exception{
 		return mapper.carList();
-	}
-	
-	public int optionInsert(OptionCarVO option)throws Exception{
-		return mapper.optionInsert(option);
 	}
 	
 	public CarVO carDetail(String id) throws Exception{
 		return mapper.carDetail(id);
 	}
 	
-	
-	public List<OptionCarVO> carOptionDetail(String rent_id) throws Exception{
-		return mapper.carOptionDetail(rent_id);
-	}
-	
-	public List<CarVO> carColorList() throws Exception{
-		return mapper.carColorList();
-	}
-	
-	public List<OptionCarVO> carOptionList() throws Exception{
-		return mapper.carOptionList();
-	}
-	
 	public int carUpdate(CarVO car)throws Exception{
 		return mapper.carUpdate(car);
-	}
-	
-	public int carOptionUpdate(OptionCarVO option)throws Exception{
-		return mapper.carOptionUpdate(option);
-	}
-	
-	public OptionCarVO selectName(String name)throws Exception{
-		return mapper.selectName(name);
 	}
 	
 	public List<String> manufacturer()throws Exception{
@@ -79,5 +50,9 @@ public class CarService {
 	
 	public List<String> selectCar(CarVO car)throws Exception{
 		return mapper.selectCar(car);
+	}
+	
+	public List<String> fuel()throws Exception{
+		return mapper.fuel();
 	}
 }

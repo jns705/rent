@@ -14,69 +14,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		(#{manufacturer}, #{car_name}, #{exhaust_volume}, #{car_kind}, #{fuel}, #{transmission}, #{car_price}, #{made_country}, #{content}, #{car_year})
 	</insert>
 	
-	<!-- 차량 색상 등록 -->
-	<insert id="colorInsert" parameterType="com.rent.domain.CarColor" useGeneratedKeys="true" keyProperty="car_id">
-		INSERT INTO COLOR
-		(car_id, color, color_image, color_url)
-		VALUES
-		(#{car_id}, #{color}, #{color_image}, #{color_url})
-	</insert>
-	
 	<!-- 차량 리스트 전체 조회 -->
 	<select id="carList" resultType="com.rent.domain.CarVO">
 		SELECT	*
 		FROM	CAR
 	</select>
 	
-	<!-- 옵션 등록 -->
-	<insert id="optionInsert" parameterType="com.rent.domain.OptionCarVO">
-		INSERT INTO OPTIONCAR
-		(rent_id, option_name, option_price, option_content)
-		VALUES
-		(#{rent_id}, #{option_name}, #{option_price}, #{option_content})
-	</insert>
-	
-		<!-- 차량 세부 조회 -->
+	<!-- 차량 세부 조회 -->
 	<select id="carDetail" parameterType="String" resultType="com.rent.domain.CarVO">
 		SELECT	*
 		FROM	CAR
 		WHERE	CAR_ID = #{car_id}
 	</select>
 	
-		<!-- 차량 색상 세부 조회 -->
-	<select id="carColorDetail" parameterType="String" resultType="com.rent.domain.CarColor">
-		SELECT	*
-		FROM	COLOR
-		WHERE	CAR_ID = #{car_id}
-	</select>
-	
-		<!-- 차량 옵션 세부 조회 -->
-	<select id="carOptionDetail" parameterType="String" resultType="com.rent.domain.OptionCarVO">
-		SELECT	*
-		FROM	OPTIONCAR
-		WHERE	RENT_ID = #{rent_id}
-	</select>
-	
-		<!-- 차량 삭제 -->
+	<!-- 차량 삭제 -->
 	<delete id="carDelete" parameterType="String">
 		DELETE	
 		FROM	CAR
 		WHERE	CAR_ID = #{car_id}
 	</delete>
 	
-		<!-- 차량 색상 세부 조회 -->
-	<select id="carColorList" resultType="com.rent.domain.CarColor">
-		SELECT	*
-		FROM	COLOR
-	</select>
-	
-		<!-- 차량 옵션 세부 조회 -->
-	<select id="carOptionList" resultType="com.rent.domain.OptionCarVO">
-		SELECT	*
-		FROM	OPTIONCAR
-	</select>
-	
-		<!-- 차정보 수정 -->
+	<!-- 차정보 수정 -->
 	<update id="carUpdate" parameterType="com.rent.domain.CarVO">
 		UPDATE	CAR
 		SET		manufacturer 	= #{manufacturer}
@@ -90,23 +48,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 				,content 		= #{content} 
 				,car_year 		= #{car_year}
 		WHERE	CAR_ID 			= #{car_id}
-	</update>
-	
-	
-	<select id="selectName" parameterType="String" resultType="com.rent.domain.OptionCarVO">
-		SELECT	*
-		FROM	OPTIONCAR
-		WHERE	OPTION_NAME	= #{name} and RENT_ID = 0
-	</select>
-	
-	<update id="carOptionUpdate" parameterType="com.rent.domain.OptionCarVO">
-		UPDATE	OPTIONCAR
-		SET		rent_id 		= #{rent_id}
-				,option_name	= #{option_name} 
-				,option_price 	= #{option_price} 
-				,option_content = #{option_content} 
-		WHERE	option_name		= #{option_name}
-		AND		rent_id			= #{rent_id}
 	</update>
 	
 	<select id="manufacturer" resultType="hashMap">
@@ -124,5 +65,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		select 	distinct car_name 
 		from 	car 
 		where 	car_kind = #{car_kind} and manufacturer = #{manufacturer}	
+	</select>
+	
+	<select id="fuel" resultType="hashMap">
+		SELECT	distinct FUEL
+		FROM	CAR
 	</select>
 </mapper>

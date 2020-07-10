@@ -61,21 +61,23 @@ public class AdminController {
 		return "/admin/carInsertForm";
 	}
 	
+	//차량 등록
 	@RequestMapping("/carInsertProc")
 	public String carInsertForm(CarVO car)throws Exception{
 			carService.carInsert(car);
 		return "redirect:/admin/colorInsertForm/"+car.getCar_id();
 	}
 	
-	//차 등록
+	//차 등록폼
 	@RequestMapping("/colorInsertForm/{id}")
 	public String colorInsertForm(Model model, @PathVariable String id) throws Exception{
 		model.addAttribute("list", carService.carList());
 		model.addAttribute("car_id", id);
-		model.addAttribute("option", carService.carOptionList());
+		model.addAttribute("option", opService.optionList());
 		return "/admin/colorInsertForm";
 	}
 	
+	//차량 색상 등록
 	@RequestMapping("/carColorProc")
 	public String carColorProc(@RequestParam(defaultValue = "1") int car_id, @RequestParam String color, Model model, @RequestPart MultipartFile files)throws Exception{
 		
@@ -101,8 +103,7 @@ public class AdminController {
 		file.setColor		(color);
 		file.setColor_image	(destinationFileName);
 		file.setColor_url	("http://localhost:8082/static/upload/");
-		
-		carService.colorInsert(file);
+		colorService.colorInsert(file);
 		}
 		model.addAttribute("car_id", car_id);
 		return "redirect:/admin/colorInsertForm/"+car_id;
@@ -115,6 +116,7 @@ public class AdminController {
 		return "/admin/optionForm";
 	}
 	
+	//옵션등록
 	@RequestMapping("/optionProc")
 	public String optionProc(HttpServletRequest request)throws Exception{
 		OptionCarVO option = new OptionCarVO();
@@ -122,7 +124,7 @@ public class AdminController {
 		option.setOption_content(request.getParameter("option_content"));
 		option.setOption_name(request.getParameter("option_name"));
 		option.setOption_price(Integer.parseInt(request.getParameter("option_price")));
-		carService.optionInsert(option);
+		opService.optionInsert(option);
 		
 		return "redirect:/admin/optionForm";
 	}
@@ -131,7 +133,7 @@ public class AdminController {
 	@RequestMapping("/optionList")
 	@ResponseBody
 	public List<OptionCarVO> optionList()throws Exception{
-		return carService.carOptionDetail("0");
+		return opService.optionDetail("0");
 	}
 	
 	//차량 목록
@@ -166,7 +168,7 @@ public class AdminController {
 	@RequestMapping("/carDetail/{id}")
 	public String carDetail(@PathVariable String id, Model model)throws Exception{
 		model.addAttribute("detail", carService.carDetail(id));
-		model.addAttribute("color",  colorService.carColorDetail(id));
+		model.addAttribute("color",  colorService.colorDetail(id));
 		return "/admin/carDetail";
 	}
 	
@@ -175,22 +177,22 @@ public class AdminController {
 	@ResponseBody
 	public List<CarColor> colorList(@RequestParam String car_id)throws Exception{
 		System.out.println(car_id);
-		return colorService.carColorDetail(car_id);
+		return colorService.colorDetail(car_id);
 	}
 	
 	//렌트 입력 폼
 	@RequestMapping("/rentInsertForm")
 	public String rentInsertForm(Model model)throws Exception{
 		model.addAttribute("car", 	 carService.carList());
-		model.addAttribute("option", carService.carOptionDetail("1"));
+		model.addAttribute("option", opService.optionDetail("1"));
 		return "/admin/rentInsertForm";
 	}
 	//car_id에 따른 색상 추출
 	@RequestMapping("/getColor")
 	@ResponseBody
 	public List<CarColor> getColor(@RequestParam String car_id)throws Exception{
-		System.out.println(colorService.carColorDetail(car_id));
-		return colorService.carColorDetail(car_id);
+		System.out.println(colorService.colorDetail(car_id));
+		return colorService.colorDetail(car_id);
 	}
 	
 	@RequestMapping("/color")
@@ -208,12 +210,12 @@ public class AdminController {
 		 else
 		 opService.optionDelete(Integer.toString(rent.getRent_id()));
 		 
-		 List<OptionCarVO> list = carService.carOptionDetail("0");
+		 List<OptionCarVO> list = opService.optionDetail("0");
 		 for(OptionCarVO olist : list) {
 			 if(request.getParameter(olist.getOption_name())!=null) {
-				 olist = carService.selectName(olist.getOption_name());
+				 olist = opService.selectName(olist.getOption_name());
 				 olist.setRent_id(rent.getRent_id());
-				 carService.optionInsert(olist);
+				 opService.optionInsert(olist);
 			 }
 		 }
 		 
@@ -242,7 +244,7 @@ public class AdminController {
 	 
 	 @RequestMapping("/rentDetail/{id}")
 	 public String rentDetail(@PathVariable String id, Model model)throws Exception{
-		 model.addAttribute("option", 	carService.carOptionDetail(id));
+		 model.addAttribute("option", 	opService.optionDetail(id));
 		 model.addAttribute("accident", accService.accidentListId(id));
 		 model.addAttribute("rent_id", 	id);
 		 return "/admin/rentDetail";

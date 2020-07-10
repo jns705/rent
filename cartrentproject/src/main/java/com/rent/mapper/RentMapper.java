@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rent.domain.BuyVO;
 import com.rent.domain.RentVO;
+import com.rent.domain.RentListVO;
 
 @Repository("com.rent.mapper.RentMapper")
 public interface RentMapper {
@@ -38,5 +39,13 @@ public interface RentMapper {
 	
 	//구매한 차량 정보들을 buy 테이블에 넣는다.
 	public int buyInsert(BuyVO buy) throws Exception;
+	
+	public List<String> location() throws Exception;
+	
+	//렌트리스트 최종
+	public List<RentVO> rentListPro(RentListVO list) throws Exception;
+	
+	//렌트리스트 숫자
+	public int rentListCount(RentListVO list) throws Exception;
 	
 }
