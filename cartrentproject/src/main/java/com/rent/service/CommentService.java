@@ -40,9 +40,25 @@ public class CommentService {
 		return mapper.commentDelete(comment_id);
 	}
 	
-	//대댓글 목록
-	//public List<CommentVO> recommentList() throws Exception {
-	//	return mapper.recommentList();
-	//}
+	// 댓글 삭제 시 대댓글의 comment_id를 알아오는 메서드
+	public List<CommentVO> recommentDeleteList(CommentVO comment) throws Exception {
+		return mapper.recommentDeleteList(comment);
+	}
+	
+	// 댓글 삭제 시 삭제하는 댓글의 recomment_id를 가져오는 메서드
+	public CommentVO commentDetail(int comment_id) throws Exception {
+		return mapper.commentDetail(comment_id);
+	}
+	
+	// 대댓글 등록
+	public int recommentInsert(CommentVO comment) throws Exception {
+		return mapper.recommentInsert(comment);
+	}
+	
+	// 대댓글 수정
+	public int recommentUpdate(CommentVO comment) throws Exception {
+		return mapper.recommentUpdate(comment);
+	}
+	
 	
 }
