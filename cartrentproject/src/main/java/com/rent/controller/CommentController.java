@@ -88,7 +88,7 @@ public class CommentController {
 	@RequestMapping("/commentUpdate")
 	@ResponseBody
 	private int reCommentUpdate(CommentVO comment) throws Exception {
-		return service.commentUpdate(comment);
+		return service.recommentUpdate(comment);
 	}
 	
 	

@@ -41,15 +41,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
     
     <!-- 대댓글 목록 -->
     <select id="recommentList" parameterType="int" resultType="com.rent.domain.CommentVO">
-    <!--
-    	select * 
-    	from comment
-    	where comment_id = recomment_id
-    -->
-	    select *
+		select a.comment_id, a.content, a.writer, a.comment_date , b.comment_date , b.comment_content, b.comment_writer
 		from comment a , comment b
-		where a.comment_id = b.recomment_id;
-    	and qna_id = #{qna_id}
+		where a.comment_id = b.recomment_id
+		and a.qna_id = b.qna_id
     </select>
     
     <!-- 대댓글 등록 -->
@@ -62,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
     <!-- 대댓글 수정 -->
     <update id="recommentUpdate" parameterType="com.rent.domain.CommentVO">
   		update comment
-  		set comment_content = #{comment_content}, comment_writer = #{comment_writer}
+  		set comment_content = #{comment_content}
   		where comment_id = #{comment_id}
     </update>
      
