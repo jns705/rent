@@ -66,7 +66,9 @@
 	                            </td>
 	                        </tr>
 	                    </table>
-	                <div class="commentList" id="commentList">
+	                <div>
+	                <table id="commentList">
+	                </table>
                     </div>
                 </div>
                 

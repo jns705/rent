@@ -6,7 +6,6 @@ $('[name=commentInsertBtn]').click(function() {
 	var insertData = $('[name=commentInsertForm]').serialize();	//commentInsertForm의 내용을 가져온다.
 	commentInsert(insertData);	
 });
-
 //댓글 등록
 function commentInsert(insertData){
     $.ajax({
@@ -30,7 +29,6 @@ function commentList() {
 		data : {'qna_id': qna_id} ,
 		success : function(data) {
 			var str = '';
-			str += '<table class="table" style="font-size: 13px; padding : 20px">';
 			//배열관리 메서드
 			$.each(data, function(key, value){
 				str += '<tr>';
@@ -38,7 +36,7 @@ function commentList() {
 				str += '<strong>'+value.writer+'</strong>';
 				str += '</td>';
 				str += '<td class="text-right">';
-				str += value.comment.date;
+				str += value.comment_date;
 				str += '<a class="glyphicon glyphicon-pencil" href="#"></a>/';
 				str += '<a class="glyphicon glyphicon-trash" href="#"></a>';
 				str += '</td>';
@@ -47,9 +45,8 @@ function commentList() {
 				str += '<td colspan="2">';
 				str += '<p class="txt">'+value.content+'</p></td></tr>';
 			});
-			str += '</table>';
-			 $(".commentList").html(str);
-		}
+			 $("#commentList").html(str);
+		}, error : function(data){alert("오류");}
 	});
 }
 

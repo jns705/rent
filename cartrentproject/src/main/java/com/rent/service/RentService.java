@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rent.domain.RentImageVO;
 import com.rent.domain.RentVO;
+import com.rent.domain.RentListVO;
 import com.rent.mapper.RentMapper;
 
 @Service("com.rent.service.RentService")
@@ -49,7 +50,17 @@ public class RentService {
 		return mapper.rentDetail(rent_id);
 	}
 	
-
+	public List<String> location() throws Exception{
+		return mapper.location();
+	}
+	
+	public List<RentVO> rentListPro(RentListVO list) throws Exception{
+		return mapper.rentListPro(list);
+	}
+	
+	public int rentListCount(RentListVO list) throws Exception{
+		return mapper.rentListCount(list);
+	}
 	
 	
 	

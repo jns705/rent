@@ -22,5 +22,8 @@ public interface CarOptionMapper {
 	public List<OptionCarVO> optionList() throws Exception;
 	
 	//차옵션 상세조회 
-	public OptionCarVO optionDetail(String car_id) throws Exception;
+	public List<OptionCarVO> optionDetail(String car_id) throws Exception;
+	
+	//이름으로 조회
+	public OptionCarVO selectName(String name)throws Exception;
 }

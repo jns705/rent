@@ -22,5 +22,9 @@ public class RentVO {
 	private String car_number;
 	private int price;
 	private int standby_personnel;
+	private String rent_url;
+	private	String car_name;
+	private int count;
+	private int car_price;
 
 }

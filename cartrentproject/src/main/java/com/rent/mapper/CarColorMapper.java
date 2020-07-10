@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.rent.domain.CarColor;
+import com.rent.domain.CarVO;
 
 @Repository("com.rent.mapper.CarColorMapper")
 public interface CarColorMapper {
@@ -19,8 +20,11 @@ public interface CarColorMapper {
 	public int colorDelete(String color_id) throws Exception;
 	
 	//조회
-	public List<CarColor> carColorDetail(String car_id)throws Exception;
+	public List<CarColor> colorDetail(String car_id)throws Exception;
 	
 	//조회
 	public CarColor carColor(CarColor color)throws Exception;
+	
+	//전체리스트
+	public List<CarVO> colorList() throws Exception;
 }

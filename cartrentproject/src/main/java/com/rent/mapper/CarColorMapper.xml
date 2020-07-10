@@ -13,10 +13,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		WHERE	CAR_ID = #{car_id}
 	</select>
 	
+	<!-- car_id car색상으로 차량 리스트 조회 -->
 	<select id="carColor" resultType="com.rent.domain.CarColor" parameterType="com.rent.domain.CarColor">
 		SELECT	*
 		FROM	COLOR
 		WHERE	CAR_ID = #{car_id} and COLOR = #{color}
+	</select>
+	
+	<!-- 차량 색상 등록 -->
+	<insert id="colorInsert" parameterType="com.rent.domain.CarColor" useGeneratedKeys="true" keyProperty="car_id">
+		INSERT INTO COLOR
+		(car_id, color, color_image, color_url)
+		VALUES
+		(#{car_id}, #{color}, #{color_image}, #{color_url})
+	</insert>
+	
+	<!-- 차량 색상 세부 조회 -->
+	<select id="colorDetail" parameterType="String" resultType="com.rent.domain.CarColor">
+		SELECT	*
+		FROM	COLOR
+		WHERE	CAR_ID = #{car_id}
+	</select>
+	
+	<!-- 차량 색상 세부 조회 -->
+	<select id="colorList" resultType="com.rent.domain.CarColor">
+		SELECT	*
+		FROM	COLOR
 	</select>
 	
 	

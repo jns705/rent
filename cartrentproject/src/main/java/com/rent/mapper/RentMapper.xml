@@ -49,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE	RENT_ID = #{rent_id}
 	</update>
 	
+	<!-- 예약여부 조회 -->
 	<update id="situation" parameterType="com.rent.domain.RentVO">
 		UPDATE	RENT	
 		SET		situation 	= #{situation}
@@ -60,5 +61,240 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT	*
 		FROM	RENT
 		WHERE	RENT_ID = #{rent_id}
+	</select>
+	
+	<!-- 지역 정보 출력 -->
+	<select id="location" resultType="hashMap">
+		select 	distinct location 	
+		from 	rent
+	</select>
+	
+	<!-- 조건부 렌트 정보 출력 -->
+	<select id="rentListPro" parameterType="com.rent.domain.RentListVO" resultType="com.rent.domain.RentVO">
+        select	r.rent_id, r.car_id, r.color, r.reg_date, reg_date , r.location, r.special_note, r.Max_month, r.situation, r.standby_personnel, r.price, r.car_number, l.rent_url, c.car_name, c.car_price
+        from 	car c, rent r, rentimage l
+        where	c.car_id = r.car_id and r.rent_id = l.rent_id and l.rent_image = '앞' 
+		<if test="manufacturer != ''">
+		and	manufacturer = #{manufacturer} 	
+		</if>
+		<if test="car_kind != ''">
+		and	car_kind = #{car_kind} 	
+		</if>
+		<if test="car_name != ''">
+		and	car_name = #{car_name} 	
+		</if>
+		<if test="Max_month != 0">
+		<![CDATA[and	Max_month >= #{Max_month}]]>	
+		</if>
+		<if test="price1  != 0">
+		<![CDATA[and	price >= #{price1}]]>	
+		</if>
+		<if test="price2  != 0">
+		<![CDATA[and	price <= #{price2}]]>	
+		</if>
+		<if test="milage1  != 0">
+		<![CDATA[and	milage >= #{milage1}]]>	
+		</if>
+		<if test="milage2  != 0">
+		<![CDATA[and	milage <= #{milage2}]]>	
+		</if>
+		<if test="reg_date1  != 0">
+		<![CDATA[and	YEAR(reg_date) >= #{reg_date1}]]>	
+		</if>
+		<if test="reg_date2  != 0">
+		<![CDATA[and	YEAR(reg_date) <= #{reg_date2}]]>	
+		</if>
+		<if test="f0 != '' or f1 != '' or f2 != '' or f3 != '' or f4 != ''">
+		 and ( 
+		 </if>
+		
+		<if test="f0  != ''">
+			fuel = #{f0} 
+		</if>
+			<if test="f1  != '' and f0  != ''">
+				or 
+			</if>
+			<if test="f1  != ''">
+				fuel = #{f1} 
+			</if>
+			<if test="f2  != '' and (f0  != '' or f1  != '')">
+				or 
+			</if>
+			<if test="f2  != ''">
+				fuel = #{f2} 
+			</if>
+			<if test="f3  != '' and (f0  != '' or f1  != '' or f2  != '')">
+				or 
+			</if>
+			<if test="f3  != '' ">
+				fuel = #{f3} 
+			</if>
+			<if test="f4  != '' and (f0  != '' or f1  != '' or f2  != ''or f3  != '')">
+				or 
+			</if>
+			<if test="f4  != '' ">
+				fuel = #{f4} 
+			</if>
+			<if test="f0 != '' or f1 != '' or f2 != '' or f3 != '' or f4 != '' ">)</if>
+		
+		<if test="l0 != '' or l1 != '' or l2 != '' or l3 != '' or l4 != '' ">
+		 and ( 
+		 </if>
+		
+		<if test="l0  != ''">
+			location = #{l0} 
+		</if>
+			<if test="l1  != '' and l0  != ''">
+				or 
+			</if>
+			<if test="l1  != ''">
+				location = #{l1} 
+			</if>
+			<if test="l2  != '' and (l0  != '' or l1  != '')">
+				or 
+			</if>
+			<if test="l2  != ''">
+				location = #{l2} 
+			</if>
+			<if test="l3  != '' and (l0  != '' or l1  != '' or l2  != '')">
+				or 
+			</if>
+			<if test="l3  != '' ">
+				location = #{l3} 
+			</if>
+			<if test="l4  != '' and (l0  != '' or l1  != '' or l2  != ''or l3  != '')">
+				or 
+			</if>
+			<if test="l4  != '' ">
+				location = #{l4} 
+			</if>
+<if test="l0 != '' or l1 != '' or l2 != '' or l3 != '' or l4 != ''">)</if>
+		<if test="car_number  != ''">
+			and r.car_number = #{car_number} 
+		</if>
+		<if test="orderBy == 0">
+				 order by r.price desc
+			</if>
+			<if test="orderBy == 1">
+				 order by r.price 
+			</if>
+			<if test="orderBy == 2">
+				 order by r.milage desc
+			</if>
+			<if test="orderBy == 3">
+				 order by r.reg_date desc
+			</if>
+			<if test="orderBy == 4">
+				 order by r.standby_personnel desc
+			</if>
+		limit 0, ${limit}
+	</select>
+	
+	
+	<!-- 조건부 렌트 정보 갯수 출력 -->
+	<select id="rentListCount" parameterType="com.rent.domain.RentListVO" resultType="int">
+        select	count(*)
+        from 	car c, rent r, rentimage l
+        where	c.car_id = r.car_id and r.rent_id = l.rent_id and l.rent_image = '앞' 
+		<if test="manufacturer != ''">
+		and	manufacturer = #{manufacturer} 	
+		</if>
+		<if test="car_kind != ''">
+		and	car_kind = #{car_kind} 	
+		</if>
+		<if test="car_name != ''">
+		and	car_name = #{car_name} 	
+		</if>
+		<if test="Max_month != 0">
+		<![CDATA[and	Max_month >= #{Max_month}]]>	
+		</if>
+		<if test="price1  != 0">
+		<![CDATA[and	price >= #{price1}]]>	
+		</if>
+		<if test="price2  != 0">
+		<![CDATA[and	price <= #{price2}]]>	
+		</if>
+		<if test="milage1  != 0">
+		<![CDATA[and	milage >= #{milage1}]]>	
+		</if>
+		<if test="milage2  != 0">
+		<![CDATA[and	milage <= #{milage2}]]>	
+		</if>
+		<if test="reg_date1  != 0">
+		<![CDATA[and	YEAR(reg_date) >= #{reg_date1}]]>	
+		</if>
+		<if test="reg_date2  != 0">
+		<![CDATA[and	YEAR(reg_date) <= #{reg_date2}]]>	
+		</if>
+		<if test="f0 != '' or f1 != '' or f2 != '' or f3 != '' or f4 != '' ">
+		 and ( 
+		 </if>
+		
+		<if test="f0  != ''">
+			fuel = #{f0} 
+		</if>
+			<if test="f1  != '' and f0  != ''">
+				or 
+			</if>
+			<if test="f1  != ''">
+				fuel = #{f1} 
+			</if>
+			<if test="f2  != '' and (f0  != '' or f1  != '')">
+				or 
+			</if>
+			<if test="f2  != ''">
+				fuel = #{f2} 
+			</if>
+			<if test="f3  != '' and (f0  != '' or f1  != '' or f2  != '')">
+				or 
+			</if>
+			<if test="f3  != '' ">
+				fuel = #{f3} 
+			</if>
+			<if test="f4  != '' and (f0  != '' or f1  != '' or f2  != ''or f3  != '')">
+				or 
+			</if>
+			<if test="f4  != '' ">
+				fuel = #{f4} 
+			</if>
+			<if test="f0 != '' or f1 != '' or f2 != '' or f3 != '' or f4 != ''">)</if>
+		
+		<if test="l0 != '' or l1 != '' or l2 != '' or l3 != '' or l4 != '' ">
+		 and ( 
+		 </if>
+		
+		<if test="l0  != ''">
+			location = #{l0} 
+		</if>
+			<if test="l1  != '' and l0  != ''">
+				or 
+			</if>
+			<if test="l1  != ''">
+				location = #{l1} 
+			</if>
+			<if test="l2  != '' and (l0  != '' or l1  != '')">
+				or 
+			</if>
+			<if test="l2  != ''">
+				location = #{l2} 
+			</if>
+			<if test="l3  != '' and (l0  != '' or l1  != '' or l2  != '')">
+				or 
+			</if>
+			<if test="l3  != '' ">
+				location = #{l3} 
+			</if>
+			<if test="l4  != '' and (l0  != '' or l1  != '' or l2  != ''or l3  != '')">
+				or 
+			</if>
+			<if test="l4  != '' ">
+				location = #{l4} 
+			</if>
+<if test="l0 != '' or l1 != '' or l2 != '' or l3 != '' or l4 != '' ">)</if>
+		<if test="car_number  != ''">
+			and r.car_number = #{car_number} 
+		</if>
+			
+		
 	</select>
 </mapper>
