@@ -50,7 +50,7 @@
 	                    <table class="table commentList" id="tableList" style="font-size: 13px; padding :20px">
 	                        <tr>
 	                            <td>
-	                                <strong>댓글작성자</strong>
+	                                <strong>댓글작성자s</strong>
 	                            </td>
 	                            <td class="text-right">
 	                                2020-07-08/
