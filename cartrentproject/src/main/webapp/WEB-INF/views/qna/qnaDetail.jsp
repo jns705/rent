@@ -30,7 +30,7 @@
                          &nbsp;<span class="text-muted"> <fmt:formatDate value="${detail.qna_date}" pattern="yyyy/MM/dd" /></span>
                         
                          &nbsp;<span class="text-muted">100회 읽음</span>
-                            <span class="glyphicon glyphicon-comment" style="padding:10px">댓글수</span>
+                            <span class="glyphicon glyphicon-comment" style="padding:10px"><label class="count"></label></span>
                             
                          <c:if test="${detail.qne_password != null && detail.qne_password !='' || sessionScope.id eq 'master'}">
                              <a href="${path}/qna/update"
@@ -47,29 +47,7 @@
                     </p>
                     
                    <!-- 저장된 댓글을 보여주는 영역 -->
-                   	
-					
-	                    <table class="table commentList" id="tableList" style="font-size: 13px; padding :20px">
-	                        <tr>
-	                            <td>
-	                                <strong>댓글작성자</strong>
-	                            </td>
-	                            <td class="text-right">
-	                                2020-07-08/
-	                                <a class="glyphicon glyphicon-pencil" href="#"></a>/
-	                                <a class="glyphicon glyphicon-trash" href="#"></a>
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td colspan="2">
-	                                <p class="txt">댓글</p>
-	                            </td>
-	                        </tr>
-	                    </table>
-	                <div>
-	                <table id="commentList">
-	                </table>
-                    </div>
+	                <div class="commentList"></div>
                 </div>
                 
                 <!-- 댓글을 입력하는 영역 -->
@@ -85,7 +63,7 @@
 			                    <div>
 			                    	<input type="hidden" id="qna_id" name="qna_id" value="${detail.qna_id}">
 			                        <textarea class="input_write_comment" id="content" name="content" placeholder="댓글을 입력하세요"></textarea>
-			                        <input type="submit" class="comment_submit" name="commentInsertBtn" value="전송">
+			                        <button class="comment_submit" type="button" name="commentInsertBtn">등록</button>
 			                    </div>
 		                    </div>
 	                    </div>
