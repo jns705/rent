@@ -24,6 +24,11 @@
 .nextBoard {padding-right:15px; background:url(../img/ico_arr_b.gif) right 50% no-repeat;float:left; }
 
 .panel-footer {background-color:dcdcdc;}
+
+.table2 {
+	background-color:000000;
+}
+
 body {
 	   padding-top: 40px;
 }
