@@ -38,11 +38,14 @@ function commentList() {
 				str += '<tr>';
 				str += '<td>';
 				str += '<strong>'+value.writer+'</strong>';
+				//대댓글달기
 				str += '&nbsp;<a class="glyphicon glyphicon-comment" onclick="recommentInsert('+value.comment_id+',\''+qna_id+'\');"></a>';
 				str += '</td>';
 				str += '<td class="text-right">';
 				str += value.comment_date;
+				//수정
 				str += '/<a class="glyphicon glyphicon-pencil" onclick="commentUpdate('+value.comment_id+',\''+value.content+'\');"></a> /';
+				//삭제
 				str += '<a class="glyphicon glyphicon-trash" onclick="commentDelete('+value.comment_id+')"></a>';
 				str += '</td>';
 				str += '</tr>';
@@ -54,7 +57,8 @@ function commentList() {
 				}
 				str += '</table>';
 				str += '<div class="recomment_'+value.comment_id+'"></div>'
-				
+
+				//대댓글리스트
 				if(value.recomment_id){
 					str += '<tr>';
 					str += '<td>';
@@ -62,13 +66,13 @@ function commentList() {
 					str += '</td>';
 					str += '<td class="text-right">';
 					str += value.comment_date;
-					str += '/<a class="glyphicon glyphicon-pencil" onclick="commentUpdate('+value.comment_id+',\''+value.comment_content+'\');"></a> /';
+					str += '/<a class="glyphicon glyphicon-pencil" onclick="recommentUpdate('+value.comment_id+',\''+value.comment_content+'\');"></a> /';
 					str += '<a class="glyphicon glyphicon-trash" onclick="commentDelete('+value.comment_id+')"></a>';
 					str += '</td>';
 					str += '</tr>';
 					str += '<tr>';
 					str += '<td colspan="2">';
-					str += '<p class="txt content'+value.comment_id +'">'+value.comment_content+'</p></td></tr>';
+					str += '<p class="txt recontent'+value.comment_id +'">'+value.comment_content+'</p></td></tr>';
 				}
 			});
 			
@@ -108,7 +112,6 @@ function commentDelete(comment_id) {
 	});
 }
 
-
 //대댓글 입력폼
 function recommentInsert(comment_id, qna_id) {
 	str = '';
@@ -122,9 +125,10 @@ function recommentInsert(comment_id, qna_id) {
     str += '<input type="hidden" name="qna_id" value="'+qna_id+'">';
     str += '<textarea class="input_write_comment" name="comment_content" placeholder="댓글을 입력하세요"></textarea>';
     str += '<button class="comment_submit" type="button" name="recommentBtn" onclick="recomment();">등록</button>';   
-    str += '</div></div></div></form></div>';       
+    str += '</div></div></div></form></div>';   
     $(".recomment_"+comment_id).html(str);
 }
+
 
 //대댓글 등록버튼을 눌렀을 경우 실행한다.
 function recomment() {
@@ -143,7 +147,25 @@ function recomment() {
     });
 }
 	
-
+//대댓글 수정
+function recommentUpdate(comment_id, comment_content) {
+	str = '';
+	str += '<input type="text" class="form-control" name="comment_content_'+comment_id+'"value="'+comment_content+'">';
+	str += '<button class="form-control btn btn-danger" type="button" onclick="recommentUpdateProc('+comment_id+');">수정</button>';
+	$('.recontent' + comment_id).html(str);
+}
+function recommentUpdateProc(comment_id) {
+	//대댓글 번호에 해당하는 수정된 내용을 가져온다.
+	var commentupdate = $('[name=comment_content_'+comment_id+']').val();
+	$.ajax({
+		url : '/comment/commentUpdate' ,
+		type : 'post',
+		data : {'comment_content' : commentupdate, 'comment_id' : comment_id},
+		success: function(data) {
+			if(data == 1) commentList(comment_id); //댓글을 수정한 후 목록을 출력한다.
+		}
+	});
+}
 
 //페이지 로딩시 게시글에 연결된 댓글이 있으면 무조건 댓글을 보여준다.
 commentList();

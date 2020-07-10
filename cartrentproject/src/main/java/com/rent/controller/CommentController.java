@@ -38,7 +38,7 @@ public class CommentController {
 	 */
 	@RequestMapping("/update")
 	@ResponseBody
-	private int CommentUpdate(CommentVO comment) throws Exception {
+	private int commentUpdate(CommentVO comment) throws Exception {
 		return service.commentUpdate(comment);
 	}
 	
@@ -49,7 +49,7 @@ public class CommentController {
 	 */
 	@RequestMapping("/delete/{comment_id}")
 	@ResponseBody
-	private int CommentDelete(@PathVariable int comment_id, Model model) throws Exception {
+	private int commentDelete(@PathVariable int comment_id, Model model) throws Exception {
 		return service.commentDelete(comment_id);
 	}
 	
@@ -60,7 +60,7 @@ public class CommentController {
 	 */
 	@RequestMapping("/list/{qna_id}")
 	@ResponseBody
-	private List<CommentVO> CommentList(@PathVariable int qna_id) throws Exception {
+	private List<CommentVO> commentList(@PathVariable int qna_id) throws Exception {
 		System.out.println("CommentList()");
 		return service.commentList(qna_id);
 	}
@@ -81,7 +81,15 @@ public class CommentController {
 	}
 	
 	
-	
+	/**
+	 * 대댓글 수정
+	 * @param comment - domain
+	 */
+	@RequestMapping("/commentUpdate")
+	@ResponseBody
+	private int reCommentUpdate(CommentVO comment) throws Exception {
+		return service.commentUpdate(comment);
+	}
 	
 	
 	
