@@ -47,7 +47,6 @@
                     </p>
                     
                    <!-- 저장된 댓글을 보여주는 영역 -->
-					kdafndaofdaaggdagdagdadgadg
 	                    <table class="table commentList" id="tableList" style="font-size: 13px; padding :20px">
 	                        <tr>
 	                            <td>
