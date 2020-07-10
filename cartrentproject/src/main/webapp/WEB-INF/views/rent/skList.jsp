@@ -13,6 +13,11 @@
 		width: 1030px; 
 	}
 	
+	#moreBtn {
+		margin-top: 30px;
+		background-color: #e0e0e0;
+	}
+	
 
 </style>
 <head>
@@ -70,6 +75,10 @@
 						</span>
 					</div>
 						<script type="text/javascript">
+
+						function numberFormat(inputNumber) {
+							   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+						}
 
 							function selectCar() {
 								var car_kind = $('#usedCarSgmntTypeCd').val();
@@ -239,9 +248,9 @@
 		</article>
 	</div>
 		<div class="form-group">
-			<h1 class="col-sm-2">검색결과(총 <span id="total"></span> 건)</h1> 
-			<div align="right" class="col-sm-10">
-			<select name="orderBy" onchange="searchForm();">
+			<label class="control-label col-sm-2" id="total"></label>	
+			<div align="right" class="col-sm-offset-8 col-sm-2">
+			<select name="orderBy" onchange="searchForm();" class="form-control ">
 				<option value="0">낮은 가격 순</option>
 				<option value="1">높은 가격 순</option>
 				<option value="2">짧은 주행거리 순</option>
@@ -250,13 +259,8 @@
 			</select>
 			</div>
 		</div>
-		
-		<br><br><hr>
-		
-		<article class="car-search tab-content">
+		<hr>
 		<div id="aa" ></div>
-
-		</article>
 		
 	</div>
 </form>
@@ -309,16 +313,6 @@ function more(count){
 	function searchForm(click){
 		if(click != 'click') $('[name=limit]').val('');
 		var forms = $('.listForm').serialize();
-/* 		var locationSize = $('.loactionSize').val();
-		var fuelSize = $('.fuelSize').val();
-		var location1 = new Array();
-		var fuel1 	 = new Array();
-		for(i = 0; locationSize-1 > i; i++){
-			location1[i] = $('[name=l'+ i +']').val();
-		}
-		for(i = 0; fuelSize-1 > i; i++){
-			fuel1[i] = $('[name=f'+ i +']').val();
-		}  */
 		
 	$.ajax({
 		url  : '/rent/rentListProc',
@@ -328,26 +322,25 @@ function more(count){
 		success : function(data){
 			var str = '';
 			$.each(data.rentList, function(key, value){
-				str+= '<div class="col-sm-6"><table class="table table-bordered">';
-				str+= '<tr><td><img src ="'+ value.rent_url + '" width="160" height="90"></td>';
-				str+= '<td>'+ value.car_name +'</td></tr>';
-				str+= '<tr><td>소비자가 : '+ value.car_price*10000 +'</td>';
-				str+= '<td>월 렌탈료 : '+ value.price +'</td></tr>';
+				str+= '<div class="form-group"><div class="col-sm-6"><table class="table table-bordered">';
+				str+= '<tr><td width="200">&nbsp;<img src ="'+ value.rent_url + '" width="160" height="90"></td>';
+				str+= '<td width="320">'+ value.car_name +'</td></tr>';
+				str+= '<tr><td>소비자가 : '+ numberFormat(value.car_price*10000) +'원</td>';
+				str+= '<td>월 렌탈료 : '+ numberFormat(value.price) +'원</td></tr>';
 				str+= '<td colspan=2><div><ul class="col-sm-6">';
 				str+= '<li>차량등록&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ value.reg_date.substring(0,4)+'년</li>';
 				str+= '<li>계약기간&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최대 '+ value.max_month+'개월</li>';
 				str+= '</ul><ul class="col-sm-6">';
 				str+= '<li>주행거리&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ value.milage +'Km</li>';
 				str+= '<li>지역&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	'+ value.location +'</li></ul></div></td>';
-				str+= '</table></div>';
+				str+= '</table></div></div>';
 			});
 				if(data.count > 1 ){
-				str+= '<div align="center">';
-				str+= '<button class="btn btn-lg" type="button" onclick="more('+ data.count +');">더보기	</button>';
-				str+= '</div>';
+				str+= '</div><br><br><div class="col-sm-12">';
+				str+= '<button class="col-sm-12 btn" id="moreBtn" type="button" onclick="more('+ data.count +');">더보기&nbsp;<span class="glyphicon glyphicon-menu-down"></span></button></div>';
 				}
 				
-				$('#total').html(data.total);
+				$('#total').html('검색결과 (총 '+data.total+'건)');
 			$('#aa').html(str);
 		}
 	});
