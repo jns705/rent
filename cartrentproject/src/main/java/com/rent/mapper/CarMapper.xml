@@ -108,4 +108,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		WHERE	option_name		= #{option_name}
 		AND		rent_id			= #{rent_id}
 	</update>
+	
+	<select id="manufacturer" resultType="hashMap">
+		select 	distinct manufacturer 
+		from 	car;
+	</select>
+	
+	<select id="carKind" resultType="hashMap">
+		select 	distinct car_kind 
+		from 	car 
+		where 	manufacturer = #{manufacturer}
+	</select>
+	
+	<select id="selectCar" resultType="hashMap" parameterType="com.rent.domain.OptionCarVO">
+		select 	distinct car_name 
+		from 	car 
+		where 	car_kind = #{car_kind} and manufacturer = #{manufacturer}	
+	</select>
 </mapper>

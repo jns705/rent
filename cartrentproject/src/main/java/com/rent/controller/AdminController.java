@@ -290,7 +290,6 @@ public class AdminController {
 			String 	sourceFileName = files.getOriginalFilename();
 			File 	destinationFile;
 			String	destinationFileName;
-			String	rent_url;
 			// fileUrl="uploadFiles 폴더의 위치"
 			String	fileUrl = "C:/Git/rent/cartrentproject/src/main/resources/static/rentUpload/";
 			do {

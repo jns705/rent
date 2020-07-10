@@ -1,6 +1,8 @@
 package com.rent.mapper;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -70,6 +72,12 @@ public interface CarMapper {
 	//차량 옵션 조회
 	public List<OptionCarVO> carOptionList() throws Exception;
 	
+	public List<String> manufacturer()throws Exception;
+	
+	//차량 검색
+	public List<String> carKind(String manufacturer)throws Exception;
+	
+	public List<String> selectCar(CarVO car)throws Exception;
 	//차목록(조건검색)
 	//public List<CarVO> carListSelect(String 월대여료, 차명, 연료...) throws Exception;
 }
