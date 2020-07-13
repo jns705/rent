@@ -14,10 +14,10 @@ public interface AccidentMapper {
 
 	//사고이력 수정
 	public int accidentUpdate(AccidentVO accident) throws Exception;
-	/*
+
 	//사고이력 삭제
 	public int accidentDelete(int accident_id) throws Exception;
-	*/
+
 	//전체목록
 	public List<AccidentVO> accidentList() throws Exception;
 	

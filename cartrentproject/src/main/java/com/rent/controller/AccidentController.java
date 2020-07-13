@@ -1,6 +1,8 @@
 package com.rent.controller;
 
 import java.sql.Date;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -31,29 +33,35 @@ public class AccidentController {
 		return "/accident/accidentInsert";
 	}
 	@RequestMapping("/insertProc")
-	private String accidentInsertProc(HttpServletRequest re) throws Exception {
-		 AccidentVO accident = new AccidentVO();
-		 
-		String date = re.getParameter("date1")+"-"+re.getParameter("date2")+"-"+re.getParameter("date3");
-		
-		accident.setAccident_date(date);
-		accident.setAccident_content(re.getParameter("accident_content"));
-		accident.setAccident_price(Integer.parseInt(re.getParameter("accident_price")));
-		accident.setSpecial_note(re.getParameter("special_note"));
+	private String accidentInsertProc(AccidentVO accident) throws Exception {
 		service.accidentInsert(accident);
 		return "redirect:/accident/list";
 	}
 	
 	@RequestMapping("/detail/{accident_id}")
 	private String accidentDatail(@PathVariable int accident_id,Model Model) throws Exception {
-		Model.addAttribute("detail", service.accidentDetail(accident_id));
+		Model.addAttribute("data", service.accidentDetail(accident_id));
 		return "/accident/accidentDetail";
 	}
 	
 	@RequestMapping("/update")
 	private String accidentUpdate(AccidentVO accident) throws Exception {
-		service.accidentUpdate(accident);
+		
+			System.out.println(accident);
+			service.accidentUpdate(accident);
+		
 		return "redirect:/accident/list";
 	}
 	
+	@RequestMapping("/delete/{accident_id}")
+	private String accidentDelete(@PathVariable List accident_id) throws Exception {
+		System.out.println("accident_Delete 실행중");
+		System.out.println(accident_id);
+		
+		for(int i=0; i < accident_id.size(); i++) {
+			String id = (String) accident_id.get(i);
+			service.accidentDelete(Integer.parseInt(id));
+		}
+		return "redirect:/accident/list";
+	}
 }

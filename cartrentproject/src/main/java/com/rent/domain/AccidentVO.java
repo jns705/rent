@@ -13,5 +13,6 @@ public class AccidentVO {
 	private String accident_content;
 	private int accident_price;
 	private String special_note;
+	private int rent_id;
 
 }

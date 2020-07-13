@@ -17,16 +17,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="accidentUpdate" parameterType="com.rent.domain.AccidentVO">
 		update accident
 		set 	accident_date = #{accident_date}, accident_content = #{accident_content},
-				accident_price = #{accident_price}, special_note = #{special_note}, rent_id = #{rent_id}
+				accident_price = #{accident_price}, special_note = #{special_note}
 		where accident_id = #{accident_id}
 	</update>
-<!-- 
-	사고이력 삭제
+
+	<!-- 사고이력 삭제 -->
 	<delete id="accidentDelete" parameterType="int">
 		delete from accident
 		where accident_id = #{accident_id}
 	</delete>
--->
+
 	<!-- 사고이력 전체목록 -->
 	<select id="accidentList" resultType="com.rent.domain.AccidentVO">
 		select * 
