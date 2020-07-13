@@ -93,7 +93,6 @@
 				<div align=center>
 					<!-- ajax str에 넣어서 할라고 했는데 onclick()이 실행이 안됨-->
 					<button class="hidden" id="insertBtn" type="button" name="accidentInsertBtn">등록</button>
-					<p class="hidden" id="bbb"><font color="red">수정은 1개씩만 해주세요</font></p>
 					<button class="hidden" id="updateBtn" type="button" onclick="accidentUpdate();">수정</button>
 					<button class="hidden" id="deleteBtn" type="button" onclick="accidentDelete();">삭제</button>
 				</div>
