@@ -48,19 +48,22 @@ public class AccidentController {
 	
 	@RequestMapping("/update")
 	private String accidentUpdate(AccidentVO accident, HttpServletRequest request) throws Exception {
-			List<AccidentVO> accidentList = new ArrayList<AccidentVO>();
-			for(int i = 0; i < 10; i++) {
+			
+		int count =Integer.parseInt(request.getParameter("count"))+1;
+		
+			for(int i = 0; i < count; i++) {
 				if(request.getParameter("accident_content"+i) != null) {
 				AccidentVO acc = new AccidentVO();
+				acc.setAccident_id(Integer.parseInt(request.getParameter("accident_id_"+i)));
 				acc.setAccident_content(request.getParameter("accident_content"+i));
 				acc.setAccident_price(Integer.parseInt(request.getParameter("accident_price"+i)));
 				acc.setAccident_date(request.getParameter("accident_date"+i));
 				acc.setSpecial_note(request.getParameter("special_note"+i));
-				accidentList.add(acc);
+				service.accidentUpdate(acc);
 				}
 			}
-			System.out.println(accidentList);
-			service.accidentUpdate(accident);
+		
+			
 		
 		return "redirect:/accident/list";
 	}

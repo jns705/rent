@@ -89,6 +89,7 @@
 						<tr class="accidentList"></tr>
 					</tbody>
 				</table>	
+				<input type="text" id="count" name="count" value="z">
 				<div align=center>
 					<!-- ajax str에 넣어서 할라고 했는데 onclick()이 실행이 안됨-->
 					<button class="hidden" id="insertBtn" type="button" name="accidentInsertBtn">등록</button>
@@ -163,6 +164,8 @@ $('[name=accident_id]').click(function() {
 	$("input[name=accident_id]:checked").each(function(i){
 		id.push($(this).val());
 	});
+
+	
 	
 	for(var i = 0; i<= id.length;i++) {
 		var accident_id = id[i];
@@ -171,7 +174,8 @@ $('[name=accident_id]').click(function() {
 		var pri = document.getElementById("pri"+accident_id).innerText
 		var dat = document.getElementById("dat"+accident_id).innerText
 		var not = document.getElementById("not"+accident_id).innerText
-
+		
+		update += '<input type="hidden" class="form-control" id="content_'+accident_id+'" name="accident_id_'+ i +'" value="'+accident_id+'">';
 		update += '<input type="text" class="form-control" id="content_'+accident_id+'" name="accident_content'+ i +'" value="'+con+'">';
 		$('.content_' + accident_id ).html(update);
 		
@@ -183,6 +187,7 @@ $('[name=accident_id]').click(function() {
 		
 		update = '<input type="text" class="form-control" id="note'+accident_id+'" name="special_note'+ i +'" value="'+not+'">';
 		$('.note_'+ accident_id).html(update);
+		document.getElementById('count').value = i;
 	}
 	
 
