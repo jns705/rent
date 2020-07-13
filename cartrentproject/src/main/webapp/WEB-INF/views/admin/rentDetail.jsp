@@ -62,8 +62,9 @@
 				
 				</form>
 				
-				
 				<br>
+				
+				<form name="accidentInsertForm">
 				<table class="table table-bordered table-striped naum  form-group">
 					<thead>
 						<tr>
@@ -81,17 +82,19 @@
 								<td>${accident.accident_date}</td>
 								<td>${accident.special_note}</td>
 							</tr>
+							<tr class="accidentList"></tr>
 						</c:forEach>
 					</tbody>
 				</table>	
+				<div class="insertbtn"></div>
+				</form>
 				
 				<div align="center">
-					<button type="button" class="btn btn-rg">사고추가	</button>
+					<button type="button" class="btn btn-rg" onclick="accidentScreen();">사고추가</button>
 				</div>
 				
 				</div>	
 				
-								
 				<br><br>
 				
 				</div>
@@ -99,6 +102,44 @@
 	</div>
 
 </body>
+<script>
+function accidentScreen(){
+	str = '';
+	str += '<table class="table table-bordered table-striped naum  form-group">';
+	str += '<tr align="center">';
+	str += '<td><input type="text" name="accident_content" class="col-sm-12"></td>';
+	str += '<td><input type="text" name="accident_price" class="col-sm-12"></td>';
+	str += '<td><input type="text" name="accident_date" class="col-sm-12"></td>';
+	str += '<td><input type="text" name="special_note" class="col-sm-12"></td>';
+	str += '</tr></table>';
+	$('.accidentList').html(str);	
+	var btn = '';
+	btn += '<div align=center>';
+	btn += '<button type="button" class="btn btn-rg" onclick="accidentInsertFormBtn();">등록</button></div><br>'
+	$('.insertbtn').html(btn);
+}
+//댓글 등록버튼을 눌렀을 경우 실행한다.
+$('[name=accidentInsertFormBtn]').click(function() {
+	var accidentData = $('[name=accidentInsertForm]').serialize();
+	alert("zz");
+	accidentInsert(accidentData);	
+});
+
+function accidentInsert() {
+    $.ajax({
+        url : '//',
+        type : 'post',
+        data : accidentData,
+        success : function(data){
+            if(data == 1) {
+            	accidentList(); 
+            }
+        }
+    });
+}
+
+</script>
+
 <script type="text/javascript">
 function addOption(){
 	window.open('${path}/admin/optionForm'
