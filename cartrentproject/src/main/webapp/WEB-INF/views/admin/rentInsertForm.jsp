@@ -118,10 +118,10 @@
 			success : function(data){
 				var str = "";
 				$.each(data, function(key, value){
-					str += '<div class="col-sm-1">' +
-							'<input class="checkbox col-sm-2" type="checkbox" name="'+ value.option_name +'" value="'+ value.option_name +'" />' +
-							'<label class="control-label col-sm-2">'+ value.option_name +'</label>'+
-						'</div>';
+					str += '<div class="col-sm-3">' +
+							'<input class="col-sm-1" type="checkbox" name="'+ value.option_name +'" value="'+ value.option_name +'" />' +
+							'<label class="control-label col-sm-6">'+ value.option_name +'</label>'+
+							'</div>';
 				});
 				$('.op').html(str);
 			}

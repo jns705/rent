@@ -18,6 +18,7 @@ public class RentListVO {
 	private int milage2;
 	private int reg_date1;
 	private int reg_date2;
+	private int count;
 	private String  l0;
 	private String  l1;
 	private String  l2;

@@ -11,14 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rent.domain.CarVO;
+import com.rent.domain.OptionCarVO;
+import com.rent.domain.RentImageVO;
 import com.rent.domain.RentVO;
 import com.rent.domain.RentListVO;
+import com.rent.service.CarOptionService;
 import com.rent.service.CarService;
+import com.rent.service.RentImageService;
 import com.rent.service.RentService;
 
 @Controller
@@ -30,6 +35,12 @@ public class RentController {
 	
 	@Resource(name = "com.rent.service.RentService")
 	RentService rentService;
+	
+	@Resource(name="com.rent.service.RentImageService")
+	RentImageService rentImageService;
+	
+	@Resource(name="com.rent.service.CarOptionService")
+	CarOptionService opService;
 	
 	//렌트목록
 	@RequestMapping("/rentList")
@@ -89,5 +100,44 @@ public class RentController {
 		map.put("total", listCount);
 		map.put("showCount", showCount);
 		return map;
+	}
+	
+	//차량 리스트 상세정보
+	@RequestMapping("/rentListDetail/{rent_id}")
+	public String rentListDetail(@PathVariable String rent_id, Model model)throws Exception{
+		RentVO rent = new RentVO();
+		rent = rentService.rentDetail(rent_id);
+		
+		String onOff[] = new String [8]; 
+		for(int i = 0; i < 8; i++) {
+			onOff[i] = "off";
+		}
+		List<OptionCarVO> list = opService.optionDetail(rent_id);
+		System.out.println(list);
+		for(int i = 0; list.size() > i ; i++) {
+			OptionCarVO List = list.get(i);
+			
+			if(List.getOption_name().equals("가죽시트"))
+				onOff[0] = "on";
+			if(List.getOption_name().equals("네비게이션"))
+				onOff[1] = "on";
+			if(List.getOption_name().equals("ECM룸미러 "))
+				onOff[2] = "on";
+			if(List.getOption_name().equals("스마트키"))
+				onOff[3] = "on";
+			if(List.getOption_name().equals("썬루프"))
+				onOff[4] = "on";
+			if(List.getOption_name().equals("통풍시트"))
+				onOff[5] = "on";
+			if(List.getOption_name().equals("후방카메라"))
+				onOff[6] = "on";
+		}
+		System.out.println(onOff[2]);
+		model.addAttribute("rent"   , rent);
+		model.addAttribute("car"    , carService.carDetail(Integer.toString(rent.getCar_id())));
+		model.addAttribute("rentImage" , rentImageService.imageList(Integer.parseInt(rent_id)));
+		model.addAttribute("oList"  , list);
+		model.addAttribute("count"  , onOff);
+		return "/rent/rentListDetail";
 	}
 }

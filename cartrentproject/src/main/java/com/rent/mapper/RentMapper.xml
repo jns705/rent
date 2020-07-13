@@ -71,7 +71,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 조건부 렌트 정보 출력 -->
 	<select id="rentListPro" parameterType="com.rent.domain.RentListVO" resultType="com.rent.domain.RentVO">
-        select	r.rent_id, r.car_id, r.color, r.reg_date, reg_date , r.location, r.special_note, r.Max_month, r.situation, r.standby_personnel, r.price, r.car_number, l.rent_url, c.car_name, c.car_price
+        select	
+        r.rent_id, r.car_id, r.color, r.reg_date, reg_date , r.location, r.special_note, r.Max_month, r.situation, r.standby_personnel, r.price, r.car_number, l.rent_url, c.car_name, c.car_price
+        
         from 	car c, rent r, rentimage l
         where	c.car_id = r.car_id and r.rent_id = l.rent_id and l.rent_image = '앞' 
 		<if test="manufacturer != ''">
@@ -173,19 +175,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and r.car_number = #{car_number} 
 		</if>
 		<if test="orderBy == 0">
-				 order by r.price desc
-			</if>
-			<if test="orderBy == 1">
 				 order by r.price 
 			</if>
+			<if test="orderBy == 1">
+				 order by r.price desc
+			</if>
 			<if test="orderBy == 2">
-				 order by r.milage desc
+				 order by r.milage 
 			</if>
 			<if test="orderBy == 3">
-				 order by r.reg_date desc
+				 order by r.reg_date 
 			</if>
 			<if test="orderBy == 4">
-				 order by r.standby_personnel desc
+				 order by r.standby_personnel 
 			</if>
 		limit 0, ${limit}
 	</select>
