@@ -49,8 +49,8 @@ public class AccidentController {
 	@RequestMapping("/update")
 	private String accidentUpdate(AccidentVO accident, HttpServletRequest request) throws Exception {
 			
-		int count =Integer.parseInt(request.getParameter("count"))+1;
-		
+		int count =Integer.parseInt(request.getParameter("count"));
+		count+=1;
 			for(int i = 0; i < count; i++) {
 				if(request.getParameter("accident_content"+i) != null) {
 				AccidentVO acc = new AccidentVO();

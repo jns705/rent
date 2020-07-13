@@ -150,7 +150,6 @@ function accidentScreen(){
 function changeBtn() {
 	document.getElementById("updateBtn").className = "btn btn-rg";
 	document.getElementById("deleteBtn").className = "btn btn-rg";
-	document.getElementById("bbb").className = "";
 
 	//show클래스를 찾아서 hidden을 빼준다
 	$('.showChange').attr('class', 'showChange');
