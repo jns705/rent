@@ -1,6 +1,7 @@
 package com.rent.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rent.domain.AccidentVO;
 import com.rent.service.AccidentService;
@@ -45,9 +47,19 @@ public class AccidentController {
 	}
 	
 	@RequestMapping("/update")
-	private String accidentUpdate(AccidentVO accident) throws Exception {
-		
-			System.out.println(accident);
+	private String accidentUpdate(AccidentVO accident, HttpServletRequest request) throws Exception {
+			List<AccidentVO> accidentList = new ArrayList<AccidentVO>();
+			for(int i = 0; i < 10; i++) {
+				if(request.getParameter("accident_content"+i) != null) {
+				AccidentVO acc = new AccidentVO();
+				acc.setAccident_content(request.getParameter("accident_content"+i));
+				acc.setAccident_price(Integer.parseInt(request.getParameter("accident_price"+i)));
+				acc.setAccident_date(request.getParameter("accident_date"+i));
+				acc.setSpecial_note(request.getParameter("special_note"+i));
+				accidentList.add(acc);
+				}
+			}
+			System.out.println(accidentList);
 			service.accidentUpdate(accident);
 		
 		return "redirect:/accident/list";

@@ -172,16 +172,16 @@ $('[name=accident_id]').click(function() {
 		var dat = document.getElementById("dat"+accident_id).innerText
 		var not = document.getElementById("not"+accident_id).innerText
 
-		update += '<input type="text" class="form-control" id="content_'+accident_id+'" name="accident_content" value="'+con+'">';
+		update += '<input type="text" class="form-control" id="content_'+accident_id+'" name="accident_content'+ i +'" value="'+con+'">';
 		$('.content_' + accident_id ).html(update);
 		
-		update = '<input type="text" class="form-control" id="price_'+accident_id+'" name="accident_price" value="'+pri+'">';
+		update = '<input type="text" class="form-control" id="price_'+accident_id+'" name="accident_price'+ i +'" value="'+pri+'">';
 		$('.price_'+ accident_id).html(update);
 		
-		update = '<input type="date" class="form-control" id="date'+accident_id+'" name="accident_date" value="'+dat+'">';
+		update = '<input type="date" class="form-control" id="date'+accident_id+'" name="accident_date'+ i +'" value="'+dat+'">';
 		$('.date_'+ accident_id).html(update);
 		
-		update = '<input type="text" class="form-control" id="note'+accident_id+'" name="special_note" value="'+not+'">';
+		update = '<input type="text" class="form-control" id="note'+accident_id+'" name="special_note'+ i +'" value="'+not+'">';
 		$('.note_'+ accident_id).html(update);
 	}
 	
