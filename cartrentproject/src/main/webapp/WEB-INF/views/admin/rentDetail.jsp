@@ -88,13 +88,11 @@
 				</table>	
 				<div class="insertbtn"></div>
 				</form>
-				
 				<div align="center">
 					<button type="button" class="btn btn-rg" onclick="accidentScreen();">사고추가</button>
 				</div>
 				
 				</div>	
-				
 				<br><br>
 				
 				</div>
@@ -121,7 +119,6 @@ function accidentScreen(){
 //댓글 등록버튼을 눌렀을 경우 실행한다.
 $('[name=accidentInsertFormBtn]').click(function() {
 	var accidentData = $('[name=accidentInsertForm]').serialize();
-	alert("zz");
 	accidentInsert(accidentData);	
 });
 
@@ -156,7 +153,7 @@ function option(){
 			var str = "";
 			$.each(data, function(key, value){
 				str += '<div class="col-sm-3">' +
-						'<input class="checkbox col-sm-1" type="checkbox" name="'+ value.option_name +'" value="'+ value.option_name +'" />' +
+						'<input class="col-sm-1" type="checkbox" name="'+ value.option_name +'" value="'+ value.option_name +'" />' +
 						'<label class="control-label col-sm-6">'+ value.option_name +'</label>'+
 						'</div>';
 			});

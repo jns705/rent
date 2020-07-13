@@ -71,7 +71,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 조건부 렌트 정보 출력 -->
 	<select id="rentListPro" parameterType="com.rent.domain.RentListVO" resultType="com.rent.domain.RentVO">
-        select	r.rent_id, r.car_id, r.color, r.reg_date, reg_date , r.location, r.special_note, r.Max_month, r.situation, r.standby_personnel, r.price, r.car_number, l.rent_url, c.car_name, c.car_price
+        select	
+        r.rent_id, r.car_id, r.color, r.reg_date, reg_date , r.location, r.special_note, r.Max_month, r.situation, r.standby_personnel, r.price, r.car_number, l.rent_url, c.car_name, c.car_price
+        
         from 	car c, rent r, rentimage l
         where	c.car_id = r.car_id and r.rent_id = l.rent_id and l.rent_image = '앞' 
 		<if test="manufacturer != ''">
