@@ -157,7 +157,7 @@ function changeBtn() {
 	
 }
 
-//수정삭제버튼 누르고 체크박스 누르면 실행
+///수정삭제버튼 누르고 체크박스 누르면 실행
 $('[name=accident_id]').click(function() {
 	var id=[];
 	$("input[name=accident_id]:checked").each(function(i){
