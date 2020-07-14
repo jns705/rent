@@ -45,7 +45,7 @@
 				 		<li><a href="${path}/admin/rentInsertForm">렌트등록</a></li>
 				 		<li><a href="${path}/admin/carList">차량리스트</a></li>
 				 		<li><a href="${path}/admin/rentList">렌트리스트</a></li>
-				 		<li><a href="${path}/accident/insert">사고이력 등록</a>
+				 		<li><a href="${path}/accident/list">사고이력 전체목록</a>
 				 		<li class="divider"></li>
 				 		<li><a href="#">Exit</a></li>
 				 	</ul>

@@ -242,6 +242,7 @@ public class AdminController {
 		 return "/admin/rentList";
 	 }
 	 
+	 
 	 @RequestMapping("/rentDetail/{id}")
 	 public String rentDetail(@PathVariable String id, Model model)throws Exception{
 		 model.addAttribute("option", 	opService.optionDetail(id));

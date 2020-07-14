@@ -89,7 +89,7 @@
 						<tr class="accidentList"></tr>
 					</tbody>
 				</table>	
-				<input type="text" id="count" name="count" value="z">
+				<input type="hidden" id="count" name="count" value="z">
 				<div align=center>
 					<!-- ajax str에 넣어서 할라고 했는데 onclick()이 실행이 안됨-->
 					<button class="hidden" id="insertBtn" type="button" name="accidentInsertBtn">등록</button>
@@ -120,7 +120,8 @@ $('[name=accidentInsertBtn]').click(function() {
 	var accidentData = $('[name=accidentInsertForm]').serialize();
 	accidentInsert(accidentData);
 });
-//DB등록
+
+//사고이력 등록 ajax
 function accidentInsert(accidentData) {
     $.ajax({
         url : '/accident/insertProc',
@@ -132,6 +133,7 @@ function accidentInsert(accidentData) {
     });
 }
 
+//사고추가버튼을 누르면 실행
 //등록하기 위한 input들과 등록버튼(hidden)클래스명을 바꾼다.
 function accidentScreen(){
 	str = '';
@@ -146,26 +148,29 @@ function accidentScreen(){
 	$('.accidentList').html(str);
 	document.getElementById("insertBtn").className = "btn btn-rg";
 }
-
+//삭제/수정버튼 누르면 실행
 function changeBtn() {
+	//버튼 class에 hidden이 있는데 btn btn-rg로 바꾼다.
 	document.getElementById("updateBtn").className = "btn btn-rg";
 	document.getElementById("deleteBtn").className = "btn btn-rg";
 
-	//show클래스를 찾아서 hidden을 빼준다
+	//showChange클래스를 찾아서 hidden을 빼준다
 	$('.showChange').attr('class', 'showChange');
 	
 }
 
 ///수정삭제버튼 누르고 체크박스 누르면 실행
 $('[name=accident_id]').click(function() {
+	//클릭한 체크박스 값을 가져온다
 	var id=[];
 	$("input[name=accident_id]:checked").each(function(i){
 		id.push($(this).val());
 	});
 
 	
-	
+	//체크박스 클릭시 수정할 수 있게 input창을 생성한다.
 	for(var i = 0; i<= id.length;i++) {
+		//리스트 id[i]번째 값을 accident_id에 넣는다
 		var accident_id = id[i];
 		var update = '';
 		var con = document.getElementById("con"+accident_id).innerText
