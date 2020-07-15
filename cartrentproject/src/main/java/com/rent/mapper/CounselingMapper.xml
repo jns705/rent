@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.rent.mapper.CounselingMapper">
+	
+	<insert id="counselingInsert" parameterType="com.rent.domain.CounselingVO">
+		insert into counseling
+				(counseling_id, id, rent_id, option_name, color, name, address,
+				 tel, counseling_situation, month, counseling_date)
+		values(	#{counseling_id}, #{id}, #{rent_id}, #{option_name}, #{color},
+		 		#{name}, #{address}, #{tel}, #{counseling_situation}, #{month}, now() )
+	</insert>
+	
+</mapper>
+

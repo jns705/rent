@@ -358,8 +358,11 @@
 
 		
 		
-		<form id="frm" name="frm" action="" method="post">
-        	
+		<form id="frm" name="frm" action="${path}/counseling/insert/${rent_id}" method="post">
+		
+        	<input type="hidden" name="term" id="term" value="1"> <!-- 계약기간 -->
+        	<input type="hidden" name="totalPrice" id="totalPrice"> <!-- 총합 비용 -->
+        	<input type="hidden" name="deposit" id="deposit"> <!-- 보증금 -->
         	
 			<div class="form-gorup-list js-accordion-group">
 
@@ -421,8 +424,6 @@
 									</div>
 								</div>
 
-							
-
 							<div class="form-group__list" id="sub5" >
 								<div class="form-group__header">
 									<div class="estimate-list">
@@ -450,15 +451,20 @@
 													
 <script>
 var cost = ${rent.price};
-var price=0;
+var temporaryPrice=0;
 function monthShow(e) {
 	$('#monthShow').html(e+"개월");
+	document.getElementById('term').value = e;
 	
-	if(e==1) $('#totalRental').html(cost);
-	else{
+	if(e==1) {
+		$('#totalRental').html(numberWithCommas(cost));
+		$('#span_deposit').html(numberWithCommas(cost*5));
+		temporaryPrice = cost;
+	}else{
 		var sale = e*5000;
-		price=cost-sale;
-		$('#totalRental').html(price);
+		temporaryPrice=cost-sale;
+		$('#totalRental').html(numberWithCommas(temporaryPrice));
+		$('#span_deposit').html(numberWithCommas(temporaryPrice*5));
 	}
 }
 function driving(e) {
@@ -466,12 +472,14 @@ function driving(e) {
 	var drPrice = e*22000;
 	//document.getElementById('totalRental').text();
 	if(e == 1) drPrice =0;
-	if(price == 0) {
+	if(temporaryPrice == 0) {
 		var drive = cost + drPrice;
-		$('#totalRental').html(drive);
-	}else if(price != 0) {
-		var a =price + drPrice;
-		$('#totalRental').html(a);
+		$('#totalRental').html(numberWithCommas(drive));
+		$('#span_deposit').html(numberWithCommas(drive*5));
+	}else if(temporaryPrice != 0) {
+		var a = temporaryPrice + drPrice;
+		$('#totalRental').html(numberWithCommas(a));
+		$('#span_deposit').html(numberWithCommas(a*5));
 	}
 	
 }
@@ -497,7 +505,7 @@ function driving(e) {
 										<div class="estimate-item__caption clearfix">
 											<!-- estimate-item__caption//end -->
 											<div class="col-sm-10">
-												<p class="estimate-item__caption-text" id="prmsDtcClsCd_view">보증금<span id="span_deposit" class="cl-point2 ml10">&nbsp;${String.format('%,d',rent.price)}원&nbsp;</span>(렌탈료 1개월분)<span id="span_deposit_after" ></span></p>
+												<p class="estimate-item__caption-text" id="prmsDtcClsCd_view">보증금<span id="span_deposit" class="cl-point2 ml10">&nbsp;${String.format('%,d',rent.price*5)}원&nbsp;</span>(렌탈료 1개월분 * 5)<span id="span_deposit_after" ></span></p>
 											</div>
 											<div class="col-sm-12">
 												<p class="estimate-item__caption-subtext">※ 보증금 납부 후 차량이 출고되며, 입금(가상)계좌는 계약완료 후 문자 발송됩니다.</p>
@@ -523,7 +531,7 @@ function driving(e) {
 								<dt>월 렌탈료</dt>
 								<dd class="text-r">
 								<div class="col-sm-4" id="rent_price">
-								<strong id="totalRental">${rent.price}</strong>원
+								<strong id="totalRental">${String.format('%,d',rent.price)}</strong>원
 								</div>
 								<div class="col-sm-offset-1 col-sm-3" style="margin-left: 30px;">
 									<button onclick="apply()">상담신청</button>
@@ -552,9 +560,17 @@ function driving(e) {
 </html>
 </body>
 <script>
-function apply() {
-	
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+function apply() {
+	document.getElementById('totalPrice').value = $('#totalRental').text(); // 옵션등등 추가 후 비용
+	document.getElementById('deposit').value = $('#span_deposit').text();//보증금(렌트계약기간 * 5)
+}
+
+
+
 </script>
 </html>
 </layoutTag:layout>

@@ -11,9 +11,9 @@ import lombok.ToString;
 @ToString
 public class CounselingVO {
 	
-	private String counseling;
+	private String counseling_id;
 	private String id;
-	private String car_id;
+	private String rent_id;
 	private String option_name;
 	private String color;
 	private String name;
