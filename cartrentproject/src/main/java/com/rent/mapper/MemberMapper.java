@@ -12,4 +12,7 @@ public interface MemberMapper {
 	
 	//계정체크
 	public String accountCheck(String id) throws Exception;
+	
+	//id중복체크
+	public int idCheck(String id)throws Exception;
 }

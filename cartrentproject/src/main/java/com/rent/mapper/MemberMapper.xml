@@ -9,9 +9,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 회원가입 -->	
 	<insert id="insertProc" parameterType="com.rent.domain.MemberVO">
 		INSERT INTO MEMBER
-		(ID, PASSWORD, NAME, REG_DATE, TEL, ADDRESS, DATE_OF_BIRTH)
+		(ID, PASSWORD, NAME, REG_DATE, TEL, ADDRESS, DATE_OF_BIRTH, GENDER)
 		VALUES
-		(#{id}, #{password}, #{name}, now(), #{tel}, #{address}, #{date_of_birth})
+		(#{id}, #{password}, #{name}, now(), #{tel}, #{address}, #{date_of_birth}, #{gender})
 	</insert>
 	
 	<!-- 계정 검사 -->	
@@ -21,4 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE	ID = #{ID}
 	</select>
 	
+	<!-- 아이디 중복체크 -->
+	<select id="idCheck" parameterType="String" resultType="int">
+		SELECT	count(*)
+		FROM	MEMBER
+		WHERE	ID = #{id}
+	</select>
 </mapper>

@@ -145,7 +145,7 @@
 							<li id="전체"	value="all" class="fuel" onclick="ac('fuel'); searchForm();">전체</li>
 						<c:forEach items="${fuel}" var="fuel" varStatus="status">
 							<li id="${fuel.FUEL}" value="2" class="fuel${status.index}" onclick="cc(${status.index},'fuel'); searchForm();">${fuel.FUEL}</li>
-							<input class="hidden" id="a${fuel.FUEL}" name="f${status.index}" value="">
+							<input class="hidden" id="a${fuel.FUEL}" name="f${status.index}">
 						</c:forEach>
 						</ul>
 					</div>
@@ -155,7 +155,7 @@
 							<li id="전체"	value="all" class="location" onclick="ac('location'); searchForm();">전체</li>
 						<c:forEach items="${location}" var="location" varStatus="status">
 							<li id="${location.location}"	value="2" class="location${status.index}"  onclick="cc(${status.index},'location'); searchForm();">${location.location}</li>
-							<input class="hidden" id="a${location.location}" name="l${status.index}" value="">
+							<input class="hidden" id="a${location.location}" name="l${status.index}">
 						</c:forEach>
 						</ul>
 					</div>
@@ -185,7 +185,7 @@
 			</div>
 		</div>
 		<hr>
-		<div id="aa" ></div>
+		<div id="aa"></div>
 		
 	</div>
 </form>

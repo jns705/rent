@@ -341,7 +341,7 @@
 				<article>
 					<!-- 20180223 : s -->
 					<div class="header-group estimate-type clearfix mab0">
-						<h4 class="fl">렌트 조건 선택${count[1]}</h4>
+						<h4 class="fl">렌트 조건 선택</h4>
 						<!-- btn-box//end -->
 					</div>
 					<!-- header-gruop//end -->
@@ -351,18 +351,6 @@
 
 							<input type="text" id="sDate" readonly="readonly" placeholder="계약시작일" name="sDate" value="" style="display:none;" >
 
-							
-							
-							
-
-							
-<script>
-    function btnSlide(id){
-            if		($('#'+id).is(":visible")) $('#'+id).slideUp();
-            else  	$('#'+id).slideDown();
-    }    
-    
-</script>
 
 									<div class="form-group__list">
 									<div class="form-group__header">
@@ -501,5 +489,12 @@
 </body>
 </html>
 </body>
+<script>
+    function btnSlide(id){
+            if		($('#'+id).is(":visible")) $('#'+id).slideUp();
+            else  	$('#'+id).slideDown();
+    }    
+    
+</script>
 </html>
 </layoutTag:layout>

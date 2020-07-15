@@ -75,9 +75,23 @@ public class RentController {
 	//차 리스트 조건부 출력 ajax
 	@RequestMapping("/rentListProc")
 	@ResponseBody
-	public Map<String, Object> rentListProc(RentListVO list, Model model)throws Exception{
+	public Map<String, Object> rentListProc(RentListVO list, Model model, HttpServletRequest request)throws Exception{
+		List<String> location 	= new ArrayList<String>();
+		List<String> fuel 		= new ArrayList<String>();
+		for(int i = 0; i < 5; i ++) {
+			if(!request.getParameter("l"+i).equals(""))
+			location.add(request.getParameter("l"+i));
+			list.setLocation(location);
+		}
+		for(int i = 0; i < 5; i ++) {
+			if(!request.getParameter("f"+i).equals(""))
+			fuel.add(request.getParameter("f"+i));
+			list.setFuel(fuel);
+		}
+		
 		//조회한 정보 갯수
-		int listCount = rentService.rentListCount(list);
+		int listCount = rentService.rentListPro(list).get(0).getRent_id();
+		System.out.println(listCount);
 		//보여질 아이템 갯수
 		int showCount = 6;
 		int temp  = listCount/showCount;
@@ -89,8 +103,8 @@ public class RentController {
 		//총 페이지 수에서 리미트값을 뺀 값에 보여질 아이템 수를 곱한다
 		int Ccount = (temp - count +1) * showCount;
 		list.setLimit(Integer.toString(Ccount));
-		
 		//정보를 통해 출력할 리스트 값을 가져온다.
+		list.setTemp("list");
 		List<RentVO> rentList = rentService.rentListPro(list);
 		
 		//보낼 값들을 map에 넣는다
@@ -121,7 +135,7 @@ public class RentController {
 				onOff[0] = "on";
 			if(List.getOption_name().equals("네비게이션"))
 				onOff[1] = "on";
-			if(List.getOption_name().equals("ECM룸미러 "))
+			if(List.getOption_name().equals("ECM룸미러"))
 				onOff[2] = "on";
 			if(List.getOption_name().equals("스마트키"))
 				onOff[3] = "on";
@@ -132,12 +146,15 @@ public class RentController {
 			if(List.getOption_name().equals("후방카메라"))
 				onOff[6] = "on";
 		}
-		System.out.println(onOff[2]);
-		model.addAttribute("rent"   , rent);
-		model.addAttribute("car"    , carService.carDetail(Integer.toString(rent.getCar_id())));
-		model.addAttribute("rentImage" , rentImageService.imageList(Integer.parseInt(rent_id)));
-		model.addAttribute("oList"  , list);
-		model.addAttribute("count"  , onOff);
+		model.addAttribute("rent"   	, rent);
+		model.addAttribute("car"    	, carService.carDetail(Integer.toString(rent.getCar_id())));
+		model.addAttribute("rentImage" 	, rentImageService.imageList(Integer.parseInt(rent_id)));
+		model.addAttribute("oList"  	, list);
+		model.addAttribute("count"  	, onOff);
 		return "/rent/rentListDetail";
+	}
+	@RequestMapping("/main")
+	public String main() {
+		return "/rent/main";
 	}
 }

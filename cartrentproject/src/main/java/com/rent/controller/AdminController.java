@@ -2,7 +2,9 @@ package com.rent.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -118,22 +120,34 @@ public class AdminController {
 	
 	//옵션등록
 	@RequestMapping("/optionProc")
-	public String optionProc(HttpServletRequest request)throws Exception{
-		OptionCarVO option = new OptionCarVO();
-		option.setRent_id(0);
-		option.setOption_content(request.getParameter("option_content"));
-		option.setOption_name(request.getParameter("option_name"));
-		option.setOption_price(Integer.parseInt(request.getParameter("option_price")));
+	public String optionProc(OptionCarVO option, HttpServletRequest request)throws Exception{
+		if(!option.getOption_name().equals(""))
 		opService.optionInsert(option);
-		
+		int size = opService.optionDetail(Integer.toString(option.getRent_id())).size();
+		System.out.println(size);
+		for(int i = 0; i < size; i++) {
+			if(request.getParameter("option_name"+i)!= null) {
+				OptionCarVO list = new OptionCarVO();
+				list.setOption_content	(request.getParameter("option_content"+i));
+				list.setOption_name   	(request.getParameter("option_name"+i));
+				list.setOption_price	(Integer.parseInt(request.getParameter(("option_price"+i))));
+				list.setOption_id	    ((request.getParameter(("option_id"+i))));
+				list.setRent_id			(option.getRent_id());
+				opService.optionUpdate(list);
+				System.out.println(list);
+			}
+		}
 		return "redirect:/admin/optionForm";
 	}
 	
 	//옵션 전체 조회
 	@RequestMapping("/optionList")
 	@ResponseBody
-	public List<OptionCarVO> optionList()throws Exception{
-		return opService.optionDetail("0");
+	public Map<String, Object> optionList(@RequestParam String rent_id)throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", 	opService.optionDetail(rent_id));
+		map.put("detail", 	opService.optionDetailAll());
+		return map;
 	}
 	
 	//차량 목록
@@ -184,7 +198,6 @@ public class AdminController {
 	@RequestMapping("/rentInsertForm")
 	public String rentInsertForm(Model model)throws Exception{
 		model.addAttribute("car", 	 carService.carList());
-		model.addAttribute("option", opService.optionDetail("1"));
 		return "/admin/rentInsertForm";
 	}
 	//car_id에 따른 색상 추출
@@ -210,7 +223,7 @@ public class AdminController {
 		 else
 		 opService.optionDelete(Integer.toString(rent.getRent_id()));
 		 
-		 List<OptionCarVO> list = opService.optionDetail("0");
+		 List<OptionCarVO> list = opService.optionDetailAll();
 		 for(OptionCarVO olist : list) {
 			 if(request.getParameter(olist.getOption_name())!=null) {
 				 olist = opService.selectName(olist.getOption_name());
@@ -218,11 +231,7 @@ public class AdminController {
 				 opService.optionInsert(olist);
 			 }
 		 }
-		 
-		 if(rent.getColor()==null)
 			 return "redirect:/admin/rentDetail/"+rent.getRent_id();
-		 
-		 return "redirect:/admin/rentList"; 
 	 }
 	 
 	 //렌트 리스트
@@ -242,11 +251,11 @@ public class AdminController {
 		 return "/admin/rentList";
 	 }
 	 
-	 @RequestMapping("/rentDetail/{id}")
-	 public String rentDetail(@PathVariable String id, Model model)throws Exception{
-		 model.addAttribute("option", 	opService.optionDetail(id));
-		 model.addAttribute("accident", accService.accidentListId(id));
-		 model.addAttribute("rent_id", 	id);
+	 @RequestMapping("/rentDetail/{rent_id}")
+	 public String rentDetail(@PathVariable String rent_id, Model model)throws Exception{
+		 model.addAttribute("option", 	opService.optionDetail(rent_id));
+		 model.addAttribute("accident", accService.accidentListId(rent_id));
+		 model.addAttribute("rent_id", 	rent_id);
 		 return "/admin/rentDetail";
 	 }
 	 

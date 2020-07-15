@@ -88,15 +88,6 @@
 						</div>
 				</div>
 				
-				
-				<br><hr><br>
-				<div class="form-group">
-					<label class="control-label col-sm-2">옵션 선택</label>
-						<div class="op"></div>
-				</div>
-					<button type="button" class="btn col-sm-offset-1" onclick="addOption();">옵션추가하기</button>
-				
-				<br><br>
 				<div align="center">
 					<button class="btn btn-lg">렌트등록</button>
 				</div><br><br><br>
@@ -108,26 +99,7 @@
 </body>
 <script type="text/javascript">
 
-	option();
 	colorChange();
-
-	function option(){
-		$.ajax({
-			url 	: '/admin/optionList',
-			type	: 'get',
-			success : function(data){
-				var str = "";
-				$.each(data, function(key, value){
-					str += '<div class="col-sm-3">' +
-							'<input class="col-sm-1" type="checkbox" name="'+ value.option_name +'" value="'+ value.option_name +'" />' +
-							'<label class="control-label col-sm-6">'+ value.option_name +'</label>'+
-							'</div>';
-				});
-				$('.op').html(str);
-			}
-		});
-	}
-
 
 	function colorChange(){
 		var car_id = $('.car').val();
@@ -144,12 +116,6 @@
 			},
 			error 	: function(data){alert("gd");}
 		});
-	}
-
-	function addOption(){
-		window.open('/admin/optionForm'
-				,'left=200, top=170, width=900, height=250, scrollbars=no, status=no, resizable=no, fullscreen=no, channelmode=no');
-		return;
 	}
 </script>
 </html>

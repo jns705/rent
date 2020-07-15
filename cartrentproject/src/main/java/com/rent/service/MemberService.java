@@ -24,4 +24,9 @@ public class MemberService {
 	public String accountCheck(String id)throws Exception{
 		return mapper.accountCheck(id);
 	}
+	
+	//아이디 중복체크
+	public int idCheck(String id)throws Exception{
+		return mapper.idCheck(id);
+	}
 }

@@ -86,7 +86,7 @@ function searchForm(click){
 		success : function(data){
 			var str = '';
 			$.each(data.rentList, function(key, value){
-				str+= '<a href="#"><div class="form-group" onclick="location.href=\'${path}/rent/rentListDetail/'+ value.rent_id +'\'"><div class="col-sm-6"><table class="table table-bordered">';
+				str+= '<a href="#"><div class="form-group" onclick="location.href=\'${path}/rent/rentListDetail/'+ value.rent_id +'\'"><div style="padding-bottom: 30px;" class="col-sm-6"><table class="table table-bordered">';
 				str+= '<tr><td width="200">&nbsp;<img src ="'+ value.rent_url + '" width="160" height="90"></td>';
 				str+= '<td width="320">'+ value.car_name +'</td></tr>';
 				str+= '<tr><td>소비자가 : '+ numberFormat(value.car_price*10000) +'원</td>';
