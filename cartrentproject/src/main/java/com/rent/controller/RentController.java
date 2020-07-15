@@ -153,8 +153,8 @@ public class RentController {
 		model.addAttribute("count"  	, onOff);
 		return "/rent/rentListDetail";
 	}
-	@RequestMapping("/main")
+	@RequestMapping("/main.do")
 	public String main() {
-		return "/rent/main";
+		return "/rent/main.do";
 	}
 }

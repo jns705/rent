@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript">
-//숫자 세자리 , 찍는 함수
+//숫자 세자리 , 찍는 정규식
 function numberFormat(inputNumber) {
 	   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

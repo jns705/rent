@@ -38,6 +38,7 @@ public class MemberController {
 	@RequestMapping("/insertProc")
 	public String insertProc(HttpServletRequest request, MemberVO member) throws Exception{
 		member.setTel(request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3"));
+		member.setAddress(request.getParameter("zipcode")+"-"+request.getParameter("address")+"-"+request.getParameter("addressDetail"));
 		mMemberService.insertProc(member);
 		return "/member/loginForm";
 	}
@@ -46,10 +47,8 @@ public class MemberController {
 	@RequestMapping("/loginProc")
 	public String loginProc(@RequestParam String id, @RequestParam String password, HttpSession session, Model model)throws Exception{
 		String login_msg = "";
-		if		(mMemberService.accountCheck(id)==null) 			
-			login_msg = "아이디가 틀렸습니다.";
-		else if	(!mMemberService.accountCheck(id).equals(password)) 
-			login_msg = "비밀번호가 틀렸습니다.";
+		if		(mMemberService.accountCheck(id)==null) login_msg = "아이디가 틀렸습니다.";
+		else if	(!mMemberService.accountCheck(id).equals(password)) login_msg = "비밀번호가 틀렸습니다.";
 		
 		//아이디, 비밀번호가 있으면 세션을 등록한다
 		else if	(mMemberService.accountCheck(id).equals(password))  

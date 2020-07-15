@@ -72,77 +72,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 조건부 렌트 정보 출력 -->
 	<select id="rentListPro" parameterType="com.rent.domain.RentListVO" resultType="com.rent.domain.RentVO">
         select	
-		<if test="temp == null">
-		count(*) rent_id	
-		</if>
-		<if test="temp != null">
-        r.rent_id, r.car_id, r.color, r.reg_date, reg_date , r.location, r.special_note, r.Max_month, r.situation, r.standby_personnel, r.price, r.car_number, l.rent_url, c.car_name, c.car_price
-        </if>
+		<if test="temp == null"> count(*) rent_id </if>
+		<if test="temp != null"> r.rent_id, r.car_id, r.color, r.reg_date, reg_date , r.location, r.special_note, r.Max_month, r.situation, r.standby_personnel, r.price, r.car_number, l.rent_url, c.car_name, c.car_price</if> 
         
         from 	car c, rent r, rentimage l
         where	c.car_id = r.car_id and r.rent_id = l.rent_id and l.rent_image = '앞' 
-		<if test="manufacturer != ''">
-		and	manufacturer = #{manufacturer} 	
-		</if>
-		<if test="car_kind != ''">
-		and	car_kind = #{car_kind} 	
-		</if>
-		<if test="car_name != ''">
-		and	car_name = #{car_name} 	
-		</if>
-		<if test="Max_month != 0">
-		<![CDATA[and	Max_month >= #{Max_month}]]>	
-		</if>
-		<if test="price1  != 0">
-		<![CDATA[and	price >= #{price1}]]>	
-		</if>
-		<if test="price2  != 0">
-		<![CDATA[and	price <= #{price2}]]>	
-		</if>
-		<if test="milage1  != 0">
-		<![CDATA[and	milage >= #{milage1}]]>	
-		</if>
-		<if test="milage2  != 0">
-		<![CDATA[and	milage <= #{milage2}]]>	
-		</if>
-		<if test="reg_date1  != 0">
-		<![CDATA[and	YEAR(reg_date) >= #{reg_date1}]]>	
-		</if>
-		<if test="reg_date2  != 0">
-		<![CDATA[and	YEAR(reg_date) <= #{reg_date2}]]>	
-		</if>
+        
+		<if test="manufacturer != ''"> 	and	manufacturer = #{manufacturer} 			  </if>
+		<if test="car_kind != ''"> 		and	car_kind = #{car_kind} 					  </if>
+		<if test="car_name != ''"> 		and	car_name = #{car_name} 					  </if>
+		<if test="Max_month != 0"> 	<![CDATA[and	Max_month >= #{Max_month}]]> 	  </if>
+		<if test="price1  != 0"> 	<![CDATA[and	price >= #{price1}]]> 			  </if>
+		<if test="price2  != 0"> 	<![CDATA[and	price <= #{price2}]]>		  	  </if>
+		<if test="milage1  != 0"> 	<![CDATA[and	milage >= #{milage1}]]> 		  </if>
+		<if test="milage2  != 0"> 	<![CDATA[and	milage <= #{milage2}]]> 		  </if>
+		<if test="reg_date1  != 0"> <![CDATA[and	YEAR(reg_date) >= #{reg_date1}]]> </if>
+		<if test="reg_date2  != 0"> <![CDATA[and	YEAR(reg_date) <= #{reg_date2}]]> </if>
 		
-		<if test="location != null">
+		<if test="location != null"> 
 		<foreach collection="location" item="location" open=" and (" separator="or" close=")">
 			location = #{location}
-		</foreach>
-		</if>
+		</foreach> </if>
 		
-		<if test="fuel != null">
+		<if test="fuel != null"> 
 		<foreach collection="fuel" item="fuel" open=" and (" separator="or" close=")">
 			fuel = #{fuel}
-		</foreach>
-		</if>
-		<if test="car_number  != ''">
-			and r.car_number = #{car_number} 
-		</if>
-		<if test="orderBy == 0">
-				 order by r.price 
-			</if>
-			<if test="orderBy == 1">
-				 order by r.price desc
-			</if>
-			<if test="orderBy == 2">
-				 order by r.milage 
-			</if>
-			<if test="orderBy == 3">
-				 order by r.reg_date 
-			</if>
-			<if test="orderBy == 4">
-				 order by r.standby_personnel 
-			</if>
-		<if test="temp != null">
-		limit 0, ${limit}
-		</if>
+		</foreach> </if>
+		
+		<if test="car_number  != ''"> and r.car_number = #{car_number}  </if>
+		
+		<if test="orderBy == 0"> order by r.price </if>
+		<if test="orderBy == 1"> order by r.price desc </if>
+		<if test="orderBy == 2"> order by r.milage  </if>
+		<if test="orderBy == 3"> order by r.reg_date </if>
+		<if test="orderBy == 4"> order by r.standby_personnel </if>
+		
+		<if test="temp != null"> limit 0, ${limit} </if>
 	</select>
 </mapper>
