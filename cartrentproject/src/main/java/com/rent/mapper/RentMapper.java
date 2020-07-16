@@ -48,4 +48,7 @@ public interface RentMapper {
 	//렌트리스트 숫자
 	public int rentListCount(RentListVO list) throws Exception;
 	
+	//렌트 상담 후 대기인원 증가시킨다.
+	public int rentStandby(RentVO rent) throws Exception;
+	
 }

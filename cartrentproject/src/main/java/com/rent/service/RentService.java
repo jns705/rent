@@ -62,7 +62,10 @@ public class RentService {
 		return mapper.rentListCount(list);
 	}
 	
-	
+	//렌트 상담 후 대기인원 증가시킨다.
+	public int rentStandby(RentVO rent) throws Exception {
+		return mapper.rentStandby(rent);
+	}
 	
 	
 }

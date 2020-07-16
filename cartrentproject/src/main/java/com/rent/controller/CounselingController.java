@@ -76,12 +76,13 @@ public class CounselingController {
 		counseling.setCounseling_situation("상담 대기중");
 		couService.counselingInsert(counseling);
 		
-		
 		RentVO rent = rentService.rentDetail(rent_id);
 		//상담한 차에 상담대기인원수 증가시키기
-		int reservation = rent.getStandby_personnel();
-		rent.setStandby_personnel(reservation+1);
 		
+		int Standby = rent.getStandby_personnel();
+		rent.setStandby_personnel(Standby+1);
+		rent.setSituation("상담중");
+		rentService.rentStandby(rent);
 		
 		return "redirect:/rent/rentList";
 	}

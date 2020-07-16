@@ -299,4 +299,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			
 		
 	</select>
+	
+	<update id="rentStandby" parameterType="com.rent.domain.RentVO">
+		update rent
+		set standby_personnel = #{standby_personnel}, situation = #{situation}
+		where rent_id = #{rent_id}
+	</update>
 </mapper>
