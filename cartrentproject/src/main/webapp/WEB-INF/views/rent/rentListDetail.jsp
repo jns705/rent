@@ -534,10 +534,10 @@ function driving(e) {
 								<strong id="totalRental">${String.format('%,d',rent.price)}</strong>원
 								</div>
 								<div class="col-sm-offset-1 col-sm-3" style="margin-left: 30px;">
-									<button onclick="apply()">상담신청</button>
+									<button onclick="apply();">상담신청</button>
 								</div>
 								<div class="col-sm-4">
-									<button >다이렉트 계약</button>
+									<button onclick="location.href='${path}/rent/rentList'" >다이렉트 계약</button>
 								</div>
 								</dd>
 								<dt class="fs-default">(총 차량 소비자가)</dt>
@@ -569,7 +569,9 @@ function apply() {
 	document.getElementById('deposit').value = $('#span_deposit').text();//보증금(렌트계약기간 * 5)
 }
 
-
+function contract() {
+	alert("ㄱㅖ약");
+}
 
 </script>
 </html>
