@@ -14,7 +14,6 @@
 <body>
 	<div class="container">
  	<h2>게시글 목록</h2>
- 	<button class="btn btn-primary" onclick="location.href='${path}/accident/insert'">사고이력 추가</button>
  	
  	<table class="table table-hover table-bordered">
  		<thead>
@@ -30,8 +29,8 @@
  		<tbody>
  		<c:forEach items="${accident}" var="acc" >
  			<tr>
- 				<td onclick="location.href='/accident/detail/${acc.accident_id}'">${acc.accident_id}</td>
- 				<td>${acc.rent_id}</td>
+ 				<td>${acc.accident_id}</td>
+ 				<td  onclick="location.href='/admin/rentDetail/${acc.rent_id}'">${acc.rent_id}</td>
  				<td>${acc.accident_date}</td>
  				<td>${acc.accident_content}</td>
  				<td>${acc.accident_price}</td>

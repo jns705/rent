@@ -12,15 +12,12 @@ public interface CounselingMapper {
 	//관리자에게 상담문자 보내기(등록)
 	public int counselingInsert(CounselingVO counseling) throws Exception;
 	
-	//수정
-	public int counselingUpdate(CounselingVO counseling) throws Exception;
-	
 	//삭제
-	public int counselingDelete(CounselingVO counseling) throws Exception;
+	public int counselingDelete(int counseling_id) throws Exception;
 	
 	//전체목록(관리자)
 	public List<CounselingVO> counselingList() throws Exception;
 	
 	//상세목록
-	public CounselingVO counselingDetail(String counseling) throws Exception;
+	public CounselingVO counselingDetail(String counseling_id) throws Exception;
 }

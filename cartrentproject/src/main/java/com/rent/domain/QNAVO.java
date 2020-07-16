@@ -16,5 +16,6 @@ public class QNAVO {
 	private String writer;
 	private Timestamp qna_date;
 	private String qne_password;
+	private int rent_id;
 
 }

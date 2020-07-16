@@ -8,8 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- QNA 등록 -->
 	<insert id="qnaInsert" parameterType="com.rent.domain.QNAVO">
 		insert into qna
-			(qna_id, subject, content, writer, qna_date, qne_password)
-		values (#{qna_id}, #{subject}, #{content}, #{writer}, now(), #{qne_password})
+			(qna_id, subject, content, writer, qna_date, qne_password, rent_id)
+		values (#{qna_id}, #{subject}, #{content}, #{writer}, now(), #{qne_password}, #{rent_id})
 	</insert>
 	
 	<!-- QNA 수정 -->

@@ -40,11 +40,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rent_id = #{rent_id}
 	</select>
 
-	<!-- 사고이력 상세조회 -->
-	<select id="accidentDetail" parameterType="int" resultType="com.rent.domain.AccidentVO">
-		select *
-		from accident
-		where accident_id = #{accident_id}
-	</select>
-	
 </mapper>

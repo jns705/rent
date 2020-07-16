@@ -131,20 +131,13 @@ public class RentController {
 		for(int i = 0; list.size() > i ; i++) {
 			OptionCarVO List = list.get(i);
 			
-			if(List.getOption_name().equals("가죽시트"))
-				onOff[0] = "on";
-			if(List.getOption_name().equals("네비게이션"))
-				onOff[1] = "on";
-			if(List.getOption_name().equals("ECM룸미러"))
-				onOff[2] = "on";
-			if(List.getOption_name().equals("스마트키"))
-				onOff[3] = "on";
-			if(List.getOption_name().equals("썬루프"))
-				onOff[4] = "on";
-			if(List.getOption_name().equals("통풍시트"))
-				onOff[5] = "on";
-			if(List.getOption_name().equals("후방카메라"))
-				onOff[6] = "on";
+			if(List.getOption_name().equals("가죽시트")) 	onOff[0] = "on";
+			if(List.getOption_name().equals("네비게이션")) 	onOff[1] = "on";
+			if(List.getOption_name().equals("ECM룸미러")) 	onOff[2] = "on";
+			if(List.getOption_name().equals("스마트키")) 	onOff[3] = "on";
+			if(List.getOption_name().equals("썬루프")) 		onOff[4] = "on";
+			if(List.getOption_name().equals("통풍시트")) 	onOff[5] = "on";
+			if(List.getOption_name().equals("후방카메라")) 	onOff[6] = "on";
 		}
 		model.addAttribute("rent"   	, rent);
 		model.addAttribute("car"    	, carService.carDetail(Integer.toString(rent.getCar_id())));

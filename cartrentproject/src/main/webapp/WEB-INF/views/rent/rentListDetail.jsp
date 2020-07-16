@@ -495,6 +495,15 @@
             else  	$('#'+id).slideDown();
     }    
     
+    function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function apply() {
+	document.getElementById('totalPrice').value = $('#totalRental').text(); // 옵션등등 추가 후 비용
+	document.getElementById('deposit').value = $('#span_deposit').text();//보증금(렌트계약기간 * 5)
+}
+    
 </script>
 </html>
 </layoutTag:layout>

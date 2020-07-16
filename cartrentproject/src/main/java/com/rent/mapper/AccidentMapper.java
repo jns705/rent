@@ -24,7 +24,4 @@ public interface AccidentMapper {
 	//전체목록
 	public List<AccidentVO> accidentListId(String rent_id) throws Exception;
 	
-	//상세조회
-	public AccidentVO accidentDetail(int accident_id) throws Exception;
-	
 }

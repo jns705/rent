@@ -45,11 +45,6 @@ public class AccidentService {
 		return mapper.accidentListId(rent_id);
 	}
 	
-	//상세조회
-	public AccidentVO accidentDetail(int accident_id) throws Exception{
-		System.out.println("accidentDetail() 실행중. . .");
-		return mapper.accidentDetail(accident_id);
-	}
 	
 	
 }

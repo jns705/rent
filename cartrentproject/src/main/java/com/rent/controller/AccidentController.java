@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rent.domain.AccidentVO;
 import com.rent.service.AccidentService;
+import com.rent.service.RentService;
 
 @Controller
 @RequestMapping("/accident")
@@ -24,28 +25,38 @@ public class AccidentController {
 	@Resource(name="com.rent.service.AccidentService")
 	AccidentService service;
 	
+	@Resource(name = "com.rent.service.RentService")
+	RentService rentService;
+	
+
 	@RequestMapping("/list")
 	public String accidentList(Model model) throws Exception{
 		model.addAttribute("accident", service.accidentList());
+		model.addAttribute("rent", rentService.rentList());
 		return "/accident/accidentList";
 	}
-	
-	@RequestMapping("/insert")
-	public String accidentInsert() throws Exception {
-		return "/accident/accidentInsert";
-	}
+	/**
+	 * 사고이력 등록
+	 * @param accident
+	 * @return public String accidentList(Model model) 새로고침
+	 * @throws Exception
+	 * rentDetail.jsp에서 ajax사용
+	 */
 	@RequestMapping("/insertProc")
 	private String accidentInsertProc(AccidentVO accident) throws Exception {
 		service.accidentInsert(accident);
 		return "redirect:/accident/list";
 	}
 	
-	@RequestMapping("/detail/{accident_id}")
-	private String accidentDatail(@PathVariable int accident_id,Model Model) throws Exception {
-		Model.addAttribute("data", service.accidentDetail(accident_id));
-		return "/accident/accidentDetail";
-	}
-	
+	/**
+	 * 사고이력 수정
+	 * @param accident
+	 * @param request
+	 * @return public String accidentList(Model model) 새로고침
+	 * @throws Exception
+	 * rentDetail.jsp에서 ajax사용
+	 * 여러개 수정하기 위해 for문 사용
+	 */
 	@RequestMapping("/update")
 	private String accidentUpdate(AccidentVO accident, HttpServletRequest request) throws Exception {
 			
@@ -62,12 +73,17 @@ public class AccidentController {
 				service.accidentUpdate(acc);
 				}
 			}
-		
-			
-		
 		return "redirect:/accident/list";
 	}
 	
+	/**
+	 * 사고이력 삭제
+	 * @param accident_id
+	 * @return public String accidentList(Model model) 새로고침
+	 * @throws Exception
+	 * rentDetail.jsp 에서 ajax사용
+	 * 여러개 삭제하기 위해 for문 사용
+	 */
 	@RequestMapping("/delete/{accident_id}")
 	private String accidentDelete(@PathVariable List accident_id) throws Exception {
 		System.out.println("accident_Delete 실행중");
