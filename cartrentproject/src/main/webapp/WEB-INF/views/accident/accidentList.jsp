@@ -10,6 +10,10 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 홈페이지</title>
+<style type="text/css">
+tbody td#a:hover {
+	background-color : #F5F0C5;
+</style>
 </head>
 <body>
 	<div class="container">
@@ -30,7 +34,7 @@
  		<c:forEach items="${accident}" var="acc" >
  			<tr>
  				<td>${acc.accident_id}</td>
- 				<td  onclick="location.href='/admin/rentDetail/${acc.rent_id}'">${acc.rent_id}</td>
+ 				<td id="a" style="cursor: pointer;" onclick="location.href='/admin/rentDetail/${acc.rent_id}'">${acc.rent_id}</td>
  				<td>${acc.accident_date}</td>
  				<td>${acc.accident_content}</td>
  				<td>${acc.accident_price}</td>

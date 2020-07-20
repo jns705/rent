@@ -13,7 +13,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
     <meta charset="UTF-8">
-    <title>솔렌터카${nowDate}</title>
+    <title>솔렌터카</title>
 </head>
 <style>
 #car-type6, #car-type1, #car-type2, #car-type3, #car-type4, #car-type5 {display: none;}
@@ -154,7 +154,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 
 }
 </script>
-<form action="/counseling/short_rentProc" method="get">
+<form action="/buy/short_rentProc" name="insertForm" method="get">
 <div id="content">
     <div id="container">
         <div class="breadcrumbs">
@@ -1294,7 +1294,7 @@ function btnSlide(id){
                         </dl>
                         <div class="btn-box">
                             <a href="#none" class="btn btn-line3 btn-fix1" onClick="location.reload(true);">초기화</a>
-                            <div class="btn btn-color2 btn-fix1 disable">결제하기</div>
+                            <div class="btn btn-color2 btn-fix1 disable" onclick="insertForm.submit()">결제하기</div>
                         </div>
                     </div>
                     <!-- ticker-head//end -->

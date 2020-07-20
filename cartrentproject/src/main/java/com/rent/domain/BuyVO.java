@@ -10,7 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class BuyVO {
-	
+	//buy에 car_id를 넣으면 car테이블에서 car_number +1?
 	private int buy_id;
 	private String id;
 	private String car_id;

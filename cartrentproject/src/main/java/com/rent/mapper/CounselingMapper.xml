@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
  
 <mapper namespace="com.rent.mapper.CounselingMapper">
 	
+	<!-- 등록 -->
 	<insert id="counselingInsert" parameterType="com.rent.domain.CounselingVO">
 		insert into counseling
 				(counseling_id, id, rent_id, option_name, color, name, address,
@@ -12,6 +13,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		values(	#{counseling_id}, #{id}, #{rent_id}, #{option_name}, #{color},
 		 		#{name}, #{address}, #{tel}, #{counseling_situation}, #{month}, now() )
 	</insert>
+	
+	<!-- 상담글 상태 현황 변경(상담완료, 예약완료) -->
+	<update id="counselingUpdate" parameterType="com.rent.domain.CounselingVO">
+		update counseling
+		set counseling_situation = #{counseling_situation}
+		where counseling_id = #{counseling_id}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="counselingDelete" parameterType="String">
+		delete from counseling
+		where counseling_id = #{counseling_id}
+	</delete>
+	
+	<!-- 전체목록 기본 내림차순-->
+	<select id="counselingList" resultType="com.rent.domain.CounselingVO">
+		select * 
+		from counseling
+		order by counseling_date asc
+	</select>
+	
+	<!-- 전체목록 기본 내림차순-->
+	<select id="searchList" parameterType="String" resultType="com.rent.domain.CounselingVO">
+		select * 
+		from counseling
+		where counseling_situation = #{counseling_situation}
+		order by counseling_date asc
+	</select>
+	
+	<!-- 상세목록 -->
+	<select id="counselingDetail" parameterType="String" resultType="com.rent.domain.CounselingVO">
+		select *
+		from counseling
+		where counseling_id = #{counseling_id}
+	</select>
+	
+	<!-- 회원아이디로 상담신청했는지 확인 후 상담한 날짜를 뿌려준다 -->
+	<select id="counselingOK" parameterType="String" resultType="com.rent.domain.CounselingVO">
+		select counseling_date
+		from counseling
+		where id = #{id}
+	</select>
 	
 </mapper>
 

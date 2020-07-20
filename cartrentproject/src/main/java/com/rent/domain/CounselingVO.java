@@ -1,7 +1,5 @@
 package com.rent.domain;
 
-import java.sql.Timestamp;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,6 +19,9 @@ public class CounselingVO {
 	private String tel;
 	private String counseling_situation;
 	private String month;
-	private Timestamp counseling_date;
+	private String counseling_date;
+	
+
+
 
 }

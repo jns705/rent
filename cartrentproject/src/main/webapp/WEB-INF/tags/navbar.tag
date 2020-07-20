@@ -46,6 +46,8 @@
 				 		<li><a href="${path}/admin/carList">차량리스트</a></li>
 				 		<li><a href="${path}/admin/rentList">렌트리스트</a></li>
 				 		<li><a href="${path}/accident/list">사고이력 전체목록</a>
+				 		<li><a href="${path}/counseling/list">상담(비구매) 전체목록</a>
+				 		<li><a href="${path}/buy/list">예약(구매예정) 전체목록</a>
 				 		<li class="divider"></li>
 				 		<li><a href="#">Exit</a></li>
 				 	</ul>

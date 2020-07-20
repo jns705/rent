@@ -29,7 +29,6 @@
 	
 	<input type="hidden" name="id" value="${sessionScope.id}"> <!-- 회원이면 id값 비회원이면 null -->
 	<input type="hidden" name="rent_id" value="${rent.rent_id}">	<!-- 렌트차량 고유아이디 -->
-	<input type="hidden" name="option_name" value="${option }">	<!-- 차량 옵션들 -->
 	<input type="hidden" name="color" value="${rent.color}">	<!-- 차량 색상 -->
 	<input type="hidden" name="month" value="${month}">	<!-- 계약기간 -->
 	

@@ -27,9 +27,14 @@ public class MemberService {
 	public int idCheck(String id)throws Exception{
 		return mapper.idCheck(id);
 	}
-	
+
 	//아이디로 정보 가져오기
 	public MemberVO accountDetail(String id) throws Exception{
 		return mapper.accountDetail(id);
+	}
+		
+	//회원 상세정보
+	public MemberVO memberDetail(String id) throws Exception {
+		return mapper.memberDetail(id);
 	}
 }

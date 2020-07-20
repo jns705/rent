@@ -353,8 +353,13 @@ img {
 
 		
 		
-		<form id="frm" name="frm" action="" method="post">
-        	
+		<form id="frm" name="frm" action="${path}/counseling/insert/${rent_id}" method="post">
+		
+        	<input type="hidden" name="term" id="term" value="1"> <!-- 계약기간 -->
+        	<input type="hidden" name="totalPrice" id="totalPrice"> <!-- 총합 비용 -->
+        	<input type="text" name="deposit" id="deposit"> <!-- 보증금 -->
+        	<input type="hidden" name="km" id="km" value="1"> <!-- 주행거리 -->
+        	<input type="hidden" name="id" value="${sessionScope.id}">
         	
 			<div class="form-gorup-list js-accordion-group">
 
@@ -418,6 +423,7 @@ img {
 										<div class="estimate-list__item">
 											<div class="estimate-item__caption clearfix">
 												<p class="estimate-item__caption-text" id="prmsDtcClsCd_view">2만Km 이하/년</p>
+												<p class="estimate-item__caption-text"  id="driving">1만Km 이하/년</p>
 											</div>
 											<!-- estimate-item__caption//end -->
 										</div>
@@ -432,6 +438,45 @@ img {
 											<div class="estimate-information__detail">
 												<p class="estimate-information__detail-desc" id="cntrTermMm_detail">계약기간 총 주행거리 초과 시 위약금발생</p>
 											</div>
+													
+<script>
+var cost = ${rent.price};
+var temporaryPrice=0;
+function monthShow(e) {
+	$('#monthShow').html(e+"개월");
+	document.getElementById('term').value = e;
+	
+	if(e==1) {
+		$('#totalRental').html(numberWithCommas(cost));
+		$('#span_deposit').html(numberWithCommas(cost*5));
+		temporaryPrice = cost;
+	}else{
+		var sale = e*5000;
+		temporaryPrice=cost-sale;
+		$('#totalRental').html(numberWithCommas(temporaryPrice));
+		$('#span_deposit').html(numberWithCommas(temporaryPrice*5));
+	}
+}
+function driving(e) {
+	$('#driving').html(e+"만km 이하/년");
+	document.getElementById('km').value = e;
+	var drPrice = e*22000;
+	//document.getElementById('totalRental').text();
+	if(e == 1) drPrice =0;
+	if(temporaryPrice == 0) {
+		var drive = cost + drPrice;
+		$('#totalRental').html(numberWithCommas(drive));
+		$('#span_deposit').html(numberWithCommas(drive*5));
+	}else if(temporaryPrice != 0) {
+		var a = temporaryPrice + drPrice;
+		$('#totalRental').html(numberWithCommas(a));
+		$('#span_deposit').html(numberWithCommas(a*5));
+	}
+	
+}
+
+
+</script>
 														
 											<div class="col-lg-3">
 											<select name="cntrTermMm" class="form-control" >
@@ -480,10 +525,17 @@ img {
 								<strong id="totalRental" style="">${String.format('%,d',rent.price)}</strong>원
 								</div>
 								<div class="col-sm-offset-1 col-sm-3" style="margin-left: 30px;">
-									<button >상담신청</button>
+									<button onclick="apply();">상담신청</button>
 								</div>
 								<div class="col-sm-4">
-									<button >다이렉트 계약</button>
+								<c:choose>
+									<c:when test="${sessionScope.id !=null && sessionScope.id != ''}">
+										<button formaction="${path}/buy/insert/${rent.rent_id}" onclick="apply();">다이렉트 계약</button>
+									</c:when>
+									<c:otherwise>
+										<button formaction="${path}/rent/rentListDetail/${rent.rent_id}" onclick="alert('로그인 후 사용가능')">다이렉트 계약</button>
+									</c:otherwise>
+								</c:choose>
 								</div>
 								</dd>
 								<dt class="fs-default">(총 차량 소비자가)</dt>
@@ -522,8 +574,8 @@ img {
 function apply() {
 	document.getElementById('totalPrice').value = $('#totalRental').text(); // 옵션등등 추가 후 비용
 	document.getElementById('deposit').value = $('#span_deposit').text();//보증금(렌트계약기간 * 5)
+	
 }
-    
 </script>
 </html>
 </layoutTag:layout>

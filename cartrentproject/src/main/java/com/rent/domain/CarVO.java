@@ -11,7 +11,7 @@ public class CarVO {
 	private int car_id;
 	private int rent_id;
 	private int price;
-	private String car_number; //??
+	private int car_number; //??
 	private String manufacturer;
 	private String car_name;
 	private int exhaust_volume;

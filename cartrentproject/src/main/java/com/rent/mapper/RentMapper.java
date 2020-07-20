@@ -50,4 +50,7 @@ public interface RentMapper {
 	public int rentListCount(RentListVO list) throws Exception;
 	
 	public List<CarVO> carKindList(RentVO temp) throws Exception;
+	//렌트 상담 후 대기인원 증가시킨다.
+	public int rentStandby(RentVO rent) throws Exception;
+	
 }
