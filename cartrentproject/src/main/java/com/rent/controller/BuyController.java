@@ -133,7 +133,7 @@ public class BuyController {
 		//렌트카를 돈주고 예약 했으니 car테이블에 있는 car_number를 증가시킨다.(사용횟수)
 		CarVO car = carService.carDetail(car_id);
 		int count = car.getCar_number();
-		count +=1;
+		count -=1;
 		car.setCar_number(count);
 		
 		RentVO rent = rentService.rentDetail(rent_id);
