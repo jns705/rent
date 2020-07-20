@@ -1,7 +1,5 @@
 package com.rent.service;
 
-import java.util.HashMap;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -28,5 +26,10 @@ public class MemberService {
 	//아이디 중복체크
 	public int idCheck(String id)throws Exception{
 		return mapper.idCheck(id);
+	}
+	
+	//아이디로 정보 가져오기
+	public MemberVO accountDetail(String id) throws Exception{
+		return mapper.accountDetail(id);
 	}
 }

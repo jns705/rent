@@ -13,7 +13,7 @@
 <title>단기 렌터카</title>
 </head>
 <body>
-
+<form action="/counseling/mainProc" method="get" name="proc">
 				<div class="spot short type2">
 					<div class="spot-wrapper">
 						<div class="heading">
@@ -44,10 +44,10 @@
 									<div class="option">
 										<div class="option-row clearfix">
 											<span id="sDateSpan" class="fl" >
-												<input type="text" id="startDate" value="대여일 선택" onchange="changeDate();">
+												<input type="text" id="startDate" name="startDate" value="대여일 선택" onchange="changeDate(); changeHour(); todayCheck();">
 											</span>
 											<span class="select-box fl">
-												<select name="sHour" id="sHour" class="option01 option02 hour fast-reserve-select" onchange="changeDate();">
+												<select name="sHour" id="sHour" class="option01 option02 hour fast-reserve-select" onchange="changeDate(); changeHour();">
 												<c:forEach begin="06" end="22" varStatus="status">
 													<option value="${status.index}">${status.index} 시</option>
 												</c:forEach>
@@ -60,15 +60,16 @@
 												</select>
 											</span>
 											<span class="select-box fl">
-												<select name="" id="" class="option01 option02 timeChange fast-reserve-select">
-													<option value="00">00 분</option>
-													<option value="30">30 분</option>
+												<select name="sLocation" id="sLocation" class="option01 option02 timeChange fast-reserve-select">
+													<c:forEach items="${location}" var="location">
+														<option>${location.location}</option>
+													</c:forEach>
 												</select>
 											</span>
 										</div>
 										<div class="option-row clearfix">
 											<span id="lDateSpan" class="fl">
-												<input type="text" id="endDate" value="반납일 선택" onchange="changeDate();">
+												<input type="text" id="endDate" name="endDate" value="반납일 선택" onchange="changeDate();  changeHour();">
 											</span>
 											<span  class="select-box fl">
 												<select name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate();">
@@ -84,22 +85,19 @@
 												</select>
 											</span>
 											<span class="select-box fl">
-												<select name="" id="" class="option01 option02 timeChange fast-reserve-select">
-													<option value="00">00 분</option>
-													<option value="30">30 분</option>
+												<select name="lLocation" id="lLocation" class="option01 option02 timeChange fast-reserve-select">
+													<c:forEach items="${location}" var="location">
+														<option>${location.location}</option>
+													</c:forEach>
 												</select>
 											</span>
 											</div>
 										<div class="option-row clearfix">
 											<span class="select-box select-box-car fl">
-												<select id="carTab" name=carTab class="option01 option02 fast-reserve-car-select" onchange="submitable()">
-													<option value="">차량 선택</option>
-													<option value="1">소형</option>
-													<option value="2">중형</option>
-													<option value="3">대형</option>
-													<option value="4">승합차</option>
-													<option value="5">SUV</option>
-													<option value="6">수입/전기차</option>
+												<select id="carTab" name=carKind class="option01 option02 fast-reserve-car-select" onchange="submitable()">
+													<c:forEach items="${carKind}" var="carKind">
+														<option>${carKind}</option>
+													</c:forEach>
 												</select>
 											</span>
 										</div>
@@ -113,8 +111,7 @@
 										</p>
 									</div>
 									<div class="btn-box">
-										<!-- 대여/반납 기간, 지점 선택 완료 시 disable 삭제 부탁 드립니다. -->
-										<a id="btn_quick" href="javascript:void(0);" class="btn btn-color1 btn-large" onclick="go_resv(this)">빠른예약</a>
+										<a id="btn_quick" href="#" onclick="proc.submit();" class="btn btn-color1 btn-large">빠른예약</a>
 									</div>
 									<div class="helper">
 										<span class="tooltip">
@@ -130,7 +127,7 @@
 						</div>
 					</div>
 				</div>
-
+</form>
 </body>
 </html>
 <script type="text/javascript">
@@ -146,7 +143,7 @@
                  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
                  monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
                  dateFormat: "yy-mm-dd",
-                 maxDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+                 minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
                  onClose: function( selectedDate ) {    
                       //시작일(startDate) datepicker가 닫힐때
                       //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
@@ -164,7 +161,7 @@
                  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
                  monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
                  dateFormat: "yy-mm-dd",
-                 maxDate: 0,                       // 선택할수있는 최대날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+                 //maxDate: 0,                       // 선택할수있는 최대날짜, ( 0 : 오늘 이후 날짜 선택 불가)
                  onClose: function( selectedDate ) {    
                      // 종료일(endDate) datepicker가 닫힐때
                      // 시작일(sta	rtDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 시작일로 지정
@@ -207,16 +204,48 @@
 
 
 
-    $('#sHour').change(function(){
-        if($('#startDate').val() == $('#endDate').val()){
-        var hour = Number($('#sHour').val())+1;
-        var str  = '';
-        for(i = hour; i < 23; i++ ){
-            str += '<option value="'+ i +'">'+ i +'시</option>';
-        }
-        $('#lHour').html(str);
-        }
-    });
+
+    function todayCheck(){
+    	var nowDate = $('#nowDate').val();
+    	var nowHour = Number($('#nowHour').val());
+    	//시작날짜가 현재 날짜일 시
+    	if(nowDate == $('#startDate').val()){
+    		 var str1  = '';
+    		 //현재시간+1부터 시작
+    	     for(i = nowHour+1; i < 22; i++ ){
+    		     str1 += '<option value="'+ i +'">'+ i +'시</option>';
+    	     }
+    	}else{
+    		var str1  = '';
+    		//아닐 시 6 ~ 23시 까지
+    	     for(i = 6; i < 23; i++ ){
+    	    	 str1 += '<option value="'+ i +'">'+ i +'시</option>';
+        	 }
+    	}
+        $('#sHour').html(str1);
+        changeHour();
+    }
+    function changeHour(){
+    	//시작날짜와 마지막 날짜가 같을 시
+       	if($('#startDate').val() == $('#endDate').val()){
+       	   	//마지막 시간을 시작시간+1로 바꾼다
+    	   	var hour = Number($('#sHour').val())+1;
+    	   	var str  = '';
+    	   	for(i = hour; i < 23; i++ ){
+    	       str += '<option value="'+ i +'">'+ i +'시</option>';
+         	}
+    	//아닐 시 06~23시로 바꾼다
+        }else{
+    		var str  = '';
+    		//아닐 시 6 ~ 23시 까지
+    	     for(i = 6; i < 23; i++ ){
+    	    	 str += '<option value="'+ i +'">'+ i +'시</option>';
+        	 }
+    	}
+       $('#lHour').html(str);
+    	   
+       changeDate();
+    }
 </script>
 
 

@@ -17,7 +17,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="nav-menu <c:if test="${fn : contains(URL, 'List')}">active</c:if> " id="longRent"><a href="${path}/rent/rentList">장기렌트</a></li>
                     <li class="nav-menu" id="lease">
-                    	<a href="/lease/domestic">
+                    	<a href="/rent/main.do">
                     		<span>리스 </span>
                     		<span style="font-size: 13px;">(화물차포함)</span>
                     	</a>

@@ -31,4 +31,8 @@ public class CarColorService {
 	public List<CarVO> colorList() throws Exception{
 		return mapper.colorList();
 	}
+	
+	public String colorName(String rent_id) throws Exception{
+		return mapper.colorName(rent_id);
+	}
 }

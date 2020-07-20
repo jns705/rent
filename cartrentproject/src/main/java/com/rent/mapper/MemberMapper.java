@@ -15,4 +15,6 @@ public interface MemberMapper {
 	
 	//id중복체크
 	public int idCheck(String id)throws Exception;
+	//id로 정보 가져오기
+	public MemberVO accountDetail(String id) throws Exception;
 }

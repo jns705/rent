@@ -27,4 +27,7 @@ public interface CarColorMapper {
 	
 	//전체리스트
 	public List<CarVO> colorList() throws Exception;
+	
+	//렌트아이디로 색상 조회
+	public String colorName(String rent_id) throws Exception;
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.rent.domain.BuyVO;
+import com.rent.domain.CarVO;
 import com.rent.domain.RentVO;
 import com.rent.domain.RentListVO;
 
@@ -48,4 +49,5 @@ public interface RentMapper {
 	//렌트리스트 숫자
 	public int rentListCount(RentListVO list) throws Exception;
 	
+	public List<CarVO> carKindList(RentVO temp) throws Exception;
 }

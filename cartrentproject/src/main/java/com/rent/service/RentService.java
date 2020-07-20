@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.rent.domain.CarVO;
 import com.rent.domain.RentImageVO;
 import com.rent.domain.RentVO;
 import com.rent.domain.RentListVO;
@@ -60,6 +61,10 @@ public class RentService {
 	
 	public int rentListCount(RentListVO list) throws Exception{
 		return mapper.rentListCount(list);
+	}
+	
+	public List<CarVO> carKindList(RentVO temp) throws Exception{
+		return mapper.carKindList(temp);
 	}
 	
 	

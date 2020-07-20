@@ -253,7 +253,7 @@
 								<div class="header-group estimate-type mab0">
 									<h4>차량 정보</h4>
 								</div>
-								<table class="tb-cnt tb-my bt0">
+								<table class="tb-cnt tb-my bt0 table">
 					                    <colgroup>
 					                        <col width="20%">
 					                        <col width="30%">
@@ -314,7 +314,27 @@
 
 		
 		
+<style>
+img {
+	 margin-right: 30px; 
+	 margin-top: 15px; 
+	 margin-bottom: 15px; 
+}
 
+.table th {
+	text-align: center !important;
+	height: 44px !important;
+	width: 200px;
+	padding: 0px;
+	margin: 0px;
+}
+.table td {
+	width: 200px;
+	height: 44px;
+	padding: 0px;
+	margin: 0px;
+}
+</style>
 			<article>
 				<div class="header-group estimate-type mab0">
 					<h4>옵션 정보</h4>
@@ -424,14 +444,14 @@
 									
 							<div class="form-group__list" id="sub5" >
 								<div class="form-group__header">
-									<div class="estimate-list" style="margin-left: 0px;">
-										<div class="estimate-list__label">
-												<p class="estimate-list__label-title">보증금</p>
+									<div class="estimate-list" style="margin-left: 0px; padding: 0px; margin: 0px;">
+										<div class="estimate-list__label" style="width: 280">
+												<p class="estimate-list__label-title" style="width: 280">보증금</p>
 										</div>
 										<div class="estimate-item__caption clearfix">
 											<!-- estimate-item__caption//end -->
-											<div class="col-sm-10">
-												<p class="estimate-item__caption-text" id="prmsDtcClsCd_view">보증금<span id="span_deposit" class="cl-point2 ml10">&nbsp;${String.format('%,d',rent.price)}원&nbsp;</span>(렌탈료 1개월분)<span id="span_deposit_after" ></span></p>
+											<div class="col-sm-10" style="padding-left:0px;">
+												<p class="estimate-item__caption-text" id="prmsDtcClsCd_view" style="padding-left:0px;">보증금<span id="span_deposit" class="cl-point2 ml10">&nbsp;${String.format('%,d',rent.price)}원&nbsp;</span>(렌탈료 1개월분)<span id="span_deposit_after" ></span></p>
 											</div>
 											<div class="col-sm-12">
 												<p class="estimate-item__caption-subtext">※ 보증금 납부 후 차량이 출고되며, 입금(가상)계좌는 계약완료 후 문자 발송됩니다.</p>

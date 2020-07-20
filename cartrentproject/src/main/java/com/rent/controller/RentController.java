@@ -146,8 +146,16 @@ public class RentController {
 		model.addAttribute("count"  	, onOff);
 		return "/rent/rentListDetail";
 	}
+	
 	@RequestMapping("/main.do")
-	public String main() {
+	public String main(Model model) throws Exception{
+		String [] carKind = {"차량 선택", "소형", "중형", "준중형", "대형", "RV", "친환경차"};
+		model.addAttribute("carKind",  carKind);
+		model.addAttribute("location", rentService.location());
+		
 		return "/rent/main.do";
 	}
+	
+	
+
 }
