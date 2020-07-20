@@ -5,10 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rent.domain.MemberVO;
 import com.rent.service.MemberService;
@@ -36,6 +38,7 @@ public class MemberController {
 	@RequestMapping("/insertProc")
 	public String insertProc(HttpServletRequest request, MemberVO member) throws Exception{
 		member.setTel(request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3"));
+		member.setAddress(request.getParameter("zipcode")+"-"+request.getParameter("address")+"-"+request.getParameter("addressDetail"));
 		mMemberService.insertProc(member);
 		return "/member/loginForm";
 	}
@@ -44,10 +47,8 @@ public class MemberController {
 	@RequestMapping("/loginProc")
 	public String loginProc(@RequestParam String id, @RequestParam String password, HttpSession session, Model model)throws Exception{
 		String login_msg = "";
-		if		(mMemberService.accountCheck(id)==null) 			
-			login_msg = "아이디가 틀렸습니다.";
-		else if	(!mMemberService.accountCheck(id).equals(password)) 
-			login_msg = "비밀번호가 틀렸습니다.";
+		if		(mMemberService.accountCheck(id)==null) login_msg = "아이디가 틀렸습니다.";
+		else if	(!mMemberService.accountCheck(id).equals(password)) login_msg = "비밀번호가 틀렸습니다.";
 		
 		//아이디, 비밀번호가 있으면 세션을 등록한다
 		else if	(mMemberService.accountCheck(id).equals(password))  
@@ -69,8 +70,16 @@ public class MemberController {
 		return "/main";
 	}
 	
-	@RequestMapping("/test")
-	public String test() {
-		return "/member/test";
+	//아이디 중복검사
+	@RequestMapping("/idCheck")
+	@ResponseBody
+	public int idCheck(@RequestParam String id) throws Exception {
+		return mMemberService.idCheck(id);
 	}
+	
+	@RequestMapping("/main")
+	public String main()throws Exception{
+		return "/main";
+	}
+	
 }

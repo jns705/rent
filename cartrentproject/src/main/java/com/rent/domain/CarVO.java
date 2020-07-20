@@ -9,6 +9,8 @@ import lombok.ToString;
 @ToString
 public class CarVO {
 	private int car_id;
+	private int rent_id;
+	private int price;
 	private int car_number; //??
 	private String manufacturer;
 	private String car_name;
@@ -20,5 +22,6 @@ public class CarVO {
 	private String made_country;
 	private String content;
 	private String car_year;
+	private String situation;
 
 }

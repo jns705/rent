@@ -15,6 +15,11 @@ public class MainController {
 		return "/main";
 	}
 	
+	@RequestMapping("/main.do")
+	public String mainDo() {
+		return "/rent/main.do";
+	}
+	
 	
 	
 }

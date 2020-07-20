@@ -1,5 +1,7 @@
 package com.rent.domain;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,18 +21,11 @@ public class RentListVO {
 	private int reg_date1;
 	private int reg_date2;
 	private int count;
-	private String  l0;
-	private String  l1;
-	private String  l2;
-	private String  l3;
-	private String  l4;
-	private String  f0;
-	private String  f1;
-	private String  f2;
-	private String  f3;
-	private String  f4;
+	private List<String> location;
+	private List<String> fuel;
 	private String  orderBy;
 	private String  limit;
+	private String  temp;
 	
 	private String car_number;
 

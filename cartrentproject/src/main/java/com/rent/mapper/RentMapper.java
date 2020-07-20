@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.rent.domain.BuyVO;
+import com.rent.domain.CarVO;
 import com.rent.domain.RentVO;
 import com.rent.domain.RentListVO;
+import com.rent.domain.RentPriceVO;
 
 @Repository("com.rent.mapper.RentMapper")
 public interface RentMapper {
@@ -51,4 +53,14 @@ public interface RentMapper {
 	//렌트 상담 후 대기인원 증가시킨다.
 	public int rentStandby(RentVO rent) throws Exception;
 	
+	public List<CarVO> carKindList(RentVO temp) throws Exception;
+	
+	//렌트 가격들 등록
+	public int priceInsert(RentPriceVO price) throws Exception;
+	
+	//수정
+	public int priceUpdate(RentPriceVO price) throws Exception;
+	
+	//삭제
+	public int priceDelete(String rentPrice_id) throws Exception;
 }

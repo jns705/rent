@@ -33,33 +33,41 @@
 				<div id="container">
 				<br><br><br>
 				<div class="container">
+				<form action="/admin/optionProc" class="optionForm" method="get">
 				<table class="table table-bordered table-striped naum form-group">
 					<thead>
 						<tr>
 							<th>옵션리스트</th>
 							<th>가격</th>
 							<th>내용</th>
+							<th>수정</th>
 						</tr>
 					</thead>
-					<tbody>
-						<c:forEach items="${option}" var="option">
-							<tr align="center">
-								<td>${option.option_name}</td>
-								<td>${option.option_price}</td>
-								<td>${option.option_content}</td>
-							</tr>
-						</c:forEach>
+					<tbody id="tbody">
 					</tbody>
+						<tr align="center"  style="display: none;"  id="addOption" >
+							<td><input name="option_name"     placeholder="옵션 이름" class="form-control" size="2" value=""></td>
+							<td><input name="option_price"    placeholder="옵션 가격" class="form-control" size="2" value="1"></td>
+							<td><input name="option_content"  placeholder="옵션 내용" class="form-control" size="4" value=""><input class="hidden" name="rent_id" value="${rent_id}"></td>
+							<td>비고</td>
+						</tr>
+							
 				</table>		
+				</form>
+
 				<form action="${path}/admin/rentInsertProc" method="get">
-				<input class="hidden" name="rent_id" value="${id}">
+				<input class="hidden" name="rent_id" value="${rent_id}">
 				<div class="op col-sm-offset-1 col-sm-11" align="center"></div>
+				
 				
 				<div align="center">
 					<button class="btn btn-rg">옵션변경</button>
-					<button type="button" class="btn btn-rg" onclick="addOption();">옵션추가</button>
+					<button type="button" class="btn btn-rg btnChange" onclick="btnSlide('addOption');">옵션추가</button>
 				</div>
 				
+				
+				<div>
+				</div>
 				</form>
 				
 				<br>
@@ -102,10 +110,7 @@
 					<button type="button" class="btn btn-rg" onclick="accidentScreen();">사고추가</button>
 					<button type="button" class="btn btn-rg" onclick="changeBtn();">삭제/수정</button>
 				</div>
-				
-				
 				</div>	
-				
 				<br><br>
 				
 				</div>
@@ -113,8 +118,70 @@
 	</div>
 
 </body>
-<script>
 
+<script>
+var rent_id = $('[name=rent_id]').val();
+showOption();
+function btnSlide(id){
+        if($('#'+id).is(":visible")) {
+            $('#'+id).slideUp();
+ 			$('.btnChange').attr('onclick', '');
+        } else {
+            $('#'+id).slideDown();
+			$('.btnChange').html('추가하기');
+			$('.btnChange').attr('onclick', 'optionForm();');
+         }
+}    
+
+    function showOption(){
+		$.ajax({
+			url 	: '/admin/optionList',
+			type	: 'get',
+			data    :  {'rent_id' : rent_id},
+			success : function(data){
+				var str = "";
+				$.each(data.list, function(key, value){
+					str += '<tr align="center" class="'+key+'">';
+					str += '<td class="n'+key+'">' + value.option_name + '</td>';
+					str += '<td class="p'+key+'">' + value.option_price + '</td>';
+					str += '<td class="c'+key+'">' + value.option_content + '</td>';
+					str += '<td><a onclick="update('+key+','+value.option_id+');">수정하기</a></td></tr>';
+					
+				});
+				$('#tbody').html(str);
+			}, error : {function(data){alert("실패");}}
+		});
+    }
+
+    function update(index,option_id){
+        var name 	= $('.n'+index).html();
+        var price 	= $('.p'+index).html();
+        var content = $('.c'+index).html();
+    	$('.'+index).html(
+			'<td><input name="option_name'   +index+'"    value="'+name+'"  placeholder="옵션 이름" class="form-control" size="2"></td>'+
+			'<td><input name="option_price'  +index+'"   value="' +price+'"   placeholder="옵션 가격" class="form-control" size="2"></td>'+
+			'<td><input name="option_content'+index+'" value="'   +content+'"   placeholder="옵션 내용" class="form-control" size="4"><input class="hidden" name="option_id'+index+'" value="'+option_id+'"></td>'+
+			'<td><a onclick="optionForm();">수정완료</a></td>'
+    	);
+    }
+
+    function optionForm(){
+        if($('[name=option_price]').val() == '')
+			$('[name=option_price]').val('1');
+            
+		$.ajax({
+			url 	: '/admin/optionProc',
+			type	: 'get',
+			data	:  $('.optionForm').serialize(),
+			success :  function(data){
+				showOption();
+				option();
+				$('[name=option_name]').val('');
+				$('[name=option_price]').val('');
+				$('[name=option_content]').val('');
+			}
+		});
+    }
 //등록버튼을 눌렀을 경우 실행한다.
 $('[name=accidentInsertBtn]').click(function() {
 	var accidentData = $('[name=accidentInsertForm]').serialize();
@@ -139,7 +206,7 @@ function accidentScreen(){
 	str = '';
 	str += '<table class="table table-bordered table-striped naum form-group">';
 	str += '<tr align="center">';
-	str += '<input class="hidden" name="rent_id" value="${id}">';
+	str += '<input class="hidden" name="rent_id" value="${rent_id}">';
 	str += '<td><input type="text" name="accident_content" class="col-sm-12"></td>';
 	str += '<td><input type="text" name="accident_price" class="col-sm-12"></td>';
 	str += '<td><input type="date" name="accident_date" class="col-sm-12"></td>';
@@ -242,11 +309,17 @@ function option(){
 	$.ajax({
 		url 	: '/admin/optionList',
 		type	: 'get',
+		data    :  {'rent_id' : rent_id},
 		success : function(data){
 			var str = "";
-			$.each(data, function(key, value){
-				str += '<div class="col-sm-3">' +
-						'<input class="checkbox col-sm-1" type="checkbox" name="'+ value.option_name +'" value="'+ value.option_name +'" />' +
+			/* var dataList = $.extend(true, data.detail, data.list) */
+			$.each(data.detail, function(key, value){
+				str += '<div class="col-sm-3"> <input class="checkbox col-sm-1" ';
+				$.each(data.list, function(key1, value1){
+					if(value.option_name == value1.option_name)
+						str += '  checked  ';
+				});
+				str +=	'type="checkbox" name="'+ value.option_name +'" value="'+ value.option_name +'" />' +
 						'<label class="control-label col-sm-6">'+ value.option_name +'</label>'+
 						'</div>';
 			});

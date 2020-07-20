@@ -28,4 +28,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id = #{id}
 	</select>
 	
+	<!-- 아이디 중복체크 -->
+	<select id="idCheck" parameterType="String" resultType="int">
+		SELECT	count(*)
+		FROM	MEMBER
+		WHERE	ID = #{id}
+	</select>
+	
+	<!-- 아이디로 정보 가져오기 -->
+	<select id="accountDetail" parameterType="String" resultType="com.rent.domain.MemberVO">
+		SELECT	*
+		FROM	MEMBER
+		WHERE	ID = #{id}
+	</select>
 </mapper>

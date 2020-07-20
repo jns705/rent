@@ -10,8 +10,9 @@ import lombok.ToString;
 public class OptionCarVO {
 	
 	private int rent_id;
-	private String option_name;
 	private int option_price;
+	private String option_id;
+	private String option_name;
 	private String option_content;
 
 }

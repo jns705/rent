@@ -27,6 +27,10 @@ public class CarOptionService {
 		return mapper.optionDetail(rent_id);
 	}
 	
+	public List<OptionCarVO> optionDetailAll() throws Exception{
+		return mapper.optionDetailAll();
+	}
+	
 	public List<OptionCarVO> optionList() throws Exception{
 		return mapper.optionList();
 	}

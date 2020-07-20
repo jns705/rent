@@ -100,8 +100,8 @@
 							</div>
 							
 							 <input class="sildeBar"  id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="100" data-slider-step="10" data-slider-value="[10,100]"  onchange="searchForm();" /> 
-							 <input class="hidden" name="price1" id="price1" value="0">
-							 <input class="hidden" name="price2" id="price2" value="0">
+<input class="hidden" name="price1" id="price1" value="0">
+<input class="hidden" name="price2" id="price2" value="0">
 							<div id="divUsedcarStdRentAmtAreaValue" class="area-value">
 								<p class="from100" align="right">전체</p>
 							</div>
@@ -116,8 +116,8 @@
 							</div>
 							
 							<input class="sildeBar"  id="ex3" type="text" class="span3" value="" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="[0,10]"  onchange="searchForm();" />
-							 <input class="hidden" name="milage1" id="milage1" value="0">
-							 <input class="hidden" name="milage2" id="milage2" value="0">
+<input class="hidden" name="milage1" id="milage1" value="0">
+<input class="hidden" name="milage2" id="milage2" value="0">
 							<div id="divUsedcarCurTravelDtcAreaValue" class="area-value">
 								<p class="from100">전체</p>
 							</div>
@@ -145,7 +145,7 @@
 							<li id="전체"	value="all" class="fuel" onclick="ac('fuel'); searchForm();">전체</li>
 						<c:forEach items="${fuel}" var="fuel" varStatus="status">
 							<li id="${fuel.FUEL}" value="2" class="fuel${status.index}" onclick="cc(${status.index},'fuel'); searchForm();">${fuel.FUEL}</li>
-							<input class="hidden" id="a${fuel.FUEL}" name="f${status.index}" value="">
+							<input class="hidden" id="a${fuel.FUEL}" name="f${status.index}">
 						</c:forEach>
 						</ul>
 					</div>
@@ -155,7 +155,7 @@
 							<li id="전체"	value="all" class="location" onclick="ac('location'); searchForm();">전체</li>
 						<c:forEach items="${location}" var="location" varStatus="status">
 							<li id="${location.location}"	value="2" class="location${status.index}"  onclick="cc(${status.index},'location'); searchForm();">${location.location}</li>
-							<input class="hidden" id="a${location.location}" name="l${status.index}" value="">
+							<input class="hidden" id="a${location.location}" name="l${status.index}">
 						</c:forEach>
 						</ul>
 					</div>
@@ -185,7 +185,7 @@
 			</div>
 		</div>
 		<hr>
-		<div id="aa" ></div>
+		<div id="aa"></div>
 		
 	</div>
 </form>
@@ -213,9 +213,9 @@ $('#ex2').on('slide',function(data){
 
 //주행거리
 $('#ex3').on('slide',function(data){
+	$( "#divUsedcarCurTravelDtcAreaValue" ).html('<p class="from100" align="right">'+ data.value[0]+'만Km 이상 ~ '+ data.value[1]+'만Km 이하</p>');
 	$( "#milage1" ).val(data.value[0]*10000);
 	$( "#milage2" ).val(data.value[1]*10000);
-	$( "#divUsedcarCurTravelDtcAreaValue" ).html('<p class="from100" align="right">'+ data.value[0]+'만Km 이상 ~ '+ data.value[1]+'만Km 이하</p>');
 });
 
 //차량등록
