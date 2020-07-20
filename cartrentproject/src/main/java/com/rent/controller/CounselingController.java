@@ -97,8 +97,8 @@ public class CounselingController {
 		
 		RentVO rent = rentService.rentDetail(rent_id);
 		//상담한 차에 상담대기인원수 증가시키기
-		int Standby = rent.getStandby_personnel();
-		rent.setStandby_personnel(Standby+1);
+		int standby = rent.getStandby_personnel();
+		rent.setStandby_personnel(standby+1);
 		rent.setSituation("상담중");
 		rentService.rentStandby(rent);
 		
@@ -130,6 +130,7 @@ public class CounselingController {
 	@RequestMapping("/update")
 	public String counselingUpdate(CounselingVO counseling, HttpServletRequest request) throws Exception {
 		String counseling_id = request.getParameter("counseling_id");
+		String rent_id = request.getParameter("rent_id");
 		couService.counselingUpdate(counseling);
 		
 		String counseling_situation = request.getParameter("counseling_situation");
@@ -137,7 +138,15 @@ public class CounselingController {
 			//예약완료면 rent테이블 렌트완료, car테이블 car_number -1 하기
 			System.out.println("예약완료");
 		}else if(counseling_situation.equals("상담완료")) {
+			RentVO rent = rentService.rentDetail(rent_id);
+			int standby = rent.getStandby_personnel();
+			//standby가 1일경우 상담인원이 0명이 됨 그래서 예약가능으로 바꾸기
+			if(standby == 1 ) rent.setSituation("예약가능");
+			
 			//상담완료면 렌트테이블 상담인원 -1
+			rent.setStandby_personnel(standby-1);
+			
+			rentService.rentStandby(rent);
 			System.out.println("상담완료");
 		}
 		

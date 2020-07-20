@@ -66,6 +66,7 @@ tbody tr:hover {
 			<td>
 				<input type="hidden" name="counseling_situation" id="counseling_situation" value="${detail.counseling_situation}">
 				<input type="hidden" name="counseling_id" value="${detail.counseling_id}">
+				<input type="hidden" name="rent_id" value="${detail.rent_id}">
 				<select id="sit" onchange="situationUpdate(this.value);">
 					<option value="상담 대기중" >상담 대기중</option>
 					<option value="상담완료" >상담완료</option>
