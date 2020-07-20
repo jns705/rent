@@ -167,11 +167,11 @@
 		
 		<form action="${path}/buy/insertProc" method="post">
 		
-        	<input type="text" name="id" value="${sessionScope.id}"> <!-- 아이디 -->
-        	<input type="text" name="car_id" value="${rent.car_id}"> <!-- 차 아이디 -->
-        	<input type="text" name="rent_id" value="${rent.rent_id}"> <!-- 렌트 아이디 -->
-        	<input type="text" name="color" value="${rent.color}"> <!-- 차 색상 -->
-        	<input type="text" name="month" value="${month}"> <!-- 계약기간 -->
+        	<input type="hidden" name="id" value="${sessionScope.id}"> <!-- 아이디 -->
+        	<input type="hidden" name="car_id" value="${rent.car_id}"> <!-- 차 아이디 -->
+        	<input type="hidden" name="rent_id" value="${rent.rent_id}"> <!-- 렌트 아이디 -->
+        	<input type="hidden" name="color" value="${rent.color}"> <!-- 차 색상 -->
+        	<input type="hidden" name="month" value="${month}"> <!-- 계약기간 -->
         	
 			<div class="form-gorup-list js-accordion-group">
 

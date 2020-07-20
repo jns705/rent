@@ -45,7 +45,7 @@ tbody tr:hover {
 			<c:forEach items="${counselingList}" var="couList" >
 			<tr>
 				<td onclick="location.href='${path}/counseling/detail/${couList.counseling_id}'" style="cursor: pointer;">${couList.id}</td>
-				<td>${couList.rent_id}<input type="hidden" name="rent_id" value="${couList.rent_id}"></td>
+				<td onclick="location.href='${path}/rent/rentListDetail/${couList.rent_id}'" style="cursor: pointer;">${couList.rent_id}<input type="hidden" name="rent_id" value="${couList.rent_id}"></td>
 				<td>${couList.month}개월</td>
 				<td>${couList.name}</td>
 				<td>${couList.address}</td>

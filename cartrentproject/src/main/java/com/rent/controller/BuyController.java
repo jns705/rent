@@ -150,4 +150,14 @@ public class BuyController {
 		return "redirect:/rent/rentList";
 	}
 	
+	@RequestMapping("/list")
+	public String buyList(Model model) throws Exception {
+		
+		model.addAttribute("buyList", buyService.buyList());
+		return "/buy/buyList";
+	}
+	
+	
+	
+	
 }

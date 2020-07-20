@@ -218,7 +218,7 @@ public class CounselingController {
 		String id = (String)(session.getAttribute("id"));
 		buy.setId(id);
 		buy.setColor(rentService.rentDetail(request.getParameter("rent_id")).getColor());
-		buy.setCar_id(request.getParameter("rent_id"));
+		buy.setRent_id(request.getParameter("rent_id"));
 		buy.setOption_name("null");
 		buy.setMonth("null");
 		buy.setAddress(request.getParameter("zipCode")+"/"+request.getParameter("address")+"/"+request.getParameter("addressDetail"));

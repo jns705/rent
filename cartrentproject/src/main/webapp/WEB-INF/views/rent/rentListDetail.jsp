@@ -387,7 +387,7 @@ img {
 		<form id="frm" name="frm" action="${path}/counseling/insert/${rent_id}" method="post">
         	<input type="hidden" name="term" id="term" value="1"> <!-- 계약기간 -->
         	<input type="hidden" name="totalPrice" id="totalPrice"> <!-- 총합 비용 -->
-        	<input type="text" name="deposit" id="deposit"> <!-- 보증금 -->
+        	<input type="hidden" name="deposit" id="deposit"> <!-- 보증금 -->
         	<input type="hidden" name="km" id="km" value="1"> <!-- 주행거리 -->
         	<input type="hidden" name="id" value="${sessionScope.id}">
         	

@@ -1,5 +1,7 @@
 package com.rent.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +20,10 @@ public class BuyService {
 		return mapper.rentBuyInsert(buy);
 	}
 	
+	//구매목록
+	public List<BuyVO> buyList() throws Exception { 
+		return mapper.buyList();
+	}
 	
 	
 }

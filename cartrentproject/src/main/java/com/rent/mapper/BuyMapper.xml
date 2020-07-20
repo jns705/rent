@@ -8,9 +8,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 	<!-- 렌트차량 구매 -->
 	<insert id="rentBuyInsert" parameterType="com.rent.domain.BuyVO">
 		insert into buy
-			(buy_id, id, car_id, option_name, color, buy_date, counseling_date, name, address, tel, month)
-		values (#{buy_id}, #{id}, #{car_id}, #{option_name}, #{color}, now(), #{counseling_date},
+			(buy_id, id, rent_id, option_name, color, buy_date, counseling_date, name, address, tel, month)
+		values (#{buy_id}, #{id}, #{rent_id}, #{option_name}, #{color}, now(), #{counseling_date},
 				 #{name}, #{address}, #{tel}, #{month})
 	</insert>
+	
+	<!-- 렌트 구매자 목록 -->
+	<select id="buyList" parameterType="com.rent.domain.BuyVO" resultType="com.rent.domain.BuyVO">
+		select *
+		from buy
+	</select>
+	
 	
 </mapper>

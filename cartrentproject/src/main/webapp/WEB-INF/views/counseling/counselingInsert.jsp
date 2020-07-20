@@ -14,6 +14,7 @@
 //ready 랑 같은거
 </script>
 <body>
+
 <div id="content">
 	<div id="container">
 		<div class="breadcrumbs">
