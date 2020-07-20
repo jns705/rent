@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class CarVO {
 	private int car_id;
-	private String car_number; //??
+	private int car_number; //??
 	private String manufacturer;
 	private String car_name;
 	private int exhaust_volume;

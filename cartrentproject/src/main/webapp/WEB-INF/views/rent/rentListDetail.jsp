@@ -362,7 +362,9 @@
 		
         	<input type="hidden" name="term" id="term" value="1"> <!-- 계약기간 -->
         	<input type="hidden" name="totalPrice" id="totalPrice"> <!-- 총합 비용 -->
-        	<input type="hidden" name="deposit" id="deposit"> <!-- 보증금 -->
+        	<input type="text" name="deposit" id="deposit"> <!-- 보증금 -->
+        	<input type="hidden" name="km" id="km" value="1"> <!-- 주행거리 -->
+        	<input type="hidden" name="id" value="${sessionScope.id}">
         	
 			<div class="form-gorup-list js-accordion-group">
 
@@ -433,7 +435,7 @@
 										<!-- estimate-list__label//end -->
 										<div class="estimate-list__item">
 											<div class="estimate-item__caption clearfix">
-												<p class="estimate-item__caption-text"  id="driving">2만Km 이하/년</p>
+												<p class="estimate-item__caption-text"  id="driving">1만Km 이하/년</p>
 											</div>
 											<!-- estimate-item__caption//end -->
 										</div>
@@ -469,6 +471,7 @@ function monthShow(e) {
 }
 function driving(e) {
 	$('#driving').html(e+"만km 이하/년");
+	document.getElementById('km').value = e;
 	var drPrice = e*22000;
 	//document.getElementById('totalRental').text();
 	if(e == 1) drPrice =0;
@@ -505,7 +508,7 @@ function driving(e) {
 										<div class="estimate-item__caption clearfix">
 											<!-- estimate-item__caption//end -->
 											<div class="col-sm-10">
-												<p class="estimate-item__caption-text" id="prmsDtcClsCd_view">보증금<span id="span_deposit" class="cl-point2 ml10">&nbsp;${String.format('%,d',rent.price*5)}원&nbsp;</span>(렌탈료 1개월분 * 5)<span id="span_deposit_after" ></span></p>
+												<p class="estimate-item__caption-text" id="prmsDtcClsCd_view">보증금<span id="span_deposit" class="cl-point2 ml10">&nbsp;${String.format('%,d',rent.price*5)}&nbsp;</span>원(렌탈료 1개월분 * 5)<span id="span_deposit_after" ></span></p>
 											</div>
 											<div class="col-sm-12">
 												<p class="estimate-item__caption-subtext">※ 보증금 납부 후 차량이 출고되며, 입금(가상)계좌는 계약완료 후 문자 발송됩니다.</p>
@@ -537,7 +540,14 @@ function driving(e) {
 									<button onclick="apply();">상담신청</button>
 								</div>
 								<div class="col-sm-4">
-									<button onclick="location.href='${path}/rent/rentList'" >다이렉트 계약</button>
+								<c:choose>
+									<c:when test="${sessionScope.id !=null && sessionScope.id != ''}">
+										<button formaction="${path}/buy/insert/${rent.rent_id}" onclick="apply();">다이렉트 계약</button>
+									</c:when>
+									<c:otherwise>
+										<button formaction="${path}/rent/rentListDetail/${rent.rent_id}" onclick="alert('로그인 후 사용가능')">다이렉트 계약</button>
+									</c:otherwise>
+								</c:choose>
 								</div>
 								</dd>
 								<dt class="fs-default">(총 차량 소비자가)</dt>
@@ -567,10 +577,7 @@ function numberWithCommas(x) {
 function apply() {
 	document.getElementById('totalPrice').value = $('#totalRental').text(); // 옵션등등 추가 후 비용
 	document.getElementById('deposit').value = $('#span_deposit').text();//보증금(렌트계약기간 * 5)
-}
-
-function contract() {
-	alert("ㄱㅖ약");
+	
 }
 
 </script>

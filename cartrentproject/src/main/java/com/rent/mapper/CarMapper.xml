@@ -71,4 +71,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		SELECT	distinct FUEL
 		FROM	CAR
 	</select>
+	
+	<!-- 차가 팔려서 사용횟수 증가시키기 -->
+	<update id="carNumberAdding" parameterType="com.rent.domain.CarVO">
+		update car
+		set car_number = #{car_number}
+		where car_id = #{car_id}
+	</update>
+	
+	
 </mapper>

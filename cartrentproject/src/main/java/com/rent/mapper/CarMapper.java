@@ -46,6 +46,9 @@ public interface CarMapper {
 	//연료 리스트 조회
 	public List<String> fuel()throws Exception;
 	
+	//차가 팔려서 사용횟수를 증가시킨다.
+	public int carNumberAdding(CarVO car) throws Exception;
+	
 	//차목록(조건검색)
 	//public List<CarVO> carListSelect(String 월대여료, 차명, 연료...) throws Exception;
 }

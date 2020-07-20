@@ -78,7 +78,6 @@ public class CounselingController {
 		
 		RentVO rent = rentService.rentDetail(rent_id);
 		//상담한 차에 상담대기인원수 증가시키기
-		
 		int Standby = rent.getStandby_personnel();
 		rent.setStandby_personnel(Standby+1);
 		rent.setSituation("상담중");
@@ -87,8 +86,72 @@ public class CounselingController {
 		return "redirect:/rent/rentList";
 	}
 	
+	//상담 전체 목록
+	@RequestMapping("/list")
+	public String counselingList(Model model) throws Exception {
+		model.addAttribute("counselingList",couService.counselingList());
+		return "/counseling/counselingList";
+	}
 	
+	//전체목록(조건검색)
+	@RequestMapping("/searchList/{counseling_situation}")
+	public String searchList(@PathVariable String counseling_situation, Model model) throws Exception {
+		model.addAttribute("counselingList", couService.searchList(counseling_situation));
+		return "/counseling/counselingList";
+	}
 	
+	//상담글 상세보기
+	@RequestMapping("/detail/{counseling_id}")
+	public String counselingDetail(@PathVariable String counseling_id, Model model) throws Exception {
+		model.addAttribute("detail", couService.counselingDetail(counseling_id));
+		return "/counseling/counselingDetail";
+	}
+	
+	//상담글 상태 현황 변경(상담완료, 예약완료)
+	@RequestMapping("/update")
+	public String counselingUpdate(CounselingVO counseling, HttpServletRequest request) throws Exception {
+		String counseling_id = request.getParameter("counseling_id");
+		couService.counselingUpdate(counseling);
+		
+		String counseling_situation = request.getParameter("counseling_situation");
+		if(counseling_situation.equals("예약완료")) {
+			//예약완료면 rent테이블 렌트완료, car테이블 car_number -1 하기
+			System.out.println("예약완료");
+		}else if(counseling_situation.equals("상담완료")) {
+			//상담완료면 렌트테이블 상담인원 -1
+			System.out.println("상담완료");
+		}
+		
+		return "redirect:/counseling/detail/"+counseling_id;
+	}
+	
+	//상담글 삭제
+	@RequestMapping("/delete/{counseling_id}")
+	public String counselingDelete(@PathVariable String counseling_id, HttpServletRequest request) throws Exception {
+		
+		String rent_id = request.getParameter("rent_id");
+		RentVO rent = rentService.rentDetail(rent_id);
+		//상담한 차에 상담대기인원수 1빼기
+		int standby = rent.getStandby_personnel();
+		
+		if(standby == 1) {
+			System.out.println("standby==1 : "+standby);
+			rent.setStandby_personnel(standby-1);
+			rent.setSituation("예약가능");
+		}else if(standby == 0) { //혹시 모르니 만들어둠
+			System.out.println("standby==0 : "+standby);
+			rent.setStandby_personnel(0);
+			rent.setSituation("예약가능");
+		}else {
+			System.out.println("ELSE: standby : "+standby);
+			rent.setStandby_personnel(standby-1);
+		}
+		
+		rentService.rentStandby(rent);
+		couService.counselingDelete(counseling_id);
+		
+		return "redirect:/counseling/list";
+	}
 	
 	
 }

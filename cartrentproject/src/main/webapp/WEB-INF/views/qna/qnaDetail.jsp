@@ -56,7 +56,16 @@
                 		<div class="comment-group">
 		                	<div>
 		                		<label>이름</label>
-		                		<input type="text" id="writer" name="writer" placeholder="이름을 입력하세요">
+		                		
+		                		<c:choose>
+		                		<c:when test="${sessionScope.id eq 'master'}">
+			 						<input type="text" id="writer" name="writer" value="관리자" placeholder="이름을 입력하세요">
+				 				</c:when>
+				 				<c:otherwise>
+				 					<input type="text" id="writer" name="writer" placeholder="이름을 입력하세요">
+				 				</c:otherwise>
+		                		</c:choose>
+		                		
 		                	</div>
 		                	<br>
 		                    <div class="write_area">

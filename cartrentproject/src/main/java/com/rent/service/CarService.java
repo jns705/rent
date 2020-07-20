@@ -55,4 +55,9 @@ public class CarService {
 	public List<String> fuel()throws Exception{
 		return mapper.fuel();
 	}
+	
+	//차가 팔려서 사용횟수를 증가시킨다.
+	public int carNumberAdding(CarVO car) throws Exception {
+		return mapper.carNumberAdding(car);
+	}
 }
