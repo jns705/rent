@@ -21,4 +21,7 @@ public interface BuyMapper {
 	//예약자 상세조회
 	public BuyVO buyDetail(int buy_id) throws Exception;
 	
+	//id에 따른 구매목록(단기전용)
+	public List<BuyVO> buyListSId(String id) throws Exception;
+		
 }

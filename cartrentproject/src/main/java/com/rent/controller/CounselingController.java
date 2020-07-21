@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.mysql.cj.jdbc.SuspendableXAConnection;
 import com.rent.domain.BuyVO;
 import com.rent.domain.CarVO;
+import com.rent.domain.BuyVO;
 import com.rent.domain.CounselingVO;
 import com.rent.domain.MemberVO;
 import com.rent.domain.OptionCarVO;

@@ -20,6 +20,11 @@ public class BuyService {
 		return mapper.rentBuyInsert(buy);
 	}
 	
+	//고객 아이디로 구매리스트 조회(단기전용)
+	public List<BuyVO> buyListSId(String id) throws Exception{
+		return mapper.buyListSId(id);
+}
+	
 	//구매목록
 	public List<BuyVO> buyList() throws Exception { 
 		return mapper.buyList();

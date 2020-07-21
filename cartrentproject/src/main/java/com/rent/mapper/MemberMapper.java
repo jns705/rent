@@ -13,11 +13,10 @@ public interface MemberMapper {
 	//계정체크
 	public String accountCheck(String id) throws Exception;
 	
-	//회원 상세정보
-	public MemberVO memberDetail(String id) throws Exception;
-	
 	//id중복체크
 	public int idCheck(String id)throws Exception;
 	//id로 정보 가져오기
 	public MemberVO accountDetail(String id) throws Exception;
+	//회원 상세정보
+	public MemberVO memberDetail(String id) throws Exception;
 }
