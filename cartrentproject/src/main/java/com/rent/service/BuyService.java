@@ -25,5 +25,14 @@ public class BuyService {
 		return mapper.buyList();
 	}
 	
+	//예약삭제
+	public int rentBuyDelete(int buy_id) throws Exception {
+		return mapper.rentBuyDelete(buy_id);
+	}
+	
+	//예약자 상세조회
+	public BuyVO buyDetail(int buy_id) throws Exception {
+		return mapper.buyDetail(buy_id);
+	}
 	
 }

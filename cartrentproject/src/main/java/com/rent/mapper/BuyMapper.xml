@@ -19,5 +19,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		from buy
 	</select>
 	
+	<!-- 렌트 구매자 예약 취소 -->
+	<delete id="rentBuyDelete" parameterType="int">
+		delete from buy
+		where buy_id = #{buy_id}
+	</delete>
+	
+	<!-- 예약자 상세조회 -->
+	<select id="buyDetail" parameterType="int" resultType="com.rent.domain.BuyVO">
+		select *
+		from buy
+		where buy_id = #{buy_id}
+	</select>
+	
 	
 </mapper>

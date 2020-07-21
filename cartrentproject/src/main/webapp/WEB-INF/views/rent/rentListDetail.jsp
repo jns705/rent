@@ -391,7 +391,7 @@ img {
         	<input type="hidden" name="km" id="km" value="1"> <!-- 주행거리 -->
         	<input type="hidden" name="id" value="${sessionScope.id}">
         	
-			<div class="form-gorup-list js-accordion-group">
+			<div class="form-gorup-list js-accordion-group" id="abc">
 
 				<article>
 					<!-- 20180223 : s -->
@@ -604,5 +604,15 @@ function apply() {
 }
     
 </script>
+<script>
+//문서 로딩시 스크롤값 얻기  1233도착하면 멈추기
+$(document).scrollTop();
+//실시간(현재) 스크롤값 얻기 (현재 스크롤값이 로깅됨)
+$(window).scroll(function () {
+	var scrollValue = $(document).scrollTop();
+	//alert(scrollValue);
+});
+</script>
+
 </html>
 </layoutTag:layout>

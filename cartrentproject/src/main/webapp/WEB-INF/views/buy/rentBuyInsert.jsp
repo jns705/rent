@@ -22,13 +22,13 @@
 			<div class="clearfix">
 				<span>홈</span>
 				<span>중고렌터카</span>
-				<span class="cl-point2">솔렌터카 상세정보</span>
+				<span class="cl-point2">다이렉트 견적</span>
 			</div>
 			
 		</div>
 
 			<div class="header-group mab0 form-group">
-				<h3 class="col-sm-5">다이렉트 견적조회</h3>
+				<h3 class="col-sm-5">다이렉트 견적</h3>
 				<div class="col-sm-offset-10">
 				<a href="#" class="btn btn-line4 btn-fix1 listBtn" onclick="location.href='${path}/rent/rentList'"   >목록</a>
 				</div>
@@ -177,7 +177,7 @@
 
 				<article>
 					<div class="header-group estimate-type clearfix mab0">
-						<h4 class="fl">렌트 선택</h4>
+						<h4 class="fl">선택한 렌트 정보</h4>
 					</div>
 					<fieldset>
 						<legend class="sr-only">렌트 선택 폼</legend>

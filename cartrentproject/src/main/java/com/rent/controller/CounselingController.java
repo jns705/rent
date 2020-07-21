@@ -130,15 +130,24 @@ public class CounselingController {
 	@RequestMapping("/update")
 	public String counselingUpdate(CounselingVO counseling, HttpServletRequest request) throws Exception {
 		String counseling_id = request.getParameter("counseling_id");
-		String rent_id = request.getParameter("rent_id");
+		String rent_id = request.getParameter("rent_id_"+counseling_id);
+		RentVO rent = rentService.rentDetail(rent_id);
 		couService.counselingUpdate(counseling);
 		
 		String counseling_situation = request.getParameter("counseling_situation");
 		if(counseling_situation.equals("예약완료")) {
 			//예약완료면 rent테이블 렌트완료, car테이블 car_number -1 하기
+			String id = Integer.toString( rent.getCar_id());
+			CarVO car = carService.carDetail(id);
+			int car_count= car.getCar_number();
+			car_count -=1;
+			if(car_count == -1) car_count = 0; //혹시 모르니 만듬
+			car.setCar_number(car_count);
+			
+			carService.carNumberAdding(car);
 			System.out.println("예약완료");
 		}else if(counseling_situation.equals("상담완료")) {
-			RentVO rent = rentService.rentDetail(rent_id);
+			
 			int standby = rent.getStandby_personnel();
 			//standby가 1일경우 상담인원이 0명이 됨 그래서 예약가능으로 바꾸기
 			if(standby == 1 ) rent.setSituation("예약가능");
@@ -157,8 +166,11 @@ public class CounselingController {
 	@RequestMapping("/delete/{counseling_id}")
 	public String counselingDelete(@PathVariable String counseling_id, HttpServletRequest request) throws Exception {
 		
-		String rent_id = request.getParameter("rent_id");
+		String rent_id = request.getParameter("rent_id_"+counseling_id);
 		RentVO rent = rentService.rentDetail(rent_id);
+		
+		System.out.println(rent_id);
+		
 		//상담한 차에 상담대기인원수 1빼기
 		int standby = rent.getStandby_personnel();
 		

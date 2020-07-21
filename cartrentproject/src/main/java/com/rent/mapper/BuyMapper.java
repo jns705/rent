@@ -15,5 +15,10 @@ public interface BuyMapper {
 	//구매목록
 	public List<BuyVO> buyList() throws Exception;
 	
+	//예약삭제
+	public int rentBuyDelete(int buy_id) throws Exception;
+	
+	//예약자 상세조회
+	public BuyVO buyDetail(int buy_id) throws Exception;
 	
 }

@@ -130,17 +130,16 @@ public class BuyController {
 		
 		buy.setOption_name(options);
 		
-		//렌트카를 돈주고 예약 했으니 car테이블에 있는 car_number를 증가시킨다.(사용횟수)
+		//렌트카를 돈주고 예약 했으니 car테이블에 있는 car_number(재고량)를 뺀다
 		CarVO car = carService.carDetail(car_id);
 		int count = car.getCar_number();
 		count -=1;
 		car.setCar_number(count);
 		
 		RentVO rent = rentService.rentDetail(rent_id);
-		//상담한 차에 상담대기인원수 증가시키기
+		//예약했으니 상담대기인원수 0으로 만들기
 		
-		int Standby = rent.getStandby_personnel();
-		rent.setStandby_personnel(Standby+1);
+		rent.setStandby_personnel(0);
 		rent.setSituation("렌트완료");
 		rentService.rentStandby(rent);
 		
@@ -150,6 +149,7 @@ public class BuyController {
 		return "redirect:/rent/rentList";
 	}
 	
+	//예약자 리스트
 	@RequestMapping("/list")
 	public String buyList(Model model) throws Exception {
 		
@@ -157,6 +157,32 @@ public class BuyController {
 		return "/buy/buyList";
 	}
 	
+	//예약자 상세조회
+	@RequestMapping("/detail/{buy_id}")
+	public String buyDetail(@PathVariable int buy_id, Model model) throws Exception {
+		model.addAttribute("detail", buyService.buyDetail(buy_id));
+		return "/buy/buyDetail";
+	}
+	
+	//예약 취소
+	@RequestMapping("/delete/{buy_id}")
+	public String buyDelete(@PathVariable int buy_id, HttpServletRequest request) throws Exception {
+		
+		String rent_id = request.getParameter("rent_id_"+buy_id);
+		buyService.rentBuyDelete(buy_id);
+		
+		//예약을 취소 했으니 car 재고량을 1증가시킨다
+		RentVO rent = rentService.rentDetail(rent_id);
+		CarVO car = carService.carDetail(Integer.toString(rent.getCar_id()));
+		int count = car.getCar_number();
+		car.setCar_number(count+1);
+		carService.carNumberAdding(car);
+		
+		//예약을 취소 했으니 렌트예약가능으로 바꾼다
+		rent.setSituation("예약가능");
+		rentService.rentStandby(rent);
+		return "redirect:/buy/list";
+	}
 	
 	
 	

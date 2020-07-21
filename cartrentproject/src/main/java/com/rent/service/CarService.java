@@ -56,7 +56,7 @@ public class CarService {
 		return mapper.fuel();
 	}
 	
-	//차가 팔려서 사용횟수를 증가시킨다.
+	//차가 팔려서 사용횟수를 빼고 예약취소, 반남할땐 증가시킨다.
 	public int carNumberAdding(CarVO car) throws Exception {
 		return mapper.carNumberAdding(car);
 	}
