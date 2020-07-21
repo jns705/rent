@@ -2,7 +2,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 	<footer>
-	<div class="container-fluid footer col-md-12">
+	<div class="container-fluid footer col-md-12" style="padding: 0px; margin: 0px;">
 		<div class="row">
 			<div class="footer-menu">
 				<ul class="footer-menu">

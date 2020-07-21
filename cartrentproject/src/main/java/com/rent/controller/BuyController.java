@@ -1,6 +1,7 @@
 package com.rent.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -12,12 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rent.domain.BuyVO;
 import com.rent.domain.CarVO;
 import com.rent.domain.CounselingVO;
+import com.rent.domain.MemberVO;
 import com.rent.domain.OptionCarVO;
 import com.rent.domain.RentVO;
+import com.rent.domain.ShortRentVO;
 import com.rent.service.BuyService;
 import com.rent.service.CarOptionService;
 import com.rent.service.CarService;
@@ -25,6 +29,7 @@ import com.rent.service.CounselingService;
 import com.rent.service.MemberService;
 import com.rent.service.RentImageService;
 import com.rent.service.RentService;
+import com.rent.service.ShortRentService;
 
 @Controller
 @RequestMapping("/buy")
@@ -44,6 +49,9 @@ public class BuyController {
 	
 	@Resource(name="com.rent.service.CounselingService")
 	CounselingService couService;
+	
+	@Resource(name="com.rent.service.ShortRentService")
+	ShortRentService shortService;
 	
 	@Resource(name="com.rent.service.MemberService")
 	MemberService memService;
@@ -153,16 +161,48 @@ public class BuyController {
 	
 	
 	@RequestMapping("/short_rentProc")
-	public String short_rentProc(BuyVO buy, Model model, HttpSession session, HttpServletRequest request) throws Exception{
+	public String short_rentProc(@RequestParam String rent_id, ShortRentVO sRent, BuyVO buy, Model model, HttpSession session, HttpServletRequest request) throws Exception{
 		String id = (String)(session.getAttribute("id"));
+		RentVO rent = new RentVO();
+		rent.setRent_id(Integer.parseInt(rent_id));
+		rent.setStandby_personnel(0);
+		rent.setSituation("확인중");
+		
+		
 		buy.setId(id);
-		buy.setColor(rentService.rentDetail(request.getParameter("rent_id")).getColor());
-		buy.setCar_id(request.getParameter("rent_id"));
+		buy.setColor(rentService.rentDetail(rent_id).getColor());
+		buy.setRent_id(rent_id);
 		buy.setOption_name("null");
 		buy.setMonth("00");
 		buy.setAddress(request.getParameter("zipcode")+"/"+request.getParameter("address")+"/"+request.getParameter("addressDetail"));
 		buyService.rentBuyInsert(buy);
-		return "/counseling/short_rent";
+		sRent.setBuy_id(buy.getBuy_id());
+		sRent.setStart_time(request.getParameter("sHour")+":"+request.getParameter("sMinute"));
+		sRent.setEnd_time(request.getParameter("lHour")+":"+request.getParameter("lMinute"));
+		shortService.shortInsert(sRent);
+		rentService.rentStandby(rent);
+		return "redirect:/buy/short_rentList";
+	}
+	
+	@RequestMapping("/short_rentList")
+	public String short_rentList(Model model, HttpSession session) throws Exception{
+		String id = (String)(session.getAttribute("id"));
+		if(id != null) {
+			List<BuyVO> Buy = buyService.buyListSId(id);
+			List<CarVO> Car = new ArrayList<CarVO>();
+			List<ShortRentVO> SRent = new ArrayList<ShortRentVO>();
+			List<String> situation = new ArrayList<String>();
+			for(BuyVO buy : Buy ) {
+				Car.add(carService.carDetail(Integer.toString(rentService.rentDetail(buy.getRent_id()).getCar_id())));
+				SRent.add(shortService.shortDetail(buy.getBuy_id()));
+				situation.add(rentService.rentDetail(buy.getRent_id()).getSituation());
+			}
+		model.addAttribute("Buy", Buy);
+		model.addAttribute("Car", Car);
+		model.addAttribute("SRent", SRent);
+		model.addAttribute("situation", situation);
+		}
+		return "/buy/short_rentList";
 	}
 	
 }

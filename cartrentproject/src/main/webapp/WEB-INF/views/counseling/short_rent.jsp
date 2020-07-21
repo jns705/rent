@@ -6,6 +6,8 @@
 <layoutTag:layout>
 <!DOCTYPE html>
 <head>
+<style>
+</style>
 <jsp:useBean id="toDay" class="java.util.Date" />
 <fmt:formatDate value='${toDay}' pattern='HH' var="nowHour"/>
 <fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' var="nowDate"/>
@@ -17,6 +19,20 @@
 </head>
 <style>
 #car-type6, #car-type1, #car-type2, #car-type3, #car-type4, #car-type5 {display: none;}
+html,body {
+
+	margin: 0;
+
+	padding: 0;
+
+}
+footer{
+	padding: 0px; margin: 0px;
+}
+
+
+
+
 </style>
 
 
@@ -34,12 +50,14 @@ function todayCheck(){
 		 var str1  = '';
 		 //현재시간+1부터 시작
 	     for(i = nowHour+1; i < 22; i++ ){
+		     if(i < 10) i = "0"+i;
 		     str1 += '<option value="'+ i +'">'+ i +'시</option>';
 	     }
 	}else{
 		var str1  = '';
 		//아닐 시 6 ~ 23시 까지
 	     for(i = 6; i < 23; i++ ){
+		     if(i < 10) i = "0"+i;
 	    	 str1 += '<option value="'+ i +'">'+ i +'시</option>';
     	 }
 	}
@@ -53,6 +71,7 @@ function changeHour(){
 	   	var hour = Number($('#sHour').val())+1;
 	   	var str  = '';
 	   	for(i = hour; i < 23; i++ ){
+		     if(i < 10) i = "0"+i;
 	       str += '<option value="'+ i +'">'+ i +'시</option>';
      	}
 	//아닐 시 06~23시로 바꾼다
@@ -60,6 +79,7 @@ function changeHour(){
 		var str  = '';
 		//아닐 시 6 ~ 23시 까지
 	     for(i = 6; i < 23; i++ ){
+		     if(i < 10) i = "0"+i;
 	    	 str += '<option value="'+ i +'">'+ i +'시</option>';
     	 }
 	}
@@ -150,6 +170,7 @@ if(hour > 23){
 	}
 //각자 값을 넣는다.
 $('#ddd').html(dateDiff); $('#mmm').html(minute); $('#hhh').html(hour);
+$('[name=rental_time]').val(dateDiff+'_'+hour+'_'+minute);
 if(isNaN(dateDiff)){ $('#ddd').html('0');} 
 
 }
@@ -165,7 +186,6 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                 <span>단기렌터카 예약/확인</span>
             </div>
         </div>
-        <!-- breadcrumbs//end -->
         <div class="tab-menu v1">
             <ul class="unlink tTab" id="reservMenu">
                 <li class="col-3 selected">
@@ -175,14 +195,14 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                     <a href="/rent/rentcar/short_rent_reservation_new.do">내륙예약</a>
                 </li>
                 <li class="col-3">
-		            	<a href="/rent/rentcar/short_rent_reservation_confirm.do">예약확인</a>
+		            	<a href="/buy/short_rentList">예약확인</a>
                 </li>
             </ul>
         </div>
         <!-- tab-menu//end -->
         <div class="tab-reservation-step">
             <ul class="clearfix">
-                <li class="fl col-3 ing">
+                <li class="fl col-3 complete">
                     <span>
                         <strong>1</strong>
                         <span>예약/약관동의</span>
@@ -203,7 +223,6 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
             </ul>
         </div>
         <!-- tab-reservation-step//end -->
-        <form action="/counseling/short_rentProc" id="reservForm" method="get">
                 <article>                
                 	<div class="header-group">
                         <h3>기간/지점 선택 <p><span class="cl-point1">기간·지점·차량</span>은 순서와 관계없이 <span class="cl-point1">선택 예약이 가능</span>합니다.</p></h3><!-- 20180402 -->
@@ -214,12 +233,12 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                             
                                 <div class="date-time-area clearfix">
 										<span id="sDateSpan" class="fl" >
-                                            <input type="text" id="startDate" value="${sD}" onchange="changeDate(); changeHour(); selectCar(); todayCheck();"/>
+                                            <input type="text" id="startDate" name="start_date" value="${sD}" onchange="changeDate(); changeHour(); selectCar(); todayCheck();"/>
                                         </span>
                                   			<span class="select-box fl">
 												<select name="sHour" id="sHour"  onchange="changeDate(); changeHour();  selectCar();">
 												<c:forEach begin="06" end="22" varStatus="status">
-													<option <c:if test="${sH == status.index}">selected</c:if> value="${status.index}">${status.index} 시</option>
+													<option <c:if test="${sH == status.index}">selected</c:if> value="${String.format('%02d', status.index)}">${String.format('%02d', status.index)} 시</option>
 												</c:forEach>
 												</select>
 											</span>
@@ -232,24 +251,23 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                                 </div>
                                 <div class="store-area clearfix">
                                         <span class="select-box fl">
-												<select name="" id="location" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
+												<select name="start_location" id="location" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
 													<c:forEach items="${location}" var="location" >
 														<option <c:if test="${sL == location.location}">selected</c:if> >${location.location}</option>
 													</c:forEach>
 												</select>
 											</span>
-                                    <a href="javascript:void(0);"  class="btn btn-default btn-fix1 btn-modal fr" onclick="viewBranch('000012');">지도보기</a>
                                 </div>
                             </div>
                             <div class="col fl">
                                 <div class="date-time-area clearfix">
 										<span id="sDateSpan" class="fl" >
-                                            <input type="text" id="endDate" value="${eD}" onchange="changeDate(); changeHour(); selectCar();"/>
+                                            <input type="text" name="end_date" id="endDate" value="${eD}" onchange="changeDate(); changeHour(); selectCar();"/>
                                         </span>
                            				   <span  class="select-box fl">
 												<select name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate(); selectCar();">
 												<c:forEach begin="06" end="22" varStatus="status">
-													<option <c:if test="${lH == status.index}">selected</c:if>   value="${status.index}">${status.index} 시</option>
+													<option <c:if test="${lH == status.index}">selected</c:if>   value="${String.format('%02d', status.index)}">${String.format('%02d', status.index)} 시</option>
 												</c:forEach>
 												</select>
 											</span>
@@ -262,13 +280,12 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                                 </div>
                                 <div class="store-area clearfix">
                                        <span class="select-box fl">
-												<select name="" id="" class="option01 option02 timeChange fast-reserve-select" onchange="selectCar();">
+												<select name="end_location" id="end_location" class="option01 option02 timeChange fast-reserve-select" onchange="selectCar();">
 													<c:forEach items="${location}" var="location">
 														<option <c:if test="${lL == location.location}">selected</c:if>  >${location.location}</option>
 													</c:forEach>
 												</select>
 											</span>
-                                    <a href="javascript:void(0);"  class="btn btn-default btn-fix1 btn-modal fr" onclick="viewBranch('000012');">지도보기</a>
                                 </div>
                             </div>
                             <div class="col fr">
@@ -300,7 +317,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
    }
 
    //차량 가격
-   function carPrice(rent_id, price, index){
+   function carPrice(car_name, rent_id, price, index){
 	   if(rent_id != null) $('#rent_id').val(rent_id);
 	   //차가격이 없을 시 컨트롤러에서 가져온다
        if(price == null) price = $('#realPrice').html();
@@ -314,10 +331,27 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
        $('#realPrice').html(price);
        //계산한 값을 보여준다 세자리 이하 내림
        $('#rentPayment').html(numberFormat(Math.ceil(time/1000)*1000));
+       $('#rateAmt').html(numberFormat(Math.ceil(time/1000)*1000));
        //모든 글씨의 선택CSS를 제거한다
        $('[name=carI]').removeClass('cl-point1 wg-bold');
        //해당 글씨에 CSS(class값)를 넣는다.
        $('.'+index).addClass('cl-point1 wg-bold');
+       //퀵하단 메뉴에 값을 넣는다
+       var email = "";
+       if($('#email1').val() != "") email = "@"+ $('#email1').val();
+       
+	   if($('#startDate').val() != '대여일 선택')
+       $('#s_date_end').html($('#startDate').val()+" "+ $('[name=sHour]').val() + "시 " + $('[name=sMinute]').val() + "분");
+	   if($('#endDate').val() != '반납일 선택')
+       $('#e_date_end').html($('#endDate').val()+" "+ $('[name=lHour]').val() + "시 " + $('[name=lMinute]').val() + "분");
+	   $('#sel2_che').html($('#location').val());
+	   $('#sel2_che2').html($('[name=end_location]').val());
+	   $('#modelNm').html(car_name);
+	   $('#reservNm').html($('[name=name]').val());
+	   $('#reservHp').html($('[name=tel]').val());
+	   $('#reservBirth').html($('#birth').val());
+	   $('#reservEmail').html($('#emailId').val()+email);
+	   
    }
    //다시 리로딩
    selectCar();
@@ -348,7 +382,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 				$.each(data.a0, function(key, value){
 					str += '<li><a href="javascript:void(0);"';
 					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice('+ value.rent_id + ','+ value.price + ', \'a' + key +'\');" name="carI" class="a'+key+'">';					
+					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ', \'a' + key +'\');" name="carI" class="a'+key+'">';					
 					str += value.car_name+'</a></li>';
 				});
 				str += '</ul></div>';
@@ -357,7 +391,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 				$.each(data.a1, function(key, value){
 					str += '<li><a href="javascript:void(0);"';
 					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice('+ value.rent_id + ','+ value.price + ', \'b' + key +'\')" name="carI"  class="b'+key+'">';					
+					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ', \'b' + key +'\')" name="carI"  class="b'+key+'">';					
 					str += value.car_name+'</a></li>';
 				});
 				str += '</ul></div>';
@@ -366,7 +400,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 				$.each(data.a2, function(key, value){
 					str += '<li><a href="javascript:void(0);"';
 					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice('+ value.rent_id + ','+ value.price + ', \'c' + key +'\')" name="carI"  class="c'+key+'">';					
+					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ', \'c' + key +'\')" name="carI"  class="c'+key+'">';					
 					str += value.car_name+'</a></li>';
 				});
 				str += '</ul></div>';
@@ -375,7 +409,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 				$.each(data.a3, function(key, value){
 					str += '<li><a href="javascript:void(0);"';
 					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice('+ value.rent_id + ','+ value.price + ',  \'d' + key +'\')" name="carI"  class="d'+key+'">';					
+					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ',  \'d' + key +'\')" name="carI"  class="d'+key+'">';					
 					str += value.car_name+'</a></li>';
 				});
 				str += '</ul></div>';
@@ -384,7 +418,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 				$.each(data.a4, function(key, value){
 					str += '<li><a href="javascript:void(0);"';
 					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice('+ value.rent_id + ','+ value.price + ', \'e' + key +'\')" name="carI"  class="e'+key+'">';					
+					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ', \'e' + key +'\')" name="carI"  class="e'+key+'">';					
 					str += value.car_name+'</a></li>';
 				});
 				str += '</ul></div>';
@@ -393,7 +427,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 				$.each(data.a5, function(key, value){
 					str += '<li><a href="javascript:void(0);"';
 					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice('+ value.rent_id + ','+ value.price + ',  \'f' + key +'\')" name="carI"  class="f'+key+'">';					
+					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ',  \'f' + key +'\')" name="carI"  class="f'+key+'">';					
 					str += value.car_name+'</a></li>';
 				});
 				str += '</ul></div>';
@@ -402,13 +436,14 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 				$.each(data.a6, function(key, value){
 					str += '<li><a href="javascript:void(0);"';
 					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice('+ value.rent_id + ','+ value.price + ',  \'g' + key +'\')" name="carI"  class="g'+key+'">';					
+					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ',  \'g' + key +'\')" name="carI"  class="g'+key+'">';					
 					str += value.car_name+'</a></li>';
 				});
 				str += '</ul></div>';
 				
 		
 				$('#selectCar').html(str);
+				
 				carPrice();
 			}
 		});
@@ -421,6 +456,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
             <article>
                      <div class="header-group">
                      	<input class="hidden" id="rent_id" name="rent_id" value="">
+                     	<input class="hidden" name=rental_time value="">
                      	<input class="hidden" id="kindCar" value="${carKind}">
                      	<input class="hidden" id="nowHour" value="${nowHour}">
                      	<input class="hidden" id="nowDate" value="${nowDate}">
@@ -434,19 +470,19 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                         <div class=" clearfix">
                             <div class="fl col-3">
                             <span class="essential" id="alert-name">
-                                <label><input type="text" placeholder="이름 입력" name="name" class="onlyKorEng" maxlength="20" value="${detail.id}"/></label>
+                                <label><input oninput="carPrice();" type="text" placeholder="이름 입력" name="name" class="onlyKorEng" maxlength="20" value="${detail.name}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-name"></span>
                             </div>
                             <div class="fl col-3">
                             <span class="essential" id="alert-birth">
-                                <label><input type="text" maxlength="8" placeholder="생년월일(20170101) 입력" class="readonly onlyNumber" name="birthday" value="${detail.date_of_birth}"/></label>
+                                <label><input oninput="carPrice();" id="birth" type="text" maxlength="8" placeholder="생년월일(20170101) 입력" class="readonly onlyNumber" name="birthday" value="${detail.date_of_birth}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-birth"></span>
                             </div>
                             <div class="fl col-3">
                             <span class="essential" id="alert-mobile">
-                                <label><input type="text" placeholder="휴대폰번호(-없이 입력) 입력" class="onlyNumber" name="tel"  value="${tel[0]}${tel[1]}${tel[2]}"/></label>
+                                <label><input oninput="carPrice();" type="text" placeholder="휴대폰번호(-없이 입력) 입력" class="onlyNumber" name="tel"  value="${tel[0]}${tel[1]}${tel[2]}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-mobile"></span>
                             </div>
@@ -463,14 +499,14 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                         <div class=" clearfix">
                         	<div class="email-input  col-1 maa0" id="alert-email"><!-- 20170705 : 경고 알럿 노출 될 경우 msg-alert 추가 부탁 드립니다. -->
                                 <span class="col-3">
-                                    <label><input type="text" placeholder="이메일 입력" class="checkEmail" name="emailId" id="emailId" value=""  maxlength="30"/></label>
+                                    <label><input oninput="carPrice();" type="text" placeholder="이메일 입력" class="checkEmail" name="emailId" id="emailId" value=""  maxlength="30"/></label>
                                 </span>
                                 <span class="hyphen col-3">
                                     <span class="text">@</span>
-                                    <input type="text" placeholder="직접 입력" class="checkEmail" name="domain" id="email1" value=""  maxlength="30" />
+                                    <input oninput="carPrice();" type="text" placeholder="직접 입력" class="checkEmail" name="domain" id="email1" value=""  maxlength="30" />
                                 </span>
                                 <span class="select-box col-3">
-                                    <select name="" id="email2" class="option01" onchange="emailInput();">
+                                    <select name="" id="email2" class="option01" onchange="emailInput(); carPrice();">
                                         <option value="">직접 입력</option>
 	                                    	<option value="chol.com">chol.com</option>	
 	                                    	<option value="dreamwiz.com">dreamwiz.com</option>	
@@ -504,13 +540,13 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                                 <div class="address-input col-1">
                                     <span class="">
                                         <span class="">
-                                            <label><input type="number" class="readonly" readonly="readonly" placeholder="우편번호 검색"  placeholder="우편번호" name="zipcode" id="zipcode" value="${address[0]}" /></label>
+                                            <label><input oninput="carPrice();"  type="number" class="readonly" readonly="readonly" placeholder="우편번호 검색"  placeholder="우편번호" name="zipcode" id="zipcode" value="${address[0]}" /></label>
                                         </span>
                                         <span class=" essential">
-                                            <label><input type="text" class="readonly" readonly="readonly" placeholder="주소 입력" name="address" id="address" value="${address[1]}" /></label>
+                                            <label><input oninput="carPrice();"  type="text" class="readonly" readonly="readonly" placeholder="주소 입력" name="address" id="address" value="${address[1]}" /></label>
                                         </span>
                                         <span class="">
-                                            <label><input type="text" placeholder="나머지 주소 입력"  name="addressDetail" id="addressDetail" maxlength="30" value="${address[2]}" onkeyup="checkingDtlAddr()" /></label>
+                                            <label><input oninput="carPrice();"  type="text" placeholder="나머지 주소 입력"  name="addressDetail" id="addressDetail" maxlength="30" value="${address[2]}" onkeyup="checkingDtlAddr()" /></label>
                                         </span>
                                         <a href="#none" class="btn btn-default btn-fix2 fr" onclick="daumZipCode();" id="addrSearchBtn">우편번호 검색</a>
                                     </span>
@@ -894,25 +930,6 @@ function btnSlide(id){
 									제36조 (차량손해면책제도)
 									1. 임차인은 회사에 소정의 수수료를 지불하고 대여계약 시 전면 ”차량손해면책”항의 ”가입”란에 서명함으로써 제21조 제2항의 차량손해배상책임으로부터 면책된다. 단, 임차인 최대 부담금 범위 내에서는 임차인이 이를 부담하여야 하고, 제2항에 해당하는 경우에는 차량손해면책제도가 적용되지 않는다. 차량손해면책은 “일반자차면책”, “완전자차면책”으로 구분되며, 임차인의 최대부담금의 한도는 다음과 같다.
 									
-									<table class="threesix">
-									<colgroup>
-										<col width="20%">
-										<col width="15%">
-										<col width="15%">
-										<col width="30%">
-										<col width="20%">
-									</colgroup>
-									<tr>
-									<td>종류</td>
-									<td>일반자차면책</td>
-									<td>완전자차면책</td>
-									</tr>
-									<tr>
-									<td>임차인 최대 부담금<br>(사고건당)</td>
-									<td>500,000원</td>
-									<td>없음</td>
-									</tr>								
-									</table>
 									※ 수입차량의 경우 완전자차면책 가입 불가
 									
 									2. 임차인이 제18조에 명시된 금지행위를 하였을 경우에는 차량손해면책제도가 적용되지 않는다.
@@ -1112,13 +1129,6 @@ function btnSlide(id){
                     <!-- article-content//end -->
                 </article>
                 
-            <link rel="stylesheet" href="/resources/css2/new_terms.css?v=3"/>
-            
-            <style>
-            #reservForm{display: block!important;} /* 200602추가 */
-            </style>
-           
-
 <div id="modal-policy-sp" class="modal-pop modal-large">
     <div class="modal-box">
         <div class="modal-header">
@@ -1192,16 +1202,8 @@ function btnSlide(id){
     </div>
 </div>
 <!-- modal-pop//end -->
-
- 
-
- 
- 
-                
-<!-- 이용약관 (2018-03-12) end -->
-    
-            <article>
-                <div class="ticker-info">
+            <article id="tinfo" >
+                <div class="ticker-info tickerHead" >
                     <div class="ticker-body">
                         <div class="clearfix">
                             <div class="fl">
@@ -1209,17 +1211,12 @@ function btnSlide(id){
                                     <div class="header-group mab0">
                                         <h4>대여현황</h4>
                                     </div>
-                                    <dl class="dl-horizontal v1">
-                                        <dt>대여일시</dt>
-                                        <dd id="s_date_end"></dd>
-                                        <dt>반납일시</dt>
-                                        <dd id="e_date_end"></dd>
-                                        <dt>대여지점</dt>
-                                        <dd id="sel2_che">제주지점</dd>
-                                        <dt>반납지점</dt>
-                                        <dd id="sel2_che2">제주지점</dd>
-                                        <dt>대여차량</dt>
-                                        <dd id="modelNm"></dd>
+                                   	<dl class="dl-horizontal v1">
+                                        <dt>대여일시<span id="s_date_end" ></span></dt>
+                                        <dt>반납일시<span id="e_date_end"></span></dt>
+                                        <dt>대여지점<span id="sel2_che" ></span></dt>
+                                        <dt>반납지점<span id="sel2_che2"></span></dt>
+                                        <dt>대여차량<span id="modelNm"></span></dt>
                                     </dl>
                                 </div>
                                 <!-- state//end -->
@@ -1234,14 +1231,10 @@ function btnSlide(id){
                                     
                                     
                                     
-                                    	<dt>이름</dt>
-                                        <dd id="reservNm"></dd>
-                                        <dt>휴대폰</dt>
-                                        <dd id="reservHp"></dd>
-                                        <dt>생년월일</dt>
-                                        <dd id="reservBirth"></dd>
-                                        <dt>이메일</dt>
-                                        <dd id="reservEmail" style="word-break: break-all;"></dd>
+                                    	<dt>이름<span id="reservNm"></span></dt>
+                                        <dt>휴대폰<span id="reservHp"></span></dt>
+                                        <dt>생년월일<span id="reservBirth"></span></dt>
+                                        <dt>이메일<span id="reservEmail"></span></dt>
                                     
                                     
                                         
@@ -1256,25 +1249,10 @@ function btnSlide(id){
                                         <h4>예약금액</h4>
                                     </div>
                                     <dl class="dl-horizontal v1">
-                                        <dt>표준요금</dt>
-                                        <dd><strong class="won cl-point2" id="rateAmt">0</strong>원</dd>
-                                        <dt>편도수수료</dt>
-                                        <dd><strong class="won cl-point2" id="oneWay">0</strong>원</dd>
-                                        <dt class="detail">차량손해면책제도</dt>
-                                        <dd class="detail">
-                                            <ul>
-                                                <li id="ldwNm">└  선택안함</li>
-                                            </ul>
-                                            <span class="conclusion"><strong class="won cl-point2" id="iRateAmt">0</strong>원</span>
-                                        </dd>
-                                        <dt class="detail">총 할인금액</dt>
-                                        <dd class="detail">
-                                            <!-- <ul id="discountList">
-                                            </ul> -->
-                                            <span class="conclusion"><strong class="won cl-point2" id="discountAmt">-0</strong>원</span>
-                                        </dd>
-                                        <dt>이벤트추가할인</dt>
-                                        <dd><strong class="won cl-point2" id="eventAmt">-0</strong>원</dd>
+                                        <dt>표준요금<span id="reservEmail"><strong class="won cl-point2" id="rateAmt">0</strong>원</span></dt>
+                                        <dt>편도수수료<span id="reservEmail"><strong class="won cl-point2" id="oneWay">0</strong>원</span></dt>
+                                        <dt class="detail">총 할인금액<span id="reservEmail"><span class="conclusion"><strong class="won cl-point2" id="discountAmt">-0</strong>원</span></span></dt>
+                                        <dt>이벤트추가할인<span id="reservEmail"><span class="conclusion"><strong class="won cl-point2" id="eventAmt">-0</strong>원</span></span></dt>
                                     </dl>
                                     <p class="p_point">* 차량손해면책제도는 할인 적용 제외</p>
                                 </div>
@@ -1283,18 +1261,18 @@ function btnSlide(id){
                             <!-- col//end -->
                         </div>
                         <!-- clearfix//end -->
+                    	</div>
                     </div>
-                    <!-- ticker-body//end -->
+                <div class="ticker-info">
                     <div class="ticker-head">
-                        <a href="#none" class="ticker-btn"><span>더보기</span></a>
+                        <a href="#none" id="tickerHeadBtn" class="ticker-btn" onclick="tickerHead();" style="text-align: center;"><span id="tH"><br><span class="glyphicon glyphicon-menu-up"></span><br>더보기</span></a>
                         <dl class="dl-horizontal">
-                            <dt>총 결제금액<span id="realPrice" style="display: none;"></span>
-                            </dt>
+                            <dt style="text-align: left; font-size: 20px; border: none;">총 결제금액</dt>
                             <dd class="text-r"><strong id="rentPayment">0</strong>원</dd>
                         </dl>
                         <div class="btn-box">
                             <a href="#none" class="btn btn-line3 btn-fix1" onClick="location.reload(true);">초기화</a>
-                            <div class="btn btn-color2 btn-fix1 disable" onclick="insertForm.submit()">결제하기</div>
+                            <div class="btn btn-color2 btn-fix1 " onclick="insertForm.submit()">결제하기</div>
                         </div>
                     </div>
                     <!-- ticker-head//end -->
@@ -1306,618 +1284,11 @@ function btnSlide(id){
                 <!-- 활성화 전에는 btn-color4 , 활성화 후에는 btn-color1로 셋팅 부탁 드립니다 -->
                 <button type="submit" class="btn btn-color1 btn-large btn-fix2" onclick="nextPage();">다음</button>
             </div>
+          </div>
+        </div>
             <!-- btn-box//end -->
         </form>
-    </div>
     <!-- container//end -->
-</div>
-<div id="sht_rnt_loading" style="display:none;">
-	<img src="/resources/img/loading.gif" border="0" class="car"/>
-</div>
-
-<!-- content//end-->
-
-
-
-<div id="modal-login-global" class="modal-pop modal-large">
-    <div class="modal-box">
-        <div class="modal-header">
-            <a href="#" class="modal-close">레이어 닫기</a>
-            <h3>SK렌터카 로그인(제주 단기)</h3>
-        </div>
-        <article>
-            <div class="input-field field-large">
-            <form id="frm" method="post">
-                <div class="input-row">
-                    <span class="radio">
-                        <input type="radio" id="select-personal" name="userCls" value="0">
-                        <label for="select-personal">개인회원/개인사업자</label>
-                    </span>
-                    <span class="radio">
-                    	<input type="radio" id="select-company" name="userCls" value="1">
-                        <label for="select-company">법인회원</label>
-                    </span>
-                </div>
-                <!-- input-row//end -->
-                <div class="input-row">
-                    <span class="input input-large">
-                        <label><input type="text" placeholder="아이디 입력" id="userId" name="userId" value=""></label>
-                    </span>
-                </div>
-                <!-- input-row//end -->
-                <div class="input-row">
-                    <span class="input input-large">
-                        <label><input type="password" placeholder="비밀번호 입력" id="passwd" name="passwd"></label>
-                    </span>
-                </div>
-                <!-- input-row//end -->
-                <div class="input-row">
-                	<span id="login-span" class="checkbox">
-                        <input type="checkbox" id="id-presonal-remember" name="cookie_yn" >
-                        <label for="id-presonal-remember">아이디 저장</label>
-                    </span>
-                    <div class="input-box fr">
-                        <a href="/member/id_search.do?mode=idSearch" class="btn btn-link">아이디 찾기</a>
-                        <a href="/member/pw_search.do?mode=pwdSearch" class="btn btn-link">비밀번호 찾기</a>
-                        <a href="/member/join_step1.do?mode=memberRegister" class="btn btn-link">회원가입</a>
-                    </div>
-                </div>                
-                <!-- input-row//end -->
-            </form>
-            <!-- 200528 추가 -->
-            <p class="cl-point1 aj_join">
-            	※ (구)AJ렌터카 회원은 SK렌터카 회원가입 후 이용 바랍니다.
-            </p>     
-            </div>
-            <!-- input-field//end -->
-            <div class="login-btn-box btn-box">
-                <a href="javascript:void(0);" class="btn btn-large btn-color2 btn-block" onclick="javascript:shortGoLogin('jeju');">로그인</a>
-            </div>                       
-            <!-- btn-box//end -->
-            <div class="info-btn-box clearfix">
-                <p class="fl">회원으로 예약 시 <br/>제휴 할인 및 다양한 혜택을 받으실 수 있습니다.</p>
-                <a href="javascript:void(0);" class="btn btn-default btn-fix2 fr" id="guestReserve">비회원 예약</a>
-            </div>
-        </article>
-    </div>
-    <!-- modal-box//end -->
-    <div class="promotion-box" style="margin-top: -5px;">
-        <div class="thumbnail">
-        	<a href="https://www.ajrentacar.co.kr/index.do?utm_source=skrentcar_pc">
-            	<img src="https://image.speedmate.com/speedimg/rentcar/real/popup/191127/login_popup.jpg" alt="1월 1일 내륙 단기대여 서비스 통합">
-			</a>
-        </div>
-    </div>
-    <!-- promotion-box//end -->
-</div>
-
-<div id="modal-password-regular" class="modal-pop" style="display: none;">
-    <div class="modal-box">
-        <div class="modal-header">
-            <a href="#" onclick="shortPopupClose()" class="modal-close" >레이어 닫기</a>
-            <h3>비밀번호 변경 안내</h3>
-        </div>
-        <article>
-        	<form id="chFrm" name="chFrm" method="post">
-	        	<input type="hidden" id="userId" name="userId" value=""/>
-	        	<input type="hidden" id="type" name="type" value="WAC"/>
-	        	<input type="hidden" id="smsChangeCheckYN" name="smsChangeCheckYN" value="N"/>
-	        	<input type="hidden" id="seqNo" name="seqNo" value=""/>
-	        	<input type="hidden" id="reqType" name="reqType" value="pwUpdate"/>
-	            <p class="tit-deafult text-c"><strong>주기적인 비밀번호 변경으로 소중한 개인정보를 지켜주세요!</strong>회원님께서 3개월 동안 비밀번호를 변경하지 않으셨습니다.<br />안전한 개인정보 관리를 위해 3개월마다 비밀번호를 변경해 주세요.</p>
-	            <div class="input-field field-large">
-	                <div class="input-row">
-	                    <div class="col-1">
-	                        <span id="oldpwd-span" class="input input-large">
-	                            <label><input type="password" placeholder="현재 비밀번호" id="oldPwd" name="oldPwd"></label>
-	                        </span>
-	                        <span id="oldPwdLayer" class="msg-txt cl-point1 text-c"></span>
-	                    </div>
-	                </div>
-	                <!-- input-row//end -->
-	                <div class="input-row">
-	                    <div class="col-1">
-	                        <span id="pwd-span" class="input input-large">
-	                            <label><input type="password" placeholder="신규 비밀번호 : 영문(대소문자구분), 숫자를 조합하여 10~20자 이내 입력 " id="newPwd" name="newPwd"></label>
-	                        </span>
-	                        <span id="newPwdLayer" class="msg-txt cl-point1 text-c"></span>
-	                    </div>
-	                </div>
-	                <!-- input-row//end -->
-	                <div class="input-row">
-	                    <div class="col-1">
-	                        <span id="pwdcnf-span" class="input input-large">
-	                            <label><input type="password" placeholder="신규 비밀번호 확인" id="confirm_newPwd" name="confirm_newPwd"></label>
-	                        </span>
-	                        <span id="pwdLayer" class="msg-txt cl-point1 text-c"></span>
-	                    </div>
-	                </div>
-	                <!-- input-row//end -->
-	                <div class="input-row">
-	                    <div class="col-1">
-	                        <span class="input-box">
-	                            <span class="input input-large col-2">
-	                                <label><input type="text" id="hpNo" name="hpNo" class="readonly disable" placeholder="" ></label><!--20170605 disabled 추가-->
-	                            </span>
-	                            <span class="input input-large col-2">
-	                                <label><input type="text" placeholder="인증번호 입력" id="smsAuthNo" name="smsAuthNo" onkeypress="return fn_press(event, 'numbers');" onkeydown="fn_press_han(this);"></label>
-	                            </span>
-	                        </span>
-	                        <a href="javascript:sendSmsAuthNo();" class="btn btn-default btn-fix2 btn-large fr" id="btnSendSms1" style="display:block;">휴대폰 인증</a><!--[인증번호 재전송]일경우 .btn-default 대신 .btn-color1 로 교체-->
-	                        <a href="javascript:sendSmsAuthNo();" class="btn btn-color1 btn-fix2 btn-large fr" id="btnSendSms2" style="display:none;">인증번호 재발송</a><!--[인증번호 재전송]일경우 .btn-default 대신 .btn-color1 로 교체-->
-	                    </div>
-	                </div>
-	            </div>
-            </form>
-            <!-- inpur-field//end -->
-            <p class="msg-info v1">다음에 변경하기를 선택하시면 30일 동안 변경 안내 페이지가 나타나지 않습니다.</p>
-            <div class="btn-box text-c">
-                <a href="#none" class="btn btn-line4 btn-large" onclick="javascript:shortDelay();">다음에 변경하기</a>
-                <button class="btn btn-color2 btn-large" onclick="javascript:chgPwd();">비밀번호 변경하기</button>
-            </div>
-            <!-- btn-box//end -->
-        </article>
-    </div>
-</div>
-
-<div id="modal-reward-system" class="modal-pop modal-large">
-    <div class="modal-box">
-        <div class="modal-header">
-            <a href="#" class="modal-close">레이어 닫기</a>
-            <h3>차량손해면책제도</h3>
-        </div>
-        <article>
-            <div class="modal-scroll">
-                <div class="article-content">
-                    <div class="terms-list">
-                        <div class="list-box bg-line1 clearfix">
-                            <p class="list-tit fl">차량손해면책제도란?</p>
-                            <ul class="list-info">
-                                <li>운전자의 과실에 의한 대여차량손해는 임차인의 책임이나, 본 제도에 가입함으로써 보상 받으실 수 있습니다. (단, 면책금은 고객 부담입니다. 면책금 : 고객 부담 최상 한도 금액 )
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- 20170818:start -->
-                        <div class="header-group table-type clearfix mab0">
-                            <h4 class="fl">차량손해 면책 수수료</h4>
-                            <p class="fr">고객부담금 기준</p>
-                        </div>
-                        <!-- 20170818:end -->
-                        
-
-                        <table class="tb-cnt">
-                            <caption>면책금 가격에 대한 표</caption>
-                            <colgroup>
-                                <col width="120">
-                                <col width="*">
-                                <col width="260">
-                            </colgroup>
-                            <thead>
-                            <tr>
-                                <th>구분</th>
-                                <th>국산차량</th>
-                                <th>수입차량</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td rowspan="2">제주</td>
-                                <td>일반 자차 - 50만원</td>
-                                <td rowspan="5">일반 자차 - 50만원</td>
-                            </tr>
-                            <tr>
-                                <td>완전 자차 - 0원</td>
-                            </tr>
-                            </tbody>
-                        </table>                        
-                        <dl class="dl-vertical">
-                            <dt>보험보상</dt>
-                            <dd>전 차량이 자동차종합보험(대인, 대물, 자손)에 가입되어 있습니다.<br>(대인 : 무한대, 자손 : 1인당 1천5백만원까지, 대물 : 1건당 2천만원까지)</dd>
-                        </dl>
-                        <dl class="dl-vertical">
-                            <dt>휴차보상</dt>
-                            <dd>차량손해면책제도 가입 유무와 관계없이 사고로 인하여 차량이 휴차 할 경우에는 차량운영의 차질로 인하여 발생한 수리기간 동안 정상요금의 50%에 해당하는 휴차보상료가 청구되며, 이는 임차인이 배상하여야 합니다. 보험보상과 관련하여 임대차 계약서 약관내용을 숙지하시기 바랍니다.</dd>
-                        </dl>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </div>
-</div>
-<!-- modal-pop//end -->
-
-<!-- 확인해주세요(팝업) begin -->
-
-<div id="modal-terms-check" class="modal-pop modal-large"><!-- 임의로 넣어둔 css 입니다 개발 완료 후 삭제 부탁 드립니다. -->
-    <div class="modal-box">
-        <div class="modal-header">
-            <!-- <a href="#" class="modal-close">레이어 닫기</a> 20180516 -->
-            <h3>꼭 확인해주세요!</h3>
-        </div>
-        <!-- 20180608 : s -->
-        <article>
-            <div class="modal-scroll">
-                <div class="article-content">
-                    <div class="header-group table-type mat0">
-                        <h4>필수 인지사항</h4>
-                        <div class="clearfix">
-                            <h5 class="cl-point1 fl">차량손해면책제도</h5>
-                            <p class="fr">고객 부담금 기준</p>
-                        </div>
-                    </div>
-                    
-                    <table class="tb-cnt">
-                        <caption>개인정보 위탁안내에 대한 표</caption>
-                        <colgroup>
-                            <col width="120px" />
-                            <col width="260px" />
-                            <col width="*" />
-                        </colgroup>                    
-                        <thead>
-                        <tr>
-                            <th scope="col">구분</th>
-                            <th scope="col">국산차량</th>
-                            <th scope="col">수입차량</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td rowspan="2" class="text-c">제주</td>
-                            <td class="text-c">일반 자차 - 50만원</td>
-                            <td rowspan="2" class="text-c">일반 자차 - 50만원</td>
-                        </tr>
-                        <tr>
-                            <td class="text-c">완전 자차 - 0원</td>
-                        </tr>
-                        </tbody>
-                    </table>                    
-                    
-                    <!-- table//end -->
-                    <div class="header-group table-type">
-                        <h5 class="cl-point1">기타</h5>
-                    </div>
-                    <!-- header-group//end -->
-                    <table class="tb-cnt">
-                        <caption>개인정보 위탁안내에 대한 표</caption>
-                        <colgroup>
-                            <col width="120px" />
-                            <col width="*" />
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th>구분</th>
-                            <th>내용</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="text-c">운행자격</td>
-                            <td class="text-l">
-                                <ul class="list-info v1">
-									<li>승용차, 9인승 이하 차량 : 만 21세 이상, 2종 보통면허 이상, 운전경력 1년 이상</li>
-									<li>11인승 이상 차량 : 만 26세 이상, 1종 보통면허 이상, 운전경력 3년 이상</li>
-									<li>수입차 : 만 26세 이상, 운전경력 3년 이상</li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-c">결제관련</td>
-                            <td class="text-l">
-                                <p class="list-info v1">대여요금 결제 시 신용카드 결제를 우선으로 하며, 예약자 본인 명의 신용카드 결제만 가능합니다.</p>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <!-- table//end -->
-                    <div class="header-group table-type brb0">
-                        <h4>결제조건</h4>
-                    </div>
-                    <!-- header-group//end -->
-                    <div class="bg-line1">
-                        <ul class="list-info v1">
-                            <li>신용정보조회는 고객님의 동의 하에 가능하며, 신용정보조회 시 고객님의 금융거래 등에 영향을 미칠 수 있습니다.</li>
-                            <li>차량 예약 후에도 신용정보조회시 불량거래 내역 등이 있을 경우 현장에서 차량대여가 불가능 할 수 있습니다.</li>
-                        </ul>
-                    </div>
-                    <!-- under-tab//end -->
-                    <div class="header-group table-type brb0">
-                        <h4>유의사항</h4>
-                    </div>
-                    <!-- header-group//end -->
-                    <div class="bg-line1">
-                        <ul class="list-info v1">
-                            <li>대여기간이 24시간 미만인 경우 할인혜택이 적용되지 않습니다.</li>
-                            <li>예약 시 20분 이내에 결제가 완료되지 않으면 예약을 다시 진행하셔야 합니다.</li>
-                            <li>예약자 본인 명의 제휴카드로만 할인 가능하며, 차량 예약 및 인수 시 본인 확인을 위해  <br>결제하신 카드와 함께 제휴카드를 반드시 지참해 주시기 바랍니다.</li>
-                            <li>현장에서 대여시간 연장, 차량 업드레이드 등 추가 결제 필요 시 본인 명의의 신용카드로만<br>결제가 가능합니다.</li>
-                            <li>대여 당일 차량인수 시 운전면허증 지참은 필수입니다.(도로교통법상 유효한 운전면허소지자)</li>
-                            <li>외국인일 경우 국제운전면허증(B등급 이상) 소지자에 한해 9인승이하 차량만 대여 가능합니다.</li> 
-                			<li>제주지점에서는 스마트폰 거치대를 무료로 대여해드립니다. (수량한정)</li>
-                            <li>카시트/유모차 등 유아용품은 제주지점에서만 대여 가능하며 각각 24시간 기준으로 요금이<br>책정됩니다.</li>                     
-                        </ul>
-                    </div>
-                    <!-- bg-line1//end -->
-                </div>
-                <!-- article-content//end -->
-            </div>
-            <!-- modal-scroll//end -->
-            
-            <link rel="stylesheet" href="/resources/css/style2.css">
-            <div class="btn-box text-c guid">
-                <a href="#none" class="btn btn-color4 btn-large btn-fix2">확인</a>
-                <div class="guidbox">
-            		<img src="/resources/img/mark_pc.png" alt="느낌표">
-            		<span>모든 내용을 확인하셔야 결제를 진행 할수 있습니다.</span>
-            		<a class="close" href="#none"><img src="/resources/img/mark_close_pc.png" alt="닫기"></a>
-            	</div>
-            </div>
-        </article>
-        <!-- 20180608 : e -->
-    </div>
-</div>
-<div id="modal-validity-check" class="modal-pop">
-	<div class="modal-box">
-		<div class="modal-header">
-			<a href="#" class="modal-close">레이어 닫기</a>
-			<h3>대여자동차 운전자의 자격 확인</h3><!-- 20180516 -->
-		</div>
-		<article>
-			<div class="article-content">
-				<p>여객자동차운수사업법 제34조 2(자동차 대여사업자의 준수사항) ②항 자동차대여사업자는 대여사업용 자동차를 대여할 때 임대차계약서상의 운전자에 대하여 운전자격을 확인하고, 해당 운전자가 다음 각 호의 어느 하나에 해당하는 경우에는 자동차를 대여하여서는 아니 된다.</p>
-				<div class="bg-line1">
-					<ul class="list-info">
-						<li><span>1.</span>“도로교통법” 제80조 제1항에 따라 지방경찰청장으로부터 운전면허를 받지 아니하거나 운전면허의<br>효력이 정지된 경우</li>
-						<li><span>2.</span>대여하는 자동차가 임대차계약서상의 운전자가 보유한 운전면허의 범위(“도로교통법” 제80조<br>제2항에 따른 운전면허의 범위를 말한다)에 따라 운전할 수 있는 자동차의 종류에 해당하지<br>아니하는 경우</li>
-					</ul>
-				</div>
-				<!-- bg-line1//end -->
-			</div>
-		</article>
-	</div>
-</div>
-<script src="/resources/js/rent/shortRentReserv_renew.js?v=52" type="text/javascript"></script>
-
-<link rel="stylesheet" href="/resources/css2/addevent.css?v=2">
-<link rel="stylesheet" href="/resources/css2/moreadd.css">
-
-
-
-
-
-
-
-
-
-
-<!--  c:if test="$(startsWith(menuId, 'P05') || startsWith(menuId, 'P06'))"-->
-
-<!-- JQuery -->
-<script src="/resources/js/bundle.js?v=1" type="text/javascript"></script>
-<script src="/resources/js/select2.full.min.js" type="text/javascript"></script>
-<script src="/resources/js/secure.js" type="text/javascript"></script>
-
-
-
-	
-	<div class="quick-menu">
-	    <ul>
-	    	<li class="menu1">
-	    	
-            
-            
-            	<a href="/rent/rentcar/short_rent_reservation_new_jeju.do">단기예약</a>
-            
-            
-	       	</li>
-	    	<li class="menu2">
-	            <a href="/rent/rentcar/html/monthly_guide.do">중고차 렌터카</a>
-	        </li>
-	        <li class="menu3">
-	            <a href="/rent/long/direct/sub_main_integration.do?tabId=NEWCAR">다이렉트견적</a>
-	        </li>
-	        <li class="menu4">
-	            <a href="/rent/custcnte/branch/shortBranch_list.do">지점안내</a>
-	        </li>
-	        <li class="menu5">
-	            <a href="/rent/custcnte/garage/skGarage_list.do">정비매장</a>
-	        </li>
-	        <li class="menu6">
-	        
-            
-            
-            	<a href="/rent/custcnte/counsel/long_reqt_form.do">상담신청</a>
-            
-            
-	        </li>
-	        <li class="menu7"><!-- 테슬라퀵메뉴 추가 200603 -->
-	        	<img onclick="javascript:location.href='/rent/long/direct/tesla_event_integration.do';" src="/resources/img/tesla_quick.jpg?v=2" alt="테슬라사전예약" />
-	        </li>
-	    </ul>
-	</div>
-	
-<div class="quick-top">
-    <a href="#top" class="btn-top">TOP</a>
-</div>
-	
-
-
-<footer>
-    <div class="footer-wrapper">
-        <div class="footer-link">
-            <nav id="cscenter-info">
-                <span class="cscenter">SK렌터카 고객센터&nbsp;&nbsp;1599-9111</span>
-                <div class="timetable">
-                    <span>일반상담 : 월~금 09:00~18:00(토요일 및 공휴일 휴무)</span>
-                    <span>사고접수 : 24시간 운영</span>
-                </div>
-            </nav><!--//20170522 수정-->
-            <div class="family-site">
-                <a href="#none" class="is-close">Family Site</a>
-                <ul>
-                    <li><a href="http://www.sknetworks.co.kr" target="_blank">SK networks</a></li>
-                    <li><a href="https://www.speedmate.com" target="_blank">스피드메이트</a></li><!--//20170522 추가-->
-                   
-                    <li><a href="http://www.enclean.com" target="_blank">Enclean</a></li>
-                    <li><a href="http://www.okcashbag.com" target="_blank">OKcashbag</a></li>
-                    <li><a href="http://www.skteleplaza.co.kr" target="_blank">SK Teleplaza</a></li>
-                    <li><a href="http://www.walkerhill.com/" target="_blank">Walkerhill</a></li>
-                    <li><a href="http://www.happybizmembers.com/main.do" target="_blank">해피비즈멤버스</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-info">
-            <h1>SK렌터카</h1>
-            <div class="footer-menu">
-             	<ul>
-                    <li><a href="/rent/intro/html/comp_info.do">회사소개</a></li>
-                    <li><a href="/rent/intro/html/sm_info.do">Sales Partner 모집</a></li><!-- /rent/intro/html/sm_info.do -->
-                    <li><a href="/rent/etc/html/use_terms.do">이용약관</a></li>
-                    <!-- 200318 주석처리<li><a href="/rent/etc/html/membership_cclpg.do">멤버십 이용약관</a></li> -->
-                    <li><a href="/rent/etc/html/privacy_policyinfo.do">개인정보처리방침</a></li>
-                    <li><a href="#modal-email" class="btn-modal">이메일무단수집거부</a></li>
-                    <li><a href="/rent/custcnte/notice/notice_list.do">고객센터</a></li>
-                    <li><a href="/rent/etc/html/site_map.do">사이트맵</a></li>
-                </ul>
-            </div>
-            <div class="site-info">
-                <address>주소 : 서울특별시 구로구 서부샛길 822(구로동)</address>
-                <span>상호명 : SK렌터카(주)</span>
-                <span>대표이사 : 현몽주</span>
-                <span>사업자번호 : 113-81-32864</span>
-                <span>통신판매업신고 : 구로구청 제2006-03389</span> 
-                <span>TEL : 1599-9111</span>
-               <!-- 200706 주석처리 <span style="margin-right:20px;">FAX : 02-2000-0838</span>  -->      
-            </div>
-            <p class="copyright">Copyright ⓒ SK렌터카  All Rights Reserved.</p>
-            <!-- <p class="award"><img src="/resources/img/img-award-2017.png" title="2017 International Business Awards 마케팅부문(교통) 금상 수상"></p> --><!--20170831 추가-->
-            <!-- <p class="award" style="right:65px"><img src="/resources/img/img-award-2018.png" title="2017 과학기술정보통신부장관상 수상"></p>--><!--20180305 추가-->
-            <p class="award" style="right:34px"><img src="/resources/img/img-award-ncsi.png" title="2018년 국가고객만족도 1위"></p><!--20181001 추가-->
-        </div>
-    </div>
-</footer>
-<!--20170522 추가-->
-<div id="modal-email" class="modal-pop">
-    <div class="modal-box">
-        <div class="modal-header">
-            <a href="#" class="modal-close">레이어 닫기</a>
-            <h3>이메일무단수집거부</h3>
-        </div>
-        <article>
-            <div class="email-opposite-msg">
-                SK렌터카는 무단 이메일 주소 수집을 거부합니다.
-            </div>
-            <div class="bg-line1">
-                본 웹사이트에 게재된 이메일 주소가 전자 우편 수집 프로그램이나 그 밖의 기술적 장치를 이용하여<br>
-                무단으로 수집되는 것을 거부하며 이를 위반 시 정보통신망 법에 의해 형사 처벌됨을 유념하시기 바랍니다.<br>
-                <p>게시일 2017년 8월 15일</p>
-            </div>
-        </article>
-    </div>
-    <!-- modal-box//end -->
-</div>
-<!-- modal-pop//end -->
-<div class="dimd" style="display: none;"></div>
-
-
-<!-- 렌터카지점 지도보기 -->
-<div id="modal-office-detail" class="modal-pop modal-large">
-    <div class="modal-box">
-        <div class="modal-header">
-            <a href="#" class="modal-close">레이어 닫기</a>
-            <h3>지도보기</h3>
-        </div>
-        <!-- modal-hedaer//end -->
-        <article>
-            <div class="office-name clearfix text-r">
-                <strong class="fl cl-bold">광주송정지점</strong>
-                <span class="cl-point2"></span>
-                <span class="cl-point1"></span>
-                <span class="cl-deafult"></span>
-            </div>
-            <ul class="list-info v1">
-                <li>
-                    <dl class="dl-horizontal">
-                        <dt>주소</dt>
-                        <dd class="addr-area"></dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl class="dl-horizontal">
-                        <dt>전화</dt>
-                        <dd class="tel-area"></dd>
-                    </dl>
-                </li>
-            </ul><!-- 지도영역 700x230 -->
-            <div id="iframe-map" class="iframe-map">
-            </div>
-            <!-- iframe-map//end -->
-            <p class="msg-info v1">지도보기는 NHN에서 제공하는 네이버 오픈 API 지도 서비스를 통해 제공됩니다.</p>
-            <div class="btn-box text-c popup-btn">
-                
-            </div>
-            <!-- btn-box//end -->
-        </article>
-    </div>
-    <!-- modal-box//end -->
-</div>
-
-
-
-<!-- 렌터카지점 지도보기 -->
-<div id="modal-office-detail-new" class="modal-pop modal-map">
-    <div class="modal-box">
-        <div class="modal-header">
-            <a href="#" class="modal-close">레이어 닫기</a>
-            <h3>지도보기</h3>
-        </div>
-        <!-- modal-hedaer//end -->
-        <article class="map_article">
-            <a href="#none"  class="btn btn-line1 map-fast-btn" >빠른 길찾기</a>
-            <div class="office-name clearfix text-r" style="text-align: left !important;">
-                <strong class="fl cl-bold">광주송정지점</strong>
-                <span class="cl-point2"></span>
-                <span class="cl-point1"></span>
-                <span class="cl-deafult"></span>
-            </div>
-            <ul class="list-info v1">
-                <li>
-                    <dl class="dl-horizontal">
-                        <dt>주소</dt>
-                        <dd class="addr-area"></dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl class="dl-horizontal">
-                        <dt>전화</dt>
-                        <dd class="tel-area"></dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl class="dl-horizontal">
-                        <dt>영업시간 </dt>
-                        <dd class="openHour-area" >월~금:00:00 ~ 23:59 / 토 ~ 일(공휴일) : 00:00 ~ 23:59</dd>
-                    </dl>
-                </li>
-                
-            </ul><!-- 지도영역 700x230 -->
-            <div id="iframe-map-new" style="height: 248px;margin-right: 10px;" class="iframe-map">
-            </div>
-            <!-- iframe-map//end -->
-            <p class="msg-info v1">지도보기는 NHN에서 제공하는 네이버 오픈 API 지도 서비스를 통해 제공됩니다.</p>
-			<table id="mapWay" class="tb-cnt mt10 map-way">
- 
-			  <colgroup>
-			   <col width="25%">
-			   <col width="*">
-			  </colgroup>			
-
-			</table>
-
-        </article>
-    </div>
-    <!-- modal-box//end -->
-</div>
-</form>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 //주소를 가져오기 위한 검색
@@ -1965,7 +1336,22 @@ function daumZipCode(){
 	
 }
 </script>
+
 <script type="text/javascript">
+//스크롤 값을 구함
+$(document).scrollTop();
+
+//1947값 이상일시 class를 바꾼다
+$(window).scroll(function () {
+	var scrollValue = $(document).scrollTop();
+	if(scrollValue > 1947)
+		$('.ticker-info').addClass("off");
+	else
+		$('.ticker-info').removeClass("off");
+});
+
+
+
 //차량 선택 시 CSS, class 값 변경	
 function selectMenu(data){
 	for(i=0; i < 7; i++){
@@ -1975,6 +1361,26 @@ function selectMenu(data){
 	$('#car-type'+data).css("display","block");
 	$('.c'+data).addClass("selected");
 }
+
+//하단 퀵메뉴 CSS
+function tickerHead(){
+	if($('#tH').html() == '<br><span class="glyphicon glyphicon-menu-up"></span><br>더보기'){
+		$('.ticker-info').animate({bottom: '0px'}, 500, 'swing');
+		$('#tH').html('<br><span class="glyphicon glyphicon-menu-down"></span><br>닫기');
+	} else{
+		$('.ticker-info').animate({bottom: '-545px'}, 500, 'swing');
+		$('#tH').html('<br><span class="glyphicon glyphicon-menu-up"></span><br>더보기');
+	}
+}
+
+$(document).click(function(e){
+	if($('#tH').html() == '<br><span class="glyphicon glyphicon-menu-down"></span><br>닫기'){
+		    if( !$('#tinfo').has(e.target).length ){
+				$('.ticker-info').animate({bottom: '-545px'}, 500, 'swing');
+				$('#tH').html('<br><span class="glyphicon glyphicon-menu-up"></span><br>더보기');
+		    }	
+	}
+});
 </script>
 
 </body>

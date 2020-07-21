@@ -150,7 +150,7 @@ public class CounselingController {
 		model.addAttribute("location", rentService.location());
 		return "/counseling/short_rent";
 	}
-
+	
 	@RequestMapping("/short_rentDetail")
 	@ResponseBody
 	public Map<String, Object> short_rentDetail(Model model, RentVO rent) throws Exception{

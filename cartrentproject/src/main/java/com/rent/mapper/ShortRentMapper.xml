@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- LogMapper.java 파일의 주소를 네임스페이스를 기술한다. -->
+<mapper namespace="com.rent.mapper.ShortRentMapper">
+	
+	<!-- 로그 메시지 등록 -->
+	<insert id="shortInsert" parameterType="com.rent.domain.ShortRentVO">
+		insert into shortrent
+				(buy_id, start_date, start_time, start_location, end_date, end_time, end_location, rental_time)
+		values(#{buy_id},#{start_date},#{start_time},#{start_location},#{end_date},#{end_time},#{end_location},#{rental_time})
+	</insert>
+	
+	<select id="shortDetail" parameterType="int" resultType="com.rent.domain.ShortRentVO">
+		SELECT	*
+		FROM	SHORTRENT
+		WHERE	BUY_ID = #{buy_id}
+	</select>
+    
+</mapper>
+

@@ -6,11 +6,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 <mapper namespace= "com.rent.mapper.BuyMapper">
 		
 	<!-- 렌트차량 구매 -->
-	<insert id="rentBuyInsert" parameterType="com.rent.domain.BuyVO">
+	<insert id="rentBuyInsert" parameterType="com.rent.domain.BuyVO" useGeneratedKeys="true" keyProperty="buy_id">
 		insert into buy
-			(buy_id, id, car_id, option_name, color, buy_date, counseling_date, name, address, tel, month)
-		values (#{buy_id}, #{id}, #{car_id}, #{option_name}, #{color}, now(), #{counseling_date},
+			(buy_id, id, rent_id, option_name, color, buy_date, counseling_date, name, address, tel, month)
+		values (#{buy_id}, #{id}, #{rent_id}, #{option_name}, #{color}, now(), #{counseling_date},
 				 #{name}, #{address}, #{tel}, #{month})
 	</insert>
+	
+	<!-- id에 따른 구매목록 -->
+	<select id="buyListSId" parameterType="String" resultType="com.rent.domain.BuyVO">
+		SELECT	*
+		FROM	BUY
+		WHERE	ID = #{id}
+		AND		MONTH = 0
+	</select>
 	
 </mapper>

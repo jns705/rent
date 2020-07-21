@@ -113,26 +113,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="carKindList" resultType="com.rent.domain.CarVO" parameterType="com.rent.domain.CarVO">
 		select c.car_name, r.situation, r.price, r.rent_id
 		from car c, rent r
-		where 	c.car_id = r.car_id
-		and		r.location = #{location}
-		<if test="car_id == 1">
-		and		car_kind = '소형'
-		</if>
-		<if test="car_id == 2">
-		and		car_kind = '중형'
-		</if>
-		<if test="car_id == 3">
-		and		car_kind = '준중형'
-		</if>
-		<if test="car_id == 4">
-		and		car_kind = '대형'
-		</if>
-		<if test="car_id == 5">
-		and		car_kind = 'RV'
-		</if>
-		<if test="car_id == 6">
-		and		car_kind = '친환경차'
-		</if>
+		where 	c.car_id 	= r.car_id
+		and		r.location 	= #{location}
+		<if test="car_id == 1"> and		car_kind = '소형' </if>
+		<if test="car_id == 2"> and		car_kind = '중형' </if>
+		<if test="car_id == 3"> and		car_kind = '준중형' </if>
+		<if test="car_id == 4"> and		car_kind = '대형' </if>
+		<if test="car_id == 5"> and		car_kind = 'RV' </if>
+		<if test="car_id == 6"> and		car_kind = '친환경차' </if>
 	</select>
 	
 	<update id="rentStandby" parameterType="com.rent.domain.RentVO">
