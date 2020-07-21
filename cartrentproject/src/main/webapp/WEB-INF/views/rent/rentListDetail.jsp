@@ -611,6 +611,10 @@ $(document).scrollTop();
 $(window).scroll(function () {
 	var scrollValue = $(document).scrollTop();
 	//alert(scrollValue);
+	if(scrollValue > 1333)
+		$('.ticker-info').addClass("off");
+	else
+		$('.ticker-info').removeClass("off");
 });
 </script>
 
