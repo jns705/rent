@@ -110,7 +110,6 @@ public class BuyController {
 		}
 		model.addAttribute("rentImage" , rentImageService.imageList(Integer.parseInt(rent_id)));
 		model.addAttribute("count"  , onOff);
-		
 		return "/buy/rentBuyInsert";
 	}
 	
