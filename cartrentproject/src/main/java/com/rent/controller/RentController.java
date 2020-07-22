@@ -157,6 +157,7 @@ public class RentController {
 		buyIdList = buyService.buyListMember(rent_id); //id가져옴
 		for(int i=0; i < buyIdList.size(); i++) {
 			String id = buyIdList.get(i).getId();
+			
 			System.out.println("아이디 : "+id);
 			System.out.println("나이 : "+ buyService.memberAge(id));
 			System.out.println("성별 : "+ buyService.memberGender(id));
