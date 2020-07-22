@@ -15,12 +15,12 @@
 	
 	#moreBtn {
 		margin-top: 30px;
-		background-color: #e0e0e0;
+		background-color: #f5f5f5;
 	}
+
 </style>
 <head>
  <link href="http://localhost:8082/static/css/total.css" rel="stylesheet" type="text/css"/>
- <link href="http://localhost:8082/static/css/bootstrap-slider.css" rel="stylesheet" type="text/css"/>
 <%@ include file="slider.jsp" %>
 <%@ include file="skListAction.jsp" %>
 	<meta charset="UTF-8">
@@ -32,17 +32,16 @@
 	<div class="container">
 		<div class="breadcrumbs">
 			<h2 class="tit">장기렌트카 리스트</h2>
-			
 			<div class="clearfix">
 				<span>홈</span>
 				<span class="cl-point2">장기렌트카 리스트</span>
 			</div>
 		</div>	
-		<div class="container">
+		<div class="container" style="padding-left: 0px; width: 1014px;">
 		<div class="tab-menu v1">
 			<ul>
-				<li class="col-4"><a href="#">신차 렌트카</a></li>
-				<li class="col-4 selected"><a href="#">중고차 렌트카</a></li>
+				<li class="col-4 "><a href="/rent/NewRentList">신차 렌트카</a></li>
+				<li class="col-4 selected"><a href="/rent/rentList">중고차 렌트카</a></li>
 			</ul>
 		</div>
 		
@@ -75,8 +74,8 @@
 					</div>
 
 				</div>
-				<div class="btn-wrap fr">
-					<a class="btn btn-color2" id="usedcarSearchButton" onclick="searchForm();">검색</a>
+				<div class="btn-wrap fr col-sm-1">
+					<a class="btn btn-color2" id="usedcarSearchButton" style="margin-top:-63px; margin-left:-15px; width: 200px;"  onclick="searchForm();">검색</a>
 				</div>
 			</div>
 			
@@ -89,8 +88,9 @@
 								<span>1개월</span> <span>48개월</span>
 							</div>
 							<input class="sildeBar" size="100" id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="1" data-slider-max="48" data-slider-step="1" data-slider-value="1" onchange="searchForm();" />
-							<div class="area-value">
-								<input id="divUsedcarCntrPsblTermAreaValue" name="Max_month" type="text" class="range-val duration-val" readonly>개월이상 ~
+							<input id="divUsedcarCntrPsblTermAreaValue" name="Max_month" type="text" class="range-val duration-val hidden" readonly>
+							<div class="area-value" id="area-valueRed">
+								1개월이상 ~
 							</div>
 						</div>
 						<div class="step1">
@@ -172,22 +172,31 @@
 			</div>
 		</article>
 	</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" id="total"></label>	
-			<div align="right" class="col-sm-offset-8 col-sm-2">
-			<select name="orderBy" onchange="searchForm();" class="form-control ">
-				<option value="0">낮은 가격 순</option>
-				<option value="1">높은 가격 순</option>
-				<option value="2">짧은 주행거리 순</option>
-				<option value="3">최근 등록 순</option>
-				<option value="4">인기 순</option>
-			</select>
-			</div>
-		</div>
-		<hr>
+	
+	
+	<article id="artcleCarModlList" >
+				<div class="header-group clearfix">
+						<h3>
+							검색 결과 <span class="result_span" id="total"></span>
+						</h3>
+					<div class="select-col result_kind_new">
+						<span class="select-box"> 
+							<select name="orderBy" onchange="searchForm();" class="form-control ">
+								<option value="0">낮은 가격 순</option>
+								<option value="1">높은 가격 순</option>
+								<option value="2">짧은 주행거리 순</option>
+								<option value="3">최근 등록 순</option>
+								<option value="4">인기 순</option>
+							</select>
+						</span>
+					</div>
+				</div>
+				
+			
 		<div id="aa"></div>
-		
+		</article>
 	</div>
+	<br><br>
 </form>
 		
 </div>
@@ -202,6 +211,7 @@ $("#ex4").slider({});  //차량등록
 //대여기간
 $('#ex1').on('slide',function(data){
 	$( "#divUsedcarCntrPsblTermAreaValue" ).val(data.value);
+	$( "#area-valueRed" ).html(data.value+"개월이상~");
 });
 
 //월렌탈료

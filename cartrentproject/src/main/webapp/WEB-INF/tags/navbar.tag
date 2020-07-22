@@ -69,27 +69,17 @@
 	            <a href="/rent/main.do">중고차 렌터카</a>
 	        </li>
 	        <li class="menu3">
-	            <a href="/rent/long/direct/sub_main_integration.do?tabId=NEWCAR">다이렉트견적</a>
-	        </li>
-	        <li class="menu4">
-	            <a href="/rent/custcnte/branch/shortBranch_list.do">지점안내</a>
-	        </li>
-	        <li class="menu5">
-	            <a href="/rent/custcnte/garage/skGarage_list.do">정비매장</a>
+	            <a href="/rent/NewRentList">다이렉트견적</a>
 	        </li>
 	        <li class="menu6">
-	        
-            
-            
             	<a href="/rent/custcnte/counsel/long_reqt_form.do">상담신청</a>
-            
-            
-	        </li>
-	        <li class="menu7"><!-- 테슬라퀵메뉴 추가 200603 -->
-	        	<img onclick="javascript:location.href='/rent/long/direct/tesla_event_integration.do';" src="/resources/img/tesla_quick.jpg?v=2" alt="테슬라사전예약" />
 	        </li>
 	    </ul>
 	</div>
+	
+<div class="quick-top" style="z-index: 1000">
+    <a href="#top" id="aaaaaa" class="btn-top">TOP</a>
+</div>
     
 <style>
 @charset "UTF-8";

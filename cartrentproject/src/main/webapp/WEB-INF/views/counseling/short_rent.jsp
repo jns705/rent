@@ -258,7 +258,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                             <div class="col fl">
                                 <div class="date-time-area clearfix">
 										<span id="sDateSpan" class="fl" >
-                                            <input type="text" name="end_date" id="endDate" value="<c:if test ="${eD == null}">반납일 선택</c:if><c:if test ="${eD != null}">${sD}</c:if>" onchange="changeDate(); changeHour(); selectCar();"/>
+                                            <input type="text" name="end_date" id="endDate" value="<c:if test ="${eD == null}">반납일 선택</c:if><c:if test ="${eD != null}">${eD}</c:if>" onchange="changeDate(); changeHour(); selectCar();"/>
                                         </span>
                            				   <span  class="select-box fl">
 												<select name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate(); selectCar();">
@@ -277,12 +277,12 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                                 <div class="store-area clearfix">
                                        <span class="select-box fl">
 												<select name="end_location" id="end_location" class="option01 option02 timeChange fast-reserve-select" onchange="selectCar();">
-													<c:if test="${sL eq '제주지점'}"><option>제주지점</option></c:if>
-													<c:if test="${sL != '제주지점'}">
-													<option <c:if test="${sL eq '서울지점'}">selected</c:if>>서울지점</option>
-													<option <c:if test="${sL eq '인천지점'}">selected</c:if>>인천지점</option>
-													<option <c:if test="${sL eq '대구지점'}">selected</c:if>>대구지점</option>
-													<option <c:if test="${sL eq '부산지점'}">selected</c:if>>부산지점</option>
+													<c:if test="${lL eq '제주지점'}"><option>제주지점</option></c:if>
+													<c:if test="${lL != '제주지점'}">
+													<option <c:if test="${lL eq '서울지점'}">selected</c:if>>서울지점</option>
+													<option <c:if test="${lL eq '인천지점'}">selected</c:if>>인천지점</option>
+													<option <c:if test="${lL eq '대구지점'}">selected</c:if>>대구지점</option>
+													<option <c:if test="${lL eq '부산지점'}">selected</c:if>>부산지점</option>
 													</c:if>
 												</select>
 											</span>

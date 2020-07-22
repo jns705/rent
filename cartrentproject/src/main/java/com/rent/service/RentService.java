@@ -58,6 +58,10 @@ public class RentService {
 	public List<RentVO> rentListPro(RentListVO list) throws Exception{
 		return mapper.rentListPro(list);
 	}
+
+	public List<RentVO> newRentListPro(RentListVO list) throws Exception{
+		return mapper.newRentListPro(list);
+	}
 	
 	public int rentListCount(RentListVO list) throws Exception{
 		return mapper.rentListCount(list);
