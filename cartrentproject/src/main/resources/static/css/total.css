@@ -579,29 +579,29 @@ article+article{margin-top:55px}
 .quick-menu ul li:hover a:before{animation:flipInX .5s forwards ease-in;-webkit-animation:flipInX .5s forwards ease-in}
 .quick-menu ul li.menu1{margin-top:0}
 .quick-menu ul li.menu1 a{padding-top:20px;border-top:none}
-.quick-menu ul li.menu1 a:before{width:31px;height:30px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -359px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
-.quick-menu ul li.menu1:hover a:before{width:31px;height:30px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -391px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
+.quick-menu ul li.menu1 a:before{width:31px;height:30px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -359px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
+.quick-menu ul li.menu1:hover a:before{width:31px;height:30px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -391px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
 .quick-menu ul li.menu2 a{padding-top:20px}
-.quick-menu ul li.menu2 a:before{width:30px;height:30px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -423px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
-.quick-menu ul li.menu2:hover a:before{width:30px;height:30px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -455px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
+.quick-menu ul li.menu2 a:before{width:30px;height:30px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -423px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
+.quick-menu ul li.menu2:hover a:before{width:30px;height:30px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -455px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
 .quick-menu ul li.menu3 a{padding-top:20px}
 
 
 
-.quick-menu ul li.menu3 a:before{width:28px;height:30px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -487px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
-.quick-menu ul li.menu3:hover a:before{width:28px;height:30px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -519px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
+.quick-menu ul li.menu3 a:before{width:28px;height:30px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -487px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
+.quick-menu ul li.menu3:hover a:before{width:28px;height:30px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -519px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
 .quick-menu ul li.menu4 a{padding-top:20px}
-.quick-menu ul li.menu4 a:before{width:24px;height:30px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -661px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
-.quick-menu ul li.menu4:hover a:before{width:24px;height:30px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -629px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
-.quick-menu ul li.menu5 a{padding-top:20px}.quick-menu ul li.menu5 a:before{width:32px;height:30px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -327px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
-.quick-menu ul li.menu5:hover a:before{width:32px;height:30px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -295px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
+.quick-menu ul li.menu4 a:before{width:24px;height:30px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -661px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
+.quick-menu ul li.menu4:hover a:before{width:24px;height:30px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -629px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
+.quick-menu ul li.menu5 a{padding-top:20px}.quick-menu ul li.menu5 a:before{width:32px;height:30px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -327px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
+.quick-menu ul li.menu5:hover a:before{width:32px;height:30px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -295px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
 .quick-top{position:fixed;top:93%;right:50%;margin-right:-580px}
 .quick-top.off{top:auto;bottom:235px}
-.quick-top a{display:block;width:50px;height:50px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1239px -312px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
+.quick-top a{display:block;width:50px;height:50px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1239px -312px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
 .quick-chat{position:fixed;right:50%;top:240px;margin-right:-560px;z-index:5000}
-.quick-chat .quick-close{position:absolute;right:6px;top:5px;width:19px;height:19px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -1271px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden} 
+.quick-chat .quick-close{position:absolute;right:6px;top:5px;width:19px;height:19px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -1271px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden} 
 .quick-chat-usedcar{position:fixed;right:50%;top:240px;margin-right:-560px;z-index:5000} 
-.quick-chat-usedcar .quick-close{position:absolute;right:6px;top:5px;width:19px;height:19px;background-image:url(/resources/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -1271px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden} 
+.quick-chat-usedcar .quick-close{position:absolute;right:6px;top:5px;width:19px;height:19px;background-image:url(http://localhost:8082/static/img/spr-common.png);background-repeat:no-repeat;background-position:-1309px -1271px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden} 
 
 
 @-webkit-keyframes play{from{background-position:0}to{background-position:-700px}}
@@ -932,7 +932,7 @@ footer .footer-wrapper .footer-info .site-info span:nth-child(5):after{display: 
 	content:"";
 	width: 32px;
     height: 30px;
-    background-image: url(/resources/img/icon_reqt_red.png);
+    background-image: url(http://localhost:8082/static/img/icon_rept_red.png);
     background-repeat: no-repeat;
     background-position: inherit;
     -webkit-background-size: inherit;
@@ -941,7 +941,7 @@ footer .footer-wrapper .footer-info .site-info span:nth-child(5):after{display: 
 .quick-menu ul li.menu6:hover a:before{
 	width: 32px;
 	height: 30px;
-	background-image:url(/resources/img/spr-common.png);
+	background-image:url(http://localhost:8082/static/img/spr-common.png);
 	background-repeat:no-repeat;
 	background-position:-1309px -295px;
 	-webkit-background-size:1347px 1290px;

@@ -78,25 +78,26 @@ public class RentController {
 	public Map<String, Object> rentListProc(RentListVO list, Model model, HttpServletRequest request)throws Exception{
 		List<String> location 	= new ArrayList<String>();
 		List<String> fuel 		= new ArrayList<String>();
-		for(int i = 0; i < 5; i ++) {
-			if(!request.getParameter("l"+i).equals(""))
-			location.add(request.getParameter("l"+i));
-			list.setLocation(location);
-		}
-		for(int i = 0; i < 5; i ++) {
-			if(!request.getParameter("f"+i).equals(""))
-			fuel.add(request.getParameter("f"+i));
-			list.setFuel(fuel);
-		}
+			for(int i = 0; i < 5; i ++) {
+				if(!request.getParameter("l"+i).equals(""))
+				location.add(request.getParameter("l"+i));
+				list.setLocation(location);
+			}
+			for(int i = 0; i < 5; i ++) {
+				if(!request.getParameter("f"+i).equals(""))
+				fuel.add(request.getParameter("f"+i));
+				list.setFuel(fuel);
+			}
 		
 		//조회한 정보 갯수
 		int listCount = rentService.rentListPro(list).get(0).getRent_id();
+		System.out.println(list);
 		System.out.println(listCount);
 		//보여질 아이템 갯수
 		int showCount = 6;
-		int temp  = listCount/showCount;
+		int temp  = listCount/showCount+1;
 		//총 페이지 수 = 전체 수 / 보여질 갯수
-		int count = listCount/showCount;
+		int count = temp;
 		
 		//더보기 버튼이 처음 눌려지는게 아닐 시 리미트 값을 가져온다
 		if(list.getLimit() != "" ) count = Integer.parseInt(list.getLimit());
@@ -105,7 +106,42 @@ public class RentController {
 		list.setLimit(Integer.toString(Ccount));
 		//정보를 통해 출력할 리스트 값을 가져온다.
 		list.setTemp("list");
-		List<RentVO> rentList = rentService.rentListPro(list);
+		List<RentVO> rentList 	 = rentService.rentListPro(list);
+		
+		
+		//보낼 값들을 map에 넣는다
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rentList", rentList);
+		map.put("count", count);
+		map.put("total", listCount);
+		map.put("showCount", showCount);
+		return map;
+	}
+	
+	//신차 리스트 조건부 출력 ajax
+	@RequestMapping("/newRentListProc")
+	@ResponseBody
+	public Map<String, Object> newRentListProc(RentListVO list, Model model, HttpServletRequest request)throws Exception{
+		
+		//조회한 정보 갯수
+		int listCount = rentService.newRentListPro(list).get(0).getRent_id();
+		System.out.println(list);
+		System.out.println(listCount);
+		//보여질 아이템 갯수
+		int showCount = 6;
+		int temp  = listCount/showCount+1;
+		//총 페이지 수 = 전체 수 / 보여질 갯수
+		int count = temp;
+		
+		//더보기 버튼이 처음 눌려지는게 아닐 시 리미트 값을 가져온다
+		if(list.getLimit() != "" ) count = Integer.parseInt(list.getLimit());
+		//총 페이지 수에서 리미트값을 뺀 값에 보여질 아이템 수를 곱한다
+		int Ccount = (temp - count +1) * showCount;
+		list.setLimit(Integer.toString(Ccount));
+		//정보를 통해 출력할 리스트 값을 가져온다.
+		list.setTemp("list");
+		List<RentVO> rentList 	 = rentService.newRentListPro(list);
+		
 		
 		//보낼 값들을 map에 넣는다
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -156,6 +192,9 @@ public class RentController {
 		return "/rent/main.do";
 	}
 	
-	
+	@RequestMapping("/NewRentList")
+	public String NewRentList(Model model) throws Exception{
+		return "/rent/NewRentList";
+	}
 
 }

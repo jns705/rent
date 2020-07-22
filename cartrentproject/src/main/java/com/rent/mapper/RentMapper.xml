@@ -69,11 +69,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from 	rent
 	</select>
 	
+	<!-- 신차 조건부 출력 -->
+	<select id="newRentListPro" parameterType="com.rent.domain.RentListVO" resultType="com.rent.domain.RentVO">
+		select
+		<if test="temp == null"> count(*) rent_id </if>
+		<if test="temp != null"> c.manufacturer,  r.rent_id, r.car_id, r.color, r.reg_date, reg_date , r.location, r.special_note, r.Max_month, r.situation, r.standby_personnel, r.price, r.car_number, o.color_url, o.color_image, c.car_name, c.car_price</if> 
+        from 	car c, rent r, color o
+        where	c.car_id = r.car_id and c.car_id = o.car_id
+        and 	r.special_note = '신차'
+        <if test="orderBy == 0"> order by r.price </if>
+		<if test="orderBy == 1"> order by r.price desc </if>
+		<if test="orderBy == 2"> order by r.milage  </if>
+		<if test="orderBy == 3"> order by r.reg_date </if>
+		<if test="orderBy == 4"> order by r.standby_personnel </if>
+		
+		<if test="temp != null"> limit 0, ${limit} </if>
+	</select>
+	
 	<!-- 조건부 렌트 정보 출력 -->
 	<select id="rentListPro" parameterType="com.rent.domain.RentListVO" resultType="com.rent.domain.RentVO">
         select	
 		<if test="temp == null"> count(*) rent_id </if>
-		<if test="temp != null"> r.rent_id, r.car_id, r.color, r.reg_date, reg_date , r.location, r.special_note, r.Max_month, r.situation, r.standby_personnel, r.price, r.car_number, l.rent_url, c.car_name, c.car_price</if> 
+		<if test="temp != null"> c.manufacturer,  r.rent_id, r.car_id, r.color, r.reg_date, reg_date , r.location, r.special_note, r.Max_month, r.situation, r.standby_personnel, r.price, r.car_number, l.rent_url, c.car_name, c.car_price</if> 
         
         from 	car c, rent r, rentimage l
         where	c.car_id = r.car_id and r.rent_id = l.rent_id and l.rent_image = '앞' 

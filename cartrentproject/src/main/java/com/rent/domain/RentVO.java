@@ -16,6 +16,7 @@ public class RentVO {
 	private int milage;
 	private Timestamp reg_date;
 	private String location;
+	private String manufacturer;
 	private String special_note;
 	private String Max_month;
 	private String situation;
@@ -26,5 +27,9 @@ public class RentVO {
 	private	String car_name;
 	private int count;
 	private int car_price;
+	
+	
+	private	String color_url;
+	private	String color_image;
 
 }
