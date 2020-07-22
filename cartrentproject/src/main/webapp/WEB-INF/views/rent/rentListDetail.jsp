@@ -92,11 +92,11 @@
 						<div class="estimate-search-list__information">
 							<div class="tab-menu v8 js-tab-opener2">
 								<ul class="tab-menu__listbox">
-									<li class="tab-menu__list col-6">
+									<li class="tab-menu__list col-6" id="">
 										<a href="#tab-prefer-information1" class="tab-menu__anchor" onclick="btnSlide('preference');">차량선호도</a>
 									</li>
 								<c:if test="${sessionScope.id != null}">
-									<li class="tab-menu__list col-6">
+									<li class="tab-menu__list col-6" id="">
 										<a href="#tab-customer-information1" class="tab-menu__anchor" onclick="btnSlide('product')">상품 문의</a>
 									</li>
 								</c:if>	
