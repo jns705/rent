@@ -26,18 +26,18 @@
 								<div class="fast-reserve-tab">
 									<div class="item">
 										<label class="label">
-											<input type="radio" id="jejuQuickReserve" name="quickReserveType" title="제주" value="jeju" checked class="sr-only">
+											<input onclick="jeju();" type="radio" checked id="jejuQuickReserve" name="quickReserveType" title="제주" value="jeju"   class="sr-only">
 											<span class="text">제주</span>
 										</label>
 									</div>
 									<div class="item">
 										<label class="label">
-											<input type="radio" id="inlandQuickReserve" name="quickReserveType" value="inland" class="sr-only">
+											<input onclick="jeju();" type="radio" id="inlandQuickReserve" name="quickReserveType" value="inland" class="sr-only">
 											<span class="text">내륙</span>
 										</label>
 									</div>
 									<div class="item">
-										<a href="/rent/long/direct/sub_main_integration.do?tabId=USEDCAR&searchProdList=000003,000023&startIndex=1&endIndex=10&orderbyColumnNm=STD_RENT_AMT_ASC" class="anchor">중고차</a>
+										<a href="/rent/rentList" class="anchor">중고차</a>
 									</div>
 								</div>
 								<div class="fast-reserve-content">
@@ -61,9 +61,7 @@
 											</span>
 											<span class="select-box fl">
 												<select name="sLocation" id="sLocation" class="option01 option02 timeChange fast-reserve-select">
-													<c:forEach items="${location}" var="location">
-														<option>${location.location}</option>
-													</c:forEach>
+														<option>제주지점</option>
 												</select>
 											</span>
 										</div>
@@ -86,9 +84,7 @@
 											</span>
 											<span class="select-box fl">
 												<select name="lLocation" id="lLocation" class="option01 option02 timeChange fast-reserve-select">
-													<c:forEach items="${location}" var="location">
-														<option>${location.location}</option>
-													</c:forEach>
+														<option>제주지점</option>
 												</select>
 											</span>
 											</div>
@@ -130,6 +126,19 @@
 </form>
 </body>
 </html>
+
+<script type="text/javascript">
+function jeju(){
+	if($('#jejuQuickReserve').prop("checked")){
+		$('#sLocation').html('<option>제주지점</option>');
+		$('#lLocation').html('<option>제주지점</option>');
+	}else if($('#inlandQuickReserve').prop("checked")){
+		var str = '<option>서울지점</option><option>인천지점</option><option>대구지점</option><option>부산지점</option>'
+		$('#sLocation').html(str);
+		$('#lLocation').html(str);
+	}
+}
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
             $.datepicker.setDefaults($.datepicker.regional['ko']); 
