@@ -19,13 +19,6 @@
 </head>
 <style>
 #car-type6, #car-type1, #car-type2, #car-type3, #car-type4, #car-type5 {display: none;}
-html,body {
-
-	margin: 0;
-
-	padding: 0;
-
-}
 footer{
 	padding: 0px; margin: 0px;
 }
@@ -181,18 +174,18 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
         <div class="breadcrumbs">
             <h2 class="tit">단기렌터카 예약/확인<a href="#modal-login-global" class="btn-modal btn-tooltip" style="display:none;" id="reservLogin"></a></h2>
             <div class="clearfix">
-                <span>홈</span>
+                <span class="glyphicon glyphicon-home"></span>
                 <span>단기렌터카</span>
                 <span>단기렌터카 예약/확인</span>
             </div>
         </div>
         <div class="tab-menu v1">
             <ul class="unlink tTab" id="reservMenu">
-                <li class="col-3 selected">
-                	<a href="/rent/rentcar/short_rent_reservation_new_jeju.do">제주예약</a>
+                <li class="col-3 <c:if test="${sL eq '제주지점'}">selected</c:if>">
+                	<a href="/counseling/short_rent?sL=제주지점">제주예약</a>
                 </li>
-                <li class="col-3">
-                    <a href="/rent/rentcar/short_rent_reservation_new.do">내륙예약</a>
+                <li class="col-3 <c:if test="${sL != '제주지점'}">selected</c:if>">
+                    <a href="/counseling/short_rent">내륙예약</a>
                 </li>
                 <li class="col-3">
 		            	<a href="/buy/short_rentList">예약확인</a>
@@ -230,10 +223,9 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                     <div class="article-content">
                         <div class="rent-store-select">
                             <div class="col fl">
-                            
                                 <div class="date-time-area clearfix">
 										<span id="sDateSpan" class="fl" >
-                                            <input type="text" id="startDate" name="start_date" value="${sD}" onchange="changeDate(); changeHour(); selectCar(); todayCheck();"/>
+                                            <input type="text" id="startDate" name="start_date" value="<c:if test ="${sD == null}">대여일 선택</c:if><c:if test ="${sD != null}">${sD}</c:if>" onchange="changeDate(); changeHour(); selectCar(); todayCheck();"/>
                                         </span>
                                   			<span class="select-box fl">
 												<select name="sHour" id="sHour"  onchange="changeDate(); changeHour();  selectCar();">
@@ -250,19 +242,23 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 											</span>
                                 </div>
                                 <div class="store-area clearfix">
-                                        <span class="select-box fl">
-												<select name="start_location" id="location" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
-													<c:forEach items="${location}" var="location" >
-														<option <c:if test="${sL == location.location}">selected</c:if> >${location.location}</option>
-													</c:forEach>
-												</select>
-											</span>
+                                    <span class="select-box fl">
+										<select name="start_location" id="location" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
+										<c:if test="${sL eq '제주지점'}"><option>제주지점</option></c:if>
+										<c:if test="${sL != '제주지점'}">
+										<option <c:if test="${sL eq '서울지점'}">selected</c:if>>서울지점</option>
+										<option <c:if test="${sL eq '인천지점'}">selected</c:if>>인천지점</option>
+										<option <c:if test="${sL eq '대구지점'}">selected</c:if>>대구지점</option>
+										<option <c:if test="${sL eq '부산지점'}">selected</c:if>>부산지점</option>
+										</c:if>
+										</select>
+									</span>
                                 </div>
                             </div>
                             <div class="col fl">
                                 <div class="date-time-area clearfix">
 										<span id="sDateSpan" class="fl" >
-                                            <input type="text" name="end_date" id="endDate" value="${eD}" onchange="changeDate(); changeHour(); selectCar();"/>
+                                            <input type="text" name="end_date" id="endDate" value="<c:if test ="${eD == null}">반납일 선택</c:if><c:if test ="${eD != null}">${sD}</c:if>" onchange="changeDate(); changeHour(); selectCar();"/>
                                         </span>
                            				   <span  class="select-box fl">
 												<select name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate(); selectCar();">
@@ -281,9 +277,13 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                                 <div class="store-area clearfix">
                                        <span class="select-box fl">
 												<select name="end_location" id="end_location" class="option01 option02 timeChange fast-reserve-select" onchange="selectCar();">
-													<c:forEach items="${location}" var="location">
-														<option <c:if test="${lL == location.location}">selected</c:if>  >${location.location}</option>
-													</c:forEach>
+													<c:if test="${sL eq '제주지점'}"><option>제주지점</option></c:if>
+													<c:if test="${sL != '제주지점'}">
+													<option <c:if test="${sL eq '서울지점'}">selected</c:if>>서울지점</option>
+													<option <c:if test="${sL eq '인천지점'}">selected</c:if>>인천지점</option>
+													<option <c:if test="${sL eq '대구지점'}">selected</c:if>>대구지점</option>
+													<option <c:if test="${sL eq '부산지점'}">selected</c:if>>부산지점</option>
+													</c:if>
 												</select>
 											</span>
                                 </div>

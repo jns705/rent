@@ -60,18 +60,13 @@
     </nav>
     <!-- header 끝 -->
     
-    	<div class="quick-menu">
+ 	<div class="quick-menu" style="z-index: 1000 !important;">
 	    <ul>
 	    	<li class="menu1">
-	    	
-            
-            
-            	<a href="/rent/rentcar/short_rent_reservation_new_jeju.do">단기예약</a>
-            
-            
+            	<a href="/rent/rentList">단기예약</a>
 	       	</li>
 	    	<li class="menu2">
-	            <a href="/rent/rentcar/html/monthly_guide.do">중고차 렌터카</a>
+	            <a href="/rent/main.do">중고차 렌터카</a>
 	        </li>
 	        <li class="menu3">
 	            <a href="/rent/long/direct/sub_main_integration.do?tabId=NEWCAR">다이렉트견적</a>

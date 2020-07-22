@@ -33,13 +33,13 @@ th{text-align: center;}
         <div class="tab-menu v1">
             <ul class="unlink tTab" id="reservMenu">
                 <li class="col-3 ">
-                	<a href="/rent/rentcar/short_rent_reservation_new_jeju.do">제주예약</a>
+                	<a href="/counseling/short_rent?sL=제주지점">제주예약</a>
                 </li>
                 <li class="col-3">
-                    <a href="/rent/rentcar/short_rent_reservation_new.do">내륙예약</a>
+                    <a href="/counseling/short_rent">내륙예약</a>
                 </li>
                 <li class="col-3 selected" >
-		            	<a href="/rent/rentcar/short_rent_reservation_confirm.do">예약확인</a>
+		            	<a href="/buy/short_rentList">예약확인</a>
                 </li>
             </ul>
         </div>

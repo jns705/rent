@@ -220,7 +220,7 @@ public class CounselingController {
 	}
 	
 	@RequestMapping("/short_rent")
-	public String short_rent(Model model, HttpSession session) throws Exception{
+	public String short_rent(Model model, HttpSession session, @RequestParam(defaultValue = "서울지점") String sL) throws Exception{
 		String id = (String)(session.getAttribute("id"));
 		if(id != null) {
 		MemberVO list = mMemberService.accountDetail(id);
@@ -232,6 +232,7 @@ public class CounselingController {
 		model.addAttribute("detail", list);
 		}
 		model.addAttribute("location", rentService.location());
+		model.addAttribute("sL",sL);
 		return "/counseling/short_rent";
 	}
 	
