@@ -3048,9 +3048,6 @@ input[type=text].w105{padding: 10px 12px;}
 	.modal-pop.contract .contract_wrap .rental_content table .title.noimg{text-indent: 0; font-size: 12px; line-height: 14px;}
 }
 
-
-
-/*Sales Partner ç­Œìš‘ì˜™å ìŽŒëœšå ìŽˆë¦­ç–«ë€ì˜™ å ìŽˆì‚å ìŽŒëµ ç­Œìš‘ì˜™*/
 .bg-line1 .check_title{display: inline-block; margin-bottom:18px; font-size: 16px; color:#333;}
 .checkbox.v2 input[type=checkbox]+label:after, .checkbox.v2 input[type=checkbox]+label:before {left: 0; margin: -12px 0 0 0;}
 .checkbox.v2 label{display: inline-block;}
@@ -3062,7 +3059,6 @@ input[type=text].w105{padding: 10px 12px;}
 .addFile .msg-info.add{margin-left: 112px;}
 .addFile .file-upload-input {width: 630px!important; margin-left: 15px;}
 
-/* ï¿½ëª­å ï¿½ å ìŽŒë„‡å ìŽŒëµ¥å ìŽˆí‰¸é›…ëš¯ëˆ˜è‹‘ï¿½å ìŽŒë’„ å ìŽˆì‚å ìŽŒëµ ç­Œìš‘ì˜™ */
 .btn-box.guid{position: relative;}
 .btn-box.guid .guidbox{position: absolute; top: -48px; left: 25%; width: 350px; height: 36px; border-radius: 100px; background-color: #333333;}
 .btn-box.guid .guidbox span{color: #fff; font-size: 13px; line-height: 38px;}
