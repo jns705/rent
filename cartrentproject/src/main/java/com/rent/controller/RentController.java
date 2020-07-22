@@ -16,11 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rent.domain.BuyVO;
 import com.rent.domain.CarVO;
+import com.rent.domain.MemberVO;
 import com.rent.domain.OptionCarVO;
+import com.rent.domain.PreferenceVO;
 import com.rent.domain.RentImageVO;
 import com.rent.domain.RentVO;
 import com.rent.domain.RentListVO;
+import com.rent.service.BuyService;
 import com.rent.service.CarOptionService;
 import com.rent.service.CarService;
 import com.rent.service.RentImageService;
@@ -41,6 +45,9 @@ public class RentController {
 	
 	@Resource(name="com.rent.service.CarOptionService")
 	CarOptionService opService;
+	
+	@Resource(name="com.rent.service.BuyService")
+	BuyService buyService;
 	
 	//렌트목록
 	@RequestMapping("/rentList")
@@ -144,6 +151,19 @@ public class RentController {
 		model.addAttribute("rentImage" 	, rentImageService.imageList(Integer.parseInt(rent_id)));
 		model.addAttribute("oList"  	, list);
 		model.addAttribute("count"  	, onOff);
+		
+		PreferenceVO preference = new PreferenceVO();
+		List<BuyVO> buyIdList = new ArrayList<BuyVO>();
+		buyIdList = buyService.buyListMember(rent_id); //id가져옴
+		for(int i=0; i < buyIdList.size(); i++) {
+			String id = buyIdList.get(i).getId();
+			System.out.println("아이디 : "+id);
+			System.out.println("나이 : "+ buyService.memberAge(id));
+			System.out.println("성별 : "+ buyService.memberGender(id));
+			
+			
+		}
+		
 		return "/rent/rentListDetail";
 	}
 	

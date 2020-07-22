@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.rent.domain.BuyVO;
+import com.rent.domain.MemberVO;
 import com.rent.mapper.BuyMapper;
 
 @Service("com.rent.service.BuyService")
@@ -40,4 +41,18 @@ public class BuyService {
 		return mapper.buyDetail(buy_id);
 	}
 	
+	//rent_id를 구매한 사람들의 id를 가져온다
+	public List<BuyVO> buyListMember(String rent_id) throws Exception {
+		return mapper.buyListMember(rent_id);
+	}
+	
+	//차량 구매한사람들의 아이디로 성별을 나눈다.
+	public MemberVO memberGender(String id) throws Exception {
+		return mapper.memberGender(id);
+	}
+	
+	//차량 구매한사람들의 아이디로  나이대를 구한다
+	public MemberVO memberAge(String id) throws Exception {
+		return mapper.memberAge(id);
+	}
 }

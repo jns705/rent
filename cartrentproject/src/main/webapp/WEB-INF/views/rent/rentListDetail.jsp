@@ -85,7 +85,9 @@
 				<!-- car-list__item//end -->
 			</div>
 			<!-- car-list//end -->
-			
+<script>
+
+</script>
 			<!-- 190103 아코디언 메뉴 추가  -->
 						<div class="estimate-search-list__information">
 							<div class="tab-menu v8 js-tab-opener2">
@@ -105,7 +107,6 @@
 								</c:if>
 								</ul>
 							</div>
-							
 							<div id="preference" class="tab-content" style="display: none;" >
 								<div class="estimate-car-prefer clearfix">
 									<div
@@ -113,10 +114,7 @@
 										<div class="estimate-car-prefer__title">전체 차량 판매순위</div>
 										<div class="estimate-car-prefer__data">
 											<p class="estimate-car-prefer__data-desc">
-											
 												<strong class="estimate-car-prefer__data-num">52</strong>위
-												
-											
 											</p>
 										</div>
 									</div>
@@ -126,10 +124,7 @@
 										<div class="estimate-car-prefer__title">동급 차량 판매순위</div>
 										<div class="estimate-car-prefer__data">
 											<p class="estimate-car-prefer__data-desc">
-											
 												<strong class="estimate-car-prefer__data-num">3</strong>위
-											
-											
 											</p>
 										</div>
 									</div>
@@ -169,8 +164,8 @@
 											<div class="age-prefer clearfix">
 												<div class="age-prefer__list fl">
 													<div class="age-prefer__graph">
-														<div class="age-prefer__graph-value" style="height:0%;">
-															<div class="age-prefer__graph-num" >0%</div>
+														<div class="age-prefer__graph-value" style="height:22%;">
+															<div class="age-prefer__graph-num" >22%</div>
 															<span class="age-prefer__graph-stick v1" aria-hidden="true"></span>
 														</div>
 													</div>
@@ -179,8 +174,8 @@
 												<!-- age-prefer__list//end -->
 												<div class="age-prefer__list fl">
 													<div class="age-prefer__graph">
-														<div class="age-prefer__graph-value" style="height:0%;">
-															<div class="age-prefer__graph-num" >0%</div>
+														<div class="age-prefer__graph-value" style="height:33%;">
+															<div class="age-prefer__graph-num" >33%</div>
 															<span class="age-prefer__graph-stick v2" aria-hidden="true"></span>
 														</div>
 													</div>
@@ -510,24 +505,32 @@ img {
 <dl class="dl-horizontal">
 <dt>월 렌탈료</dt>
 <dd class="text-r">
-<strong id="totalRental">408,000</strong>
-"원"
+<strong id="totalRental">${String.format('%,d',rent.price)}</strong>원
 </dd>
 <dt class="fs-default">(총 차량 소비자가)</dt>
 <dd class="fs-default text-r">
-"("<strong class="fs-default" id="totAmt">21,180,000</strong>
-"원)"
+(<strong class="fs-default" id="totAmt">${String.format('%,d',car.car_price)}</strong>만원)
 </dd>
 </dl>
 <div class="btn-box-all">
 <div class="btn-box-gray btn2">
-<a href="#none" onclick="openChatLayerPop()">
+<button onclick="apply();">
 <span>맞춤형 렌탈료</span>
-<br>"상담신청"</a></div>
+<br><font color="white">상담신청</font></button></div>
 <div class="btn-box-red btn2">
-<a href="#none" id="btnDirectContract">
+
+<c:choose>
+<c:when test="${sessionScope.id !=null && sessionScope.id != ''}">
+<button formaction="${path}/buy/insert/${rent.rent_id}" onclick="apply();" id="btnDirectContract">
+</c:when>
+<c:otherwise>
+<button formaction="${path}/rent/rentListDetail/${rent.rent_id}" onclick="alert('로그인 후 사용가능')" id="btnDirectContract">
+</c:otherwise>
+</c:choose>
+
+
 <span>무방문/무서류</span>
-<br>"다이렉트 계약"</a></div></div>
+<br><font color="white">다이렉트 계약</font></button></div></div>
 </div></div></article>
 
 </div></form></div></div></div></div>
@@ -571,13 +574,23 @@ function driving(e) {
 }
 </script>
 <script>
-    function btnSlide(id){
-            if		($('#'+id).is(":visible")) $('#'+id).slideUp();
-            else  	$('#'+id).slideDown();
-    }    
-    
-    function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+function btnSlide(id){
+	//if		($('#'+id).is(":visible")) $('#'+id).slideUp(); 슬라이드 효과
+	//else  	$('#'+id).slideDown();
+	if		($('#'+id).is(":visible")) $('#'+id).hide();
+	else  	$('#'+id).show();
+	
+	if(id == "product") {
+		//if		($('#'+id).is(":visible")) $("#preference").slideUp();
+		if		($('#'+id).is(":visible")) $("#preference").hide();
+	}else if(id == "preference") {
+		//if		($('#'+id).is(":visible")) $("#product").slideUp();
+		if		($('#'+id).is(":visible")) $("#product").hide();
+	}
+}    
+
+function numberWithCommas(x) {
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function apply() {
@@ -593,12 +606,11 @@ $(document).scrollTop();
 $(window).scroll(function () {
 	var scrollValue = $(document).scrollTop();
 	//alert(scrollValue);
-	if(scrollValue > 1333)
+	if(scrollValue > 1250)
 		$('.ticker-info').addClass("off");
 	else
 		$('.ticker-info').removeClass("off");
 });
 </script>
-
 </html>
 </layoutTag:layout>
