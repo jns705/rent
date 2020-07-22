@@ -2674,13 +2674,11 @@ input[type=checkbox]+label:after {
 .dl-horizontal{width:40%; float:left;}
 .btn-box-all{float:left;}
  
-/*ï¿½â‘¥ì¥’è€Œì‡½ì˜™è‹‘ê¹ì˜™è‹‘ï¿½ 20180402*/
 .list-definition.mb30{margin-bottom: 30px !important;}
 .chat-web.bt0{border-top: 0;}
 .chat-info .dl-link dd .time-box strong.mt20{margin-top: 20px;}
 .chat-info .dl-link dt strong .direct_color{display: inline-block; color:#eb444b; }
 
-/* å ìŽˆë¼„å ìŽŒëµ å ìŽŒì ‚å ìŽˆë±œ å ìŽŒëµ¬å ìŽˆë»»å ìŽŒì… å ìŽŒì‚ºï¿½â‘¨ì˜™ å ìŽˆêº–ç­Œìš‘ì˜™ å ìŽˆë¥´ï¿½ëµ³å ï¿½ å ìŽˆì†šå ìŽˆì”œ 20180426*/
 .modal-pop.page{
 	display: none;
     position: inherit;
@@ -2720,7 +2718,6 @@ input[type=checkbox]+label:after {
 	text-align: center;
 }
 
-/* ç­Œë¡¢ë‡è‹¡ï¿½å ìŽˆë¼ ç‡ì‚³ï¿½è«­ï¿½ CLUB MOST ç™°ê·¨ì˜™é‡Žê»“ì˜™ 20180509*/
 .membership-cardtype-article .inner strong {font-size: 26px;}
 .membership-cardtype-view .info-view .list-definition .card-membership-list dl .cl-point2 {font-size: 22px;}
 .card-membership-list .list-thumbnail .figcaption dl {margin: 7px 0 12px 30px;}
@@ -2735,14 +2732,11 @@ input[type=checkbox]+label:after {
 .membershipcard-benefit-list ul li:first-child:after {width: 0px;}
 .membershipcard-benefit-list ul li .thumbnail img {width: 151px;}
 
-/* 190529 ç•°ë¶½ï¿½ */
 .list-info-span{font-size:16px;line-height: 26px;}
 
 
-/* ï¿½â‘¥ì¥’è€Œì‡½ì˜™è‹‘ê¹ì˜™è‹‘ï¿½ - å ìŽˆíŽ¶å ìŽˆë»¼å ìŽˆë¼„å ìŽŒë’²åš¥â‰ªë®†è«­ï¿½ - pdf å ìŽ„í‹™ï¿½ë¹Šéºì™ì˜™ 20180510*/
 .header-group.pdf-text{border-bottom: 1px solid #ddd;padding-top: 0px;}
 
-/* ç”•ê³•ë²¡ï¿½ëµ¥ ç­Œë¾ëœ†ï¿½ëµ å ìŽŒì ‰å ìŽ„ìˆ²ç‡ì‚¼ì˜™ å ìŽ„í…¢ï¿½â‘¥ì¥“æ²…âˆ½ì˜™è‚‰ï¿½ å ìŽˆë•¾å ìŽŒì Ÿ 20180530 */
 .period-serach .period-calendar dl.input-type .select-box {width: 105px;}
 .select2-results__option {padding: 7px 10px;}
 .select2-container--default .select2-selection--single .select2-selection__arrow {right: 10px;}
@@ -2750,7 +2744,6 @@ input[type=checkbox]+label:after {
 input[type=text].w105{padding: 10px 12px;}
 .select2-container .select2-selection--single .select2-selection__rendered {padding-left: 10px; padding-right: 20px;}
 
-/* å ìŽˆë¼„å ìŽŒëµ å ìŽŒì ‚å ìŽˆë±œ hotdeal å ìŽˆì‚å ìŽŒëµ ç­Œìš‘ì˜™ ï¿½ë¹Šéºì™ì˜™  20180601 */
 .breadcrumbs.hotdeal{text-align: center;}
 .breadcrumbs.hotdeal img{vertical-align: middle;}
 .breadcrumbs.hotdeal h2{display: inline-block; margin-left: 20px;}
@@ -2779,16 +2772,13 @@ input[type=text].w105{padding: 10px 12px;}
 .membership-use-information .list-type.long.v3 .list {height: 167px;padding: 18px 30px;}
 .membership-use-information .list-type.long .dl-link dd .btn-box:after {top: -58px;}
 
-/* å ìŽˆë¼„å ìŽŒëµ å ìŽŒì ‚å ìŽˆë±œ é‡Žêº«ë”†ì…éˆºê³Œí€¬ï¿½ë³ å ìŽˆë•¾å ìŽŒì Ÿ  20180601 */
 .estimate-item__caption-text.icon tr td{vertical-align: middle;}
 .radio.v6.icon{display: inline-block; vertical-align: middle;}
 .radio.v6.icon label{padding: 0px;}
 .car_name{display: inline-block; width: 100%; vertical-align: middle;}
 
-/* ï¿½â‘£ì‘´é®ìžžì˜™ï¿½ì Ÿç™°ê·¨ì˜™ */
 .download-box .btn.mt10 {margin-top: 10px;}
 
-/* é¤“Î»ìµŽçŒ·ê¾¬ì˜™é®ë¨²ì­ªå ï¿½ å ìŽŒë§„å ìŽˆíŠ‹ç–«ë€ì˜™ ï¿½ë¹Šéºìš°ì Ÿ å ìŽˆì†šå ìŽˆì”œ */
 .modal-pop.penalty{height: 490px!important; margin-top: -240px!important;}
 .modal-pop.penalty .penalty_wrap{margin-top: 50px;}
 .modal-pop.penalty .penalty_wrap .penalty_top span{font-size: 16px; color: #000;}
@@ -2810,7 +2800,6 @@ input[type=text].w105{padding: 10px 12px;}
 .modal-pop.penalty .penalty_wrap .penalty_assist .penalty_pop .penalty_pop_wrap .penalty_pop_content span{display: block; margin-left: 10px; line-height: 20px; font-size: 13px;}
 .modal-pop.penalty .penalty_wrap .penalty_assist .penalty_pop .penalty_pop_wrap .penalty_pop_content .penalty_pop_title{margin-left: 0px; margin-bottom: 5px; font-size: 14px;}
 
-/* ç™°ê·£ë˜¾è‚‰ëºì²Žå ì™ì˜™ï¿½ë¿¯ç­Œì•¹ë¹–ï§¢ëªŒì˜™è‹‘ï¿½ ç„ì†ë®„ï¿½ë‹‹å ìŽŒë’„ç­Œï½ì˜™ å ìŽˆì†šå ìŽˆì”œ */
 .modal-pop.insurance{height: 390px!important; margin-top: -200px!important;}
 .modal-pop.insurance .insurance_wrap table th,
 .modal-pop.insurance .insurance_wrap table td{border: 1px solid #ddd; padding: 10px;}
@@ -2825,7 +2814,6 @@ input[type=text].w105{padding: 10px 12px;}
 .modal-pop.insurance .insurance_wrap.before{text-align: center; padding-top: 50px; box-sizing: border-box;}
 .modal-pop.insurance .insurance_wrap.before .btn.btn-fix1{display: block; margin: 80px auto 0;}
 
-/* å ìŽŒë¿«ç­Œâ–³ë«‚ï¿½ë„‡å ìŽŒëµ¥å ìŽ„í£ å ìŽˆì†šå ìŽˆì”œ */
 .modal-pop.hire{width: 900px;}
 .modal-pop.hire .hire_select{position: absolute; top: 44px; left: 200px; width: 200px;}
 .modal-pop.hire .hire_wrap{width: 800px; height: 514px;}
@@ -2851,7 +2839,6 @@ input[type=text].w105{padding: 10px 12px;}
 .modal-pop.hire .hire_wrap .rental_bottom .rental_bottom_left{position: relative; float: left; margin-top: 30px;}
 .modal-pop.hire .hire_wrap .rental_bottom .rental_bottom_left img{position: absolute; bottom: -9px; right: 0; width: 69px; height: 69px;}
 
-/* å ìŽŒëµ å ìŽŒë’ å ìŽ„ë•€å ìŽˆì—´å ìŽŒë„‡å ìŽŒëµ¥å ìŽ„í£ å ìŽˆì†šå ìŽˆì”œ */
 .modal-pop.history{width: 900px;}
 .modal-pop.history h3{display: inline-block;}
 .modal-pop.history .history_form{display: inline-block; vertical-align: super; margin-left: 10px; width: 65%;}
@@ -2890,7 +2877,6 @@ input[type=text].w105{padding: 10px 12px;}
 
 
 
-/* å ì™ì˜™å ìŽˆì—°ï¿½â‘£ì‘´é®ìžžì˜™ï¿½ë„‡å ìŽŒëµ¥å ìŽ„í£ å ìŽˆì†šå ìŽˆì”œ */
 .modal-pop.contract{width: 900px;}
 .modal-pop.contract .contract_wrap{width: 800px; height: 514px;}
 .modal-pop.contract .contract_wrap .rental_wrap{height: 415px; padding-right: 10px; overflow-y: scroll;}
@@ -2925,8 +2911,6 @@ input[type=text].w105{padding: 10px 12px;}
 
 
 
-
-/*å ìŽ„ë§’å ìŽˆë¼–å ìŽˆë»¿ç­Œï½ì˜™ ç„ì‰ì˜™ å ìŽˆë¼„å ìŽŒëµ å ìŽŒì ‚å ìŽˆë±œ ï¿½â‘£ì‘´é®ï¿½ ç”•ê³Œì‘µï¿½ë±£*/
 .btn-box-all {width:240px;top:10px;right:15px;position:absolute;}
 .btn2 {display:inline-block;line-height:18px;font-size:14px;text-align:center;vertical-align:top;box-sizing: border-box;overflow: hidden;}
 
@@ -2940,7 +2924,6 @@ input[type=text].w105{padding: 10px 12px;}
 
 
 
-/*å ìŽ„ë§’å ìŽˆë¼–å ìŽˆë»¿ç­Œï½ì˜™ ç„ì‰ì˜™ å ìŽˆë¼„å ìŽŒëµ å ìŽŒì ‚å ìŽˆë±œ ï¿½â‘£ì‘´é®ï¿½ å ìŽˆíˆ§å ìŽ„ë•€ ï¿½ë¹Šéºì™ì˜™*/
 .bg-line-new{box-sizing: border-box;border: 1px solid #ddd;border-top:1px solid #666666;width:100%;height:180px}
 .bg-line-new div{width:47%;float:left;padding: 17px 0 20px 28px;}
 .bg-line-new div:first-child{border-right:1px solid #ddd}
@@ -2951,7 +2934,6 @@ input[type=text].w105{padding: 10px 12px;}
 .bg-line-new-p{padding-bottom:25px;font-size:18px;color:#333333 !important;}
 	
 
-/*å ìŽ„ë§’å ìŽˆë¼–å ìŽˆë»¿ç­Œï½ì˜™ ç„ì‰ì˜™ å ìŽˆë¼„å ìŽŒëµ å ìŽŒì ‚å ìŽˆë±œ ï¿½â‘£ì‘´é®ï¿½ ç”•ê³Œì‘µï¿½ë±£ ç­Œë¤´ë«€è€Œï¿½å ìŽŒëµ¬*/		
 .wrap-btn-new{width:100%;}
 .wrap-btn-new div{width:50%;float:left;text-align:center;height:60px;padding:10px;}
 .wrap-btn-new-tran div{width:100%;float:left;text-align:center;height:60px;padding:10px;}
@@ -2965,7 +2947,6 @@ input[type=text].w105{padding: 10px 12px;}
 .btn-box-gray-m a, .btn-box-red-m a{color:#fff;text-decoration: none;}	
 
 
-/*å ìŽ„ë§’å ìŽˆë¼–å ìŽˆë»¿ç­Œï½ì˜™ ç„ì‰ì˜™ å ìŽˆë¼„å ìŽŒëµ å ìŽŒì ‚å ìŽˆë±œ ï¿½â‘£ì‘´é®ï¿½ å ìŽˆíˆ§å ìŽ„ë•€ ï¿½ë¹Šéºì™ì˜™ ç­Œë¤´ë«€è€Œï¿½å ìŽŒëµ¬*/
 .bg-line-new-m{padding-top:15px}
 .bg-line-new-m div{padding:15px 0;}
 .bg-line-new-m div:last-child{padding:15px 0 0 0;}
@@ -2976,8 +2957,6 @@ input[type=text].w105{padding: 10px 12px;}
 .bg-line-new-ul-m li:before{content:"";position:absolute;left:0;top:10px;width:3px;height:3px;background:#666;}	
 
 
-
-/* ï¿½ëœ®è¢â‘¨ì˜™ç­Œë¡³ì˜™ å ìŽŒëµ¥å ìŽˆë‡µ ï¿½ê½´å ì™ì˜™ï¿½ì¡ƒ css */
 .modal-pop.insurance .insurance_wrap table img,
 .modal-pop.hire .hire_wrap .rental_content table img,
 .modal-pop.history .history_wrap .rental_content table img,
@@ -2987,13 +2966,11 @@ input[type=text].w105{padding: 10px 12px;}
 
 @media print and (color){
 	
-	/*å ìŽˆëŠ„ï¿½ëµ³æ€¨ì¢Šë±œ ç„ì„í€—ç‘—ï¿½ å ìŽŒëµ¥å ìŽˆë‡µ*/
 	*{-webkit-print-color-adjust: exact !important;   /* Chrome, Safari */
 					color-adjust: exact !important;   /*Firefox*/
 					font-family: NanumBarunGothic,sans-serif !important;
 	}
 	
-	/*å ìŽŒë¿«ç­Œâ–³ë«‚ï¿½ë„‡å ìŽŒëµ¥å ìŽ„í£ å ìŽŒëµ¥å ìŽˆë‡µå ìŽŒë’  ï¿½ë¹Šéºì™ì˜™*/
 	.noprint{display: none;}
 	.modal-pop.hire .hire_wrap{width: 100%;}
 	.modal-pop.hire .hire_wrap .rental_wrap{overflow-y: inherit;}
@@ -3004,7 +2981,6 @@ input[type=text].w105{padding: 10px 12px;}
 	.modal-pop.hire .hire_wrap .rental_content span{margin-top:20px;}
 	.modal-pop.hire .hire_wrap .rental_bottom span {margin-top:10px; font-size: 15px;}
 	
-	/*å ì™ì˜™å ìŽˆì—°ï¿½â‘£ì‘´é®ï¿½ å ìŽŒë„‡å ìŽŒëµ¥å ìŽ„í£ å ìŽŒëµ¥å ìŽˆë‡µå ìŽŒë’  ï¿½ë¹Šéºì™ì˜™*/
 	.modal-pop.contract .contract_wrap{width: 100%;}
 	.modal-pop.contract .contract_wrap .rental_wrap{overflow-y: inherit;}
 	.modal-pop.contract .contract_wrap .rental_top table,
@@ -3021,7 +2997,6 @@ input[type=text].w105{padding: 10px 12px;}
 	input[type=checkbox]{width: 18px!important; height: 18px!important; top:0!important; vertical-align: middle;}
 	.modal-pop.contract .contract_wrap .rental_content table th span {margin-left: 5px;}
 	
-	/*å ìŽŒëµ å ìŽŒë’ å ìŽ„ë•€å ìŽˆì—´ å ìŽŒë„‡å ìŽŒëµ¥å ìŽ„í£ å ìŽŒëµ¥å ìŽˆë‡µå ìŽŒë’  ï¿½ë¹Šéºì™ì˜™*/
 	.modal-pop.history .history_wrap{width: 100%;}
 	.modal-pop.history .history_wrap .rental_wrap{overflow-y: inherit;}
 	.modal-pop.history .history_wrap .rental_content table{width: 100%; border-top: 2px solid #000;}
