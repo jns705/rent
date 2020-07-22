@@ -504,49 +504,31 @@ img {
 						</div>
 					</fieldset>
 				</article>
-				<article>
-					<div class="ticker-info ticker-info--direct">
-					
-						<!-- ticker-body//end -->
-						<div class="ticker-head">
-							<dl class="dl-horizontal">
-								<dt>월 렌탈료</dt>
-								<dd class="text-r">
-								<div class="col-sm-4">
-								<strong id="totalRental" style="">${String.format('%,d',rent.price)}</strong>원
-								</div>
-								<div class="col-sm-offset-1 col-sm-3" style="margin-left: 30px;">
-									<button onclick="apply();">상담신청</button>
-								</div>
-								<div class="col-sm-4">
-								<c:choose>
-									<c:when test="${sessionScope.id !=null && sessionScope.id != ''}">
-										<button formaction="${path}/buy/insert/${rent.rent_id}" onclick="apply();">다이렉트 계약</button>
-									</c:when>
-									<c:otherwise>
-										<button formaction="${path}/rent/rentListDetail/${rent.rent_id}" onclick="alert('로그인 후 사용가능')">다이렉트 계약</button>
-									</c:otherwise>
-								</c:choose>
-								</div>
-								</dd>
-								<dt class="fs-default">(총 차량 소비자가)</dt>
-								<dd class="fs-default text-r">
-								<div class="col-sm-4" >
-								(<strong class="fs-default" id="totAmt">${String.format('%,d',car.car_price)}</strong>만원)
-								</div>
-								</dd>
-							</dl>
-							<dl>
-								<dt>ddsd</dt>
-							</dl>
-											
-							<div>
-							</div>
-				
-						</div>
-					</div>
-					<!-- ticker-info//end -->
-				</article>
+<article>
+<div class="ticker-info ticker-info--direct">
+<div class="ticker-head">
+<dl class="dl-horizontal">
+<dt>월 렌탈료</dt>
+<dd class="text-r">
+<strong id="totalRental">408,000</strong>
+"원"
+</dd>
+<dt class="fs-default">(총 차량 소비자가)</dt>
+<dd class="fs-default text-r">
+"("<strong class="fs-default" id="totAmt">21,180,000</strong>
+"원)"
+</dd>
+</dl>
+<div class="btn-box-all">
+<div class="btn-box-gray btn2">
+<a href="#none" onclick="openChatLayerPop()">
+<span>맞춤형 렌탈료</span>
+<br>"상담신청"</a></div>
+<div class="btn-box-red btn2">
+<a href="#none" id="btnDirectContract">
+<span>무방문/무서류</span>
+<br>"다이렉트 계약"</a></div></div>
+</div></div></article>
 
 </div></form></div></div></div></div>
 </body>
