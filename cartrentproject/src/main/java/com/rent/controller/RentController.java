@@ -193,13 +193,74 @@ public class RentController {
 		buyIdList = buyService.buyListMember(rent_id); //id가져옴
 		for(int i=0; i < buyIdList.size(); i++) {
 			String id = buyIdList.get(i).getId();
+			//성별
+			String gender = buyService.memberInformation(id).getGender();
+			//나이   mysql에서 소수점 제거해도 소수점 나옴 ;;
+			int age = Integer.parseInt(buyService.memberInformation(id).getDate_of_birth().substring(0, 2));
+
+			System.out.println("======================================");
+			//id에 해당하는 성별을 추출해서 preferenceVO에 해당 정보에 1씩 더한다 (성별)
+			if(gender.equals("남자")) {
+				preference.setMan(preference.getMan()+1);
+				System.out.println("pre Man : "+preference.getMan());;
+			}else {
+				preference.setWomen(preference.getWomen()+1);
+				System.out.println("pre Women : "+preference.getWomen());
+			}
+			//id에 해당하는 정보를 추출해서 preferenceVO에 해당 정보에 1씩 더한다 (나이)
+			if(age >=60) {
+				preference.setSixties(preference.getSixties()+1);
+				System.out.println("60대 "+age);
+			}else if(age >=50) {
+				preference.setFifteen(preference.getFifteen()+1);
+				System.out.println("50대 "+age);
+			}else if(age >=40) {
+				preference.setForties(preference.getForties()+1);
+				System.out.println("40대 "+age);
+			}else if(age >=30) {
+				preference.setThirties(preference.getThirties()+1);
+				System.out.println("30대 "+age);
+			}else if(age >=20) {
+				preference.setTwenties(preference.getTwenties()+1);
+				System.out.println("20대 "+age);
+			}else{
+				System.out.println("나가");
+			}
+			//정보를 추출했으니 총인원수에 +1한다.
+			preference.setTotal(preference.getTotal()+1);
 			
 			System.out.println("아이디 : "+id);
-			System.out.println("나이 : "+ buyService.memberAge(id));
-			System.out.println("성별 : "+ buyService.memberGender(id));
-			
+			System.out.println("나이 : "+ age);
+			System.out.println("성별 : "+ gender);
+			System.out.println();
 			
 		}
+		System.out.println("남자 : "+preference.getMan());
+		System.out.println("여자 : "+preference.getWomen());
+		System.out.println("총인원수 : "+preference.getTotal());
+		System.out.println("20대수 : "+preference.getTwenties());
+		System.out.println("30대수 : "+preference.getThirties());
+		System.out.println("40대수 : "+preference.getForties());
+		System.out.println("50대수 : "+preference.getFifteen());
+		System.out.println("60대수 : "+preference.getSixties());
+		System.out.println("buyIdList.size() : "+ buyIdList.size());
+		int percent;
+		//차를 구매했던 사람이 없으면 0값을 넣어 0을 나누지 못하게한다.
+		if(buyIdList.size() == 0) {
+			percent = 0;
+		}else {
+			percent = 100 / preference.getTotal();
+		}
+		
+		preference.setMan(percent * preference.getMan());
+		preference.setWomen(percent * preference.getWomen());
+		preference.setTwenties(percent * preference.getTwenties());
+		preference.setThirties(percent * preference.getThirties());
+		preference.setForties(percent * preference.getForties());
+		preference.setFifteen(percent * preference.getFifteen());
+		preference.setSixties(percent * preference.getSixties());
+		
+		model.addAttribute("preference", preference);
 		
 		return "/rent/rentListDetail";
 	}

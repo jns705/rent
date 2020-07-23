@@ -21,7 +21,13 @@ public interface AccidentMapper {
 	//전체목록
 	public List<AccidentVO> accidentList() throws Exception;
 	
+	//페이징 전체목록
+	public List<AccidentVO> accidentPagingList() throws Exception;
+	
 	//전체목록
 	public List<AccidentVO> accidentListId(String rent_id) throws Exception;
+	
+	//전체목록 갯수
+	public int totalCount() throws Exception;	
 	
 }

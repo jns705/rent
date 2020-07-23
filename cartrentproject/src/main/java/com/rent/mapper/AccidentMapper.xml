@@ -33,11 +33,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from accident
 	</select>
 	
+	<!-- 사고이력 페이징 전체 목록 -->
+	<select id="accidentPagingList" parameterType="int" resultType="com.rent.domain.AccidentVO">
+		select *
+		from accident
+		order by accident_id
+		limit #{startRow},#{pageSize}
+	</select>
+	
+	
 	<!-- rent_id에 따른 사고이력 전체목록 -->
 	<select id="accidentListId" resultType="com.rent.domain.AccidentVO" parameterType="String">
 		select * 
 		from accident
 		where rent_id = #{rent_id}
 	</select>
-
+	
+	<!-- 전체목록 갯수 -->
+	<select id="totalCount" resultType="int">
+		select count(*)
+		from accident
+	</select>
+	
 </mapper>

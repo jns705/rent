@@ -29,10 +29,7 @@ public interface BuyMapper {
 	public List<BuyVO> buyListMember(String rent_id) throws Exception;
 	
 	//차량 구매한사람들의 아이디로 성별을 나눈다.
-	public MemberVO memberGender(String id) throws Exception;
-	
-	//차량 구매한사람들의 아이디로  나이대를 구한다
-	public MemberVO memberAge(String id) throws Exception;
+	public MemberVO memberInformation(String id) throws Exception;
 	
 		
 }

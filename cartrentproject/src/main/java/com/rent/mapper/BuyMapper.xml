@@ -48,17 +48,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 	</select>
 	
 	<!-- 차량 구매한사람들의 아이디로  성별을 나눈다-->
-	<select id="memberGender" parameterType="String" resultType="com.rent.domain.MemberVO">
-		select	gender,
+	<select id="memberInformation" parameterType="String" resultType="com.rent.domain.MemberVO">
+		select	gender, truncate(date_format(now(),'%Y')-substring(date_of_birth,1,4),0) as date_of_birth,
 			count(if(gender = "남자", gender, null)) as man,
-			count(if(gender = "여자", gender, null)) as women
-		from member
-		where id = #{id}
-	</select>
-	
-	<!-- 차량 구매한사람들의 아이디로  나이대를 구한다-->
-	<select id="memberAge" parameterType="String" resultType="com.rent.domain.MemberVO">
-		select round(date_format(now(),'%Y')-substring(date_of_birth,1,4)) as date_of_birth,
+			count(if(gender = "여자", gender, null)) as women,
 			sum(if(date_format(now(),'%Y')-substring(date_of_birth,1,4) between 20 and 29 , 1, 0)) as twenties,
 			sum(if(date_format(now(),'%Y')-substring(date_of_birth,1,4) between 30 and 39 , 1, 0)) as thirties,
 			sum(if(date_format(now(),'%Y')-substring(date_of_birth,1,4) between 40 and 49 , 1, 0)) as forties,
@@ -67,7 +60,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		from member
 		where id = #{id}
 	</select>
-	
-	
 	
 </mapper>

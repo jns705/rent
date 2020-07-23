@@ -13,8 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rent.domain.AccidentVO;
+import com.rent.domain.CommentVO;
 import com.rent.service.AccidentService;
 import com.rent.service.RentService;
 
@@ -28,11 +30,20 @@ public class AccidentController {
 	@Resource(name = "com.rent.service.RentService")
 	RentService rentService;
 	
-
+	/**
+	 * 사고이력 목록
+	 * @param paging
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/list")
 	public String accidentList(Model model) throws Exception{
+		
 		model.addAttribute("accident", service.accidentList());
 		model.addAttribute("rent", rentService.rentList());
+		model.addAttribute("count", service.totalCount());
+		
 		return "/accident/accidentList";
 	}
 	/**
@@ -95,4 +106,11 @@ public class AccidentController {
 		}
 		return "redirect:/accident/list";
 	}
+	
+//	@RequestMapping("/list")
+//	@ResponseBody
+//	private List<AccidentVO> accidentPagingList() throws Exception {
+//		return ;
+//	}
+	
 }

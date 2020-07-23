@@ -92,11 +92,11 @@
 						<div class="estimate-search-list__information">
 							<div class="tab-menu v8 js-tab-opener2">
 								<ul class="tab-menu__listbox">
-									<li class="tab-menu__list col-6" id="">
+									<li class="preference tab-menu__list col-6" >
 										<a href="#tab-prefer-information1" class="tab-menu__anchor" onclick="btnSlide('preference');">차량선호도</a>
 									</li>
 								<c:if test="${sessionScope.id != null}">
-									<li class="tab-menu__list col-6" id="">
+									<li class="product tab-menu__list col-6" >
 										<a href="#tab-customer-information1" class="tab-menu__anchor" onclick="btnSlide('product')">상품 문의</a>
 									</li>
 								</c:if>	
@@ -136,20 +136,20 @@
 											<div class="gender-prefer clearfix">
 												<div class="gender-prefer__list gender-prefer__list--men">
 													<div class="gender-prefer__graph">
-														<div class="gender-prefer__graph-num" style="height:50%;">남성</div>
+														<div class="gender-prefer__graph-num" style="height:${preference.man}%;">남성</div>
 														<span class="gender-prefer__graph-avatar" aria-hidden="true"></span>
 													</div>
 													<p class="estimate-car-prefer__data-desc">
-														<strong class="estimate-car-prefer__data-num">50</strong>%
+														<strong class="estimate-car-prefer__data-num">${preference.man}</strong>%
 													</p>
 												</div>
 												<div class="gender-prefer__list gender-prefer__list--women">
 													<div class="gender-prefer__graph">
-														<div class="gender-prefer__graph-num" style="height:50%;">여성</div>
+														<div class="gender-prefer__graph-num" style="height:${preference.women}%;">여성</div>
 														<span class="gender-prefer__graph-avatar" aria-hidden="true"></span>
 													</div>
 													<p class="estimate-car-prefer__data-desc">
-														<strong class="estimate-car-prefer__data-num">50</strong>%
+														<strong class="estimate-car-prefer__data-num">${preference.women}</strong>%
 													</p>
 												</div>
 											</div>
@@ -164,8 +164,8 @@
 											<div class="age-prefer clearfix">
 												<div class="age-prefer__list fl">
 													<div class="age-prefer__graph">
-														<div class="age-prefer__graph-value" style="height:22%;">
-															<div class="age-prefer__graph-num" >22%</div>
+														<div class="age-prefer__graph-value" style="height:${preference.twenties}%;">
+															<div class="age-prefer__graph-num" >${preference.twenties}%</div>
 															<span class="age-prefer__graph-stick v1" aria-hidden="true"></span>
 														</div>
 													</div>
@@ -174,8 +174,8 @@
 												<!-- age-prefer__list//end -->
 												<div class="age-prefer__list fl">
 													<div class="age-prefer__graph">
-														<div class="age-prefer__graph-value" style="height:33%;">
-															<div class="age-prefer__graph-num" >33%</div>
+														<div class="age-prefer__graph-value" style="height:${preference.thirties}%;">
+															<div class="age-prefer__graph-num" >${preference.thirties}%</div>
 															<span class="age-prefer__graph-stick v2" aria-hidden="true"></span>
 														</div>
 													</div>
@@ -184,8 +184,8 @@
 												<!-- age-prefer__list//end -->
 												<div class="age-prefer__list fl">
 													<div class="age-prefer__graph">
-														<div class="age-prefer__graph-value" style="height:67%;">
-															<div class="age-prefer__graph-num" >67%</div>
+														<div class="age-prefer__graph-value" style="height:${preference.forties}%;">
+															<div class="age-prefer__graph-num" >${preference.forties}%</div>
 															<span class="age-prefer__graph-stick v3" aria-hidden="true"></span>
 														</div>
 													</div>
@@ -194,8 +194,8 @@
 												<!-- age-prefer__list//end -->
 												<div class="age-prefer__list fl">
 													<div class="age-prefer__graph">
-														<div class="age-prefer__graph-value" style="height:17%;">
-															<div class="age-prefer__graph-num" >17%</div>
+														<div class="age-prefer__graph-value" style="height:${preference.fifteen}%;">
+															<div class="age-prefer__graph-num" >${preference.fifteen}%</div>
 															<span class="age-prefer__graph-stick v4" aria-hidden="true"></span>
 														</div>
 													</div>
@@ -204,8 +204,8 @@
 												<!-- age-prefer__list//end -->
 												<div class="age-prefer__list fl">
 													<div class="age-prefer__graph">
-														<div class="age-prefer__graph-value" style="height:17%;">
-															<div class="age-prefer__graph-num" >17%</div>
+														<div class="age-prefer__graph-value" style="height:${preference.sixties}%;">
+															<div class="age-prefer__graph-num" >${preference.sixties}%</div>
 															<span class="age-prefer__graph-stick v5" aria-hidden="true"></span>
 														</div>
 													</div>
@@ -236,24 +236,28 @@
 								<div class="estimate-car-prefer-info">
 									
 									<p class="msg-info v1">출고일은 제조사 상황에 따라 다를 수 있습니다.</p>
+									<c:if test="${preference.total eq 0}">
+									<p class="msg-info v1"><font color="red" size="5px">해당 자동차는 표본이 적어서 분석할 수 없습니다.</font></p>
+									</c:if>
 								</div>		
 								<!-- estimate-car-prefer-info//end -->
 							</div>
 								
-	<div class="pd25"  >
-	
 							<form class="bs-example form-horizontal" action="${path}/qna/insertProc" method="post">		
 								<input type="hidden" name="rent_id" value="${rent.rent_id }">
 								<input type="hidden" name="subject" value="${car.car_name}">
 								<input type="hidden" name="writer" value="${sessionScope.id}">
-								<div class="review_bigbox" id="product"  style="display: none;">
+								
+							<div class="review_bigbox" id="product"  style="display: none;">
+								<div class="tab-content" >
 									<ul class="review_step1_ul">
 										<li id="lockSt" class="lock_off"></li>
 										<li><textarea id="regTextArea" name="content" placeholder="상품에 대한 문의는 100자이내로 작성해 주세요."></textarea></li>
-										<li><button type="submit" >등록</button> &nbsp; 비밀글<label><input type="checkbox" id="check_yn"></label></li>
-										<li><div class="form-group pwd" id="pwd"><div id="pwevt"></div></div></li>
+										<li style="float :left;"><button type="submit" style="margin-top: 0px;">등록</button> &nbsp; 비밀글  &nbsp; <input type="checkbox" id="check_yn"></li>
+										<li style="float :right; width:75%;"><div class="form-group pwd" id="pwd"></div></li>
 									</ul>	
 								</div>
+							</div>
 <script>
 var str ='';
 	str += '<div id="pwevt">';
@@ -533,7 +537,7 @@ img {
 <br><font color="white">다이렉트 계약</font></button></div></div>
 </div></div></article>
 
-</div></form></div></div></div></div>
+</div></form></div></div></div>
 </body>
 </html>
 </body>
@@ -577,15 +581,22 @@ function driving(e) {
 function btnSlide(id){
 	//if		($('#'+id).is(":visible")) $('#'+id).slideUp(); 슬라이드 효과
 	//else  	$('#'+id).slideDown();
-	if		($('#'+id).is(":visible")) $('#'+id).hide();
-	else  	$('#'+id).show();
+	if($('#'+id).is(":visible")) {
+		 $('#'+id).hide();
+		 $('.'+id).removeClass("selected");
+	}else{
+	  	$('#'+id).show();
+	  	$('.'+id).addClass("selected");
+	}
 	
 	if(id == "product") {
 		//if		($('#'+id).is(":visible")) $("#preference").slideUp();
 		if		($('#'+id).is(":visible")) $("#preference").hide();
+		 $(".preference").removeClass("selected");
 	}else if(id == "preference") {
 		//if		($('#'+id).is(":visible")) $("#product").slideUp();
 		if		($('#'+id).is(":visible")) $("#product").hide();
+		 $(".product").removeClass("selected");
 	}
 }    
 

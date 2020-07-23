@@ -9,16 +9,17 @@ import lombok.ToString;
 @ToString
 public class PreferenceVO {
 	//성별
-	private int man;		//남자
+	private int man;	//남자
 	private int women;	//여자
-	private int gender;	//사람수
 	
 	//나이대
 	private int twenties;	//20대
 	private int thirties;	//30대
-	private int forties;		//40대
-	private int fifteen;		//50대
-	private int sixties;		//60대
-	private int age;			//사람수
+	private int forties;	//40대
+	private int fifteen;	//50대
+	private int sixties;	//60대
+	
+	//총인원수
+	private int total;
 	
 }

@@ -46,13 +46,8 @@ public class BuyService {
 		return mapper.buyListMember(rent_id);
 	}
 	
-	//차량 구매한사람들의 아이디로 성별을 나눈다.
-	public MemberVO memberGender(String id) throws Exception {
-		return mapper.memberGender(id);
-	}
-	
-	//차량 구매한사람들의 아이디로  나이대를 구한다
-	public MemberVO memberAge(String id) throws Exception {
-		return mapper.memberAge(id);
+	//차량 구매한사람들의 아이디로 성별과 나이를 찾는다.
+	public MemberVO memberInformation(String id) throws Exception {
+		return mapper.memberInformation(id);
 	}
 }

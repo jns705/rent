@@ -39,12 +39,20 @@ public class AccidentService {
 		return mapper.accidentList();
 	}
 	
+	//페이징 전체목록
+	public List<AccidentVO> accidentPagingList() throws Exception {
+		return mapper.accidentPagingList();
+	}
+	
 	//렌트 아이디에 따른 전체목록
 	public List<AccidentVO> accidentListId(String rent_id) throws Exception{
 		System.out.println("accidentListId() 실행중. . .");
 		return mapper.accidentListId(rent_id);
 	}
 	
-	
+	//전체목록 갯수
+	public int totalCount() throws Exception {
+		return mapper.totalCount();
+	}
 	
 }
