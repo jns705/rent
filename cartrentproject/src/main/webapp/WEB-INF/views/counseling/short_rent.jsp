@@ -1253,8 +1253,6 @@ function btnSlide(id){
     margin-top: 210px;
     line-height: 13px;
 }
-p {
-}
 </style>      
                                     
                                     	<dt id="reserv">이름<span id="reservNm"></span></dt>
