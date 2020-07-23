@@ -75,6 +75,9 @@ public class RentService {
 		return mapper.carKindList(temp);
 	}
 	
-	
+	//차량 아이디로 금액
+	public String getPrice(String car_id)throws Exception{
+		return mapper.getPrice(car_id);
+	}
 	
 }
