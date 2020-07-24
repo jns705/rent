@@ -5,41 +5,28 @@
 <c:set var="URL" value="${pageContext.request.requestURL}" />
 
 	    <!-- header 시작 -->
-    <nav class="navbar navbar-default">
-    	<a class="navbar-brand" href="${path}/main">
-    		<!-- <img alt="Brand" src="/resources/images/toplogo_w.png" /> -->
-    		<img alt="Brand" src="http://localhost:8082/static/img/logo2.png"  style="margin-top:-10px;" height="50" width="70px;"/>
-    	</a>
-        <div class="container" style="width: 1000px;">
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse"
-                id="bs-example-navbar-collapse-1" style="width: 1000px;">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-menu <c:if test="${fn : contains(URL, 'List')}">active</c:if> " id="longRent"><a href="${path}/rent/rentList">장기렌트</a></li>
-                    <li class="nav-menu" id="lease">
-                    	<a href="/rent/main.do">
-                    		<span>리스 </span>
-                    		<span style="font-size: 13px;">(화물차포함)</span>
-                    	</a>
-                    </li>
-                    <li class="nav-menu" id="secondhand"><a href="#">재렌트·재리스</a></li>
-                    
-                    <li class="nav-menu" id="month"><a href="#">월렌트</a></li>
-                    
-                    <li class="nav-menu nav-estimate primary" id="estimate-span"><a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;실시간 견적</a></li>
-                    
-                    <li class="nav-menu nav-call primary" id="company"><a href="${path}/qna/insert"><span class="glyphicon glyphicon-earphone"></span>&nbsp;간편상담</a></li>
-                    	<c:if test="${sessionScope.id eq null}">
-						<li class="nav-menu nav-login <c:if test="${fn : contains(URL, 'login')}"> active</c:if> "><a href="${path}/member/loginForm"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-						</c:if>
-                    	<c:if test="${sessionScope.id != null}">
-						<li class="nav-menu nav-login <c:if test="${fn : contains(URL, 'login')}"> active</c:if> "><a href="${path}/member/logOut"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
-						</c:if>
-						
-					<c:if test="${sessionScope.id eq 'master'}">
+ <header id="menuHeader11" class="hc" >
+	<div class="header-wrapper">
+		<h1 id="menuHeaderLogoH1" >
+			<a href="/main">SK렌터카</a>
+		</h1>		
+		<nav id="util" >
+			<ul>
+				<li>
+				<c:if test="${sessionScope.id == null}"><a href="/member/loginForm" class="awaw">로그인</a></c:if>
+				<c:if test="${sessionScope.id != null}"><a href="/member/logOut" class="awaw">로그아웃</a></c:if>
+				</li>
+				<li>
+					<a href="/rent/prmt/evnt/evnt_list.do" id="awawaaaa" class="awaw">이벤트</a>
+				</li>
+				<li>
+					<a href="/rent/custcnte/notice/notice_list.do" class="awaw">고객센터</a>
+				</li>
+				
+			<c:if test="${sessionScope.id eq 'master'}">
                     <li class="nav-menu nav-estimate primary dropdown" id="estimate-span">
                     <a href="${path}/admin"class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;관리자 메뉴&nbsp;<span class="caret"></span></a>
+                    </span>&nbsp;관리자 메뉴&nbsp;<span class="caret"></span></a>
 				 	<ul class="dropdown-menu" role="menu">
 				 		<li><a href="${path}/admin/carInsert">차량등록</a></li>
 				 		<li><a href="${path}/admin/rentInsertForm">렌트등록</a></li>
@@ -53,20 +40,34 @@
 				 	</ul>
                     </li>
                     </c:if>	
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-    </nav>
+		</nav>
+		<nav class="gnb hc" id="menuHeader12" tabindex="0">
+			<h2 class="sr-only ">메인 메뉴</h2>
+			<div class="gnb-wrapper">
+				<ul class="gnb-listbox" >
+					<li class="gnb-listitem gnb-listitem-long">
+					
+						<a href="/rent/rentList" class="gnb-anchor awaw" style="left: auto; right: 0px;">장기렌터카</a>
+					</li>
+					<li class="gnb-listitem gnb-listitem-short">
+						<a href="/rent/main.do" class="gnb-anchor awaw"   style="left: 60px; width: 100px;">단기렌터카</a>
+					</li>
+				</ul>
+			</div>
+						
+		</nav>
+		<div class="header-placeholder"><div class="header-placeholder-bg"></div></div>
+	</div>
+</header>
     <!-- header 끝 -->
     
  	<div class="quick-menu" style="z-index: 1000 !important;">
 	    <ul>
 	    	<li class="menu1">
-            	<a href="/rent/rentList">단기예약</a>
+            	<a href="/rent/main.do">단기예약</a>
 	       	</li>
 	    	<li class="menu2">
-	            <a href="/rent/main.do">중고차 렌터카</a>
+	            <a href="/rent/rentList">중고차 렌터카</a>
 	        </li>
 	        <li class="menu3">
 	            <a href="/rent/NewRentList">다이렉트견적</a>
@@ -81,7 +82,50 @@
     <a href="#top" id="aaaaaa" class="btn-top">TOP</a>
 </div>
     
+<c:if test="${fn : contains(URL, 'main.do')}">
 <style>
+header a {
+	color : white !important;
+}
+#menuHeader11 , #menuHeader12{
+	background-color:  transparent;
+}
+</style>
+</c:if>
+<style>
+body {
+	margin-top: 140px;
+}
+
+.content {
+	margin-top: 140px;
+}
+header h1 a {
+    display: block;
+    text-indent: -9999px;
+    width: 107px;
+    height: 51px;
+    background-image: url(/resources/img/spr-common.png);
+    background-repeat: no-repeat;
+    background-position: -264px -586px;
+    -webkit-background-size: 1347px 1290px;
+    background-size: 1347px 1290px;
+    text-indent: 1000%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+header .gnb .gnb-anchor {
+    position: absolute;
+    top: 30px;
+    z-index: 1;
+    font-family: NanumBarunGothic;
+    font-size: 22px;
+    line-height: 1.5em;
+    color: #333;
+    letter-spacing: -.020em;
+    -webkit-transition: color .3s ease-out;
+    transition: color .3s ease-out;
+}
 @charset "UTF-8";
 * {
   font-family: Noto Sans KR,sans-serif;
@@ -109,7 +153,6 @@ label {
 .btn-default-reverse:hover, .btn-default-reverse:focus, .btn-default-reverse.active {
   color: #fff !important; }
 
-/* layout > header > navbar */
 .nav > li > a {
   font-size: 17px;
   padding-left: 15px !important;
@@ -333,7 +376,6 @@ details,
 figcaption,
 figure,
 footer,
-header,
 hgroup,
 main,
 menu,
@@ -1124,8 +1166,6 @@ th {
 .glyphicon-cutlery:before {
   content: "\e179"; }
 
-.glyphicon-header:before {
-  content: "\e180"; }
 
 .glyphicon-compressed:before {
   content: "\e181"; }
@@ -1662,10 +1702,6 @@ a.bg-danger:hover,
 a.bg-danger:focus {
   background-color: #e4b9b9; }
 
-.page-header {
-  padding-bottom: 9px;
-  margin: 40px 0 20px;
-  border-bottom: 1px solid #eeeeee; }
 
 ul,
 ol {
@@ -3569,13 +3605,6 @@ tbody.collapse.in {
   left: 0;
   right: auto; }
 
-.dropdown-header {
-  display: block;
-  padding: 3px 20px;
-  font-size: 12px;
-  line-height: 1.42857;
-  color: #777777;
-  white-space: nowrap; }
 
 .dropdown-backdrop {
   position: fixed;
@@ -4010,14 +4039,6 @@ tbody.collapse.in {
     .navbar {
       border-radius: 0px; } }
 
-.navbar-header:before, .navbar-header:after {
-  content: " ";
-  display: table; }
-.navbar-header:after {
-  clear: both; }
-@media (min-width: 768px) {
-  .navbar-header {
-    float: left; } }
 
 .navbar-collapse {
   overflow-x: visible;
@@ -4057,16 +4078,12 @@ tbody.collapse.in {
     .navbar-fixed-bottom .navbar-collapse {
       max-height: 200px; } }
 
-.container > .navbar-header,
 .container > .navbar-collapse,
-.container-fluid > .navbar-header,
 .container-fluid > .navbar-collapse {
   margin-right: -15px;
   margin-left: -15px; }
   @media (min-width: 768px) {
-    .container > .navbar-header,
     .container > .navbar-collapse,
-    .container-fluid > .navbar-header,
     .container-fluid > .navbar-collapse {
       margin-right: 0;
       margin-left: 0; } }
@@ -5440,17 +5457,6 @@ button.close {
     opacity: 0.5;
     filter: alpha(opacity=50); }
 
-.modal-header {
-  padding: 15px;
-  border-bottom: 1px solid #e5e5e5; }
-  .modal-header:before, .modal-header:after {
-    content: " ";
-    display: table; }
-  .modal-header:after {
-    clear: both; }
-
-.modal-header .close {
-  margin-top: -2px; }
 
 .modal-title {
   margin: 0;

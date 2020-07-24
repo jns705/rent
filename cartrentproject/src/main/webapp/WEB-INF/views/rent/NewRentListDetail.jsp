@@ -10,13 +10,15 @@
 <head>
     <title>솔렌터카</title>
 </head>
-
-<body id="" class="longterm-section type-reverse">
+<form action="${path}/counseling/newRent" method="get" id="newCarForm">
+<body id="body" class="longterm-section type-reverse">
 <div id="content">
 	<div id="container">
 		<div class="breadcrumbs">
 			<h2 class="tit">솔장기렌터카 다이렉트</h2>
 			<input class="hidden" id="pricea" value="${rent.price}">
+			<input class="hidden" name="month" value="48">
+			<input class="hidden" name="color" value="${color[0].color}">
 			<div class="clearfix">
 				<span>홈</span>
 				<span>장기렌터카</span>
@@ -145,6 +147,10 @@ function price(data){
 	$('#totalRental').html(nf(  Math.ceil(Number(price) * Number(temp)/100)*100 ));
 	$('#totAmt').html(nf(price*($('input[name="cntrTermMm"]:checked').val())));
 }
+
+function colorName(data){
+	$('[name=color]').val(data);
+}
 </script>
 								<div class="form-group__body" id="f1" >
 									<div class="estimate-information clearfix">
@@ -171,8 +177,8 @@ function price(data){
 											<div class="tab-menu v10">
 												<ul class="tab-menu__listbox">
 													<c:forEach items="${color}" var="color" varStatus="status">
-													<li class="tab-menu__list col-6 a${status.index} <c:if test="${status.index eq 0}">selected</c:if> ">
-														<a href="###" class="tab-menu__anchor" onclick="showColor('${status.index}');">${color.color}</a>
+													<li class="tab-menu__list col-6 a${status.index} <c:if test="${status.index eq 0}">selected</c:if> " >
+														<a href="###" class="tab-menu__anchor" onclick="showColor('${status.index}'); colorName('${color.color}');">${color.color}</a>
 													</li>
 													</c:forEach>
 												</ul>
@@ -411,14 +417,14 @@ function price(data){
 													<div class="radio-box row-2 clearfix">
 														<div class="col-2 fl">
 				                                            <span class="radio v7">
-				                                                <input type="radio" id="cntrTermMm2" name="cntrTermMm" value="36" onchange="price();">
+				                                                <input type="radio" id="cntrTermMm2" name="cntrTermMm" value="36" onchange="price(); sMonth('36');">
 	                                               				<label for="cntrTermMm2">36 개월</label>
 				                                            </span>
 														</div>
 														<!-- col//end -->
 														<div class="col-2 fl">
 				                                            <span class="radio v7">
-				                                                <input  checked type="radio" id="cntrTermMm3" name="cntrTermMm" value="48" onchange="price();">
+				                                                <input  checked type="radio" id="cntrTermMm3" name="cntrTermMm" value="48" onchange="price(); sMonth('48');">
 	                                               				<label for="cntrTermMm3">48 개월</label>
 				                                            </span>
 														</div>
@@ -521,7 +527,7 @@ function price(data){
 							</dl>
  							<div class="btn-box-all">
 								<div class="btn-box-gray btn2">
-									<a href="#none" onclick="openChatLayerPop()"><span>맞춤형 렌탈료</span><br>상담신청</a>
+									<a href="#none" onclick="counseling();"><span>맞춤형 렌탈료</span><br>상담신청</a>
 								</div>
 										
 								<div class="btn-box-red btn2">
@@ -530,20 +536,21 @@ function price(data){
 							</div>
 							<script type="text/javascript">
 								function direct(){
-									if($('#article').is(":hidden"))
 									$('#article').css("display","block");
-									else
-									$('#article').css("display","none");
+									$('.buy').removeClass('hidden');
+									$('.counseling').addClass('hidden');
+									
+								}
+
+								function counseling(){
+										$('#article').css("display","block");
+										$('.counseling').removeClass('hidden');
+										$('.buy').addClass('hidden');
 								}
 							</script>
-							<!-- 180801 다이렉트 버튼 수정 끝 -->
 							
+							<!-- 180801 다이렉트 버튼 수정 끝 -->
 						</div><!-- ticker-head//end -->
-												
-						
-						<!-- ticker-head//end -->
-									
-						
 					</div>
 					<!-- ticker-info//end -->
 				</article>
@@ -1137,15 +1144,16 @@ function btnSlide(id){
                         <p class="msg-info v1">고객님께서는 동의를 거부할 권리가 있으나, 미 동의시 렌터카 서비스 이용이 불가능합니다.</p>
                     </div>
                     <!-- article-content//end -->
-					<input placeholder="이름 입력" value=""><input placeholder="생년월일(8자리) 입력" value=""><input placeholder="휴대폰번호 (-없이)입력" value=""><br>
-					                       <div class=" clearfix">
+					<input placeholder="이름 입력" name="name" value="${detail.name}"><input placeholder="생년월일(8자리) 입력" name="" value="${detail.date_of_birth}"><input name="tel" placeholder="휴대폰번호 (-없이)입력" value="${tel[0]}${tel[1]}${tel[2]}"><br>
+					<input class="hidden" name="rent_id" value="${rent.rent_id}"> 
+		                       <div class=" clearfix">
                         	<div class="email-input  col-1 maa0" id="alert-email"><!-- 20170705 : 경고 알럿 노출 될 경우 msg-alert 추가 부탁 드립니다. -->
                                 <span class="col-3">
                                     <label><input oninput="carPrice();" type="text" placeholder="이메일 입력" class="checkEmail" name="emailId" id="emailId" value=""  maxlength="30"/></label>
                                 </span>
                                 <span class="hyphen col-3">
                                     <span class="text">@</span>
-                                    <input oninput="carPrice();" type="text" placeholder="직접 입력" class="checkEmail" name="domain" id="email1" value=""  maxlength="30" />
+                                    <input oninput="carPrice();" type="text" placeholder="직접 입력" class="checkEmail" name="email" id="email1" value=""  maxlength="30" />
                                 </span>
                                 <span class="select-box col-3">
                                     <select name="" id="email2" class="option01" onchange="emailInput(); carPrice();">
@@ -1193,24 +1201,37 @@ function btnSlide(id){
                                         <a href="#none" class="btn btn-default btn-fix2 fr" onclick="daumZipCode();" id="addrSearchBtn">우편번호 검색</a>
                                     </span>
                                     <span class="msg-txt cl-point1" id="span-addr"></span>
+                                			<div class="input-row brt0 pat0">
+			</div>
                                 </div>
+                                
+				<div class="col-1">
+					<span class="">
+					<textarea class="counseling hidden" placeholder="문의 내용 입력" name="contents"></textarea>
+				</span>
+				</div>
+                                
                             </div>
                             <div class="step-btn-box btn-box text-c">
                             
                             
                 <a href="#" class="btn btn-line1 btn-large btn-fix2" >취소</a>
                 <!-- 활성화 전에는 btn-color4 , 활성화 후에는 btn-color1로 셋팅 부탁 드립니다 -->
-                <button type="submit" class="btn btn-color1 btn-large btn-fix2" onclick="nextPage();">다음</button>
+                <button type="submit" class="btn btn-color2 btn-large btn-fix2 buy hidden">상담신청</button>
+                <button type="button" class="btn btn-color1 btn-large btn-fix2 counseling hidden" onclick="nextPage();">구매신청</button>
             </div>
 					                    
                 </article>
 			</div>
 	</div>
+	</div>
+	
 	<!-- container//end -->
 </div>
-
-
 </body>
+
+
+</form>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 //주소를 가져오기 위한 검색
@@ -1257,11 +1278,19 @@ function daumZipCode(){
 	
 	
 }
-
+//바이 서밋
+function nextPage(){
+	$("#newCarForm").attr("action", "${path}/buy/newRent");
+	$("#newCarForm").submit();
+}
 
 //이메일 선택 시 메일 값을 넣는다
 function emailInput(){
 	$('#email1').val($('#email2').val());
+}
+
+function sMonth(data){
+	$('[name=month]').val(data);
 }
 </script>
 </html>

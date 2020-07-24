@@ -164,7 +164,7 @@
 						<div class="searchBar">
 							<input name="car_number" id="usedCarNo" class="searchBar_input" type="text" title="키워드" placeholder="차량번호로 검색">
 							<div class="searchBarBtn" >
-								<font size="+1"><span class="glyphicon glyphicon-search"  onclick="searchForm();"></span></font>
+								<font size="+1" ><span class="glyphicon glyphicon-search"  onclick="searchForm();" style="margin-top: 9px;"></span></font>
 							</div>
 						</div>
 					</div>

@@ -14,7 +14,7 @@
 </head>
 <body>
 <form action="/counseling/mainProc" method="get" name="proc">
-				<div class="spot short type2">
+				<div class="spot short type2" style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동촤.gif')">
 					<div class="spot-wrapper">
 						<div class="heading">
 							<h2 class="tit">즐거운 여행의 시작</h2>
@@ -117,6 +117,7 @@
 										
 											
 												<a href="/rent/rentcar/short_rent_reservation_confirm.do" class="btn-reserve-confirm">예약확인</a>
+												
 									</div>
 								</div>
 							</div>
@@ -255,6 +256,25 @@ function jeju(){
     	   
        changeDate();
     }
+
+
+  $(document).scrollTop();
+
+  //1947값 이상일시 class를 바꾼다
+  $(window).scroll(function () {
+  	var scrollValue = $(document).scrollTop();
+  	if(scrollValue != 0){
+  		$('#menuHeader11').css('background-color','white');
+  		$('#menuHeader12').css('background-color','white');
+  		$('.awaw').css('color','black');
+  	}else{
+  		$('#menuHeader11').css('background-color','transparent');
+  		$('#menuHeader12').css('background-color','transparent');
+  		$('#menuHeader12').css('background-color','transparent');
+  		$('.awaw').css('color','white');
+  		
+  	}});
+
 </script>
 
 

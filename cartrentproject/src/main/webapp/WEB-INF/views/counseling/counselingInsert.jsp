@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags" %>
@@ -53,7 +53,7 @@
 				<div class="area-input select-input clearfix">
 					<div class="form-group">
 						<label for="address1">주소</label>
-						<input type="text" class="form-control" id="address" name="address" placeholder="주소를 입력하세요." readonly/>
+						<input type="text" class="f	l" id="address" name="address" placeholder="주소를 입력하세요." readonly/>
 						<input type="button" class="form-control" onclick="daumZipCode()" value="주소찾기">
 					</div>
 				</div>

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -29,12 +30,16 @@ import com.rent.service.BuyService;
 import com.rent.service.CarColorService;
 import com.rent.service.CarOptionService;
 import com.rent.service.CarService;
+import com.rent.service.MemberService;
 import com.rent.service.RentImageService;
 import com.rent.service.RentService;
 
 @Controller
 @RequestMapping("/rent")
 public class RentController {
+	@Resource(name="com.rent.service.MemberService")
+	MemberService mMemberService;	
+	
 	@Resource(name = "com.rent.service.CarColorService")
 	CarColorService colorService;
 
@@ -223,7 +228,17 @@ public class RentController {
 	}
 	
 	@RequestMapping("/NewRentListDetail/{rent_id}")
-	public String NewRentListDetail(Model model, @PathVariable String rent_id)throws Exception{
+	public String NewRentListDetail(Model model, @PathVariable String rent_id, HttpSession session)throws Exception{		
+	String id = (String)(session.getAttribute("id"));
+	if(id != null) {
+	MemberVO list = mMemberService.accountDetail(id);
+	String [] address = list.getAddress().split("/");
+	String [] tel = list.getTel().split("\\|");
+	
+	model.addAttribute("address", address);
+	model.addAttribute("tel", tel);
+	model.addAttribute("detail", list);
+	}
 		RentVO rent 	= rentService.rentDetail(rent_id);
 		System.out.println("aa"+rent);
 		String car_id 	= Integer.toString(rent.getCar_id());
@@ -247,4 +262,7 @@ public class RentController {
 		
 		return color;
 	}
+	
+	
+	
 }
