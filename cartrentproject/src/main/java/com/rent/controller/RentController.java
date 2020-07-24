@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rent.domain.BuyVO;
+import com.rent.domain.CarColor;
 import com.rent.domain.CarVO;
 import com.rent.domain.MemberVO;
 import com.rent.domain.OptionCarVO;
@@ -25,15 +27,22 @@ import com.rent.domain.RentImageVO;
 import com.rent.domain.RentVO;
 import com.rent.domain.RentListVO;
 import com.rent.service.BuyService;
+import com.rent.service.CarColorService;
 import com.rent.service.CarOptionService;
 import com.rent.service.CarService;
+import com.rent.service.MemberService;
 import com.rent.service.RentImageService;
 import com.rent.service.RentService;
 
 @Controller
 @RequestMapping("/rent")
 public class RentController {
+	@Resource(name="com.rent.service.MemberService")
+	MemberService mMemberService;	
 	
+	@Resource(name = "com.rent.service.CarColorService")
+	CarColorService colorService;
+
 	@Resource(name = "com.rent.service.CarService")
 	CarService carService;
 	
@@ -278,5 +287,43 @@ public class RentController {
 	public String NewRentList(Model model) throws Exception{
 		return "/rent/NewRentList";
 	}
-
+	
+	@RequestMapping("/NewRentListDetail/{rent_id}")
+	public String NewRentListDetail(Model model, @PathVariable String rent_id, HttpSession session)throws Exception{		
+	String id = (String)(session.getAttribute("id"));
+	if(id != null) {
+	MemberVO list = mMemberService.accountDetail(id);
+	String [] address = list.getAddress().split("/");
+	String [] tel = list.getTel().split("\\|");
+	
+	model.addAttribute("address", address);
+	model.addAttribute("tel", tel);
+	model.addAttribute("detail", list);
+	}
+		RentVO rent 	= rentService.rentDetail(rent_id);
+		System.out.println("aa"+rent);
+		String car_id 	= Integer.toString(rent.getCar_id());
+		
+		model.addAttribute("rent"	, rent);
+		model.addAttribute("car"	, carService.carDetail(car_id));
+		model.addAttribute("color"	, colorService.colorDetail(car_id));
+		model.addAttribute("option"	, opService.optionDetail(rent_id));
+		
+		return "/rent/NewRentListDetail";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/rentColorProc")
+	public CarColor rentColorProc(Model model, @RequestParam String rent_id, @RequestParam int index)throws Exception{
+		RentVO rent 	= rentService.rentDetail(rent_id);
+		String car_id 	= Integer.toString(rent.getCar_id());
+		CarColor color = colorService.colorDetail(car_id).get(index);
+		color.setCar_id(Integer.parseInt(rent_id));
+		color.setColor(rentService.getPrice(car_id));
+		
+		return color;
+	}
+	
+	
+	
 }

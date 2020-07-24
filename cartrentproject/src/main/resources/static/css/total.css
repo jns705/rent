@@ -970,7 +970,7 @@ footer .footer-wrapper .footer-info .site-info span:nth-child(5):after{display: 
 	content:"";
 	width: 32px;
     height: 30px;
-    background-image: url(/resources/img/icon_reqt_red.png);
+    background-image: url(http://localhost:8082/static/img/icon_rept_red.png);
     background-repeat: no-repeat;
     background-position: inherit;
     -webkit-background-size: inherit;

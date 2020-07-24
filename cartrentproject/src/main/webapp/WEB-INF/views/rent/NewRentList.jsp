@@ -90,7 +90,7 @@ function searchForm(click){
 		success : function(data){
 			var str = '<div class="result_bigbox" id="result_bigbox_list" style="margin:0px">';
 			$.each(data.rentList, function(key, value){
-				str += '<a href="#"><div class="result_box" onclick="location.href=\'/rent/rentListDetail/'+ value.rent_id +'\'">'+
+				str += '<a href="#"><div class="result_box" onclick="location.href=\'/rent/NewRentListDetail/'+ value.rent_id +'\'">'+
 				'<div class="car-list__sticker special">신차</div>'+
 			'<div class="result_box_top ">'+
 					'<div class="result_img user_car">'+

@@ -60,7 +60,6 @@ th{text-align: center;}
                 </li>
                 <li class="fl col-3 ing">
                    <span>
-                       <strong>3</strong>
                        <span>예약/결제완료</span>
                    </span>
                 </li>

@@ -66,4 +66,7 @@ public interface RentMapper {
 	
 	//삭제
 	public int priceDelete(String rentPrice_id) throws Exception;
+	
+	//차량아이디로 금액
+	public String getPrice(String car_id)throws Exception;
 }

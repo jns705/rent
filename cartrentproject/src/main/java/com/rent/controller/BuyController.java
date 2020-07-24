@@ -237,6 +237,15 @@ public class BuyController {
 		return "/buy/short_rentList";
 	}
 	
+	@RequestMapping("/newRent")
+	public String newRent(BuyVO list, HttpSession session) throws Exception{
+		list.setId((String)session.getAttribute("id"));
+		if(session.getAttribute("id")==null || session.getAttribute("id").equals("")) list.setId("비회원");
+		list.setOption_name("파퓰러 패키지,빌트인 캠 패키지");
+		buyService.rentBuyInsert(list);
+		return "/counseling/short_rent";
+	}
+	
 	
 	
 }

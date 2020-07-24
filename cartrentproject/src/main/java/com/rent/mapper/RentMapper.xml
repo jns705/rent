@@ -145,4 +145,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set standby_personnel = #{standby_personnel}, situation = #{situation}
 		where rent_id = #{rent_id}
 	</update>
+	
+	<select id="getPrice" resultType="String" parameterType="String">
+		SELECT	PRICE
+		FROM	RENT
+		WHERE	special_note = '신차' and car_id = #{car_id}
+	</select>
 </mapper>

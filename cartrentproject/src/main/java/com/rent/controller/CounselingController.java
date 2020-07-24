@@ -252,16 +252,25 @@ public class CounselingController {
 	
 	@RequestMapping("/short_rentDetail")
 	@ResponseBody
-	public Map<String, Object> short_rentDetail(Model model, RentVO rent) throws Exception{
+	public Map<String, Object> short_rentDetail(Model model, RentVO rent, HttpSession session) throws Exception{
 		String [] carKind = {"소형", "중형", "준중형", "대형", "RV", "친환경차"};
 		Map<String, Object> map = new HashMap<String, Object>();
 		for(int i = 0; i < 7; i ++) {
 			rent.setCar_id(i);
 			map.put("a"+i,rentService.carKindList(rent));
-			System.out.println(rentService.carKindList(rent));
 		}
 		map.put("carKind",  carKind);
 		return map;
+	}
+	
+	@RequestMapping("/newRent")
+	public String newRent(CounselingVO list, HttpSession session) throws Exception{
+		list.setId((String)session.getAttribute("id"));
+		if(session.getAttribute("id")==null || session.getAttribute("id").equals("")) list.setId("비회원");
+		list.setOption_name("파퓰러 패키지,빌트인 캠 패키지");
+		list.setCounseling_situation("상담 대기중");
+		couService.counselingInsert(list);
+		return "/counseling/short_rent";
 	}
 	
 	
