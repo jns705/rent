@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.rent.domain.AccidentVO;
+import com.rent.domain.PageMaker;
 
 @Repository("com.rent.mapper.AccidentMapper")
 public interface AccidentMapper {
@@ -21,8 +22,11 @@ public interface AccidentMapper {
 	//전체목록
 	public List<AccidentVO> accidentList() throws Exception;
 	
-	//페이징 전체목록
-	public List<AccidentVO> accidentPagingList() throws Exception;
+	//스크롤페이징 목록 불러오기 (스크롤다운)
+	public List<AccidentVO> scrollDown(int accident_id) throws Exception;
+	
+	//스크롤페이징 목록 불러오기 (스크롤업)
+	public List<AccidentVO> scrollUp(int accident_id) throws Exception;
 	
 	//전체목록
 	public List<AccidentVO> accidentListId(String rent_id) throws Exception;

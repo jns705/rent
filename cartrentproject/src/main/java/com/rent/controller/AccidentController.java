@@ -11,12 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rent.domain.AccidentVO;
 import com.rent.domain.CommentVO;
+import com.rent.domain.PageMaker;
+import com.rent.domain.PagingCriteria;
 import com.rent.service.AccidentService;
 import com.rent.service.RentService;
 
@@ -39,13 +42,34 @@ public class AccidentController {
 	 */
 	@RequestMapping("/list")
 	public String accidentList(Model model) throws Exception{
+		int total = service.totalCount();
+		
+		System.out.println(total);
 		
 		model.addAttribute("accident", service.accidentList());
 		model.addAttribute("rent", rentService.rentList());
-		model.addAttribute("count", service.totalCount());
 		
 		return "/accident/accidentList";
 	}
+	
+	@RequestMapping("/scrollDown")
+	public @ResponseBody List<AccidentVO> scrollDown(@RequestBody AccidentVO accident) throws Exception {
+		
+		Integer idToStart = accident.getAccident_id()-1;
+		System.out.println("scrollDwon id : " + idToStart);
+		
+		return service.scrollDown(idToStart);
+	}
+	@RequestMapping("/scrollUp")
+	public @ResponseBody List<AccidentVO> scrollUp(@RequestBody AccidentVO accident) throws Exception {
+		
+		Integer idToStart = accident.getAccident_id()+1;
+		System.out.println("scrollUp id : " + idToStart);
+		
+		return service.scrollDown(idToStart);
+	}
+	
+	
 	/**
 	 * 사고이력 등록
 	 * @param accident
@@ -106,11 +130,5 @@ public class AccidentController {
 		}
 		return "redirect:/accident/list";
 	}
-	
-//	@RequestMapping("/list")
-//	@ResponseBody
-//	private List<AccidentVO> accidentPagingList() throws Exception {
-//		return ;
-//	}
 	
 }

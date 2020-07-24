@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.rent.domain.AccidentVO;
+import com.rent.domain.PageMaker;
 import com.rent.mapper.AccidentMapper;
 
 @Service("com.rent.service.AccidentService")
@@ -39,9 +40,13 @@ public class AccidentService {
 		return mapper.accidentList();
 	}
 	
-	//페이징 전체목록
-	public List<AccidentVO> accidentPagingList() throws Exception {
-		return mapper.accidentPagingList();
+	//스크롤 페이징 목록 불러오기 (스크롤다운)
+	public List<AccidentVO> scrollDown(int accident_id) throws Exception {
+		return mapper.scrollDown(accident_id);
+	}
+	//스크롤페이징 목록 불러오기 (스크롤업)
+	public List<AccidentVO> scrollUp(int accident_id) throws Exception {
+		return mapper.scrollUp(accident_id);
 	}
 	
 	//렌트 아이디에 따른 전체목록
