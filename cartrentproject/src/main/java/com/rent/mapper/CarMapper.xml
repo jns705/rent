@@ -79,5 +79,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		where car_id = #{car_id}
 	</update>
 	
+	<!-- 렌트아이디로 차량이름 조회 -->
+	<select id="carName" parameterType="String" resultType="String">
+		SELECT	CAR_NAME
+		FROM	CAR
+		WHERE	CAR_ID = #{car_id}
+	</select>
 	
 </mapper>

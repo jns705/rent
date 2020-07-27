@@ -3,6 +3,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags" %>
+      	<c:if test="${sessionScope.id != null and check == 0}">
+      		<script type="text/javascript">
+				location.href="/buy/short_rentList";
+      		</script>
+      	</c:if>
+      	<c:if test="${sessionScope.id != null and check == 1}">
+      		<script type="text/javascript">
+				location.href="/counseling/userList";
+      		</script>
+      	</c:if>
 <layoutTag:layout>
 <!DOCTYPE html>
 <head>
@@ -17,21 +27,21 @@ th{text-align: center;}
     <meta charset="UTF-8">
     <title>솔렌터카</title>
 </head>
-
-
-
+<c:if test="${check == 1}"><c:set var="temp" value="장기"/></c:if>
+<c:if test="${check == 0}"><c:set var="temp" value="단기"/></c:if>
 <form action="/buy/short_rentProc" name="insertForm" method="get">
 <div id="content">
     <div id="container">
         <div class="breadcrumbs">
-            <h2 class="tit">단기렌터카 예약/확인<a href="#modal-login-global" class="btn-modal btn-tooltip" style="display:none;" id="reservLogin"></a></h2>
+            <h2 class="tit">${temp}렌터카 예약/확인<a href="#modal-login-global" class="btn-modal btn-tooltip" style="display:none;" id="reservLogin"></a></h2>
             <div class="clearfix">
                 <span>홈</span>
-                <span>단기렌터카</span>
-                <span>단기렌터카 예약/확인</span>
+                <span>${temp}렌터카</span>
+                <span class="cl-point<c:if test="${check == 1}">2</c:if><c:if test="${check == 0}">1</c:if>">${temp}렌터카 예약/확인</span>
             </div>
         </div>
         <!-- breadcrumbs//end -->
+        <c:if test="${check == 0}">
         <div class="tab-menu v1">
             <ul class="unlink tTab" id="reservMenu">
                 <li class="col-3 ">
@@ -45,79 +55,48 @@ th{text-align: center;}
                 </li>
             </ul>
         </div>
-        <!-- tab-menu//end -->
-        
-        <div class="tab-reservation-step">
-            <ul class="clearfix">
-                <li class="fl col-3 complete">
-                    <span>
-                        <strong>1</strong>
-                        <span>예약/약관동의</span>
-                    </span>
+        </c:if>
+        <c:if test="${check == 1}">
+        <div class="tab-menu v1">
+            <ul class="unlink tTab" id="reservMenu">
+            	<li class="col-3">
+                	<a href="/rent/NewRentList">신차 렌트카</a>
                 </li>
-                <li class="fl col-3 complete">
-                    <span>
-                        <strong>2</strong>
-                        <span>할인/결제</span>
-                    </span>
+                <li class="col-3">
+                    <a href="/rent/rentList">중고차 렌트카</a>
                 </li>
-                <li class="fl col-3 ing">
-                   <span>
-                       <span>예약/결제완료</span>
-                   </span>
+                <li class="col-3 selected" >
+		           <a href="/buy/memberCheckForm?check=1">예약 확인</a>
                 </li>
             </ul>
         </div>
-        <!-- tab-reservation-step//end -->
-<style>
-th{
- border-left: none !important;
- }
- 
- td{
- 	border-bottom: 1px solid #ddd;
- }
-</style>
-                 <article>                
-                		<div class="header-group">
-                        <h3>예약 확인 <p><span class="cl-point1">기간·지점·차량</span>은 순서와 관계없이 <span class="cl-point1">선택 예약이 가능</span>합니다.</p></h3><!-- 20180402 -->
-                    </div>
-                    <table class="tb-cnt cnt-center">
-                <caption><span class="cl-point1">${sessionScope.id}</span>님 상담 리스트</caption>
-                <thead>
-                <tr>
-                 			<th  style="border-left: none;">고객 아이디</th>
-                 			<th  style="border-left: none;">고객 이름</th>
-                 			<th>차량 이름</th>
-                 			<th>출발 지점</th>
-                 			<th>반납 지점</th>
-                 			<th>시작 날짜</th>
-                 			<th>반납 날짜</th>
-                 			<th>신청 날짜</th>
-                 			<th>신청 현황</th>
-                 		</tr>
-                 		<c:forEach items="${Buy}" var="Buy" varStatus="status">
-                 		<tr class="tr" align="center">
-                 			<td style="vertical-align: middle;">${Buy.id}</td>
-                 			<td style="vertical-align: middle;">${Buy.name}</td>
-                 			<td style="vertical-align: middle;">${Car[status.index].car_name}</td>
-                 			<td style="vertical-align: middle;">${SRent[status.index].start_location}</td>
-                 			<td style="vertical-align: middle;">${SRent[status.index].end_location}</td>
-                 			<td style="vertical-align: middle;">${SRent[status.index].start_date}<br><span class="cl-point1">${SRent[status.index].start_time}</span></td>
-                 			<td style="vertical-align: middle;">${SRent[status.index].end_date}<br><span class="cl-point1">${SRent[status.index].end_time}</span></td>
-                 			<td style="vertical-align: middle;"><fmt:formatDate value="${Buy.buy_date}" var="date" pattern="yyyy-MM-dd"/>${date}</td>
-                 			<td style="vertical-align: middle;">${situation[status.index]}</td>
-                 		</tr>
-                			</c:forEach>
-                 	</table>
-            <div class="under-tab">
-                <ul class="list-info v1">
-                    <li>대여자격 기준에 적합하지 않은 면허증을 소지하신 경우 대여가 취소 될 수 있으니 이점 유념하여 주시기 바랍니다.</li>
-                    <li>대여 당일 운전면허증 미 지참 시 차량 대여가 불가하오니, 꼭 지참 후 방문부탁드립니다.</li>
-                    <li>상담 신청 후 24시간 이내로 유선연락이 가오니 이점 유념하여 주시기 바랍니다.</li>
-                </ul>
+        </c:if>
+        <!-- tab-menu//end -->
+        
+      	<c:if test="${sessionScope.id == null}">
+        <style>
+        .reserve-check li {width: 430px;}
+		</style>
+      	<article>
+            <div class="article-content">
+                <div class="reserve-check">
+                    <ul class="clearfix">
+                        <li>
+                            <p>회원으로 예약하셨나요?</p>
+                            <span>로그인을 하시면 예약내역 확인이 가능합니다.</span>
+				            	<a href="/member/loginForm" class="btn btn-color<c:if test="${check == 1}">2</c:if><c:if test="${check == 0}">1</c:if> btn-fix3 btn-large">회원 예약확인</a>
+                        </li>
+                        <li>
+                            <p>비회원으로 예약하셨나요?</p>
+                            <span>이름, 휴대폰 번호로 확인이 가능합니다.</span>
+                            <a href="#modal-nomember-check" class="btn btn-color<c:if test="${check == 1}">2</c:if><c:if test="${check == 0}">1</c:if> btn-fix3 btn-large btn-modal" onclick="check();">비회원 예약확인</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-                </article>
+        </article>
+        </c:if>
+
                 
               </div>
           </div>
@@ -129,11 +108,23 @@ th{
 		$('#modal-nomember-check').css('display','block');
 		if(data == 'close') $('#modal-nomember-check').css('display','none');
 	}
-
-	function goConfirm(){
-		myform.submit();
-	}
 </script>
+
+
+        <c:if test="${check == 1}">
+        <script type="text/javascript">
+        function goConfirm(){
+        $('#myform').attr("action", "/member/checkId1");
+        myform.submit();
+        }	
+        </script>
+        </c:if>
+        <c:if test="${check == 0}">
+        <script type="text/javascript">
+        function goConfirm(){ myform.submit(); }
+        </script>
+        </c:if>
+        
       <div id="modal-nomember-check" class="modal-pop" style="display: none;">
     <div class="modal-box">
         <div class="modal-header">
@@ -161,7 +152,7 @@ th{
                     </div>
                 </div>
                 <div class="btn-box" id="div-btn">
-                    <button type="button" class="btn btn-color1 btn-large btn-block" onclick="goConfirm();">예약확인</button>
+                    <button type="button" class="btn btn-color<c:if test="${check == 1}">2</c:if><c:if test="${check == 0}">1</c:if> btn-large btn-block" onclick="goConfirm();">예약확인</button>
                 </div>
             </article>
         </form>
@@ -169,6 +160,12 @@ th{
     <!-- modal-box//end -->
 </div>
 <style>
+.modal-pop {
+	position:fixed;
+	box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px, rgba(0,0,0,0.5) 2px 2px 3px 3px;
+	z-index : 10000;
+}
+
 .inputt{
 	width: 500;
     height: 50;

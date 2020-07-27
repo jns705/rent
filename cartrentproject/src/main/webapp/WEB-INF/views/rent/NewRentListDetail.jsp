@@ -527,11 +527,11 @@ function colorName(data){
 							</dl>
  							<div class="btn-box-all">
 								<div class="btn-box-gray btn2">
-									<a href="#none" onclick="counseling();"><span>맞춤형 렌탈료</span><br>상담신청</a>
+									<a href="#header-group" onclick="counseling();"><span>맞춤형 렌탈료</span><br>상담신청</a>
 								</div>
 										
 								<div class="btn-box-red btn2">
-									<a href="#none" onclick="direct();" id="btnDirectContract" ><span>무방문/무서류</span><br>다이렉트 계약</a>
+									<a href="#header-group" onclick="direct();" id="btnDirectContract" ><span>무방문/무서류</span><br>다이렉트 계약</a>
 								</div>
 							</div>
 							<script type="text/javascript">
@@ -559,7 +559,7 @@ function colorName(data){
 						<h4>SK렌터카 서비스</h4>
 					</div>
 					
-					<div class="estimate-notice bg-line1">
+					<div class="estimate-notice bg-line1" >
 						<ul class="list-info v1">
 							<!-- 191118 테슬라문구 추가 -->
 							
@@ -571,7 +571,7 @@ function colorName(data){
 							<li>차량 옵션은 제조사의 사정에 따라 변경될 수 있으며, 변경시 별도 연락을 드리겠습니다.</li>
 							<!-- 180711 다이렉트 문구 추가 -->
 							<li>SK렌터카 서비스 중 '용품' 혜택은 다이렉트 전용 제공 상품입니다.</li>		
-							<li>약정 주행거리 초과 위약금: 1600CC미만(60원/km) , 2000CC미만(80원/km) , 2000CC이상(100원/km) , 수입차(200원/km) , 테슬라(450원/km)</li>					
+							<li  id="header-group">약정 주행거리 초과 위약금: 1600CC미만(60원/km) , 2000CC미만(80원/km) , 2000CC이상(100원/km) , 수입차(200원/km) , 테슬라(450원/km)</li>					
 						</ul>
 					</div>
 				</article>
@@ -1215,10 +1215,10 @@ function btnSlide(id){
                             <div class="step-btn-box btn-box text-c">
                             
                             
-                <a href="#" class="btn btn-line1 btn-large btn-fix2" >취소</a>
                 <!-- 활성화 전에는 btn-color4 , 활성화 후에는 btn-color1로 셋팅 부탁 드립니다 -->
-                <button type="submit" class="btn btn-color2 btn-large btn-fix2 buy hidden">상담신청</button>
+                <button type="button" class="btn btn-color2 btn-large btn-fix2 buy hidden">상담신청</button>
                 <button type="button" class="btn btn-color1 btn-large btn-fix2 counseling hidden" onclick="nextPage();">구매신청</button>
+                <a href="#" class="btn btn-line1 btn-large btn-fix2" >취소</a>
             </div>
 					                    
                 </article>

@@ -259,19 +259,26 @@ function jeju(){
 
 
   $(document).scrollTop();
-
-  //1947값 이상일시 class를 바꾼다
+//스크롤에 따른 css
   $(window).scroll(function () {
   	var scrollValue = $(document).scrollTop();
+  	//스크롤이 맨위에 있을 시
   	if(scrollValue != 0){
   		$('#menuHeader11').css('background-color','white');
   		$('#menuHeader12').css('background-color','white');
-  		$('.awaw').css('color','black');
+  		$('.plh').removeClass('hidden');
+  		$('.awaw').attr('style','color:black !important')
+  		$('.aa1').attr('style','color:black !important; left: auto; right: 0px; ')
+  		$('.aa2').attr('style','color:black !important; left: 60px; width: 100px;')
+
   	}else{
   		$('#menuHeader11').css('background-color','transparent');
   		$('#menuHeader12').css('background-color','transparent');
   		$('#menuHeader12').css('background-color','transparent');
-  		$('.awaw').css('color','white');
+  		$('.plh').addClass('hidden');
+  		$('.awaw').attr('style','color:white !important')
+  		$('.aa1').attr('style','color:white !important; left: auto; right: 0px; ')
+  		$('.aa2').attr('style','color:white !important; left: 60px; width: 100px;')
   		
   	}});
 

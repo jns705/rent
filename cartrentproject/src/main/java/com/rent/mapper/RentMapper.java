@@ -69,4 +69,7 @@ public interface RentMapper {
 	
 	//차량아이디로 금액
 	public String getPrice(String car_id)throws Exception;
+	
+	//렌트아이디로 차량이름 추출
+	public String carName(String rent_id)throws Exception;
 }

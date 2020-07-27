@@ -5,10 +5,11 @@
 <c:set var="URL" value="${pageContext.request.requestURL}" />
 
 	    <!-- header 시작 -->
- <header id="menuHeader11" class="hc" >
+ <c:if test="${URL.substring(36) != 'main.jsp'}">
+ <header id="menuHeader11" class="hc"  style="border-bottom: 0.1px solid rgb(255, 255, 255, .5) !important; ">
 	<div class="header-wrapper">
 		<h1 id="menuHeaderLogoH1" >
-			<a href="/main">SK렌터카</a>
+			<a href="/main">SK렌터카 </a>
 		</h1>		
 		<nav id="util" >
 			<ul>
@@ -25,7 +26,7 @@
 				
 			<c:if test="${sessionScope.id eq 'master'}">
                     <li class="nav-menu nav-estimate primary dropdown" id="estimate-span">
-                    <a href="${path}/admin"class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <a href="${path}/admin"class="dropdown-toggle awaw" data-toggle="dropdown" role="button" aria-expanded="false">
                     </span>&nbsp;관리자 메뉴&nbsp;<span class="caret"></span></a>
 				 	<ul class="dropdown-menu" role="menu">
 				 		<li><a href="${path}/admin/carInsert">차량등록</a></li>
@@ -47,18 +48,26 @@
 				<ul class="gnb-listbox" >
 					<li class="gnb-listitem gnb-listitem-long">
 					
-						<a href="/rent/rentList" class="gnb-anchor awaw" style="left: auto; right: 0px;">장기렌터카</a>
+						<a href="/rent/rentList" class="gnb-anchor awaw aa1" style="left: auto; right: 0px;">장기렌터카</a>
 					</li>
 					<li class="gnb-listitem gnb-listitem-short">
-						<a href="/rent/main.do" class="gnb-anchor awaw"   style="left: 60px; width: 100px;">단기렌터카</a>
+						<a href="/rent/main.do" class="gnb-anchor awaw aa2"   style="left: 60px; width: 100px;">단기렌터카</a>
 					</li>
 				</ul>
 			</div>
 						
 		</nav>
-		<div class="header-placeholder"><div class="header-placeholder-bg"></div></div>
+		<div id="pho">
+		<c:if test="${fn : contains(URL, 'main.do')}"><c:set var="hidden" value="hidden"/></c:if>
+		<div class="header-placeholder ${hidden} plh"><div class="header-placeholder-bg plh ${hidden}"></div></div>
+		
+		</div>
 	</div>
 </header>
+<div class="quick-top" style="z-index: 1000">
+    <a href="#top" id="aaaaaa" class="btn-top">TOP</a>
+</div>
+</c:if>
     <!-- header 끝 -->
     
  	<div class="quick-menu" style="z-index: 1000 !important;">
@@ -78,9 +87,6 @@
 	    </ul>
 	</div>
 	
-<div class="quick-top" style="z-index: 1000">
-    <a href="#top" id="aaaaaa" class="btn-top">TOP</a>
-</div>
     
 <c:if test="${fn : contains(URL, 'main.do')}">
 <style>

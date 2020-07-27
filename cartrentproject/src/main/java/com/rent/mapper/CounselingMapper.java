@@ -30,4 +30,10 @@ public interface CounselingMapper {
 	//회원아이디로 상담신청했는지 확인 후 상담한 날짜를 뿌려준다
 	public CounselingVO counselingOK(String id) throws Exception;
 	
+	//아이디로 상담리스트 조회
+	public List<CounselingVO> counselingListId(String id) throws Exception;
+	
+	//전화번호로 리스트 출력
+	public List<CounselingVO> counselingListTel(String tel) throws Exception;
+	
 }

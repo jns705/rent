@@ -1,6 +1,9 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="URL" value="${pageContext.request.requestURL}" />
+ <c:if test="${URL.substring(36) != 'main.jsp'}">
 	<footer>
 	<div class="container-fluid footer col-md-12" style="padding: 0px; margin: 0px;">
 		<div class="row">
@@ -18,7 +21,6 @@
 		<div class="row footer-brand">			
 			<div class="brand-info">
 				<div class="col-md-4 text-right">
-					<!-- <img src="/resources/images/footer_logo.png" style="width:110px;float:right"/> -->
 					<img src="http://localhost:8082/static/img/logo2.png" style="width:110px;float:right;margin-top: 10px;"/>
 				</div>
 	            <div class="col-md-5" style="margin-bottom:15px;">
@@ -40,3 +42,4 @@
 		</div>
 	</div>
 	</footer>
+	</c:if>

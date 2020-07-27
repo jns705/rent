@@ -24,6 +24,7 @@ import com.rent.domain.BuyVO;
 import com.rent.domain.CounselingVO;
 import com.rent.domain.MemberVO;
 import com.rent.domain.OptionCarVO;
+import com.rent.domain.RentListVO;
 import com.rent.domain.RentVO;
 import com.rent.service.CarColorService;
 import com.rent.service.CarOptionService;
@@ -270,7 +271,28 @@ public class CounselingController {
 		list.setOption_name("파퓰러 패키지,빌트인 캠 패키지");
 		list.setCounseling_situation("상담 대기중");
 		couService.counselingInsert(list);
-		return "/counseling/short_rent";
+		return "/counseling/userList?tel="+list.getTel();
+	}
+	
+	@RequestMapping("/userList")
+	public String userList(Model model, HttpSession session, @RequestParam(defaultValue = "n")String tel)throws Exception{
+		List<CounselingVO> list = new ArrayList<CounselingVO>();
+		if(tel.equals("n"))
+			list = couService.counselingListId((String)session.getAttribute("id"));
+		else
+			list = couService.counselingListTel(tel);
+		List<String> carName = new ArrayList<String>();
+		for(CounselingVO List : list) {
+			carName.add(carService.carName(rentService.carName(List.getRent_id())));
+		}
+		if(list.isEmpty())
+			model.addAttribute("tel", tel);
+		else
+			model.addAttribute("tel", list.get(0).getTel());
+			
+		model.addAttribute("couList", list);		
+		model.addAttribute("carName", carName);		
+		return "/counseling/userList";
 	}
 	
 	

@@ -188,7 +188,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                     <a href="/counseling/short_rent">내륙예약</a>
                 </li>
                 <li class="col-3">
-		            	<a href="/buy/short_rentList">예약확인</a>
+		            	<a href="/buy/memberCheckForm">예약확인</a>
                 </li>
             </ul>
         </div>

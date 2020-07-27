@@ -31,6 +31,7 @@
 <form class="listForm" action="/rent/rentListProc" method="post">
 	<div class="container">
 		<div class="breadcrumbs">
+		
 			<h2 class="tit">장기렌트카 리스트</h2>
 			<div class="clearfix">
 				<span>홈</span>
@@ -38,12 +39,19 @@
 			</div>
 		</div>	
 		<div class="container" style="padding-left: 0px; width: 1014px;">
-		<div class="tab-menu v1">
-			<ul>
-				<li class="col-4 "><a href="/rent/NewRentList">신차 렌트카</a></li>
-				<li class="col-4 selected"><a href="/rent/rentList">중고차 렌트카</a></li>
-			</ul>
-		</div>
+       <div class="tab-menu v1">
+            <ul class="unlink tTab" id="reservMenu">
+            	<li class="col-3">
+                	<a href="/rent/NewRentList">신차 렌트카</a>
+                </li>
+                <li class="col-3 selected">
+                    <a href="/rent/rentList">중고차 렌트카</a>
+                </li>
+                <li class="col-3" >
+		           <a href="/buy/memberCheckForm?check=1">예약 확인</a>
+                </li>
+            </ul>
+        </div>
 		
 		<article class="car-search tab-content" id="tab-direct-user-personal" role="search" style="display: block;">
 			<div class="car-search__wrapper clearfix">
@@ -194,6 +202,8 @@
 				
 			
 		<div id="aa"></div>
+		
+		
 		</article>
 	</div>
 	<br><br>

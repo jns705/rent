@@ -151,4 +151,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM	RENT
 		WHERE	special_note = '신차' and car_id = #{car_id}
 	</select>
+	
+	<select id="carName" resultType="String" parameterType="String">
+		SELECT	car_id
+		FROM	RENT
+		WHERE	rent_id = #{rent_id}
+	</select>
 </mapper>

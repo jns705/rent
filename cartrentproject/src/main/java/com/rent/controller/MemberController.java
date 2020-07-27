@@ -1,5 +1,8 @@
 package com.rent.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,15 +15,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rent.domain.BuyVO;
+import com.rent.domain.CarVO;
+import com.rent.domain.CounselingVO;
 import com.rent.domain.MemberVO;
+import com.rent.domain.ShortRentVO;
+import com.rent.service.BuyService;
+import com.rent.service.CarOptionService;
+import com.rent.service.CarService;
+import com.rent.service.CounselingService;
 import com.rent.service.MemberService;
+import com.rent.service.RentImageService;
+import com.rent.service.RentService;
+import com.rent.service.ShortRentService;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
+	@Resource(name="com.rent.service.BuyService")
+	BuyService buyService;
+	
+	@Resource(name="com.rent.service.CarService")
+	CarService carService;
+	
+	@Resource(name="com.rent.service.RentService")
+	RentService rentService;
+	
+	@Resource(name="com.rent.service.CarOptionService")
+	CarOptionService optService;
+	
+	@Resource(name="com.rent.service.CounselingService")
+	CounselingService couService;
+	
+	@Resource(name="com.rent.service.ShortRentService")
+	ShortRentService shortService;
 	
 	@Resource(name="com.rent.service.MemberService")
-	MemberService mMemberService;	
+	MemberService mMemberService;
+	
+	@Resource(name="com.rent.service.RentImageService")
+	RentImageService rentImageService;
 	
 	//로그인 홈페이지
 	@RequestMapping("/loginForm")
@@ -82,4 +116,42 @@ public class MemberController {
 		return "/main";
 	}
 	
+	//비회원 조회
+	@RequestMapping("/checkId")
+	public String checkId(BuyVO buyList, Model model)throws Exception{
+			List<BuyVO> Buy = buyService.getDetail(buyList);
+			if(Buy.isEmpty()) return "/buy/buyAlert";
+			List<CarVO> Car = new ArrayList<CarVO>();
+			List<ShortRentVO> SRent = new ArrayList<ShortRentVO>();
+			List<String> situation = new ArrayList<String>();
+			for(BuyVO buy : Buy ) {
+				Car.add(carService.carDetail(Integer.toString(rentService.rentDetail(buy.getRent_id()).getCar_id())));
+				SRent.add(shortService.shortDetail(buy.getBuy_id()));
+				situation.add(rentService.rentDetail(buy.getRent_id()).getSituation());
+			}
+		model.addAttribute("Buy", Buy);
+		model.addAttribute("Car", Car);
+		model.addAttribute("SRent", SRent);
+		model.addAttribute("situation", situation);
+		return "/buy/short_rentList";
+	}
+	
+	//비회원 조회
+	@RequestMapping("/checkId1")
+	public String checkId1(BuyVO buyList, Model model)throws Exception{
+		List<BuyVO> Buy = buyService.getDetail(buyList);
+		if(Buy.isEmpty()) {
+			return "redirect:/buy/buyAlert?check=1";
+		}
+		List<CarVO> Car = new ArrayList<CarVO>();
+		List<String> situation = new ArrayList<String>();
+		for(BuyVO buy : Buy ) {
+			Car.add(carService.carDetail(Integer.toString(rentService.rentDetail(buy.getRent_id()).getCar_id())));
+			situation.add(rentService.rentDetail(buy.getRent_id()).getSituation());
+		}
+		model.addAttribute("Buy", Buy);
+		model.addAttribute("Car", Car);
+		model.addAttribute("situation", situation);
+		return "/buy/userBuyList";
+	}
 }
