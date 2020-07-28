@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -79,6 +80,39 @@ public class MemberController {
 	
 	@RequestMapping("/main")
 	public String main()throws Exception{
+		return "/main";
+	}
+	
+	//회원 상세 정보
+	@RequestMapping("/detail/{id}")
+	public String memberDetail(@PathVariable String id, Model model) throws Exception {
+		MemberVO member = mMemberService.memberDetail(id);
+		
+		String address[] = member.getAddress().split("/");
+		
+		model.addAttribute("address", address);
+		model.addAttribute("detail", mMemberService.memberDetail(id));
+		return "/member/memberDetail";
+	}
+	
+	//회원정보 수정
+	@RequestMapping("/update")
+	public String memberUpdate(MemberVO member, HttpServletRequest rq) throws Exception {
+		String zipcode = rq.getParameter("address0");
+		String address = rq.getParameter("address1");
+		String detailedAddress = rq.getParameter("address2");
+		
+		member.setAddress(zipcode +"/"+ address +"/"+ detailedAddress);
+		mMemberService.memberUpdate(member);
+		System.out.println(member.getId()+"회원 정보수정");
+		return "redirect:/member/detail/"+member.getId();
+	}
+	
+	//회원탈퇴
+	@RequestMapping("/delete")
+	public String memberDelete(MemberVO member) throws Exception {
+		System.out.println(member.getId()+"회원 탈퇴");
+		mMemberService.memberDelete(member);
 		return "/main";
 	}
 	

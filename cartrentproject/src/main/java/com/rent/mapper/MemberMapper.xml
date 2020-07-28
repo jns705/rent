@@ -41,4 +41,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM	MEMBER
 		WHERE	ID = #{id}
 	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="memberUpdate" parameterType="com.rent.domain.MemberVO">
+		update member
+		set name = #{name}, tel = #{tel}, address = #{address},
+		 	date_of_birth = #{date_of_birth}, gender = #{gender}
+		where id = #{id}
+	</update>
+	
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="memberDelete" parameterType="com.rent.domain.MemberVO">
+		delete from member
+		where id = #{id}
+	</delete>
+	
+	
 </mapper>

@@ -5,7 +5,7 @@
 <c:set var="URL" value="${pageContext.request.requestURL}" />
 
 	    <!-- header 시작 -->
- <header id="menuHeader11" class="hc" >
+ <header id="menuHeader11" class="hc extend">
 	<div class="header-wrapper">
 		<h1 id="menuHeaderLogoH1" >
 			<a href="/main">SK렌터카</a>
@@ -20,7 +20,7 @@
 					<a href="/rent/prmt/evnt/evnt_list.do" id="awawaaaa" class="awaw">이벤트</a>
 				</li>
 				<li>
-					<a href="/rent/custcnte/notice/notice_list.do" class="awaw">고객센터</a>
+					<a href="/serviceCenter" class="awaw">고객센터</a>
 				</li>
 				
 			<c:if test="${sessionScope.id eq 'master'}">
@@ -39,7 +39,18 @@
 				 		<li><a href="#">Exit</a></li>
 				 	</ul>
                     </li>
-                    </c:if>	
+                    </c:if>
+             <!-- 삭제할거 -->
+            <c:if test="${sessionScope.id != 'master' && sessionScope.id != null}">
+             <li class="nav-menu nav-estimate primary dropdown" id="estimate-span">
+             <a href=""class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              </span>&nbsp;회원 메뉴&nbsp;<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+              	<li><a href="${path}/member/detail/${sessionScope.id}">회원정보</a></li>
+              </ul>
+              </li>
+            </c:if>
+            <!-- 삭제할거 -->
 		</nav>
 		<nav class="gnb hc" id="menuHeader12" tabindex="0">
 			<h2 class="sr-only ">메인 메뉴</h2>
@@ -47,17 +58,19 @@
 				<ul class="gnb-listbox" >
 					<li class="gnb-listitem gnb-listitem-long">
 					
-						<a href="/rent/rentList" class="gnb-anchor awaw" style="left: auto; right: 0px;">장기렌터카</a>
+						<a href="/rent/rentList" class="gnb-anchor awaw serviceLong" style="left: auto; right: 0px;">장기렌터카</a>
 					</li>
 					<li class="gnb-listitem gnb-listitem-short">
-						<a href="/rent/main.do" class="gnb-anchor awaw"   style="left: 60px; width: 100px;">단기렌터카</a>
+						<a href="/rent/main.do" class="gnb-anchor awaw serviceShort"   style="left: 60px; width: 100px;">단기렌터카</a>
 					</li>
 				</ul>
 			</div>
-						
+			
+			<div class="service"></div>
 		</nav>
-		<div class="header-placeholder"><div class="header-placeholder-bg"></div></div>
+		<div class="serviceHide header-placeholder"><div class="header-placeholder-bg"></div></div>
 	</div>
+	
 </header>
     <!-- header 끝 -->
     
@@ -77,6 +90,7 @@
 	        </li>
 	    </ul>
 	</div>
+	<div class="blank"></div>
 	
 <div class="quick-top" style="z-index: 1000">
     <a href="#top" id="aaaaaa" class="btn-top">TOP</a>
@@ -93,6 +107,9 @@ header a {
 </style>
 </c:if>
 <style>
+.blank {
+	height: 100px;
+}
 body {
 	margin-top: 140px;
 }

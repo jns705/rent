@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rent.domain.AccidentVO;
 import com.rent.domain.CommentVO;
-import com.rent.domain.PageMaker;
-import com.rent.domain.PagingCriteria;
+import com.rent.domain.PagingVO;
 import com.rent.service.AccidentService;
 import com.rent.service.RentService;
 

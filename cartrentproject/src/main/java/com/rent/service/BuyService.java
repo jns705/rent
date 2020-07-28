@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rent.domain.BuyVO;
 import com.rent.domain.MemberVO;
+import com.rent.domain.PagingVO;
 import com.rent.mapper.BuyMapper;
 
 @Service("com.rent.service.BuyService")
@@ -27,8 +28,13 @@ public class BuyService {
 }
 	
 	//구매목록
-	public List<BuyVO> buyList() throws Exception { 
-		return mapper.buyList();
+	public List<BuyVO> buyList(PagingVO paging) throws Exception { 
+		return mapper.buyList(paging);
+	}
+	
+	//구매목록 총 갯수
+	public int buyCount() throws Exception{
+		return mapper.buyCount();	
 	}
 	
 	//예약삭제
