@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rent.domain.BuyVO;
 import com.rent.domain.MemberVO;
+import com.rent.domain.PagingVO;
 
 @Repository("com.rent.mapper.BuyMapper")
 public interface BuyMapper {
@@ -14,7 +15,10 @@ public interface BuyMapper {
 	public int rentBuyInsert(BuyVO buy) throws Exception;
 	
 	//구매목록
-	public List<BuyVO> buyList() throws Exception;
+	public List<BuyVO> buyList(PagingVO paging) throws Exception;
+	
+	//구매목록 총 갯수
+	public int buyCount() throws Exception;
 	
 	//예약삭제
 	public int rentBuyDelete(int buy_id) throws Exception;

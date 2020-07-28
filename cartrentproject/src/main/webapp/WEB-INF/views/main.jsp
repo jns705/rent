@@ -138,7 +138,7 @@
 .event-mini-box span:last-child{line-height: 19px;margin: 0 0 5px 14px;}*/
 
 	</style>
-<body id="start">
+<body id="start" style="background-image: url(http://localhost:8082/static/img/main.jpg); background-repeat: no-repeat; background-size: 1800px 850px;">
 
 
 	<div id="content">
@@ -148,7 +148,7 @@
                     <div class="main-service-wrapper">
                         <div class="container long">
                             <div class="heading">
-                                <h2 class="title"  style="color:black; margin: 100px;">똑똑한 선택! 즐거운 여행!</h2>
+                                <h2 class="title"  style=" margin: 100px;">똑똑한 선택! 즐거운 여행!</h2>
                             </div>                           
                             <div class="shortcut rela">    
                               <!-- 200528 테슬라이벤트 추가 -->

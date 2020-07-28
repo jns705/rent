@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.rent.domain.AccidentVO;
-import com.rent.domain.PageMaker;
+import com.rent.domain.PagingVO;
 import com.rent.mapper.AccidentMapper;
 
 @Service("com.rent.service.AccidentService")

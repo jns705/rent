@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags" %>
@@ -12,6 +13,9 @@
 <meta charset="UTF-8">
 <title>단기 렌터카</title>
 </head>
+<jsp:useBean id="toDay" class="java.util.Date" />
+<fmt:formatDate value='${toDay}' pattern='HH' var="nowHour"/>
+<fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' var="nowDate"/>
 <body>
 <form action="/counseling/mainProc" method="get" name="proc">
 				<div class="spot short type2" style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동촤.gif')">
@@ -44,7 +48,7 @@
 									<div class="option">
 										<div class="option-row clearfix">
 											<span id="sDateSpan" class="fl" >
-												<input type="text" id="startDate" name="startDate" value="대여일 선택" onchange="changeDate(); changeHour(); todayCheck();">
+												<input readonly type="text" id="startDate" name="startDate" value="대여일 선택" onchange="changeDate(); changeHour(); todayCheck();">
 											</span>
 											<span class="select-box fl">
 												<select name="sHour" id="sHour" class="option01 option02 hour fast-reserve-select" onchange="changeDate(); changeHour();">
@@ -67,7 +71,7 @@
 										</div>
 										<div class="option-row clearfix">
 											<span id="lDateSpan" class="fl">
-												<input type="text" id="endDate" name="endDate" value="반납일 선택" onchange="changeDate();  changeHour();">
+												<input  readonly type="text" id="endDate" name="endDate" value="반납일 선택" onchange="changeDate();  changeHour();">
 											</span>
 											<span  class="select-box fl">
 												<select name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate();">
@@ -214,10 +218,9 @@ function jeju(){
 
 
 
-
     function todayCheck(){
-    	var nowDate = $('#nowDate').val();
-    	var nowHour = Number($('#nowHour').val());
+    	var nowDate = '${nowDate}'
+    	var nowHour = Number('${nowHour}');
     	//시작날짜가 현재 날짜일 시
     	if(nowDate == $('#startDate').val()){
     		 var str1  = '';

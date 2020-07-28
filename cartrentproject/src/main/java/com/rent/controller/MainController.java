@@ -20,6 +20,11 @@ public class MainController {
 		return "/rent/main.do";
 	}
 	
+	@RequestMapping("/serviceCenter")
+	public String serviceCenter() {
+		return "/serviceCenter";
+	}
+	
 	
 	
 }

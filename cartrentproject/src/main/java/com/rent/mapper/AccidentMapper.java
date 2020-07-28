@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.rent.domain.AccidentVO;
-import com.rent.domain.PageMaker;
+import com.rent.domain.PagingVO;
 
 @Repository("com.rent.mapper.AccidentMapper")
 public interface AccidentMapper {

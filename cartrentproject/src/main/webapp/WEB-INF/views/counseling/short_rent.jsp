@@ -224,7 +224,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                             <div class="col fl">
                                 <div class="date-time-area clearfix">
 										<span id="sDateSpan" class="fl" >
-                                            <input type="text" id="startDate" name="start_date" value="<c:if test ="${sD == null}">대여일 선택</c:if><c:if test ="${sD != null}">${sD}</c:if>" onchange="changeDate(); changeHour(); selectCar(); todayCheck();"/>
+                                            <input readonly type="text" id="startDate" name="start_date" value="<c:if test ="${sD == null}">대여일 선택</c:if><c:if test ="${sD != null}">${sD}</c:if>" onchange="changeDate(); changeHour(); selectCar(); todayCheck();"/>
                                         </span>
                                   			<span class="select-box fl">
 												<select name="sHour" id="sHour"  onchange="changeDate(); changeHour();  selectCar();">
@@ -257,7 +257,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                             <div class="col fl">
                                 <div class="date-time-area clearfix">
 										<span id="sDateSpan" class="fl" >
-                                            <input type="text" name="end_date" id="endDate" value="<c:if test ="${eD == null}">반납일 선택</c:if><c:if test ="${eD != null}">${eD}</c:if>" onchange="changeDate(); changeHour(); selectCar();"/>
+                                            <input readonly type="text" name="end_date" id="endDate" value="<c:if test ="${eD == null}">반납일 선택</c:if><c:if test ="${eD != null}">${eD}</c:if>" onchange="changeDate(); changeHour(); selectCar();"/>
                                         </span>
                            				   <span  class="select-box fl">
 												<select name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate(); selectCar();">
@@ -352,7 +352,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 	   $('#reservEmail').html($('#emailId').val()+email);
 	   
    }
-   //다시 리로딩
+   //시작 시 로딩
    selectCar();
 
    //차량선택 메뉴 ajax
@@ -360,7 +360,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 		$.ajax({
 			url  	: '${path}/counseling/short_rentDetail',
 			type 	: 'get',
-			data	: {'location' : $('#location').val()},
+			data	: $('[name=insertForm]').serialize(),
 			success : function(data){
 				var str = "";
 				str += '<div class="header-group">'+
@@ -368,7 +368,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 		                 '<div class="article-content">'+
 		                     '<div class="rent-car-select" id="alert-cartype">'+
 		                        	'<div class="tab-menu v2"><ul><li class="c0 col-7';
-		                 if($('#kindCar').val() == '차량 선택') str += ' selected ';
+		                 if($('#kindCar').val() == '차량 선택' || $('#kindCar').val() == "") str += ' selected ';
 		                 str += '" ><a onclick="selectMenu(0);">전체</a></li>';
 				$.each(data.carKind, function(key, value){
 					str += '<li class="c'+ (key+1) +' col-7';
@@ -454,7 +454,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 <!--  계약자 정보(제1운전자) start -->
             <article>
                      <div class="header-group">
-                     	<input class="hidden" id="rent_id" name="rent_id" value="">
+                     	<input class="hidden" id="rent_id" name="rent_id" value="1">
                      	<input class="hidden" name=rental_time value="">
                      	<input class="hidden" id="kindCar" value="${carKind}">
                      	<input class="hidden" id="nowHour" value="${nowHour}">
@@ -467,8 +467,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                         <div class="input-field input-field--shortterm">
                         
                         
-                        <style>
-<!--
+<style>
 .input {
     position: relative!important;
     display: inline-block!important;
@@ -477,7 +476,6 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
     box-sizing: border-box!important;
     font-size: 0!important;
 }
--->
 </style>
                         <div class=" clearfix">
                             <div class="fl col-3">

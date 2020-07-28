@@ -7,6 +7,7 @@
 	    <!-- header 시작 -->
  <c:if test="${URL.substring(36) != 'main.jsp'}">
  <header id="menuHeader11" class="hc"  style="border-bottom: 0.1px solid rgb(255, 255, 255, .5) !important; ">
+
 	<div class="header-wrapper">
 		<h1 id="menuHeaderLogoH1" >
 			<a href="/main">SK렌터카 </a>

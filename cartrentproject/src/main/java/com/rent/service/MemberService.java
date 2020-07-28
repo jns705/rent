@@ -37,4 +37,14 @@ public class MemberService {
 	public MemberVO accountDetail(String id) throws Exception{
 		return mapper.accountDetail(id);
 	}
+	
+	//회원정보 수정
+	public int memberUpdate(MemberVO member) throws Exception {
+		return mapper.memberUpdate(member);
+	}
+	
+	//회원정보 삭제
+	public int memberDelete(MemberVO member) throws Exception {
+		return mapper.memberDelete(member);
+	}
 }

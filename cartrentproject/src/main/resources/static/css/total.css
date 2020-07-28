@@ -93,7 +93,6 @@
 .select2-search--dropdown .select2-search__field{padding:4px;width:100%;box-sizing:border-box}
 .select2-search--dropdown .select2-search__field::-webkit-search-cancel-button{-webkit-appearance:none}
 .select2-close-mask{border:0;margin:0;padding:0;display:block;position:fixed;left:0;top:0;min-height:100%;min-width:100%;height:auto;width:auto;opacity:0;z-index:99;background-color:#fff}
-.select2-hidden-accessible{border:0!important;clip:rect(0 0 0 0)!important;height:1px!important;margin:-1px!important;overflow:hidden!important;padding:0!important;position:absolute!important;width:1px!important}
 .select2-container--default .select2-selection--single{background-color:#fff;border:1px solid #ddd;height:42px;border-radius:0}
 .select2-container--default .select2-selection--single .select2-selection__rendered{color:#333;font-size:14px;line-height:40px}
 .select2-container--default .select2-selection--single .select2-selection__clear{cursor:pointer;float:right;font-weight:700}
@@ -166,11 +165,6 @@ a .checkbox.v3 label.text-r{padding-right:30px}.checkbox.v3 input[type=checkbox]
 .car-search .option-box{width:678px;box-sizing:border-box;border:1px solid #ddd;border-right:0}
 .car-search .option-input{width:100%}
 .car-search .option-input input{height:60px;border:0;font-size:16px}
-.car-search .select-area{width:678px;border-width:1px 0 1px 1px}
-.car-search .select-col .select2-selection--single{height:60px}
-.car-search .select-col .select2-selection__rendered{line-height:60px}
-.car-search .select-col .select2-selection__arrow{top:28px}
-.car-search .select-col+.select-col .select2:after{top:23px}
 .car-search .btn-wrap{width:220px}
 .car-search .btn-wrap .btn{display:block;height:62px;font-size:16px;line-height:62px}
 .car-search .keyword{width:100%;margin:25px 0 -7px;font-size:0;height:25px;overflow:hidden;text-align:center}

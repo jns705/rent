@@ -17,6 +17,15 @@ public interface MemberMapper {
 	public int idCheck(String id)throws Exception;
 	//id로 정보 가져오기
 	public MemberVO accountDetail(String id) throws Exception;
+	
 	//회원 상세정보
 	public MemberVO memberDetail(String id) throws Exception;
+	
+	//회원정보 수정
+	public int memberUpdate(MemberVO member) throws Exception;
+	
+	//회원정보 삭제
+	public int memberDelete(MemberVO member) throws Exception;
+	
+	
 }
