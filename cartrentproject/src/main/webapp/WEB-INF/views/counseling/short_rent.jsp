@@ -12,6 +12,7 @@
 <fmt:formatDate value='${toDay}' pattern='HH' var="nowHour"/>
 <fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' var="nowDate"/>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> 
+<link rel="stylesheet" href="http://localhost:8082/static/css/ss.css" type="text/css" /> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
     <meta charset="UTF-8">
@@ -223,18 +224,52 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                         <div class="rent-store-select">
                             <div class="col fl">
                                 <div class="date-time-area clearfix">
+<style>
+  .inputDate{
+	font-size:15px !important;
+	font-weight:100;
+    width: 132px !important;
+    height: 42px;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    background-color: #fff;
+    font-size: 14px;
+    font-family: NanumBarunGothic;
+    box-sizing: border-box;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: 0;
+    transition: background .2s linear 0s,box-shadow .2s linear 0s;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+                                }
+                                
+.inputTime{
+    padding-left: 10px;
+	text-align:center !important;
+	font-size:17px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    height: 42px;
+    border-radius: 0;
+                                }
+</style>
 										<span id="sDateSpan" class="fl" >
-                                            <input readonly type="text" id="startDate" name="start_date" value="<c:if test ="${sD == null}">대여일 선택</c:if><c:if test ="${sD != null}">${sD}</c:if>" onchange="changeDate(); changeHour(); selectCar(); todayCheck();"/>
+                                            <input style="border-right: none;" class="inputDate" readonly type="text" id="startDate" name="start_date" value="<c:if test ="${sD == null}">대여일 선택</c:if><c:if test ="${sD != null}">${sD}</c:if>" onchange="changeDate(); changeHour(); selectCar(); todayCheck();"/>
                                         </span>
                                   			<span class="select-box fl">
-												<select name="sHour" id="sHour"  onchange="changeDate(); changeHour();  selectCar();">
+												<select class="inputTime" name="sHour" id="sHour"  onchange="changeDate(); changeHour();  selectCar();">
 												<c:forEach begin="06" end="22" varStatus="status">
 													<option <c:if test="${sH == status.index}">selected</c:if> value="${String.format('%02d', status.index)}">${String.format('%02d', status.index)} 시</option>
 												</c:forEach>
 												</select>
 											</span>
                                    			<span class="select-box fl">
-												<select name="sMinute" id="sMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
+												<select  class="inputTime" name="sMinute" id="sMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
 													<option <c:if test="${sM == 00}">selected</c:if>  value="00">00 분</option>
 													<option <c:if test="${sM == 30}">selected</c:if>  value="30">30 분</option>
 												</select>
@@ -242,7 +277,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                                 </div>
                                 <div class="store-area clearfix">
                                     <span class="select-box fl">
-										<select name="start_location" id="location" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
+										<select class="inputTime"  name="start_location" id="location" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
 										<c:if test="${sL eq '제주지점'}"><option>제주지점</option></c:if>
 										<c:if test="${sL != '제주지점'}">
 										<option <c:if test="${sL eq '서울지점'}">selected</c:if>>서울지점</option>
@@ -257,17 +292,17 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                             <div class="col fl">
                                 <div class="date-time-area clearfix">
 										<span id="sDateSpan" class="fl" >
-                                            <input readonly type="text" name="end_date" id="endDate" value="<c:if test ="${eD == null}">반납일 선택</c:if><c:if test ="${eD != null}">${eD}</c:if>" onchange="changeDate(); changeHour(); selectCar();"/>
+                                            <input style="border-right: none;"  class="inputDate"  readonly type="text" name="end_date" id="endDate" value="<c:if test ="${eD == null}">반납일 선택</c:if><c:if test ="${eD != null}">${eD}</c:if>" onchange="changeDate(); changeHour(); selectCar();"/>
                                         </span>
                            				   <span  class="select-box fl">
-												<select name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate(); selectCar();">
+												<select class="inputTime"  name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate(); selectCar();">
 												<c:forEach begin="06" end="22" varStatus="status">
 													<option <c:if test="${lH == status.index}">selected</c:if>   value="${String.format('%02d', status.index)}">${String.format('%02d', status.index)} 시</option>
 												</c:forEach>
 												</select>
 											</span>
 											<span class="select-box fl">
-												<select name="lMinute" id="lMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
+												<select class="inputTime"  name="lMinute" id="lMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
 													<option <c:if test="${lM == 00}">selected</c:if>   value="00">00 분</option>
 													<option <c:if test="${lM == 30}">selected</c:if>   value="30">30 분</option>
 												</select>
@@ -275,7 +310,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                                 </div>
                                 <div class="store-area clearfix">
                                        <span class="select-box fl">
-												<select name="end_location" id="end_location" class="option01 option02 timeChange fast-reserve-select" onchange="selectCar();">
+												<select class="inputTime"  name="end_location" id="end_location" class="option01 option02 timeChange fast-reserve-select" onchange="selectCar();">
 													<c:if test="${lL eq '제주지점'}"><option>제주지점</option></c:if>
 													<c:if test="${lL != '제주지점'}">
 													<option <c:if test="${lL eq '서울지점'}">selected</c:if>>서울지점</option>
@@ -467,31 +502,24 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                         <div class="input-field input-field--shortterm">
                         
                         
-<style>
-.input {
-    position: relative!important;
-    display: inline-block!important;
-    width: 100% !important;
-    height: 42px!important;
-    box-sizing: border-box!important;
-    font-size: 0!important;
-}
-</style>
-                        <div class=" clearfix">
+                        <div class="input-row clearfix">
                             <div class="fl col-3">
                             <span class="input essential" id="alert-name">
-                                <label><input oninput="carPrice();" type="text" placeholder="이름 입력" name="name" class="onlyKorEng" maxlength="20" value="${detail.name}"/></label>
+                                <strong class="check">필수</strong>
+                                <label><input type="text"  oninput="carPrice();" type="text" placeholder="이름 입력" name="name" class="onlyKorEng" maxlength="20" value="${detail.name}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-name"></span>
                             </div>
-                            <div class="fl col-3">
-                            <span class="essential" id="alert-birth">
-                                <label><input oninput="carPrice();" id="birth" type="text" maxlength="8" placeholder="생년월일(20170101) 입력" class="readonly onlyNumber" name="birthday" value="${detail.date_of_birth}"/></label>
+                      		 <div class="fl col-3">
+                            <span class="input essential" id="alert-birth">
+                             <strong class="check">필수</strong>
+                                <label><input type="text" maxlength="8" oninput="carPrice();" id="birth" type="text" maxlength="8" placeholder="생년월일(20170101) 입력" class="onlyNumber" name="birthday" value="${detail.date_of_birth}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-birth"></span>
                             </div>
                             <div class="fl col-3">
-                            <span class="essential" id="alert-mobile">
+                            <span class="input essential" id="alert-mobile">
+                               <strong class="check">필수</strong>
                                 <label><input oninput="carPrice();" type="text" placeholder="휴대폰번호(-없이 입력) 입력" class="onlyNumber" name="tel"  value="${tel[0]}${tel[1]}${tel[2]}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-mobile"></span>
@@ -505,18 +533,18 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 	}
 	
 </script>                        
-                        
-                        <div class=" clearfix">
-                        	<div class="email-input  col-1 maa0" id="alert-email"><!-- 20170705 : 경고 알럿 노출 될 경우 msg-alert 추가 부탁 드립니다. -->
-                                <span class="col-3">
+                        <div class="input-row clearfix">
+                        	<div class="email-input input-box col-1 maa0" id="alert-email">
+                        		<span class="input essential col-3">
+                                    <strong class="check">필수</strong>
                                     <label><input oninput="carPrice();" type="text" placeholder="이메일 입력" class="checkEmail" name="emailId" id="emailId" value=""  maxlength="30"/></label>
                                 </span>
-                                <span class="hyphen col-3">
+                                <span class="input hyphen col-3">
                                     <span class="text">@</span>
-                                    <input oninput="carPrice();" type="text" placeholder="직접 입력" class="checkEmail" name="domain" id="email1" value=""  maxlength="30" />
+                                    <input oninput="carPrice();" type="text" placeholder="직접 입력" class="checkEmail" name="domain" id="email1" value=""  maxlength="30"  tabindex="-1" aria-hidden="true"/>
                                 </span>
                                 <span class="select-box col-3">
-                                    <select name="" id="email2" class="option01" onchange="emailInput(); carPrice();">
+                                    <select id="email2" class="option01 inputTime" onchange="emailInput(); carPrice(); " tabindex="-1" aria-hidden="true">
                                         <option value="">직접 입력</option>
 	                                    	<option value="chol.com">chol.com</option>	
 	                                    	<option value="dreamwiz.com">dreamwiz.com</option>	
@@ -546,16 +574,17 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                         </div>
                         
   
-                         <div class="">
+                          <div class="input-row">
                                 <div class="address-input col-1">
-                                    <span class="">
-                                        <span class="">
+                                    <span class="input-box">
+                                        <span class="input">
                                             <label><input oninput="carPrice();"  type="number" class="readonly" readonly="readonly" placeholder="우편번호 검색"  placeholder="우편번호" name="zipcode" id="zipcode" value="${address[0]}" /></label>
                                         </span>
-                                        <span class=" essential">
+                                        <span class="input essential">
+                                   			<strong class="check">필수</strong>
                                             <label><input oninput="carPrice();"  type="text" class="readonly" readonly="readonly" placeholder="주소 입력" name="address" id="address" value="${address[1]}" /></label>
                                         </span>
-                                        <span class="">
+                                        <span class="input" style="width:280px;">
                                             <label><input oninput="carPrice();"  type="text" placeholder="나머지 주소 입력"  name="addressDetail" id="addressDetail" maxlength="30" value="${address[2]}" onkeyup="checkingDtlAddr()" /></label>
                                         </span>
                                         <a href="#none" class="btn btn-default btn-fix2 fr" onclick="daumZipCode();" id="addrSearchBtn">우편번호 검색</a>
@@ -595,7 +624,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 								<div class="terms-header subject">
 									<h4>고유식별정보 수집 및 이용에 관한 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
-                                        <input id="term-check-1" type="checkbox"  name="is_check" onclick="boxCheck(); event.cancelBubble=true"/>
+                                        <input id="term-check-1" type="checkbox"  name="is_check" onclick="event.cancelBubble=true; boxCheck();"/>
                                         <label class="label" for="term-check-1">동의</label>
                                     </span>
 								</div>
@@ -690,7 +719,7 @@ function btnSlide(id){
 								<div class="terms-header subject">
 									<h4>자동차 표준 대여 약관 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
-                                        <input type="checkbox" id="term-check-3"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
+                                        <input type="checkbox" id="term-check-3"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true;"/>
                                         <label class="label" >동의</label>
                                     </span>
 								</div>

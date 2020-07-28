@@ -695,7 +695,7 @@ article+article{margin-top:55px}
 .rent-car-select .tab-content ul li a.cl-thin{cursor:text}
 .rent-car-select .tab-content ul li a.cl-point1:after{content:"";position:absolute;right:0;top:2px;width:14px;height:15px;background-image:url(http://localhost:8082/static/img/total.png);background-repeat:no-repeat;background-position:-1331px -1139px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
 .rent-car-select .tab-content ul li:nth-child(even) a{text-indent:50px}
-.rent-car-select .tab-content:after{content:"";position:absolute;left:50%;bottom:1px;width:89.361702%;margin-left:-44.6808%;height:20px;background:#fff;border-top:none;box-sizing:border-box;z-index:1}.rent-car-select.msg-alert .tab-menu li{border-bottom-color:#f68121}
+.rent-car-select .tab-content:after{content:"";position:absolute;left:50%;bottom:1px;width:89.361702%;margin-left:-44.6808%;height:20px;border-top:none;box-sizing:border-box;z-index:1}.rent-car-select.msg-alert .tab-menu li{border-bottom-color:#f68121}
 .rent-car-select.msg-alert .tab-content{border-color:#f68121}.rent-car-select+.msg-txt{display:block;margin-top:8px;font-size:13px}.rent-location-input .msg-alert{position:relative; }.rent-location-input .msg-alert:before{content:"";position:absolute;left:0;top:0;width:1px;height:100%;background:#f68121;z-index:1}
 .rent-location-input .msg-alert .select2-container--default .select2-selection--single{border-top-color:#f68121;border-bottom-color:#f68121;border-right-color:#f68121}.rent-location-input .btn-default{margin-left:10px}
 
@@ -732,7 +732,7 @@ article+article{margin-top:55px}
 .rent-car-select .tab-content ul li a.cl-thin{cursor:text}
 .rent-car-select .tab-content ul li a.cl-point1:after{content:"";position:absolute;right:0;top:2px;width:14px;height:15px;background-image:url(http://localhost:8082/static/img/total.png);background-repeat:no-repeat;background-position:-1331px -1139px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden}
 .rent-car-select .tab-content ul li:nth-child(even) a{text-indent:50px;max-width:380px}
-.rent-car-select .tab-content:after{content:"";position:absolute;left:50%;bottom:1px;width:89.361702%;margin-left:-44.6808%;height:20px;background:#fff;border-top:none;box-sizing:border-box;z-index:1}
+.rent-car-select .tab-content:after{content:"";position:absolute;left:50%;bottom:1px;width:89.361702%;margin-left:-44.6808%;height:20px;border-top:none;box-sizing:border-box;z-index:1}
 .rent-car-select.msg-alert .tab-menu li{border-bottom-color:#f68121}
 .rent-car-select.msg-alert .tab-content{border-color:#f68121}
 .rent-car-select.msg-alert+.msg-txt{display:block}
