@@ -72,7 +72,7 @@ tbody tr:hover {
 	</table>
 	
 	<div style="display: block; text-align: center;">		
-		<c:if test="${paging.startPage != 1 }">
+		<c:if test="${paging.startPage != 1 }">									<!-- &lt; 는 기호(<)의 코드값이다  -->
 			<a href="/buy/list?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>
 		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
@@ -85,7 +85,7 @@ tbody tr:hover {
 				</c:when>
 			</c:choose>
 		</c:forEach>
-		<c:if test="${paging.endPage != paging.lastPage}">
+		<c:if test="${paging.endPage != paging.lastPage}">				<!-- &gt; 는 기호(>)의 코드값이다  -->
 			<a href="/buy/list?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 		</c:if>
 	</div>
