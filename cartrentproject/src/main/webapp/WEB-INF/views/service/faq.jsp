@@ -16,7 +16,7 @@
 <div id="content">
     <div id="container">
         <div class="breadcrumbs">
-            <h2 class="tit">자주 찾는 질문</h2>
+            <h2 class="tit">자주 찾는 질문s</h2>
             <div class="clearfix">
                 <span>홈</span>
                 <span>고객센터</span>
