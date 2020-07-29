@@ -6,7 +6,7 @@
 
 	    <!-- header 시작 -->
  <c:if test="${URL.substring(36) != 'main.jsp'}">
- <header id="menuHeader11" class="hc"  style="border-bottom: 0.1px solid rgb(255, 255, 255, .5) !important; ">
+ <header id="menuHeader11" class="hc extend"  style="border-bottom: 0.1px solid rgb(255, 255, 255, .5) !important; ">
 
 	<div class="header-wrapper">
 		<h1 id="menuHeaderLogoH1" >
@@ -42,6 +42,17 @@
 				 	</ul>
                     </li>
                     </c:if>	
+             <!-- 삭제할거 -->
+            <c:if test="${sessionScope.id != 'master' && sessionScope.id != null}">
+             <li class="nav-menu nav-estimate primary dropdown" id="estimate-span">
+             <a href=""class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              </span>&nbsp;회원 메뉴&nbsp;<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+              	<li><a href="${path}/member/detail/${sessionScope.id}">회원정보</a></li>
+              </ul>
+              </li>
+            </c:if>
+            <!-- 삭제할거 -->
 		</nav>
 		<nav class="gnb hc" id="menuHeader12" tabindex="0">
 			<h2 class="sr-only ">메인 메뉴</h2>
@@ -49,10 +60,10 @@
 				<ul class="gnb-listbox" >
 					<li class="gnb-listitem gnb-listitem-long">
 					
-						<a href="/rent/rentList" class="gnb-anchor awaw aa1" style="left: auto; right: 0px;">장기렌터카</a>
+						<a href="/rent/rentList" class="gnb-anchor awaw aa1 serviceLong" style="left: auto; right: 0px;">장기렌터카</a>
 					</li>
 					<li class="gnb-listitem gnb-listitem-short">
-						<a href="/rent/main.do" class="gnb-anchor awaw aa2"   style="left: 60px; width: 100px;">단기렌터카</a>
+						<a href="/rent/main.do" class="gnb-anchor awaw aa2 serviceShort"   style="left: 60px; width: 100px;">단기렌터카</a>
 					</li>
 				</ul>
 			</div>
@@ -94,8 +105,6 @@
 <c:if test="${sessionScope.id eq 'master'}">	
 	<li><a id="P040104" href="${path}/serviceCenter/noticeInsertForm">공지사항 글쓰기</a>
 	</li><li>
-	<a id="P040105" href="${path}/serviceCenter/faqInsertForm">자주찾는 질문 글쓰기</a>
-	</li></ul>
 </c:if>
 
 </div></div></div>

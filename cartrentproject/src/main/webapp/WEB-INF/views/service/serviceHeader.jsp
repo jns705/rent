@@ -39,8 +39,6 @@ $(function() {
 	
 	if( id == 'master') {
 		str += '<a id="P040104" href="${path}/serviceCenter/noticeInsertForm">공지사항 글쓰기</a>';
-		str += '</li><li>';
-		str += '<a id="P040105" href="${path}/serviceCenter/faqInsertForm">자주찾는 질문 글쓰기</a>';
 		str += '</li></ul>';
 	}
 	
