@@ -1243,7 +1243,7 @@ function btnSlide(id){
 <!-- modal-pop//end -->
             <article id="tinfo" >
                 <div class="ticker-info tickerHead" >
-                    <div class="ticker-body">
+                    <div class="ticker-body" style="height:630px;">
                         <div class="clearfix">
                             <div class="fl">
                                 <div class="reserve-state">

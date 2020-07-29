@@ -22,7 +22,7 @@
 					<a href="/rent/prmt/evnt/evnt_list.do" id="awawaaaa" class="awaw">이벤트</a>
 				</li>
 				<li>
-					<a href="/rent/custcnte/notice/notice_list.do" class="awaw">고객센터</a>
+					<a href="/serviceCenter" class="awaw">고객센터</a>
 				</li>
 				
 			<c:if test="${sessionScope.id eq 'master'}">
@@ -56,6 +56,57 @@
 					</li>
 				</ul>
 			</div>
+				<div class="service">
+				
+				
+				
+				 <c:if test="${fn : contains(URL, 'serviceCenter')}">
+	<div class="gnb-localnav">
+		<div class="gnb-wrapper">
+			<div class="gnb-curent customer">
+				<ul><li class="selected">
+				<a id="P0401" href="#none" data-name="customer" data-role="true">고객센터</a>
+			<div class="gnb-depth-layer">
+<ul><li>
+<a id="P040101" href="/rent/custcnte/notice/notice_list.do">공지사항</a>
+</li><li>
+<a id="P040102" href="/serviceCenter/customerConsultation">고객상담</a>
+</li><li>
+<a id="P040103" href="/serviceCenter/faq">자주찾는 질문</a>
+</li><li>
+<a id="P040104" href="/rent/custcnte/branch/shortBranch_list.do">지점안내</a>
+</li><li>
+<a href="/rent/custcnte/garage/skGarage_list.do">정비매장</a>
+</li><li>
+<a id="P040105" href="/rent/custcnte/html/form_download.do">양식다운로드</a>
+</li></ul></div></li></ul></div>
+<div class="gnb-local-depth"><ul><li>
+<a id="P040101" href="/serviceCenter">공지사항</a>
+</li><li>
+<a id="P040102" href="/serviceCenter/customerConsultation">고객상담</a>
+</li><li>
+<a id="P040103" href="/serviceCenter/faq">자주찾는 질문</a>
+</li><li>
+<a href="${path}/qna/list">QNA</a>
+</li>
+
+
+<c:if test="${sessionScope.id eq 'master'}">	
+	<li><a id="P040104" href="${path}/serviceCenter/noticeInsertForm">공지사항 글쓰기</a>
+	</li><li>
+	<a id="P040105" href="${path}/serviceCenter/faqInsertForm">자주찾는 질문 글쓰기</a>
+	</li></ul>
+</c:if>
+
+</div></div></div>
+
+	
+
+</c:if>   
+				
+				
+				
+				</div>
 						
 		</nav>
 		<div id="pho">
@@ -65,11 +116,24 @@
 		</div>
 	</div>
 </header>
+
 <div class="quick-top" style="z-index: 1000">
     <a href="#top" id="aaaaaa" class="btn-top">TOP</a>
 </div>
 </c:if>
     <!-- header 끝 -->
+    
+    
+    
+
+
+
+
+
+
+
+
+
     
  	<div class="quick-menu" style="z-index: 1000 !important;">
 	    <ul>
@@ -83,7 +147,7 @@
 	            <a href="/rent/NewRentList">다이렉트견적</a>
 	        </li>
 	        <li class="menu6">
-            	<a href="/rent/custcnte/counsel/long_reqt_form.do">상담신청</a>
+            	<a href="/serviceCenter/customerConsultation">상담신청</a>
 	        </li>
 	    </ul>
 	</div>

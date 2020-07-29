@@ -69,7 +69,7 @@
     text-overflow: ellipsis;
     
     
-        background-image: url(/resources/img/spr-common.png);
+    background-image: url(/resources/img/spr-common.png);
     background-repeat: no-repeat;
     }
     
