@@ -109,6 +109,17 @@ public class CounselingController {
 	//상담 전체 목록
 	@RequestMapping("/list")
 	public String counselingList(Model model) throws Exception {
+		List<CounselingVO> cou = couService.counselingList();
+		List<String> car_name = new ArrayList<String>();
+		for(int i = 0; i < cou.size(); i++) {
+			String rent_id = cou.get(i).getRent_id();
+			if(rent_id == null) continue;
+			RentVO ren = rentService.rentListId(rent_id);
+			int car_id = ren.getCar_id();
+			CarVO car = carService.carDetail(Integer.toString(car_id));
+			car_name.add(car.getCar_name());
+		}
+		model.addAttribute("car",car_name);
 		model.addAttribute("counselingList",couService.counselingList());
 		return "/counseling/counselingList";
 	}
@@ -123,6 +134,13 @@ public class CounselingController {
 	//상담글 상세보기
 	@RequestMapping("/detail/{counseling_id}")
 	public String counselingDetail(@PathVariable String counseling_id, Model model) throws Exception {
+		CounselingVO cou = couService.counselingDetail(counseling_id);
+		String rent_id = cou.getRent_id();
+		RentVO rent = rentService.rentDetail(rent_id);
+		int car_id = rent.getCar_id();
+		CarVO car = carService.carDetail(Integer.toString(car_id));
+		
+		model.addAttribute("car", car);
 		model.addAttribute("detail", couService.counselingDetail(counseling_id));
 		return "/counseling/counselingDetail";
 	}
