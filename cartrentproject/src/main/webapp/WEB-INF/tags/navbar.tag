@@ -6,8 +6,7 @@
 
 	    <!-- header 시작 -->
  <c:if test="${URL.substring(36) != 'main.jsp'}">
- <header id="menuHeader11" class="hc"  style="border-bottom: 0.1px solid rgb(255, 255, 255, .5) !important; ">
-
+ <header id="menuHeader11" class="hc extend"  style="border-bottom: 0.1px solid rgb(255, 255, 255, .5) !important; ">
 	<div class="header-wrapper">
 		<h1 id="menuHeaderLogoH1" >
 			<a href="/main">SK렌터카 </a>
@@ -43,16 +42,16 @@
                     </li>
                     </c:if>	
 		</nav>
-		<nav class="gnb hc" id="menuHeader12" tabindex="0">
+		<nav class="gnb hc " id="menuHeader12" tabindex="0">
 			<h2 class="sr-only ">메인 메뉴</h2>
 			<div class="gnb-wrapper">
 				<ul class="gnb-listbox" >
 					<li class="gnb-listitem gnb-listitem-long">
 					
-						<a href="/rent/rentList" class="gnb-anchor awaw aa1" style="left: auto; right: 0px;">장기렌터카</a>
+						<a href="/rent/rentList" class="gnb-anchor awaw aa1 serviceLong" style="left: auto; right: 0px;">장기렌터카</a>
 					</li>
 					<li class="gnb-listitem gnb-listitem-short">
-						<a href="/rent/main.do" class="gnb-anchor awaw aa2"   style="left: 60px; width: 100px;">단기렌터카</a>
+						<a href="/rent/main.do" class="gnb-anchor awaw aa2 serviceShort"   style="left: 60px; width: 100px;">단기렌터카</a>
 					</li>
 				</ul>
 			</div>
@@ -60,7 +59,7 @@
 				
 				
 				
-				 <c:if test="${fn : contains(URL, 'serviceCenter')}">
+<c:if test="${fn : contains(URL, 'serviceCenter')}">
 	<div class="gnb-localnav">
 		<div class="gnb-wrapper">
 			<div class="gnb-curent customer">
@@ -111,7 +110,7 @@
 		</nav>
 		<div id="pho">
 		<c:if test="${fn : contains(URL, 'main.do')}"><c:set var="hidden" value="hidden"/></c:if>
-		<div class="header-placeholder ${hidden} plh"><div class="header-placeholder-bg plh ${hidden}"></div></div>
+		<div class="serviceHide header-placeholder ${hidden} plh"><div class="header-placeholder-bg plh ${hidden}"></div></div>
 		
 		</div>
 	</div>
