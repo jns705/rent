@@ -9,7 +9,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ include file="../service/serviceHeader.jsp" %>
 <title>QNA 상세 페이지</title>
+<link href="http://localhost:8082/static/css/ss.css" rel="stylesheet" type="text/css" >
 <link href="http://localhost:8082/static/css/qna.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>

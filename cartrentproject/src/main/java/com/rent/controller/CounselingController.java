@@ -368,6 +368,29 @@ try {
 		return "/counseling/userList";
 	}
 	
-	
+	//고객센터->상담신청  등록해준다.
+	@RequestMapping("/asInsertProc")
+	public String asConsultationInsert(HttpServletRequest rq, CounselingVO counseling) throws Exception {
+		String carType = rq.getParameter("carType");
+		String zipcode = rq.getParameter("address0");
+		String address1 = rq.getParameter("address1");
+		String address2 = rq.getParameter("address2");
+		String option_name = rq.getParameter("contents");
+		String address = zipcode+"/"+address1+"/"+address2;
+		option_name += "\n차종선택 : "+carType;
+		
+		counseling.setAddress(address);
+		counseling.setOption_name(option_name);
+		counseling.setCounseling_situation("상담 대기중");
+		
+		//회원이면 아이디값 , 비회원이면 비회원 넣기
+		String id = rq.getParameter("id");
+		if(id == "") {
+			counseling.setId("비회원");
+		}
+		
+		couService.counselingInsert(counseling);
+		return "/main";
+	}
 	
 }
