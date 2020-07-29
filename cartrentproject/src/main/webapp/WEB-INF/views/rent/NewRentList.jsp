@@ -40,11 +40,18 @@
 		</div>	
 		<div class="container" style="padding-left: 0px; width: 1014px;">
 		<div class="tab-menu v1">
-			<ul>
-				<li class="col-4 selected"><a href="/rent/NewRentList">신차 렌트카</a></li>
-				<li class="col-4 "><a href="/rent/rentList">중고차 렌트카</a></li>
-			</ul>
-		</div>
+            <ul class="unlink tTab" id="reservMenu">
+            	<li class="col-3 selected">
+                	<a href="/rent/NewRentList">신차 렌트카</a>
+                </li>
+                <li class="col-3 ">
+                    <a href="/rent/rentList">중고차 렌트카</a>
+                </li>
+                <li class="col-3" >
+		           <a href="/buy/memberCheckForm?check=1">예약 확인</a>
+                </li>
+            </ul>
+        </div>
 	</div>
 	
 	

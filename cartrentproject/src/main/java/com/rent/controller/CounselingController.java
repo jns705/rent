@@ -1,5 +1,8 @@
 package com.rent.controller;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +12,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,13 +31,16 @@ import com.rent.domain.BuyVO;
 import com.rent.domain.CounselingVO;
 import com.rent.domain.MemberVO;
 import com.rent.domain.OptionCarVO;
+import com.rent.domain.RentListVO;
 import com.rent.domain.RentVO;
+import com.rent.domain.ShortRentVO;
 import com.rent.service.CarColorService;
 import com.rent.service.CarOptionService;
 import com.rent.service.CarService;
 import com.rent.service.CounselingService;
 import com.rent.service.MemberService;
 import com.rent.service.RentService;
+import com.rent.service.ShortRentService;
 
 @Controller
 @RequestMapping("/counseling")
@@ -53,6 +63,9 @@ public class CounselingController {
 	
 	@Resource(name="com.rent.service.CarOptionService")
 	CarOptionService optService;
+
+	@Resource(name="com.rent.service.ShortRentService")
+	ShortRentService shortService;
 	
 	@RequestMapping("/insert/{rent_id}")
 	public String counselingSend(Model model, HttpServletRequest request, @PathVariable String rent_id) throws Exception{
@@ -270,14 +283,75 @@ public class CounselingController {
 	
 	@RequestMapping("/short_rentDetail")
 	@ResponseBody
-	public Map<String, Object> short_rentDetail(Model model, RentVO rent, HttpSession session) throws Exception{
+	public Map<String, Object> short_rentDetail(Model model, HttpSession session, HttpServletRequest request) throws Exception{
 		String [] carKind = {"소형", "중형", "준중형", "대형", "RV", "친환경차"};
+		RentVO rent = new RentVO();
+		rent.setLocation(request.getParameter("start_location"));
+		List<ShortRentVO> sList = shortService.getTimeList();
 		Map<String, Object> map = new HashMap<String, Object>();
+		List<String> rent_id = new ArrayList<String>();
+try {		
+		if(!request.getParameter("start_date").equals("대여일 선택") || !request.getParameter("end_date").equals("반납일 선택") ) {
+			Date start_date = Date.valueOf(request.getParameter("start_date"));
+			Date end_date   = Date.valueOf(request.getParameter("end_date"));
+			int sHour = Integer.parseInt(request.getParameter("sHour"))+1;
+			int lHour = Integer.parseInt(request.getParameter("lHour"))+1;
+
+			for(ShortRentVO sho : sList) {
+				boolean cnt  = false;
+				
+				if(sho.getEnd_date().compareTo(start_date) == -1  ||  sho.getStart_date().compareTo(end_date) == 1)
+					cnt = true;
+					
+				if(sho.getEnd_date().compareTo(start_date) == 0)
+					if(Integer.parseInt(sho.getEnd_time().substring(0,2)) < sHour)
+						cnt = true;
+
+				if(sho.getStart_date().compareTo(end_date) == 0)
+					if(Integer.parseInt(sho.getStart_time().substring(0,2)) > lHour)
+						cnt = true;
+				
+				if(cnt) rent_id.add(Integer.toString(sho.getRent_id()));
+			}
+			
+		}//end - if(!request.getParameter("start_date").equals("대여일 선택") || !request.getParameter("end_date").equals("반납일 선택") )
+		
+		
+		System.out.println("rent  " + rent_id);
 		for(int i = 0; i < 7; i ++) {
 			rent.setCar_id(i);
-			map.put("a"+i,rentService.carKindList(rent));
+			List<CarVO> carList = rentService.carKindList(rent);
+			List<CarVO> car = new ArrayList<CarVO>();
+			for(CarVO cv : carList) {
+				if(sList != null) {
+					for(ShortRentVO sv : sList) {
+						 if(sv.getRent_id() == cv.getRent_id()) {
+								if(!rent_id.isEmpty()) {
+									for(String rt : rent_id) {
+										cv.setSituation("X");
+										if(Integer.parseInt(rt) == cv.getRent_id()) {
+											cv.setSituation("예약가능");
+											System.out.println("1111 "+ cv.getSituation() + "  " + cv.getRent_id());
+											break;
+										}
+									}//end - for(String rt : rent_id)
+								}
+						 }
+					}//end - for(ShortRentVO sv : sList)
+				}
+				car.add(cv);
+			}// end - for(CarVO cv : carList)
+			map.put("a"+i,car);
 		}
+}catch (Exception e) {
+	System.out.println("null무시");
+}
+
+
+		
+		map.put("rent_id", rent_id);
 		map.put("carKind",  carKind);
+		map.put("short", sList);
 		return map;
 	}
 	
@@ -288,7 +362,28 @@ public class CounselingController {
 		list.setOption_name("파퓰러 패키지,빌트인 캠 패키지");
 		list.setCounseling_situation("상담 대기중");
 		couService.counselingInsert(list);
-		return "/counseling/short_rent";
+		return "/counseling/userList?tel="+list.getTel();
+	}
+	
+	@RequestMapping("/userList")
+	public String userList(Model model, HttpSession session, @RequestParam(defaultValue = "n")String tel)throws Exception{
+		List<CounselingVO> list = new ArrayList<CounselingVO>();
+		if(tel.equals("n"))
+			list = couService.counselingListId((String)session.getAttribute("id"));
+		else
+			list = couService.counselingListTel(tel);
+		List<String> carName = new ArrayList<String>();
+		for(CounselingVO List : list) {
+			carName.add(carService.carName(rentService.carName(List.getRent_id())));
+		}
+		if(list.isEmpty())
+			model.addAttribute("tel", tel);
+		else
+			model.addAttribute("tel", list.get(0).getTel());
+			
+		model.addAttribute("couList", list);		
+		model.addAttribute("carName", carName);		
+		return "/counseling/userList";
 	}
 	
 	//고객센터->상담신청  등록해준다.

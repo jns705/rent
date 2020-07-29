@@ -35,5 +35,13 @@ public interface BuyMapper {
 	//차량 구매한사람들의 아이디로 성별을 나눈다.
 	public MemberVO memberInformation(String id) throws Exception;
 	
+	//전화번호 이름으로 비회원 조회
+	public List<BuyVO> getDetail(BuyVO buy) throws Exception;
+	
+	//바이아이디로 리스트 조회
+	public List<BuyVO> buyListBuyId(String buy_id)throws Exception;
+	
+	//전화번호로 리스트 조회
+	public List<BuyVO> buyListTel(String tel)throws Exception;
 		
 }

@@ -5,10 +5,12 @@
 <c:set var="URL" value="${pageContext.request.requestURL}" />
 
 	    <!-- header 시작 -->
- <header id="menuHeader11" class="hc extend">
+ <c:if test="${URL.substring(36) != 'main.jsp'}">
+ <header id="menuHeader11" class="hc"  style="border-bottom: 0.1px solid rgb(255, 255, 255, .5) !important; ">
+
 	<div class="header-wrapper">
 		<h1 id="menuHeaderLogoH1" >
-			<a href="/main">SK렌터카</a>
+			<a href="/main">SK렌터카 </a>
 		</h1>		
 		<nav id="util" >
 			<ul>
@@ -25,7 +27,7 @@
 				
 			<c:if test="${sessionScope.id eq 'master'}">
                     <li class="nav-menu nav-estimate primary dropdown" id="estimate-span">
-                    <a href="${path}/admin"class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <a href="${path}/admin"class="dropdown-toggle awaw" data-toggle="dropdown" role="button" aria-expanded="false">
                     </span>&nbsp;관리자 메뉴&nbsp;<span class="caret"></span></a>
 				 	<ul class="dropdown-menu" role="menu">
 				 		<li><a href="${path}/admin/carInsert">차량등록</a></li>
@@ -39,18 +41,7 @@
 				 		<li><a href="#">Exit</a></li>
 				 	</ul>
                     </li>
-                    </c:if>
-             <!-- 삭제할거 -->
-            <c:if test="${sessionScope.id != 'master' && sessionScope.id != null}">
-             <li class="nav-menu nav-estimate primary dropdown" id="estimate-span">
-             <a href=""class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              </span>&nbsp;회원 메뉴&nbsp;<span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-              	<li><a href="${path}/member/detail/${sessionScope.id}">회원정보</a></li>
-              </ul>
-              </li>
-            </c:if>
-            <!-- 삭제할거 -->
+                    </c:if>	
 		</nav>
 		<nav class="gnb hc" id="menuHeader12" tabindex="0">
 			<h2 class="sr-only ">메인 메뉴</h2>
@@ -58,21 +49,91 @@
 				<ul class="gnb-listbox" >
 					<li class="gnb-listitem gnb-listitem-long">
 					
-						<a href="/rent/rentList" class="gnb-anchor awaw serviceLong" style="left: auto; right: 0px;">장기렌터카</a>
+						<a href="/rent/rentList" class="gnb-anchor awaw aa1" style="left: auto; right: 0px;">장기렌터카</a>
 					</li>
 					<li class="gnb-listitem gnb-listitem-short">
-						<a href="/rent/main.do" class="gnb-anchor awaw serviceShort"   style="left: 60px; width: 100px;">단기렌터카</a>
+						<a href="/rent/main.do" class="gnb-anchor awaw aa2"   style="left: 60px; width: 100px;">단기렌터카</a>
 					</li>
 				</ul>
 			</div>
-			
-			<div class="service"></div>
-		</nav>
-		<div class="serviceHide header-placeholder"><div class="header-placeholder-bg"></div></div>
-	</div>
+				<div class="service">
+				
+				
+				
+				 <c:if test="${fn : contains(URL, 'serviceCenter')}">
+	<div class="gnb-localnav">
+		<div class="gnb-wrapper">
+			<div class="gnb-curent customer">
+				<ul><li class="selected">
+				<a id="P0401" href="#none" data-name="customer" data-role="true">고객센터</a>
+			<div class="gnb-depth-layer">
+<ul><li>
+<a id="P040101" href="/rent/custcnte/notice/notice_list.do">공지사항</a>
+</li><li>
+<a id="P040102" href="/serviceCenter/customerConsultation">고객상담</a>
+</li><li>
+<a id="P040103" href="/serviceCenter/faq">자주찾는 질문</a>
+</li><li>
+<a id="P040104" href="/rent/custcnte/branch/shortBranch_list.do">지점안내</a>
+</li><li>
+<a href="/rent/custcnte/garage/skGarage_list.do">정비매장</a>
+</li><li>
+<a id="P040105" href="/rent/custcnte/html/form_download.do">양식다운로드</a>
+</li></ul></div></li></ul></div>
+<div class="gnb-local-depth"><ul><li>
+<a id="P040101" href="/serviceCenter">공지사항</a>
+</li><li>
+<a id="P040102" href="/serviceCenter/customerConsultation">고객상담</a>
+</li><li>
+<a id="P040103" href="/serviceCenter/faq">자주찾는 질문</a>
+</li><li>
+<a href="${path}/qna/list">QNA</a>
+</li>
+
+
+<c:if test="${sessionScope.id eq 'master'}">	
+	<li><a id="P040104" href="${path}/serviceCenter/noticeInsertForm">공지사항 글쓰기</a>
+	</li><li>
+	<a id="P040105" href="${path}/serviceCenter/faqInsertForm">자주찾는 질문 글쓰기</a>
+	</li></ul>
+</c:if>
+
+</div></div></div>
+
 	
+
+</c:if>   
+				
+				
+				
+				</div>
+						
+		</nav>
+		<div id="pho">
+		<c:if test="${fn : contains(URL, 'main.do')}"><c:set var="hidden" value="hidden"/></c:if>
+		<div class="header-placeholder ${hidden} plh"><div class="header-placeholder-bg plh ${hidden}"></div></div>
+		
+		</div>
+	</div>
 </header>
+
+<div class="quick-top" style="z-index: 1000">
+    <a href="#top" id="aaaaaa" class="btn-top">TOP</a>
+</div>
+</c:if>
     <!-- header 끝 -->
+    
+    
+    
+
+
+
+
+
+
+
+
+
     
  	<div class="quick-menu" style="z-index: 1000 !important;">
 	    <ul>
@@ -86,15 +147,11 @@
 	            <a href="/rent/NewRentList">다이렉트견적</a>
 	        </li>
 	        <li class="menu6">
-            	<a href="/rent/custcnte/counsel/long_reqt_form.do">상담신청</a>
+            	<a href="/serviceCenter/customerConsultation">상담신청</a>
 	        </li>
 	    </ul>
 	</div>
-	<div class="blank"></div>
 	
-<div class="quick-top" style="z-index: 1000">
-    <a href="#top" id="aaaaaa" class="btn-top">TOP</a>
-</div>
     
 <c:if test="${fn : contains(URL, 'main.do')}">
 <style>
@@ -107,9 +164,6 @@ header a {
 </style>
 </c:if>
 <style>
-.blank {
-	height: 100px;
-}
 body {
 	margin-top: 140px;
 }

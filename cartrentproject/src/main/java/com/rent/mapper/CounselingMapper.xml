@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 <mapper namespace="com.rent.mapper.CounselingMapper">
 	
 	<!-- 등록 -->
-	<insert id="counselingInsert" parameterType="com.rent.domain.CounselingVO">
+	<insert id="counselingInsert" parameterType="com.rent.domain.CounselingVO" useGeneratedKeys="true" keyProperty="counseling_id">
 		insert into counseling
 				(counseling_id, id, rent_id, option_name, color, name, address,
 				 tel, counseling_situation, month, counseling_date)
@@ -56,5 +56,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		where id = #{id}
 	</select>
 	
+	<!-- 회원아이디로 상담리스트 조회 -->
+	<select id="counselingListId" parameterType="String" resultType="com.rent.domain.CounselingVO">
+		select *
+		from counseling
+		where id = #{id}
+		order by counseling_date desc
+	</select>
+	
+	<!--  전화번호로 리스트 출력 -->
+	<select id="counselingListTel" parameterType="String" resultType="com.rent.domain.CounselingVO">
+		SELECT	*
+		FROM	COUNSELING
+		WHERE	TEL = #{tel}
+	</select>
 </mapper>
 

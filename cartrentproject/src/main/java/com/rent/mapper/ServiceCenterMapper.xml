@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- LogMapper.java 파일의 주소를 네임스페이스를 기술한다. -->
+<mapper namespace="com.rent.mapper.ServiceCenterMapper">
+	
+	<!-- 서비스 센터 리스트 출력 -->
+	<select id="getList" resultType="com.rent.domain.ServiceVO">
+		SELECT	*
+		FROM	NOTICE
+	</select>
+	
+    <!-- 페이정처리 리스트 -->
+    <select id="getTotal" parameterType="hashMap" resultType="com.rent.domain.ServiceVO">
+    	SELECT * 
+    	FROM	NOTICE
+    	WHERE
+   		<if test="moKind == '전체'"> 
+			subject like '%${moVal}%' 
+			or content like '%${moVal}%' 
+			or division like '%${moVal}%' 
+			or reg_date like '%${moVal}%' 
+		</if>
+   		<if test="moKind != '전체'"> 
+   		<if test="moKind == '제목'"> subject </if>	
+   		<if test="moKind == '내용'"> content </if>
+		like '%${moVal}%' 
+		</if>
+		<if test="aaaa != 1">limit ${startNum}, ${showNum}</if>
+    	
+    </select>
+    
+    <!-- 페이정처리한 수 -->
+    <select id="getTotalSize" parameterType="hashMap" resultType="int">
+    	SELECT  count(*) 
+    	FROM	NOTICE
+    	WHERE
+   		<if test="moKind == '전체'"> 
+		subject like 		'%${moVal}%' 
+		or content like 	'%${moVal}%' 
+		or division like 	'%${moVal}%' 
+		or reg_date like 	'%${moVal}%' 
+		</if>	
+		
+   		<if test="moKind != '전체'"> 
+   		<if test="moKind == '제목'"> subject </if>	
+   		<if test="moKind == '내용'"> content </if>
+		like '%${moVal}%' 
+		</if>
+    </select>
+</mapper>
+

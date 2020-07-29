@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags" %>
@@ -12,6 +13,9 @@
 <meta charset="UTF-8">
 <title>단기 렌터카</title>
 </head>
+<jsp:useBean id="toDay" class="java.util.Date" />
+<fmt:formatDate value='${toDay}' pattern='HH' var="nowHour"/>
+<fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' var="nowDate"/>
 <body>
 <form action="/counseling/mainProc" method="get" name="proc">
 				<div class="spot short type2" style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동촤.gif')">
@@ -40,61 +44,115 @@
 										<a href="/rent/rentList" class="anchor">중고차</a>
 									</div>
 								</div>
+								
+								<style>
+.inputDate{
+	font-size:15px !important;
+	width: 100%;
+    height: 42px;
+    padding: 10px 20px;
+    border:none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    background-color: #fff;
+    font-size: 14px;
+    font-family: NanumBarunGothic;
+    box-sizing: border-box;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: 0;
+    transition: background .2s linear 0s,box-shadow .2s linear 0s;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
+    
+    background-image: url(/resources/img/spr-common.png);
+    background-repeat: no-repeat;
+    }
+    
+    .select-box b{
+    background-image: url(http://localhost:8082/static/img/spr-common.png);
+    width: 13px;
+    height: 7px;
+    background-repeat: no-repeat;
+    margin-left:-130px;
+    margin-top:17px;
+    background-position: -1331px -1205px;
+    -webkit-background-size: 1347px 1290px;
+    background-size: 1347px 1290px;
+    text-indent: 1000%;
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+    
+    }
+</style>
+
 								<div class="fast-reserve-content">
 									<div class="option">
 										<div class="option-row clearfix">
 											<span id="sDateSpan" class="fl" >
-												<input type="text" id="startDate" name="startDate" value="대여일 선택" onchange="changeDate(); changeHour(); todayCheck();">
+												<input class="inputDate" readonly type="text" id="startDate" name="startDate" value="대여일 선택" onchange="changeDate(); changeHour(); todayCheck();">
 											</span>
 											<span class="select-box fl">
-												<select name="sHour" id="sHour" class="option01 option02 hour fast-reserve-select" onchange="changeDate(); changeHour();">
+												<select class="inputDate"   name="sHour" id="sHour" class="option01 option02 hour fast-reserve-select" onchange="changeDate(); changeHour();">
 												<c:forEach begin="06" end="22" varStatus="status">
-													<option value="${status.index}">${status.index} 시</option>
+													<option value="${status.index}">${status.index} 시 </option>
 												</c:forEach>
 												</select>
+												<b role="presentation"></b>
 											</span>
 											<span class="select-box fl">
-												<select name="sMinute" id="sMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate();">
-													<option value="00">00 분</option>
-													<option value="30">30 분</option>
+												<select class="inputDate"   name="sMinute" id="sMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate();">
+													<option value="00">00 분 </option>
+													<option value="30">30 분 </option>
 												</select>
+												<b role="presentation"></b>
 											</span>
-											<span class="select-box fl">
-												<select name="sLocation" id="sLocation" class="option01 option02 timeChange fast-reserve-select">
+											<span class="select-box fl" style="width:100px;">
+												<select class="inputDate"   name="sLocation" id="sLocation" class="option01 option02 timeChange fast-reserve-select">
 														<option>제주지점</option>
 												</select>
+												<b role="presentation"></b>
 											</span>
 										</div>
 										<div class="option-row clearfix">
 											<span id="lDateSpan" class="fl">
-												<input type="text" id="endDate" name="endDate" value="반납일 선택" onchange="changeDate();  changeHour();">
+												<input class="inputDate"   readonly type="text" id="endDate" name="endDate" value="반납일 선택" onchange="changeDate();  changeHour();">
 											</span>
 											<span  class="select-box fl">
-												<select name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate();">
+												<select class="inputDate"   name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate();">
 												<c:forEach begin="06" end="22" varStatus="status">
 													<option value="${status.index}">${status.index} 시</option>
 												</c:forEach>
 												</select>
+												<b role="presentation"></b>
 											</span>
 											<span class="select-box fl">
-												<select name="lMinute" id="lMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate();">
+												<select class="inputDate"   name="lMinute" id="lMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate();">
 													<option value="00">00 분</option>
 													<option value="30">30 분</option>
 												</select>
+												<b role="presentation"></b>
 											</span>
-											<span class="select-box fl">
-												<select name="lLocation" id="lLocation" class="option01 option02 timeChange fast-reserve-select">
+											<span class="select-box fl" style="width:100px;">
+												<select class="inputDate"   name="lLocation" id="lLocation" class="option01 option02 timeChange fast-reserve-select">
 														<option>제주지점</option>
 												</select>
+												<b role="presentation"></b>
 											</span>
 											</div>
 										<div class="option-row clearfix">
 											<span class="select-box select-box-car fl">
-												<select id="carTab" name=carKind class="option01 option02 fast-reserve-car-select" onchange="submitable()">
+												<select class="inputDate"   id="carTab" name=carKind class="option01 option02 fast-reserve-car-select" onchange="submitable()">
 													<c:forEach items="${carKind}" var="carKind">
 														<option>${carKind}</option>
 													</c:forEach>
 												</select>
+												<b role="presentation" style="margin-left: -30px;"></b>
 											</span>
 										</div>
 									</div>
@@ -214,10 +272,9 @@ function jeju(){
 
 
 
-
     function todayCheck(){
-    	var nowDate = $('#nowDate').val();
-    	var nowHour = Number($('#nowHour').val());
+    	var nowDate = '${nowDate}'
+    	var nowHour = Number('${nowHour}');
     	//시작날짜가 현재 날짜일 시
     	if(nowDate == $('#startDate').val()){
     		 var str1  = '';
@@ -259,19 +316,26 @@ function jeju(){
 
 
   $(document).scrollTop();
-
-  //1947값 이상일시 class를 바꾼다
+//스크롤에 따른 css
   $(window).scroll(function () {
   	var scrollValue = $(document).scrollTop();
+  	//스크롤이 맨위에 있을 시
   	if(scrollValue != 0){
   		$('#menuHeader11').css('background-color','white');
   		$('#menuHeader12').css('background-color','white');
-  		$('.awaw').css('color','black');
+  		$('.plh').removeClass('hidden');
+  		$('.awaw').attr('style','color:black !important')
+  		$('.aa1').attr('style','color:black !important; left: auto; right: 0px; ')
+  		$('.aa2').attr('style','color:black !important; left: 60px; width: 100px;')
+
   	}else{
   		$('#menuHeader11').css('background-color','transparent');
   		$('#menuHeader12').css('background-color','transparent');
   		$('#menuHeader12').css('background-color','transparent');
-  		$('.awaw').css('color','white');
+  		$('.plh').addClass('hidden');
+  		$('.awaw').attr('style','color:white !important')
+  		$('.aa1').attr('style','color:white !important; left: auto; right: 0px; ')
+  		$('.aa2').attr('style','color:white !important; left: 60px; width: 100px;')
   		
   	}});
 

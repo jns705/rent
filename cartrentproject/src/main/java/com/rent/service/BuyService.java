@@ -56,4 +56,19 @@ public class BuyService {
 	public MemberVO memberInformation(String id) throws Exception {
 		return mapper.memberInformation(id);
 	}
+	
+	//비회원 이름, 전화번호로 조회
+	public List<BuyVO> getDetail(BuyVO buy) throws Exception{
+		return mapper.getDetail(buy);
+	}
+	
+	//바이아이디로 리스트 조회
+	public List<BuyVO> buyListBuyId(String buy_id)throws Exception{
+		return mapper.buyListBuyId(buy_id);
+	}
+	
+	//전화번호로 리스트 출력
+	public List<BuyVO> buyListTel(String tel)throws Exception{
+		return mapper.buyListTel(tel);
+	}
 }

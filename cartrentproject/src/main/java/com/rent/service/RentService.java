@@ -80,4 +80,10 @@ public class RentService {
 		return mapper.getPrice(car_id);
 	}
 	
+	//렌트 아이디로 차량이름 추출
+	public String carName(String car_id)throws Exception{
+		return mapper.carName(car_id);
+	}
+	
+	
 }

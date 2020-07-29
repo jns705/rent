@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.rent.domain.BuyVO;
 import com.rent.domain.CounselingVO;
 import com.rent.mapper.CounselingMapper;
 
@@ -49,6 +50,17 @@ public class CounselingService {
 	public CounselingVO counselingOK(String id) throws Exception{
 		return mapper.counselingOK(id);
 	}
+	
+	//회원 아이디 목록
+	public List<CounselingVO> counselingListId(String id) throws Exception{
+		return mapper.counselingListId(id);
+	}
+	
+	//회원 전화번호로 리스트 출력
+	public List<CounselingVO> counselingListTel(String tel) throws Exception{
+		return mapper.counselingListTel(tel);
+	}
+	
 	
 	
 	

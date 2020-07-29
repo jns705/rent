@@ -15,4 +15,7 @@ public interface ShortRentMapper {
 	
 	//구매아이디로 조회
 	public ShortRentVO shortDetail(int buy_id)throws Exception;
+	
+	//렌트아이디와 시간을 구한다.
+	public List<ShortRentVO> getTimeList()throws Exception;
 }

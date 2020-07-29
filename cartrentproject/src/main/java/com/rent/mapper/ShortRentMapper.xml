@@ -18,6 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		FROM	SHORTRENT
 		WHERE	BUY_ID = #{buy_id}
 	</select>
+	
+	<select id="getTimeList" resultType="com.rent.domain.ShortRentVO">
+		select 	b.rent_id, s.start_date, s.start_time, s.end_date, s.end_time
+		from 	buy b, shortrent s
+		where 	b.buy_id = s.buy_id;
+	</select>
     
 </mapper>
 
