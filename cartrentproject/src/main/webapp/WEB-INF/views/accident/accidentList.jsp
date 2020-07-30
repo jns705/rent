@@ -71,14 +71,21 @@ tbody td#a:hover {
 <script>
 var now = 1;	//시작
 var cntPerPage = 6;	//화면에 보여줄 갯수
+
 $(function() {
 	loadNext();
 });
 
+//스크롤이 발생하면
 $(window).scroll(function(){
-	if($(window).scrollTop() == $(document).height() - $(window).height()){
-		now+=1;
-		loadNext();
+	
+	//$(window).scrollTop() == $(document).height() - $(window).height() 화면비율이 이상해서?? 한번밖에안됨
+	//$(document).height() <= $(window).scrollTop() + $(window).height() 스크롤 내리면 걍 실행
+	
+	//페이지 끝 도착?
+	if($(document).height() <= $(window).scrollTop() + $(window).height()){
+		now+=1;		//now를 1증가시킨다.
+		loadNext();	//사고목록들을 가져온다 cntPerPage만큼
 	}
 });
 
