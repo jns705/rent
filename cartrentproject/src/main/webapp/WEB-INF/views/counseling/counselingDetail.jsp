@@ -16,6 +16,7 @@ tbody tr:hover {
 </style>
 </head>
 <body>
+<div style="height: 150px;"></div>
 <h2 align=center>${detail.name}님의 상담 상세조회(${detail.id})</h2>
 <div class="container">
 	<form method="post" name="form1">

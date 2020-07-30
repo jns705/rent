@@ -28,6 +28,7 @@ public class PagingVO {
 		calcLastPage(getTotal(), getCntPerPage());
 		calcStartEndPage(getNowPage(), cntPage);
 		calcStartEnd(getNowPage(), getCntPerPage());
+		System.out.println("PagingVO 생성자 페이지당 글 갯수 "+cntPerPage);
 	}
 	// 제일 마지막 페이지 계산
 	public void calcLastPage(int total, int cntPerPage) {
@@ -39,7 +40,7 @@ public class PagingVO {
 		if (getLastPage() < getEndPage()) {
 			setEndPage(getLastPage());
 		}
-		setStartPage(getEndPage() - cntPage + 1);
+		setStartPage(getEndPage() - cntPage +1);
 		if (getStartPage() < 1) {
 			setStartPage(1);
 		}
@@ -47,7 +48,7 @@ public class PagingVO {
 	// DB 쿼리에서 사용할 start, end값 계산
 	public void calcStartEnd(int nowPage, int cntPerPage) {
 		setEnd(nowPage * cntPerPage);
-		setStart(getEnd() - cntPerPage);
+		setStart(getEnd() - cntPerPage +1);
 	}
 	
 }

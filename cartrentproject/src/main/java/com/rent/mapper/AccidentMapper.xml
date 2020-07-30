@@ -29,37 +29,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 사고이력 전체목록 -->
 	<select id="accidentList" resultType="com.rent.domain.AccidentVO">
-		<![CDATA[
 		select *
 		from accident
-		where accident_id > 0
 		order by accident_id asc
-		limit 0, 6;
-		]]>
+		limit 0 , 5
 	</select>
 	
-	<!-- 사고이력 스크롤페이징 목록 불러오기 (스크롤다운) -->
-	<select id="scrollDown" parameterType="int" resultType="com.rent.domain.AccidentVO">
-		<![CDATA[
+	<!-- 사고이력 전체목록 스크롤페이징 -->
+	
+	<select id="accidentListPaging" parameterType="com.rent.domain.PagingVO" resultType="com.rent.domain.AccidentVO">
 		select *
-		from accident
-		where accident_id <= #{accident_id}
-		and accident_id > #{accident_id} - 6
-		order by accident_id asc
-		]]>
+		from (
+		select @rownum := @rownum + 1 AS rnum, A.*
+		from
+		  (
+		    select *
+		    from accident
+		  ) A,
+		  ( select @rownum := 0 ) B
+		) C
+		where C.rnum between #{start} and #{end}
 	</select>
-	
-	<!-- 사고이력 스크롤페이징 목록 불러오기 (스크롤업) -->
-	<select id="scrollUp" parameterType="int" resultType="com.rent.domain.AccidentVO">
-		<![CDATA[
-		select *
-		from accident
-		where accident_id >= #{accident_id}
-		and accident_id < #{accident_id} + 6
-		order by accident_id asc
-		]]>
-	</select>
-	
 	
 	<!-- rent_id에 따른 사고이력 전체목록 -->
 	<select id="accidentListId" resultType="com.rent.domain.AccidentVO" parameterType="String">

@@ -40,13 +40,10 @@ public class AccidentService {
 		return mapper.accidentList();
 	}
 	
-	//스크롤 페이징 목록 불러오기 (스크롤다운)
-	public List<AccidentVO> scrollDown(int accident_id) throws Exception {
-		return mapper.scrollDown(accident_id);
-	}
-	//스크롤페이징 목록 불러오기 (스크롤업)
-	public List<AccidentVO> scrollUp(int accident_id) throws Exception {
-		return mapper.scrollUp(accident_id);
+	//전체목록 스크롤페이징
+	public List<AccidentVO> accidentListPaging(PagingVO paging) throws Exception{
+		System.out.println("accidentList() 실행중. . .");
+		return mapper.accidentListPaging(paging);
 	}
 	
 	//렌트 아이디에 따른 전체목록

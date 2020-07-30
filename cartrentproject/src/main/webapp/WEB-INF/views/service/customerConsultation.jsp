@@ -156,13 +156,14 @@
                     
                     <!-- input-row//end -->
                     <div class="input-row brt0 pat0">
+                     <p id="contents" style="color:red;"></p>
                         <div class="col-1">
                             <span class="input textarea essential">
-                                 <strong class="check">필수</strong>
                                  <!-- option_name에 넣는다. -->
-                                <textarea placeholder="문의 내용 입력" name="contents">희망차종 : 
-희망옵션 :  
-문의 내용 : </textarea>
+								<input type="text" id="contents1" name="contents1" value="" placeholder="희망차량" oninput="contents();" style="border:none; border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;">
+								<input type="text" id="contents2" name="contents2" value="" placeholder="희망옵션" oninput="contents();" style="border:none; border-left: 1px solid black; border-right: 1px solid black;">
+								<input type="text" id="contents3" name="contents3" value="" placeholder="문의내용" oninput="contents();" style="border:none; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;">
+								
                             </span>
                         </div>
                     </div>
@@ -372,10 +373,8 @@ $("input:text[textname]").on("keyup", function() {
 	
 	if(!document.getElementById("name").value) {
     	document.getElementById("nameput").innerHTML = "이름을 입력하세요";
-	}else if(hechar) {
-		document.getElementById("nameput").innerHTML = "한글, 영어만 입력하세요";
-	}else {
-		document.getElementById("nameput").innerHTML = "숫자, 특수문자 입력 불가능합니다.";
+	}else{
+		document.getElementById("nameput").innerHTML = "";
 	}
     
 });
@@ -385,6 +384,7 @@ $("input:text[numberOnly]").on("keyup", function() {
 
     var nchar = /[^0-9]/g;
     var number = document.getElementById("tel").value;
+    
 	if(!document.getElementById("tel").value) {
     	document.getElementById("telput").innerHTML = "전화번호를 입력해주세요";
 	}else if(number.length < 11) {
@@ -418,6 +418,21 @@ function checkAdd() {
     	return;
     }else {
 		document.getElementById("addput").innerHTML = "";
+	}
+}
+
+//문의내용
+function contents() {
+    if(!document.getElementById("contents1").value) {
+		document.getElementById("contents").innerHTML = "희망차량을 입력하세요";
+    	return;
+    }else if(!document.getElementById("contents2").value) {
+		document.getElementById("contents").innerHTML = "희망옵션을 입력하세요";
+    	return;
+    }else if(!document.getElementById("contents3").value){
+		document.getElementById("contents").innerHTML = "문의내용을 입력하세요";
+	}else {
+		document.getElementById("contents").innerHTML = "";
 	}
 }
 
@@ -477,6 +492,20 @@ function checkInsert() {
 	   	document.getElementById('color').focus();
    		return;
     }   
+	//문의내용 입력
+	if(!document.getElementById("contents1").value) {
+		alert("희망차량을 입력하세요");
+    	document.getElementById('contents1').focus();
+    	return;
+	}else if(!document.getElementById("contents2").value){
+		alert("희망옵션을 입력하세요");
+    	document.getElementById('contents2').focus();
+    	return;
+	}else if(!document.getElementById("contents3").value){
+		alert("문의내용을 입력하세요");
+    	document.getElementById('contents3').focus();
+    	return;
+	}
 	//체크박스 상태
 	if(!$("[name=agreeYn1]").is(":checked")) {
 		  alert("동의를 거부할 권리가 있으나, 미 동의 시 상담이 불가능합니다.");
@@ -487,6 +516,7 @@ function checkInsert() {
 		  document.getElementById('select-terms2').focus();
 		  return;
 	}
+
     
     document.insertForm.submit();
 }
