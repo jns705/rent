@@ -48,7 +48,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		  ( select @NO := 0 ) B
 		) C
 		WHERE C.ROWNUM BETWEEN #{start} AND #{end}
-				
 	</select>
 	
 	<!-- 렌트 구매자 예약 취소 -->

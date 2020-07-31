@@ -114,7 +114,7 @@
 										<div class="estimate-car-prefer__title">전체 차량 판매순위</div>
 										<div class="estimate-car-prefer__data">
 											<p class="estimate-car-prefer__data-desc">
-												<strong class="estimate-car-prefer__data-num">52</strong>위
+												<strong class="estimate-car-prefer__data-num" id="abr"></strong>위
 											</p>
 										</div>
 									</div>
@@ -124,7 +124,7 @@
 										<div class="estimate-car-prefer__title">동급 차량 판매순위</div>
 										<div class="estimate-car-prefer__data">
 											<p class="estimate-car-prefer__data-desc">
-												<strong class="estimate-car-prefer__data-num">3</strong>위
+												<strong class="estimate-car-prefer__data-num" id=dbr></strong>위
 											</p>
 										</div>
 									</div>
@@ -622,6 +622,13 @@ $(window).scroll(function () {
 	else
 		$('.ticker-info').removeClass("off");
 });
+
+var abr = Math.floor(Math.random()*50)+1;
+document.getElementById('abr').innerHTML = abr;
+
+var dbr = Math.floor(Math.random()*10)+1;
+document.getElementById('dbr').innerHTML = dbr;
+
 </script>
 </html>
 </layoutTag:layout>

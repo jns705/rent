@@ -22,11 +22,8 @@ public interface AccidentMapper {
 	//전체목록
 	public List<AccidentVO> accidentList() throws Exception;
 	
-	//스크롤페이징 목록 불러오기 (스크롤다운)
-	public List<AccidentVO> scrollDown(int accident_id) throws Exception;
-	
-	//스크롤페이징 목록 불러오기 (스크롤업)
-	public List<AccidentVO> scrollUp(int accident_id) throws Exception;
+	//전체목록 스크롤페이징
+	public List<AccidentVO> accidentListPaging(PagingVO paging) throws Exception;
 	
 	//전체목록
 	public List<AccidentVO> accidentListId(String rent_id) throws Exception;

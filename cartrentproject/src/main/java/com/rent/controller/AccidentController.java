@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -41,33 +42,32 @@ public class AccidentController {
 	 */
 	@RequestMapping("/list")
 	public String accidentList(Model model) throws Exception{
-		int total = service.totalCount();
-		
-		System.out.println(total);
 		
 		model.addAttribute("accident", service.accidentList());
-		model.addAttribute("rent", rentService.rentList());
 		
 		return "/accident/accidentList";
 	}
 	
-	@RequestMapping("/scrollDown")
-	public @ResponseBody List<AccidentVO> scrollDown(@RequestBody AccidentVO accident) throws Exception {
+	//스크롤페이징
+	@RequestMapping("/pagingList")
+	@ResponseBody
+	public List<AccidentVO> accidentListPaging(Model model, PagingVO paging
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception{
+		int total = service.totalCount();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
 		
-		Integer idToStart = accident.getAccident_id()-1;
-		System.out.println("scrollDwon id : " + idToStart);
-		
-		return service.scrollDown(idToStart);
+		paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", paging);
+		return service.accidentListPaging(paging);
 	}
-	@RequestMapping("/scrollUp")
-	public @ResponseBody List<AccidentVO> scrollUp(@RequestBody AccidentVO accident) throws Exception {
-		
-		Integer idToStart = accident.getAccident_id()+1;
-		System.out.println("scrollUp id : " + idToStart);
-		
-		return service.scrollDown(idToStart);
-	}
-	
 	
 	/**
 	 * 사고이력 등록

@@ -1,8 +1,6 @@
 package com.rent.controller;
 
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +29,7 @@ import com.rent.domain.BuyVO;
 import com.rent.domain.CounselingVO;
 import com.rent.domain.MemberVO;
 import com.rent.domain.OptionCarVO;
+import com.rent.domain.PagingVO;
 import com.rent.domain.RentListVO;
 import com.rent.domain.RentVO;
 import com.rent.domain.ShortRentVO;
@@ -91,6 +90,12 @@ public class CounselingController {
 	private String counselingInsert(CounselingVO counseling, HttpServletRequest request) throws Exception{
 		
 		String rent_id = request.getParameter("rent_id");
+		String zipcode = request.getParameter("address0");
+		String address1 = request.getParameter("address1");
+		String address2 = request.getParameter("address2");
+		String address = zipcode+"/"+address1+"/"+address2;
+		
+		counseling.setAddress(address);
 		
 		List<OptionCarVO> optionList = optService.optionDetail(rent_id);
 		//rent_id에 해당하는 option_name들을 합친다.
@@ -121,19 +126,42 @@ public class CounselingController {
 	
 	//상담 전체 목록
 	@RequestMapping("/list")
-	public String counselingList(Model model) throws Exception {
-		List<CounselingVO> cou = couService.counselingList();
+	public String counselingList(Model model, PagingVO paging
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
+		List<CounselingVO> cou = couService.counselingList(paging);
 		List<String> car_name = new ArrayList<String>();
 		for(int i = 0; i < cou.size(); i++) {
 			String rent_id = cou.get(i).getRent_id();
-			if(rent_id == null) continue;
+			
+			if(rent_id == null) {
+				car_name.add("선택차량없음");
+				continue;
+			}
+			
 			RentVO ren = rentService.rentListId(rent_id);
 			int car_id = ren.getCar_id();
 			CarVO car = carService.carDetail(Integer.toString(car_id));
 			car_name.add(car.getCar_name());
 		}
+		
+		int total = couService.counselingCount();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		System.out.println("Controller페이지당 글 갯수 "+paging.getCntPerPage());
+		
+		
+		model.addAttribute("paging", paging);
 		model.addAttribute("car",car_name);
-		model.addAttribute("counselingList",couService.counselingList());
+		model.addAttribute("counselingList",couService.counselingList(paging));
 		return "/counseling/counselingList";
 	}
 	
@@ -149,11 +177,16 @@ public class CounselingController {
 	public String counselingDetail(@PathVariable String counseling_id, Model model) throws Exception {
 		CounselingVO cou = couService.counselingDetail(counseling_id);
 		String rent_id = cou.getRent_id();
-		RentVO rent = rentService.rentDetail(rent_id);
-		int car_id = rent.getCar_id();
-		CarVO car = carService.carDetail(Integer.toString(car_id));
 		
-		model.addAttribute("car", car);
+		if(rent_id == null) {
+			
+		}else {
+			RentVO rent = rentService.rentDetail(rent_id);
+			int car_id = rent.getCar_id();
+			CarVO car = carService.carDetail(Integer.toString(car_id));
+			model.addAttribute("car", car);
+		}
+		
 		model.addAttribute("detail", couService.counselingDetail(counseling_id));
 		return "/counseling/counselingDetail";
 	}
@@ -389,14 +422,21 @@ try {
 	//고객센터->상담신청  등록해준다.
 	@RequestMapping("/asInsertProc")
 	public String asConsultationInsert(HttpServletRequest rq, CounselingVO counseling) throws Exception {
-		String carType = rq.getParameter("carType");
 		String zipcode = rq.getParameter("address0");
 		String address1 = rq.getParameter("address1");
 		String address2 = rq.getParameter("address2");
-		String option_name = rq.getParameter("contents");
-		String address = zipcode+"/"+address1+"/"+address2;
-		option_name += "\n차종선택 : "+carType;
 		
+		String carType = rq.getParameter("carType");
+		String contents1 = rq.getParameter("contents1");
+		String contents2 = rq.getParameter("contents2");
+		String contents3 = rq.getParameter("contents3");
+		
+		String address = zipcode+"/"+address1+"/"+address2;
+		String option_name = "선택차종 : " + carType + "<br>" +
+		"희망차량 : " + contents1 + "<br>"+
+		"희망옵션 : " + contents2 + "<br>"+
+		"문의내용 : " + contents3;
+				
 		counseling.setAddress(address);
 		counseling.setOption_name(option_name);
 		counseling.setCounseling_situation("상담 대기중");
