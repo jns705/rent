@@ -20,7 +20,12 @@ tbody tr:hover {
 <div class="container">
 	<form method="post" name="form1">
 	<table class="table">
-	
+		
+		<tr>
+			<th>상담 자동차 이름</th>
+			<td align="left">${car.car_name}</td>
+		</tr>
+		
 		<tr>
 			<th>상담 렌트 번호</th>
 			<td align="left">${detail.rent_id}</td>

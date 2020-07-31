@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html lang="ko"> 
 <head>
+<link rel="stylesheet" href="http://localhost:8082/static/css/ss.css" type="text/css" />
     <title>솔렌터카</title>
 </head>
 <form action="${path}/counseling/newRent" method="get" id="newCarForm">
@@ -19,6 +20,7 @@
 			<input class="hidden" id="pricea" value="${rent.price}">
 			<input class="hidden" name="month" value="48">
 			<input class="hidden" name="color" value="${color[0].color}">
+			<input class="hidden" name="rent_id" value="${rent.rent_id}">
 			<div class="clearfix">
 				<span>홈</span>
 				<span>장기렌터카</span>
@@ -66,8 +68,8 @@
 							<div class="form-group__list">
 								<div class="form-group__header">
 									<div class="estimate-list">
-										<div class="estimate-list__label">
-											<p class="estimate-list__label-title">상세 차량</p>
+										<div class="estimate-list__label" style="padding: 26px;">
+											<p class="estimate-list__label-title" style="padding-left:0px;">상세 차량</p>
 											<div class="estimate-list__label-tooltip tooltip-box">
 												<p class="tooltip-btn">자세히보기</p>
 												<div class="tooltip-desc">차량의 상세 모델/트림입니다.</div>
@@ -75,11 +77,11 @@
 										</div>
 										<!-- estimate-list__label//end -->
 										<div class="estimate-list__item">
-											<div class="estimate-item__caption clearfix">
+											<div class="estimate-item__caption clearfix" style="padding-left: 0px;">
 												<table class="estimate-item__caption-text icon">
 													<tr>
 														<td>
-															<span class="radio v6 clearfix icon">
+															<span class="radio v6 clearfix icon" style="background-color:  white;">
 																<label for="car-detail-total0">
 					                                                	<span class="radio__column radio__column--tag">
 			                                                				<span class="fl tag">Hot Deal</span>
@@ -127,6 +129,7 @@ function showColor(data){
 <script type="text/javascript">
 function carSelect(data){
 	var rent_id = "${rent.rent_id}";
+	$('[name=rent_id]').val(rent_id);
 	$.ajax({
 		url : '/rent/rentColorProc',
 		data : {"index": data, "rent_id" : rent_id},
@@ -188,7 +191,7 @@ function colorName(data){
 												<div class="estimate-information__listbox scroll" ><!-- scroll 없으면 삭제 -->
 													<ul>
 															<li class="estimate-information__list" >
-																<span class="radio v6 clearfix">
+																<span class="radio v6 clearfix" style="background-color: white;">
 					                                                <input  <c:if test="${status.index eq 0}">checked</c:if>  type="radio" id="car-detail-total${status.index}" name="select-car-detail-total" >
 					                                                <label for="car-detail-total${status.index}">
 						                                                 <span class="radio__column radio__column--ico">
@@ -220,7 +223,7 @@ function colorName(data){
 							<div class="form-group__list">
 								<div class="form-group__header">
 									<div class="estimate-list">
-										<div class="estimate-list__label">
+										<div class="estimate-list__label" >
 											<p class="estimate-list__label-title">외부 색상</p>
 											<div class="estimate-list__label-tooltip tooltip-box">
 												<p class="tooltip-btn">자세히보기</p>
@@ -229,8 +232,8 @@ function colorName(data){
 										</div>
 										<!-- estimate-list__label//end -->
 										<div class="estimate-list__item">
-											<div class="estimate-item__caption clearfix">
-												<p class="estimate-item__caption-text" id="selOutColorFileUrl_nm"><span class="estimate-item__caption-color carImage"><img src="${color[0].color_url}${color[0].color_image}"></span>${color[0].color}</p>
+											<div class="estimate-item__caption clearfix" style="padding-left:0px;">
+												<p  class="estimate-item__caption-text" id="selOutColorFileUrl_nm"><span class="estimate-item__caption-color carImage"><img src="${color[0].color_url}${color[0].color_image}"></span>${color[0].color}</p>
 												<p class="estimate-item__caption-price" id="selOutColorAmt"></p>
 											</div>
 										</div>
@@ -261,7 +264,7 @@ function colorName(data){
 							<div class="form-group__list">
 								<div class="form-group__header">
 									<div class="estimate-list">
-										<div class="estimate-list__label">
+										<div class="estimate-list__label" style="height: 76px;" >
 											<p class="estimate-list__label-title">차량 옵션</p>
 											<div class="estimate-list__label-tooltip tooltip-box">
 												<p class="tooltip-btn">자세히보기</p>
@@ -269,7 +272,7 @@ function colorName(data){
 											</div>
 										</div>
 										<!-- estimate-list__label//end -->
-										<div class="estimate-list__item" id="selMakerOptDiv">
+										<div class="estimate-list__item" id="selMakerOptDiv" >
 											파퓰러 패키지,빌트인 캠 패키지
 										</div>
 										
@@ -282,24 +285,19 @@ function colorName(data){
 								</div>
 								<div class="form-group__body" id="f2">
 									<div class="estimate-information clearfix">
-										<div class="estimate-information__detail">
-											<div class="estimate-information__detail-image" id="selDetailmakerOptFileUrl">
-												
-											</div>
 											<p class="estimate-information__detail-desc" id="selDetailmakerOptDesc"></p>
-										</div>
 										<!-- estimate-information__detail//end -->
 										<div class="estimate-information__select">
-											<div class="estimate-information__listbox scroll"><!-- scroll 없으면 삭제 -->
+											<div class="estimate-information__listbox " style="border: none;"><!-- scroll 없으면 삭제 -->
 												<ul id="makerOpt_ul">
 														<li class="estimate-information__list">
-																	<span class="radio v6 clearfix" onclick="btnClick('carOptId0');">
-																		<input type="radio" checked id="carOptId0" name="carOptId0" value="" />
+																	<span class="radio v6 clearfix" onclick="btnClick('carOptId0');" style="border: 2px solid #eb444b; background-color: white;"  >
+																		<input type="radio" checked id="carOptId0" name="carOptId0" value="" style="display: none;" />
 						                                                <label for="carOptId0">
 							                                                <span class="radio__column radio__column--ico">
 								                                                <span class="ico"></span>
 							                                                </span>
-							                                                <span class="radio__column radio__column--title" >파퓰러 패키지,빌트인 캠 패키지</span>
+							                                                <span class="radio__column radio__column--title" style="width: 80%">파퓰러 패키지,빌트인 캠 패키지</span>
 							                                                <span class="radio__column radio__column--price">5,800,000원</span>
 						                                                </label>
 				                                                	</span>
@@ -417,14 +415,14 @@ function colorName(data){
 													<div class="radio-box row-2 clearfix">
 														<div class="col-2 fl">
 				                                            <span class="radio v7">
-				                                                <input type="radio" id="cntrTermMm2" name="cntrTermMm" value="36" onchange="price(); sMonth('36');">
+				                                                <input class="hidden" type="radio" id="cntrTermMm2" name="cntrTermMm" value="36" onchange="price(); sMonth('36');">
 	                                               				<label for="cntrTermMm2">36 개월</label>
 				                                            </span>
 														</div>
 														<!-- col//end -->
 														<div class="col-2 fl">
 				                                            <span class="radio v7">
-				                                                <input  checked type="radio" id="cntrTermMm3" name="cntrTermMm" value="48" onchange="price(); sMonth('48');">
+				                                                <input class="hidden" checked type="radio" id="cntrTermMm3" name="cntrTermMm" value="48" onchange="price(); sMonth('48');">
 	                                               				<label for="cntrTermMm3">48 개월</label>
 				                                            </span>
 														</div>
@@ -484,15 +482,15 @@ function colorName(data){
 													<div class="radio-box row-2 clearfix">
 														<div class="col-2 fl">
 				                                            <span class="radio v7">
-				                                            	<input type="radio" id="prmsDtcClsCd1" name="prmsDtcClsCd" checked value="2"  onchange="price();">
+				                                            	<input  class="hidden"  type="radio" id="prmsDtcClsCd1" name="prmsDtcClsCd" checked value="2"  onchange="price();">
 	                                               				<label for="prmsDtcClsCd1">2만Km 이하</label>
 				                                            </span>
 														</div>
 														<!-- col//end -->
 														<div class="col-2 fl">
 				                                            <span class="radio v7">
-				                                                <input type="radio" id="prmsDtcClsCd2" name="prmsDtcClsCd" value="3"  onchange="price();">
-				                                                <label for="prmsDtcClsCd2">3만Km 이하</label>
+				                                                <input  class="hidden"  type="radio" id="prmsDtcClsCd2" name="prmsDtcClsCd" value="3"  onchange="price();">
+				                                                <label  for="prmsDtcClsCd2">3만Km 이하</label>
 				                                            </span>
 														</div>
 														<!-- col//end -->
@@ -529,6 +527,7 @@ function colorName(data){
 								<div class="btn-box-gray btn2">
 									<a href="#header-group" onclick="counseling();"><span>맞춤형 렌탈료</span><br>상담신청</a>
 								</div>
+								
 										
 								<div class="btn-box-red btn2">
 									<a href="#header-group" onclick="direct();" id="btnDirectContract" ><span>무방문/무서류</span><br>다이렉트 계약</a>
@@ -1142,21 +1141,75 @@ function btnSlide(id){
 						</div>
 						<!-- terms-listbox//end -->
                         <p class="msg-info v1">고객님께서는 동의를 거부할 권리가 있으나, 미 동의시 렌터카 서비스 이용이 불가능합니다.</p>
-                    </div>
+                    </div><br><br>
                     <!-- article-content//end -->
-					<input placeholder="이름 입력" name="name" value="${detail.name}"><input placeholder="생년월일(8자리) 입력" name="" value="${detail.date_of_birth}"><input name="tel" placeholder="휴대폰번호 (-없이)입력" value="${tel[0]}${tel[1]}${tel[2]}"><br>
-					<input class="hidden" name="rent_id" value="${rent.rent_id}"> 
-		                       <div class=" clearfix">
-                        	<div class="email-input  col-1 maa0" id="alert-email"><!-- 20170705 : 경고 알럿 노출 될 경우 msg-alert 추가 부탁 드립니다. -->
-                                <span class="col-3">
+                    
+           <article>
+                     <div class="header-group">
+                    </div>
+                    <div class="article-content">
+                        <p>여객자동차운수사업법 제34조 2항 개정에 따른 대여자동차 운전자의 자격 확인</p>
+						<p class="cl-point1">※ 실제 운전자 정보를 입력해주세요! 입력한 제1운전자와 예약자가 상이할 경우 대여가 제한될 수 있습니다.</p>
+                        <div class="input-field input-field--shortterm">
+                        
+                        
+                        <div class="input-row clearfix">
+                            <div class="fl col-3">
+                            <span class="input essential" id="alert-name">
+                                <strong class="check">필수</strong>
+                                <label><input type="text"  oninput="carPrice();" type="text" placeholder="이름 입력" name="name" class="onlyKorEng" maxlength="20" value="${detail.name}"/></label>
+                            </span>
+                            <span class="msg-txt cl-point1" id="span-name"></span>
+                            </div>
+                      		 <div class="fl col-3">
+                            <span class="input essential" id="alert-birth">
+                             <strong class="check">필수</strong>
+                                <label><input type="text" maxlength="8" oninput="carPrice();" id="birth" type="text" maxlength="8" placeholder="생년월일(20170101) 입력" class="onlyNumber" name="birthday" value="${detail.date_of_birth}"/></label>
+                            </span>
+                            <span class="msg-txt cl-point1" id="span-birth"></span>
+                            </div>
+                            <div class="fl col-3">
+                            <span class="input essential" id="alert-mobile">
+                               <strong class="check">필수</strong>
+                                <label><input oninput="carPrice();" type="text" placeholder="휴대폰번호(-없이 입력) 입력" class="onlyNumber" name="tel"  value="${tel[0]}${tel[1]}${tel[2]}"/></label>
+                            </span>
+                            <span class="msg-txt cl-point1" id="span-mobile"></span>
+                            </div>
+                        </div>
+                        
+<script type="text/javascript">
+	//이메일 선택 시 메일 값을 넣는다
+	function emailInput(){
+		$('#email1').val($('#email2').val());
+	}
+	
+</script>         
+
+<style>
+<!--
+.inputTime{
+    padding-left: 10px;
+	text-align:center !important;
+	font-size:14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    height: 42px;
+    border-radius: 0;
+                                }
+-->
+</style>               
+                        <div class="input-row clearfix">
+                        	<div class="email-input input-box col-1 maa0" id="alert-email">
+                        		<span class="input essential col-3">
+                                    <strong class="check">필수</strong>
                                     <label><input oninput="carPrice();" type="text" placeholder="이메일 입력" class="checkEmail" name="emailId" id="emailId" value=""  maxlength="30"/></label>
                                 </span>
-                                <span class="hyphen col-3">
+                                <span class="input hyphen col-3">
                                     <span class="text">@</span>
-                                    <input oninput="carPrice();" type="text" placeholder="직접 입력" class="checkEmail" name="email" id="email1" value=""  maxlength="30" />
+                                    <input oninput="carPrice();" type="text" placeholder="직접 입력" class="checkEmail" name="domain" id="email1" value=""  maxlength="30"  tabindex="-1" aria-hidden="true"/>
                                 </span>
                                 <span class="select-box col-3">
-                                    <select name="" id="email2" class="option01" onchange="emailInput(); carPrice();">
+                                    <select id="email2" class="option01 inputTime" onchange="emailInput(); carPrice(); " tabindex="-1" aria-hidden="true">
                                         <option value="">직접 입력</option>
 	                                    	<option value="chol.com">chol.com</option>	
 	                                    	<option value="dreamwiz.com">dreamwiz.com</option>	
@@ -1186,48 +1239,54 @@ function btnSlide(id){
                         </div>
                         
   
-                         <div class="">
+                          <div class="input-row">
                                 <div class="address-input col-1">
-                                    <span class="">
-                                        <span class="">
+                                    <span class="input-box">
+                                        <span class="input">
                                             <label><input oninput="carPrice();"  type="number" class="readonly" readonly="readonly" placeholder="우편번호 검색"  placeholder="우편번호" name="zipcode" id="zipcode" value="${address[0]}" /></label>
                                         </span>
-                                        <span class=" essential">
+                                        <span class="input essential">
+                                   			<strong class="check">필수</strong>
                                             <label><input oninput="carPrice();"  type="text" class="readonly" readonly="readonly" placeholder="주소 입력" name="address" id="address" value="${address[1]}" /></label>
                                         </span>
-                                        <span class="">
+                                        <span class="input" style="width:280px;">
                                             <label><input oninput="carPrice();"  type="text" placeholder="나머지 주소 입력"  name="addressDetail" id="addressDetail" maxlength="30" value="${address[2]}" onkeyup="checkingDtlAddr()" /></label>
                                         </span>
                                         <a href="#none" class="btn btn-default btn-fix2 fr" onclick="daumZipCode();" id="addrSearchBtn">우편번호 검색</a>
                                     </span>
                                     <span class="msg-txt cl-point1" id="span-addr"></span>
-                                			<div class="input-row brt0 pat0">
-			</div>
                                 </div>
-                                
-				<div class="col-1">
-					<span class="">
-					<textarea class="counseling hidden" placeholder="문의 내용 입력" name="contents"></textarea>
-				</span>
-				</div>
-                                
-                            </div>
-                            <div class="step-btn-box btn-box text-c">
+  
+                    </div>
+                
+  
+                   <div class="input-row">
+                    	 	<div class="address-input col-1">
+                             	<div class="col-1">
+									<textarea class="counseling hidden" placeholder="문의 내용 입력" name="contents"></textarea>
+                				</div>
+                   		  	</div>
+                   </div>
                             
-                            
+               <div class="input-row">
+                     <div class="address-input col-1" align="center">
+		                 <button type="submit" class="btn btn-color2 btn-large btn-fix2 buy hidden" style="margin-right: 10px;">상담신청</button>
+		               	 <button type="button" class="btn btn-color1 btn-large btn-fix2 counseling hidden" onclick="nextPage();"  style="margin-right: 10px;">구매신청</button>
+	               		 <a href="#" class="btn btn-line1 btn-large btn-fix2" >취소</a>
+                	</div>
+                </div>
+                
+         </div>
+            </article><!-- endendendendendendendendnednednendendendendn -->
+                        
                 <!-- 활성화 전에는 btn-color4 , 활성화 후에는 btn-color1로 셋팅 부탁 드립니다 -->
-                <button type="button" class="btn btn-color2 btn-large btn-fix2 buy hidden">상담신청</button>
-                <button type="button" class="btn btn-color1 btn-large btn-fix2 counseling hidden" onclick="nextPage();">구매신청</button>
-                <a href="#" class="btn btn-line1 btn-large btn-fix2" >취소</a>
             </div>
 					                    
                 </article>
 			</div>
 	</div>
-	</div>
 	
 	<!-- container//end -->
-</div>
 </body>
 
 

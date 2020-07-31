@@ -147,17 +147,6 @@ public class ServiceCenterController {
 		return "/service/noticeDetaile";
 	}
 	
-	//자주찾는질문 등록폼
-	@RequestMapping("/serviceCenter/faqInsertForm")
-	public String faqInsertForm() {
-		return "/service/faqInsert";
-	}
-	//자주찾는질문 등록
-	@RequestMapping("/serviceCenter/faqInsert")
-	public String faqInsert() {
-		return "/service/faq";
-	}
-	
 	
 	
 	

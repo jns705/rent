@@ -76,7 +76,7 @@
 			                    <th scope="col">번호</th>
 			                    <th scope="col">구분</th>
 			                    <th scope="col">제목</th>
-			                    <th scope="col">등록일${today}</th>
+			                    <th scope="col">등록일</th>
 			                </tr>
 			                </thead>
 			                <tbody>					
@@ -85,7 +85,7 @@
 					                    <td>${SSize - status.index - (showNum*(number-1))}</td>
 					                    <td>${list.division}</td>
 					                    <td class="text-l pal0" onclick="location.href='${path}/serviceCenter/noticeDetail/${list.no}?number=${index}&moVal=${moVal}&moKind=${moKind}'">
-					                    	 ${list.content}
+					                    	 ${list.subject}
 <fmt:parseNumber var="reg_date" value="${list.reg_date.time / (1000*60*60*24)}" integerOnly="true"/>
 				                    	 <c:if test="${today+6 > reg_date}"> 
 				                    	 
@@ -93,7 +93,7 @@
 				                    	 
 				                    	 </c:if>
 					                    </td>
-					                    <td>${list.reg_date} ${reg_date}</td>
+					                    <td>${list.reg_date}</td>
 					                </tr>
 				                    </c:forEach>
 			                </tbody>

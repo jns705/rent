@@ -52,13 +52,21 @@
                 </li>
             </ul>
         </div>
-		
+        
+<style>
+.select2-selection {
+	height: 60px; 
+}
+.select-box {
+	height: 60px; 
+}
+</style>
 		<article class="car-search tab-content" id="tab-direct-user-personal" role="search" style="display: block;">
 			<div class="car-search__wrapper clearfix">
-				<div class="select-area fl">
-					<div class="select-col col-3">
-						<span class="select-box"> 
-							<select name="manufacturer" id="usedCarMakerId" class="select2-selection select2-selection--single option01" onchange="carKind(); searchForm();">
+				<div class="select-area fl" style="width: 670px;" >
+					<div class="select-col col-3" >
+						<span class="select-box" > 
+							<select style="" name="manufacturer" id="usedCarMakerId" class="select2-selection select2-selection--single option01" onchange="carKind(); searchForm();">
 								<option value="">제조사 선택</option>
 								<c:forEach items="${manufacturer}" var="manufacturer" varStatus="status">
 									<option>${manufacturer.manufacturer}</option>
@@ -83,7 +91,7 @@
 
 				</div>
 				<div class="btn-wrap fr col-sm-1">
-					<a class="btn btn-color2" id="usedcarSearchButton" style="margin-top:-63px; margin-left:-15px; width: 200px;"  onclick="searchForm();">검색</a>
+					<a class="btn btn-color2" id="usedcarSearchButton" style="margin-top:-1px; margin-left:-23px; width: 200px;"  onclick="searchForm();">검색</a>
 				</div>
 			</div>
 			

@@ -90,7 +90,8 @@
                             <span class="input essential">
                                 <strong class="check">필수</strong>
                                 <label>
-                                	<input type="text" placeholder="이름 입력" id="name" name="name">
+                                	<input type="text" placeholder="이름 입력" id="name" name="name" textname>
+                                	<p id="nameput" style="color:red;"></p>
                                 </label>
                             </span>
                         </div>
@@ -106,17 +107,18 @@
                </div>
                  <div class="fl col-3">
                    <span class="input essential">
-                       <input type="text" placeholder="주소" id="address" name="address1" style="width:310px;" readonly="readonly" class="readonly">
+                       <input type="text" placeholder="주소" id="address1" name="address1" style="width:310px;" readonly="readonly" class="readonly">
                    </span>
                </div>
                  <div class="fl col-3">
                    <span class="input essential">
-                       <input type="text" placeholder="상세 주소" id="address2" name="address2" style="width:310px;">
+                       <input type="text" placeholder="상세 주소" id="address2" name="address2" style="width:310px;" oninput="checkAdd();">
+                       <p id="addput" style="color:red;"></p>
                    </span>
                </div>
                 	<div class="fl col-11">
                    <span class="input">
-                       <input type="button" value="주소검색" class="btn" style="background-color:#E8C2C2;" onclick="daumZipCode()">
+                       <input type="button" value="주소검색" id="add" class="btn" style="background-color:#E8C2C2;" onclick="daumZipCode()">
                    </span>
                	</div>
            </div>
@@ -127,7 +129,8 @@
                         <div class="fl col-3">
                             <span class="input essential">
                                 <strong class="check">필수</strong>
-                                <label><input type="text" placeholder="휴대폰 번호(-없이) 입력" maxlength="11" id="tel" name="tel"></label>
+                                <label><input type="text" placeholder="휴대폰 번호(-없이) 입력" maxlength="11" id="tel" name="tel" numberOnly></label>
+                                <p id="telput" style="color:red;"></p>
                             </span>
                         </div>
                     </div>
@@ -137,7 +140,7 @@
                         <p class="msg-info v1 bt">월 단위로 입력해주세요.</p>
                             <span class="input essential">
                                 <strong class="check">필수</strong>
-                                <label><input type="text" placeholder="계약기간" maxlength="3" id="month" name="month"></label>
+                                <label><input type="number" placeholder="계약기간" id="month" name="month"></label>
                             </span>
                         </div>
                     </div>
@@ -361,18 +364,64 @@
 </div>
 </body>
 <script>
+//한글, 영어만 가능
+$("input:text[textname]").on("keyup", function() {
+    $(this).val($(this).val().replace(/[^a-zA-Zㄱ-힣]/gi,""));
+	
+	var hechar = /[^a-zA-Zㄱ-힣]/gi;
+	
+	if(!document.getElementById("name").value) {
+    	document.getElementById("nameput").innerHTML = "이름을 입력하세요";
+	}else if(hechar) {
+		document.getElementById("nameput").innerHTML = "한글, 영어만 입력하세요";
+	}else {
+		document.getElementById("nameput").innerHTML = "숫자, 특수문자 입력 불가능합니다.";
+	}
+    
+});
+//숫자만 가능
+$("input:text[numberOnly]").on("keyup", function() {
+    $(this).val($(this).val().replace(/[^0-9]/g,""));
 
-if($("[name=userGroup]:checked").val() != "" && $("[name=userGroup]:checked").val() != null){
-}else { //차종선택값 널이면 
-	document.getElementById('input-counsel1').focus();
-	return;
-}
-if(!document.getElementsByName("name").value) {
-	alert("이름을 입력하세요");
-	document.getElementById('name').focus();
-	return;
+    var nchar = /[^0-9]/g;
+    var number = document.getElementById("tel").value;
+	if(!document.getElementById("tel").value) {
+    	document.getElementById("telput").innerHTML = "전화번호를 입력해주세요";
+	}else if(number.length < 11) {
+		document.getElementById("telput").innerHTML = "11자리를 입력해주세요";
+	}else {
+		document.getElementById("telput").innerHTML = "";
+	}
+});
+$(function() {
+	/* 체크여부 확인
+	$('[name=agreeYn1]').click(function() {
+		alert("클릭함");
+		if($("[name=agreeYn1]").is(":checked")) {
+		  alert("체크박스 체크됨");
+		}else {
+			alert("체크박스 해제");
+		}
+	});
+	*/
+});
+
+//주소
+function checkAdd() {
+    if(!document.getElementById("zipcode").value) {
+    	document.getElementById("addput").innerHTML = "우편번호/주소/상세주소를 입력하세요";
+    	document.getElementById('add').focus();
+    	return;
+    }else if(!document.getElementById("address2").value) {
+    	document.getElementById("addput").innerHTML = "상세주소를 입력하세요";
+    	document.getElementById('address2').focus();
+    	return;
+    }else {
+		document.getElementById("addput").innerHTML = "";
+	}
 }
 
+//등록
 function checkInsert() {
 	var check_count = document.getElementsByName("userGroup").length;
 	//차종선택 한 값을 input hidden에 넣는다.
@@ -382,13 +431,64 @@ function checkInsert() {
             document.getElementById("carType").value = document.getElementsByName("userGroup")[i].value;
         }
     }
-
-
-
-
-
     
-    //document.insertForm.submit();
+	//차종
+    if($("[name=userGroup]:checked").val() != "" && $("[name=userGroup]:checked").val() != null){
+    }else { //차종선택값 널이면 
+        alert("차종을 선택하시오.");
+    	document.getElementById('input-counsel1').focus();
+    	return;
+    }
+    //이름
+    if(!document.getElementById("name").value) {
+    	alert("이름을 입력하세요");
+    	document.getElementById('name').focus();
+    	return;
+    }
+    //주소
+    if(!document.getElementById("zipcode").value) {
+    	alert("주소 입력하세요");
+    	document.getElementById('add').focus();
+    	return;
+    }else if(!document.getElementById("address1").value) {
+    	alert("주소 입력하세요");
+    	document.getElementById('add').focus();
+    	return;
+    }else if(!document.getElementById("address2").value) {
+    	alert("주소 입력하세요");
+    	document.getElementById('address2').focus();
+    	return;
+    }
+    //전화번호
+    if(!document.getElementById("tel").value) {
+    	alert("전화번호 입력하세요");
+    	document.getElementById('tel').focus();
+    	return;
+    }
+	//선택 개월수
+    if(!document.getElementById("month").value) {
+	   	alert("계약월수를 입력하세요");
+	   	document.getElementById('month').focus();
+   		return;
+    }
+	//선택 색상
+    if(!document.getElementById("color").value) {
+	   	alert("색상을 입력하세요");
+	   	document.getElementById('color').focus();
+   		return;
+    }   
+	//체크박스 상태
+	if(!$("[name=agreeYn1]").is(":checked")) {
+		  alert("동의를 거부할 권리가 있으나, 미 동의 시 상담이 불가능합니다.");
+		  document.getElementById('select-terms1').focus();
+		  return;
+	}else if(!$("[name=agreeYn2]").is(":checked")) {
+		  alert("동의를 거부할 권리가 있으나, 미 동의 시 상담이 불가능합니다.");
+		  document.getElementById('select-terms2').focus();
+		  return;
+	}
+    
+    document.insertForm.submit();
 }
 </script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -426,7 +526,7 @@ function daumZipCode() {
 
 			//우편번호와 주소정보를 해당 필드에 넣는다.
 			document.getElementById('zipcode').value = data.zonecode; //5자리 새 우편 번호
-			document.getElementById('address').value = fullAddr;
+			document.getElementById('address1').value = fullAddr;
 
 			//커서를 상세주소 입력 필드로 이동한다.
 			document.getElementById('address2').focus();

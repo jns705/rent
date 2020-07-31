@@ -144,7 +144,7 @@ function searchForm(click){
 			});
 				if(data.count > 1 ){
 				str+= '</div></div><div class="col-sm-12" style="padding:0px; border:none !important;">';
-				str+= '<button class="col-sm-12 btn" id="moreBtn" type="button" onclick="more('+ data.count +');">더보기&nbsp;<span class="glyphicon glyphicon-menu-down"></span></button></div>';
+				str+= '<button style="background-color:#e0e0e0;" class="col-sm-12 btn" id="moreBtn" type="button" onclick="more('+ data.count +');">더보기&nbsp;<span class="glyphicon glyphicon-menu-down"></span></button></div>';
 				}
 				
 				$('#total').html('(총 '+data.total+'건)');

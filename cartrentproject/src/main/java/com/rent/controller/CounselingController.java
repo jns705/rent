@@ -122,6 +122,17 @@ public class CounselingController {
 	//상담 전체 목록
 	@RequestMapping("/list")
 	public String counselingList(Model model) throws Exception {
+		List<CounselingVO> cou = couService.counselingList();
+		List<String> car_name = new ArrayList<String>();
+		for(int i = 0; i < cou.size(); i++) {
+			String rent_id = cou.get(i).getRent_id();
+			if(rent_id == null) continue;
+			RentVO ren = rentService.rentListId(rent_id);
+			int car_id = ren.getCar_id();
+			CarVO car = carService.carDetail(Integer.toString(car_id));
+			car_name.add(car.getCar_name());
+		}
+		model.addAttribute("car",car_name);
 		model.addAttribute("counselingList",couService.counselingList());
 		return "/counseling/counselingList";
 	}
@@ -136,6 +147,13 @@ public class CounselingController {
 	//상담글 상세보기
 	@RequestMapping("/detail/{counseling_id}")
 	public String counselingDetail(@PathVariable String counseling_id, Model model) throws Exception {
+		CounselingVO cou = couService.counselingDetail(counseling_id);
+		String rent_id = cou.getRent_id();
+		RentVO rent = rentService.rentDetail(rent_id);
+		int car_id = rent.getCar_id();
+		CarVO car = carService.carDetail(Integer.toString(car_id));
+		
+		model.addAttribute("car", car);
 		model.addAttribute("detail", couService.counselingDetail(counseling_id));
 		return "/counseling/counselingDetail";
 	}
@@ -281,7 +299,7 @@ try {
 
 			for(ShortRentVO sho : sList) {
 				boolean cnt  = false;
-				
+				System.out.println(sho.getEnd_date().compareTo(start_date) + "  "  + sho.getStart_date().compareTo(end_date) );
 				if(sho.getEnd_date().compareTo(start_date) == -1  ||  sho.getStart_date().compareTo(end_date) == 1)
 					cnt = true;
 					
@@ -308,12 +326,11 @@ try {
 				if(sList != null) {
 					for(ShortRentVO sv : sList) {
 						 if(sv.getRent_id() == cv.getRent_id()) {
+							 cv.setSituation("X");
 								if(!rent_id.isEmpty()) {
 									for(String rt : rent_id) {
-										cv.setSituation("X");
 										if(Integer.parseInt(rt) == cv.getRent_id()) {
 											cv.setSituation("예약가능");
-											System.out.println("1111 "+ cv.getSituation() + "  " + cv.getRent_id());
 											break;
 										}
 									}//end - for(String rt : rent_id)
@@ -339,12 +356,13 @@ try {
 	
 	@RequestMapping("/newRent")
 	public String newRent(CounselingVO list, HttpSession session) throws Exception{
+		System.out.println("Aa");
 		list.setId((String)session.getAttribute("id"));
 		if(session.getAttribute("id")==null || session.getAttribute("id").equals("")) list.setId("비회원");
 		list.setOption_name("파퓰러 패키지,빌트인 캠 패키지");
 		list.setCounseling_situation("상담 대기중");
 		couService.counselingInsert(list);
-		return "/counseling/userList?tel="+list.getTel();
+		return "redirect:/counseling/userList?tel="+list.getTel();
 	}
 	
 	@RequestMapping("/userList")

@@ -30,6 +30,7 @@ tbody tr:hover {
 		<thead style="background: #e7e6d2 ;">
 			<tr>
 				<th style="background: #e3ddcb ;">회원 아이디</th>
+				<th>차량 이름</th>
 				<th>렌트 아이디</th>
 				<th>계약기간</th>
 				<th>회원 이름</th>
@@ -42,10 +43,19 @@ tbody tr:hover {
 		</thead>
 		
 		<tbody>
-			<c:forEach items="${counselingList}" var="couList" >
+			<c:forEach items="${counselingList}" var="couList" varStatus="i" >
 			<tr>
+				
+				
 				<td onclick="location.href='${path}/counseling/detail/${couList.counseling_id}'" style="cursor: pointer;">${couList.id}</td>
+				<td>${car[i.index]}</td>
+				<c:if test="${couList.rent_id != null}">
 				<td onclick="location.href='${path}/rent/rentListDetail/${couList.rent_id}'" style="cursor: pointer;">${couList.rent_id}<input type="hidden" name="rent_id_${couList.counseling_id}" value="${couList.rent_id}"></td>
+				</c:if>
+				<c:if test="${couList.rent_id eq null }">
+				<td>${couList.rent_id}<input type="hidden" name="rent_id_${couList.counseling_id}" value="${couList.rent_id}"></td>
+				</c:if>
+				
 				<td>${couList.month}개월</td>
 				<td>${couList.name}</td>
 				<td>${couList.address}</td>
