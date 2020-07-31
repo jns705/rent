@@ -74,7 +74,25 @@
 					</div>
 				</div>
 				
+<div class="quick-top off" style="z-index: 1000">
+    <a href="#top" id="aaaaaa" class="btn-top">TOP</a>
+</div>
+<style>
+.quick-top.off {    
+top: auto;
+    bottom: 235px !important;
+    height: 70px;
+    position: fixed;
+    top: 93%;
+    right: 50%;
+    margin-right: -580px;
+}
+
+</style>
+				
 		<div id="aa"></div>
+		
+		
 		
 		</article>
 	</div>
@@ -83,6 +101,8 @@
 </div>
 </body>
 <script type="text/javascript">
+
+
 searchForm();
 //최종 데이터 조회
 function searchForm(click){
@@ -165,6 +185,9 @@ function more(count){
 	$('[name=limit]').val(count-1);
 	searchForm('click');
 }
+
+
+
 
 							
 </script>

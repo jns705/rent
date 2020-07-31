@@ -43,7 +43,7 @@
             <div class="notice-search-field clearfix">
 
                 <div class="input-field fr">
-                    <div class="input-row clearfix">
+                    <div class="input-row clearfix" style="width:501px;">
                         <span class="select-box fl">
 							<select id="schKind" name="moKind" class="option01 inputTime" tabindex="-1" aria-hidden="true">
 								<option value="전체"  <c:if test="${moKind eq '전체' || moKind eq null}">selected="selected"</c:if>>전체</option>
@@ -54,10 +54,11 @@
                         <span class="input fl">
                             <label><input id="schWord" name="moVal" type="text" value="" placeholder="검색어를 입력해 주세요."></label>
                         </span>
-                        <button class="btn btn-default btn-fix1 fr" onclick="getClientNoticeList();">검색하기</button>
+                        <button class="btn btn-default btn-fix1 fr" onclick="getClientNoticeList();" style="background-color: F68121;">검색하기</button>
                         <c:if test="${sessionScope.id eq 'master'}">
                         <button class="btn btn-default btn-fix1 fr" onclick="getClientNoticeList();">작성하기</button>
                         </c:if>	
+                        
                     </div>
                 </div>
             </div>

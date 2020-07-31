@@ -625,7 +625,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 									<h4>고유식별정보 수집 및 이용에 관한 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
                                         <input id="term-check-1" type="checkbox"  name="is_check" onclick="event.cancelBubble=true; boxCheck();"/>
-                                        <label class="label" for="term-check-1">동의</label>
+                                        <label class="label" for="term-check-1" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 <script type="text/javascript">
@@ -686,7 +686,7 @@ function btnSlide(id){
 									<h4>개인정보의 수집 항목 및 이용목적 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
                                         <input type="checkbox" id="term-check-2" name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" for="term-check-2">동의</label>
+                                        <label class="label" for="term-check-2" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 								<div class="terms-content notice"  id="a2"  >
@@ -720,7 +720,7 @@ function btnSlide(id){
 									<h4>자동차 표준 대여 약관 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
                                         <input type="checkbox" id="term-check-3"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true;"/>
-                                        <label class="label" >동의</label>
+                                        <label class="label"  for="term-check-3" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 								<div class="terms-content notice" id="a3">
@@ -1007,7 +1007,7 @@ function btnSlide(id){
 									<h4>취소 및 위약금 규정 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
                                         <input type="checkbox" id="term-check-4"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" for="term-check-4">동의</label>
+                                        <label class="label" for="term-check-4" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 								<div class="terms-content notice" id="a4">
@@ -1025,7 +1025,7 @@ function btnSlide(id){
 									<h4>대여자격 확인 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
                                         <input type="checkbox" id="term-check-5"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" for="term-check-5">동의</label>
+                                        <label class="label" for="term-check-5" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 								<div class="terms-content notice" id="a5">
@@ -1269,7 +1269,7 @@ function btnSlide(id){
                                     <dl class="dl-horizontal v1">
                                     
                               <style>
-<!--
+                              
 #reserv {
 	width:260;
 }
@@ -1279,6 +1279,9 @@ function btnSlide(id){
     color: #666;
     margin-top: 210px;
     line-height: 13px;
+}
+.glyphicons {
+	margin-left:-280px;
 }
 </style>      
                                     
@@ -1316,7 +1319,7 @@ function btnSlide(id){
                     </div>
                 <div class="ticker-info">
                     <div class="ticker-head">
-                        <a href="#none" id="tickerHeadBtn" class="ticker-btn" onclick="tickerHead();" style="text-align: center;"><span id="tH"><br><span class="glyphicon glyphicon-menu-up"></span><br>더보기</span></a>
+                        <a href="#none" id="tickerHeadBtn" class="ticker-btn" onclick="tickerHead();" style="text-align: center;"><span id="tH"><br><span class="glyphicon glyphicon-menu-up glyphicons"></span><br>더보기</span></a>
                         <dl class="dl-horizontal">
                             <dt style="text-align: left; font-size: 20px; border: none;">총 결제금액</dt>
                             <dd class="text-r"><strong id="rentPayment">0</strong>원</dd>
@@ -1337,7 +1340,6 @@ function btnSlide(id){
             </div>
           </div>
         </div>
-            <!-- btn-box//end -->
         </form>
     <!-- container//end -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -1389,13 +1391,15 @@ function daumZipCode(){
 </script>
 
 <script type="text/javascript">
-//스크롤 값을 구함
-$(document).scrollTop();
-
-//1947값 이상일시 class를 바꾼다
+//footerSHeight값 이상일시 class를 바꾼다
 $(window).scroll(function () {
+    var windowHeight = $(window).height();				// Viewport Height
+    var documentHeight = $(document).height();			// Viewport Height
+    var footerHeight = $('#footers').height();
+    var footerSHeight = documentHeight - windowHeight - footerHeight - 274;
 	var scrollValue = $(document).scrollTop();
-	if(scrollValue > 1947)
+	console.log(scrollValue + ' ' + footerSHeight + ' ' + documentHeight + ' ' +  windowHeight + ' ' + footerHeight );
+	if(scrollValue > footerSHeight)
 		$('.ticker-info').addClass("off");
 	else
 		$('.ticker-info').removeClass("off");

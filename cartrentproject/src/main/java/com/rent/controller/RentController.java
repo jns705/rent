@@ -301,7 +301,6 @@ public class RentController {
 	model.addAttribute("detail", list);
 	}
 		RentVO rent 	= rentService.rentDetail(rent_id);
-		System.out.println("aa"+rent);
 		String car_id 	= Integer.toString(rent.getCar_id());
 		
 		model.addAttribute("rent"	, rent);

@@ -10,6 +10,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.list{
+	    height: 50px;
+}
+</style>
 <meta charset="UTF-8">
 <title>공지사항 작성 페이지</title>
 <%@ include file="serviceHeader.jsp" %>
@@ -46,7 +51,7 @@
             
             <div class="view-paging">
             
-	                <div class="list">
+	                <div class="list" style="height:50px;">
             <c:if test="${list.b != null}">
 	                    <a href="/serviceCenter/noticeDetail/${list.b.no}">
 	                        <span class="prev">이전글</span>
@@ -55,7 +60,7 @@
                         </a>
              </c:if>
             <c:if test="${list.b == null}">
-	                    <a href="#">
+	                    <a href="#" >
 	                        <span class="prev">이전글</span>
 	                        <span class="link">		이전글이 존재하지 않습니다.</span>
 	                    </a>
@@ -64,7 +69,7 @@
                 
                 
                 
-	                <div class="list clearfix">
+	                <div class="list clearfix"  style="height:50px;">
             <c:if test="${list.c != null}">
 	                    <a href="/serviceCenter/noticeDetail/${list.c.no}">
 	                        <span class="next">다음글</span>
@@ -97,6 +102,8 @@
     </div>
     <!-- container//end -->
 </div>
+
+
 
 </body>
 </html>

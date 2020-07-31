@@ -4,7 +4,7 @@
 
 <c:set var="URL" value="${pageContext.request.requestURL}" />
  <c:if test="${URL.substring(36) != 'main.jsp'}">
-	<footer>
+	<footer id="footers">
 	<div class="container-fluid footer col-md-12" style="padding: 0px; margin: 0px;">
 		<div class="row">
 			<div class="footer-menu">

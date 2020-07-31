@@ -124,16 +124,33 @@
 		</div>
 	</div>
 </header>
-	<div style="height: 150px;"></div>
 
-<div class="quick-top" style="z-index: 1000">
-    <a href="#top" id="aaaaaa" class="btn-top">TOP</a>
+
+<div class="quick-top" style="z-index: 10000;">
+    <a id="aaaaaa" class="btn-top">TOP</a>
 </div>
 </c:if>
+
+
+
     <!-- header 끝 -->
     
     
-    
+<script type="text/javascript">
+$( '#aaaaaa' ).css('display','none');
+$( window ).scroll( function() {
+	if ( $( this ).scrollTop() > 400 ) {
+		$( '#aaaaaa' ).fadeIn();
+	} else {
+		$( '#aaaaaa' ).fadeOut();
+	}
+} );
+
+$( '#aaaaaa' ).click( function() {
+	$( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+	return false;
+} );
+</script>
 
 
 
@@ -164,11 +181,11 @@
     
 <c:if test="${fn : contains(URL, 'main.do')}">
 <style>
-header a {
-	color : white !important;
-}
+a:hover {text-decoration: none;}
+header a {color : white !important;}
 #menuHeader11 , #menuHeader12{
 	background-color:  transparent;
+a:hover {text-decoration: none;}
 }
 </style>
 </c:if>
@@ -3346,9 +3363,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
   pointer-events: none; }
 
 .btn-default {
-  color: #22B500;
-  background-color: #fff;
-  border-color: #22B500; }
+  color: #22B500;}
   .btn-default:focus, .btn-default.focus {
     color: #22B500;
     background-color: #e6e6e6;

@@ -8,11 +8,13 @@
 <!DOCTYPE html>
 <html lang="ko"> 
 <head>
+
 <link rel="stylesheet" href="http://localhost:8082/static/css/ss.css" type="text/css" />
     <title>솔렌터카</title>
 </head>
 <form action="${path}/counseling/newRent" method="get" id="newCarForm">
 <body id="body" class="longterm-section type-reverse">
+
 <div id="content">
 	<div id="container">
 		<div class="breadcrumbs">
@@ -30,9 +32,11 @@
 		</div>
 		
 		<article>
-			<div class="header-group mab0">
-				<h3>다이렉트 견적조회</h3>
-				<a href="#" class="btn btn-line4 btn-fix1 listBtn"  >목록</a>
+			<div class="header-group mab0 form-group" style="padding-bottom:10px;">
+				<h3 class="col-sm-5">다이렉트 견적조회</h3>
+				<div class="col-sm-offset-10">
+				<a href="#" class="btn btn-line4 btn-fix1 listBtn" onclick="location.href='${path}/rent/NewRentList	'"   >목록</a>
+				</div>
 			</div>
 			<!-- header-gruop//end -->
 			<div class="car-list v1 car-list--inquiry">
@@ -173,7 +177,7 @@ function colorName(data){
 													<li class="estimate-information__detail-list">변속기 : ${car.transmission}</li>
 												</ul>
 											</div>
-											<p class="estimate-information__detail-noti">본 차량의 정보는 실제와 다를 수 있습니다.</p><!-- 20180305 -->
+											<p class="estimate-information__detail-noti">본 사진은 실제와 다를 수 있습니다.</p><!-- 20180305 -->
 										</div>
 										<!-- estimate-information__detail//end -->
 										<div class="estimate-information__select">
@@ -191,7 +195,7 @@ function colorName(data){
 												<div class="estimate-information__listbox scroll" ><!-- scroll 없으면 삭제 -->
 													<ul>
 															<li class="estimate-information__list" >
-																<span class="radio v6 clearfix" style="background-color: white;">
+																<span class="radio v6 clearfix" style="background-color: white;  width: 615px;">
 					                                                <input  <c:if test="${status.index eq 0}">checked</c:if>  type="radio" id="car-detail-total${status.index}" name="select-car-detail-total" >
 					                                                <label for="car-detail-total${status.index}">
 						                                                 <span class="radio__column radio__column--ico">
@@ -305,9 +309,7 @@ function colorName(data){
  	function btnClick(data){
  	 	if($("#"+data).is(":checked"))
  	 		$("#"+data).prop('checked',false);
- 	 	 	alert("sss");
  	 	else{
- 	 	 	alert("gg");
  	 	}
 	 	 	
 	}
@@ -458,7 +460,7 @@ function colorName(data){
 										</div>
 										<!-- estimate-list__item//end -->
 										<div class="estimate-list__action">
-											<a href="#none" class="btn btn- btn-line4 btn-fix0 js-accordion-btn"  onclick="showMenu('f4');" data-value="btn">변경</a>
+											<a href="#none" class="btn btn- btn-line4 btn-fix0 js-accordion-btn" id="asdsasd" onclick="showMenu('f4');" data-value="btn">변경</a>
 										</div>
 										<!-- estimate-list__action//end -->
 									</div>
@@ -518,18 +520,18 @@ function colorName(data){
 						<!-- ticker-body//end -->
 						<div class="ticker-head">
 							<dl class="dl-horizontal">
-								<dt>월 렌탈료</dt>
+								<dt style="border: none;">월 렌탈료</dt>
 								<dd class="text-r"><strong id="totalRental">${String.format('%,d',rent.price)}</strong>원</dd>
-								<dt class="fs-default">(총 차량 소비자가)</dt>
+								<dt class="fs-default"  style="border: none;">(총 차량 소비자가)</dt>
 								<dd class="fs-default text-r">(<strong class="fs-default" id="totAmt">${String.format('%,d',rent.price*48)}</strong>원)</dd>
 							</dl>
  							<div class="btn-box-all">
-								<div class="btn-box-gray btn2">
+								<div class="btn-box-gray btn2" style="padding:11px;">
 									<a href="#header-group" onclick="counseling();"><span>맞춤형 렌탈료</span><br>상담신청</a>
 								</div>
 								
 										
-								<div class="btn-box-red btn2">
+								<div class="btn-box-red btn2" style="padding:11px;">
 									<a href="#header-group" onclick="direct();" id="btnDirectContract" ><span>무방문/무서류</span><br>다이렉트 계약</a>
 								</div>
 							</div>
@@ -538,13 +540,14 @@ function colorName(data){
 									$('#article').css("display","block");
 									$('.buy').removeClass('hidden');
 									$('.counseling').addClass('hidden');
-									
+									$('#term-check-2').focus();
 								}
 
 								function counseling(){
 										$('#article').css("display","block");
 										$('.counseling').removeClass('hidden');
 										$('.buy').addClass('hidden');
+										$('#term-check-2').focus();
 								}
 							</script>
 							
@@ -553,28 +556,7 @@ function colorName(data){
 					</div>
 					<!-- ticker-info//end -->
 				</article>
-				<article>
-					<div class="header-group estimate-type mab0">
-						<h4>SK렌터카 서비스</h4>
-					</div>
-					
-					<div class="estimate-notice bg-line1" >
-						<ul class="list-info v1">
-							<!-- 191118 테슬라문구 추가 -->
-							
-							<li><span class="cl-point2">계약 종료 후 차량의 소유/반납 여부를 선택하실 수 있습니다</span></li>
-							<li>월 렌탈료는 신용심사 결과, 담보조건, 담보율에 따라 변경될 수 있습니다.</li>
-							<li>차량 이미지는 고객님의 이해를 돕기 위한 이미지로 실제 차량과 다를 수 있습니다.</li>
-							<li>현재 재고 기준의 견적으로 바로 구매하시지 않는 경우 재고 소진으로 구매가 불가할 수 있습니다.</li>
-							<li>견적을 저장하시면 <span class="cl-point2">MY렌터카 &gt; 장기CAR &gt; 견적정보</span>에서 견적비교를 하실 수 있습니다.</li>
-							<li>차량 옵션은 제조사의 사정에 따라 변경될 수 있으며, 변경시 별도 연락을 드리겠습니다.</li>
-							<!-- 180711 다이렉트 문구 추가 -->
-							<li>SK렌터카 서비스 중 '용품' 혜택은 다이렉트 전용 제공 상품입니다.</li>		
-							<li  id="header-group">약정 주행거리 초과 위약금: 1600CC미만(60원/km) , 2000CC미만(80원/km) , 2000CC이상(100원/km) , 수입차(200원/km) , 테슬라(450원/km)</li>					
-						</ul>
-					</div>
-				</article>
-				<article id="article" hidden><!-- 이용약관 -->
+              <article id="article" style="display: none;"><!-- 이용약관 -->
                     <div class="header-group">
                         <h3>이용약관</h3>
                     </div>
@@ -590,7 +572,7 @@ function colorName(data){
 								<div class="terms-header">
 									<h4>전체동의</h4>
 									<span class="checkbox v2">
-                                        <input type="checkbox" id="term-check-all" onclick="checkBox(); event.cancelBubble=true"/>
+                                        <input  type="checkbox" id="term-check-all" onclick="checkBox(); event.cancelBubble=true"/>
                                         <label class="label" for="term-check-all">모두 동의</label>
                                     </span>
 								</div>
@@ -601,8 +583,8 @@ function colorName(data){
 								<div class="terms-header subject">
 									<h4>고유식별정보 수집 및 이용에 관한 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
-                                        <input id="term-check-1" type="checkbox"  name="is_check" onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" for="term-check-1">동의</label>
+                                        <input id="term-check-1" type="checkbox"  name="is_check" onclick="event.cancelBubble=true; boxCheck();"/>
+                                        <label class="label" for="term-check-1" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 <script type="text/javascript">
@@ -618,9 +600,9 @@ function checkBox(){
 function boxCheck(){
 //다른 5개의 체크박스가 모두 선택됬을 시 모두동의 체크박스를 체크 아닐 시 반대
 	if($("input:checkbox[name=is_check]:checked").length == 5)
-		$("input[id='term-check-all']:checkbox").attr("checked", true);
+		$("input[id='term-check-all']:checkbox").prop("checked", true);
 	else
-		$("input[id='term-check-all']:checkbox").attr("checked", false);
+		$("input[id='term-check-all']:checkbox").prop("checked", false);
 }
 
 
@@ -663,7 +645,7 @@ function btnSlide(id){
 									<h4>개인정보의 수집 항목 및 이용목적 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
                                         <input type="checkbox" id="term-check-2" name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" for="term-check-2">동의</label>
+                                        <label class="label" for="term-check-2" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 								<div class="terms-content notice"  id="a2"  >
@@ -696,8 +678,8 @@ function btnSlide(id){
 								<div class="terms-header subject">
 									<h4>자동차 표준 대여 약관 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
-                                        <input type="checkbox" id="term-check-3"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" >동의</label>
+                                        <input  type="checkbox" id="term-check-3"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true;"/>
+                                        <label class="label"  for="term-check-3" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 								<div class="terms-content notice" id="a3">
@@ -983,8 +965,8 @@ function btnSlide(id){
 								<div class="terms-header subject">
 									<h4>취소 및 위약금 규정 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
-                                        <input type="checkbox" id="term-check-4"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" for="term-check-4">동의</label>
+                                        <input  type="checkbox" id="term-check-4"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
+                                        <label class="label" for="term-check-4" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 								<div class="terms-content notice" id="a4">
@@ -1002,7 +984,7 @@ function btnSlide(id){
 									<h4>대여자격 확인 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
                                         <input type="checkbox" id="term-check-5"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" for="term-check-5">동의</label>
+                                        <label class="label" for="term-check-5" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 								<div class="terms-content notice" id="a5">
@@ -1141,10 +1123,8 @@ function btnSlide(id){
 						</div>
 						<!-- terms-listbox//end -->
                         <p class="msg-info v1">고객님께서는 동의를 거부할 권리가 있으나, 미 동의시 렌터카 서비스 이용이 불가능합니다.</p>
-                    </div><br><br>
+                    </div> <br><br>
                     <!-- article-content//end -->
-                    
-           <article>
                      <div class="header-group">
                     </div>
                     <div class="article-content">
@@ -1270,8 +1250,8 @@ function btnSlide(id){
                             
                <div class="input-row">
                      <div class="address-input col-1" align="center">
-		                 <button type="submit" class="btn btn-color2 btn-large btn-fix2 buy hidden" style="margin-right: 10px;">상담신청</button>
-		               	 <button type="button" class="btn btn-color1 btn-large btn-fix2 counseling hidden" onclick="nextPage();"  style="margin-right: 10px;">구매신청</button>
+		                 <button type="button" class="btn btn-color2 btn-large btn-fix2 buy hidden" style="margin-right: 10px;" onclick="nextPage();">구매신청</button>
+		               	 <button type="submit" class="btn btn-color1 btn-large btn-fix2 counseling hidden"   style="margin-right: 10px;">상담신청</button>
 	               		 <a href="#" class="btn btn-line1 btn-large btn-fix2" >취소</a>
                 	</div>
                 </div>
@@ -1351,6 +1331,22 @@ function emailInput(){
 function sMonth(data){
 	$('[name=month]').val(data);
 }
+
+
+//footerSHeight값 이상일시 class를 바꾼다
+$(window).scroll(function () {
+    var windowHeight = $(window).height();				// Viewport Height
+    var documentHeight = $(document).height();			// Viewport Height
+    var footerHeight = $('#footers').height();
+    var footerSHeight = windowHeight - 1000;
+	var scrollValue = $(document).scrollTop();
+	console.log(scrollValue + ' ' + documentHeight + ' ' + windowHeight + ' ' +  windowHeight);
+	if(scrollValue > footerSHeight)
+		$('.ticker-info').addClass("off");
+	else
+		$('.ticker-info').removeClass("off");
+});
+
 </script>
 </html>
 </layoutTag:layout>

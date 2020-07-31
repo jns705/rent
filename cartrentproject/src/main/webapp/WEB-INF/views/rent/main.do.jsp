@@ -167,15 +167,8 @@
 									<div class="btn-box">
 										<a id="btn_quick" href="#" onclick="proc.submit();" class="btn btn-color1 btn-large">빠른예약</a>
 									</div>
-									<div class="helper">
-										<span class="tooltip">
-											실시간 예약
-											<a href="#modal-reward-system" class="btn-modal btn-tooltip">확인</a>
-										</span>
-										
-											
-												<a href="/rent/rentcar/short_rent_reservation_confirm.do" class="btn-reserve-confirm">예약확인</a>
-												
+									<div class="helper" style="margin-top:15px;">
+												<a href="/buy/memberCheckForm" >예약확인</a>
 									</div>
 								</div>
 							</div>
@@ -324,18 +317,18 @@ function jeju(){
   		$('#menuHeader11').css('background-color','white');
   		$('#menuHeader12').css('background-color','white');
   		$('.plh').removeClass('hidden');
-  		$('.awaw').attr('style','color:black !important')
-  		$('.aa1').attr('style','color:black !important; left: auto; right: 0px; ')
-  		$('.aa2').attr('style','color:black !important; left: 60px; width: 100px;')
+  		$('.awaw').attr('style','color:black !important; text-decoration: none;' )
+  		$('.aa1').attr('style','color:black !important; left: auto; right: 0px; text-decoration: none;')
+  		$('.aa2').attr('style','color:black !important; left: 60px; width: 100px; text-decoration: none;')
 
   	}else{
   		$('#menuHeader11').css('background-color','transparent');
   		$('#menuHeader12').css('background-color','transparent');
   		$('#menuHeader12').css('background-color','transparent');
   		$('.plh').addClass('hidden');
-  		$('.awaw').attr('style','color:white !important')
-  		$('.aa1').attr('style','color:white !important; left: auto; right: 0px; ')
-  		$('.aa2').attr('style','color:white !important; left: 60px; width: 100px;')
+  		$('.awaw').attr('style','color:white !important text-decoration: none;')
+  		$('.aa1').attr('style','color:white !important; left: auto; right: 0px; text-decoration: none;')
+  		$('.aa2').attr('style','color:white !important; left: 60px; width: 100px; text-decoration: none;')
   		
   	}});
 
