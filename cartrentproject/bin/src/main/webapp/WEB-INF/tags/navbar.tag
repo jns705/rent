@@ -17,7 +17,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="nav-menu <c:if test="${fn : contains(URL, 'List')}">active</c:if> " id="longRent"><a href="${path}/rent/rentList">장기렌트</a></li>
                     <li class="nav-menu" id="lease">
-                    	<a href="/lease/domestic">
+                    	<a href="/rent/main.do">
                     		<span>리스 </span>
                     		<span style="font-size: 13px;">(화물차포함)</span>
                     	</a>
@@ -28,7 +28,7 @@
                     
                     <li class="nav-menu nav-estimate primary" id="estimate-span"><a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;실시간 견적</a></li>
                     
-                    <li class="nav-menu nav-call primary" id="company"><a data-toggle="modal" data-target="#contact-modal" href="#"><span class="glyphicon glyphicon-earphone"></span>&nbsp;간편상담</a></li>
+                    <li class="nav-menu nav-call primary" id="company"><a href="${path}/qna/insert"><span class="glyphicon glyphicon-earphone"></span>&nbsp;간편상담</a></li>
                     	<c:if test="${sessionScope.id eq null}">
 						<li class="nav-menu nav-login <c:if test="${fn : contains(URL, 'login')}"> active</c:if> "><a href="${path}/member/loginForm"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
 						</c:if>
@@ -44,6 +44,10 @@
 				 		<li><a href="${path}/admin/carInsert">차량등록</a></li>
 				 		<li><a href="${path}/admin/rentInsertForm">렌트등록</a></li>
 				 		<li><a href="${path}/admin/carList">차량리스트</a></li>
+				 		<li><a href="${path}/admin/rentList">렌트리스트</a></li>
+				 		<li><a href="${path}/accident/list">사고이력 전체목록</a>
+				 		<li><a href="${path}/counseling/list">상담(비구매) 전체목록</a>
+				 		<li><a href="${path}/buy/list">예약(구매예정) 전체목록</a>
 				 		<li class="divider"></li>
 				 		<li><a href="#">Exit</a></li>
 				 	</ul>
@@ -55,6 +59,42 @@
         </div>
     </nav>
     <!-- header 끝 -->
+    
+    	<div class="quick-menu">
+	    <ul>
+	    	<li class="menu1">
+	    	
+            
+            
+            	<a href="/rent/rentcar/short_rent_reservation_new_jeju.do">단기예약</a>
+            
+            
+	       	</li>
+	    	<li class="menu2">
+	            <a href="/rent/rentcar/html/monthly_guide.do">중고차 렌터카</a>
+	        </li>
+	        <li class="menu3">
+	            <a href="/rent/long/direct/sub_main_integration.do?tabId=NEWCAR">다이렉트견적</a>
+	        </li>
+	        <li class="menu4">
+	            <a href="/rent/custcnte/branch/shortBranch_list.do">지점안내</a>
+	        </li>
+	        <li class="menu5">
+	            <a href="/rent/custcnte/garage/skGarage_list.do">정비매장</a>
+	        </li>
+	        <li class="menu6">
+	        
+            
+            
+            	<a href="/rent/custcnte/counsel/long_reqt_form.do">상담신청</a>
+            
+            
+	        </li>
+	        <li class="menu7"><!-- 테슬라퀵메뉴 추가 200603 -->
+	        	<img onclick="javascript:location.href='/rent/long/direct/tesla_event_integration.do';" src="/resources/img/tesla_quick.jpg?v=2" alt="테슬라사전예약" />
+	        </li>
+	    </ul>
+	</div>
     
 <style>
 @charset "UTF-8";
