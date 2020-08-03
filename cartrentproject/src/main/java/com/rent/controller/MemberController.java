@@ -188,9 +188,8 @@ public class MemberController {
 	
 	//회원탈퇴
 	@RequestMapping("/delete")
-	public String memberDelete(MemberVO member) throws Exception {
+	public String memberDelete(MemberVO member, HttpSession session) throws Exception {
 		System.out.println(member.getId()+"회원 탈퇴");
-		
 		//예약 상담 삭제해야함
 		
 		//1. 회원아이디에 해당하는 상담들을 삭제한다.
@@ -248,8 +247,9 @@ public class MemberController {
 			
 		}
 		
-		//3. 마지막으로 회원아이디를 삭제한다.
+		//3. 마지막으로 회원아이디를 삭제 후 로그인세션을 종료시킨다.
 		mMemberService.memberDelete(member);
+		session.invalidate();
 		return "/main";
 	}
 	
