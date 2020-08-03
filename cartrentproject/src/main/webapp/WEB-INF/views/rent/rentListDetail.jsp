@@ -1028,12 +1028,16 @@ img {
 					var windowHeight = $(window).height(); // Viewport Height
 					var documentHeight = $(document).height(); // Viewport Height
 					var footerHeight = $('#ssss').height();
-					var footerSHeight = documentHeight + footerHeight - 1050;
+
+					if(documentHeight > 2457) 
+				        var footerSHeight = 1050;
+				    else if(documentHeight > 2421) var footerSHeight = 1136;
+				    else if(documentHeight > 2411) var footerSHeight = 1195;
+				    else if(documentHeight > 2400) var footerSHeight = 1308;
+					
 					var scrollValue = $(document).scrollTop();
 
-					console.log(scrollValue + ' ' + footerSHeight + ' '
-							+ documentHeight + ' ' + footerHeight + ' '
-							+ footerHeight);
+					console.log('스크롤'+scrollValue + ' 푸터' + footerSHeight + ' 도큐' + documentHeight + ' 윈도우' +  windowHeight + ' ' );
 					if (scrollValue > footerSHeight)
 						$('.ticker-info').addClass("off");
 					else

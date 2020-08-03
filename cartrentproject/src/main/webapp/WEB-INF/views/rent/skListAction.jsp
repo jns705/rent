@@ -102,7 +102,7 @@ function searchForm(click){
 					'<ul class="result_rental">'+
 						'<li style="font-size: 14px; margin-top: 70px;">렌탈료</li>'+
 						'<li>'+
-							'<span class="result_rental_price"  style="margin-top: 68px;">'
+							'<span class="result_rental_price"  style="margin-top: 66px;">'
 							+ numberFormat(value.price) +'<font size="-1">원~</font></span>'+
 						'</li><li></li>'+
 					'</ul>'+
@@ -136,8 +136,8 @@ function searchForm(click){
 			'</div>'+
 				'<div class="howmany_box" style="font-size: 12px; background-color: f5f5f5;'+ 
 				'z-index: -5">'+
-					'<span class="howmany_box_span">현재 <span class="cl-point2 fontbold">'+ 
-					+ value.standby_personnel +'</span>명의 고객님이 상담 진행 중입니다.</span>'+
+					'<span class="howmany_box_span">&nbsp;&nbsp;&nbsp;&nbsp;현재 <span class="cl-point2 fontbold">'+ 
+					+ value.standby_personnel +'</span>명의 고객님이 상담 중입니다.</span>'+
 				'</div>'+
 		'</div></a>';
 				
