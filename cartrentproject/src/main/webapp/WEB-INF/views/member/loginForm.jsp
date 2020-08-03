@@ -49,8 +49,8 @@
                     </div>
                     <div class="input-row">
                         <span id="login-span" class="checkbox">
-                            <input type="checkbox" id="chkuser_id"  name="chkuser_id" class="idchk" >
-                            <label for="id-presonal-remember">아이디 저장</label>
+                            <input type="checkbox" id="select-terms3" class="chkuser_id"  name="chkuser_id" class="idchk" >
+                            <label for="select-terms3">아이디 저장</label>
                         </span>
                         <span id="login_msg" class="msg-txt cl-point1 text-c"></span>
                     </div>
@@ -83,7 +83,7 @@ $(function(){
  function saveid() {
    var expdate = new Date();
    // 기본적으로 30일동안 기억하게 함. 일수를 조절하려면 * 30에서 숫자를 조절하면 됨
-   if($("#chkuser_id").prop("checked")){
+   if($(".chkuser_id").prop("checked")){
     expdate.setTime(expdate.getTime() + 1000 * 3600 * 24 * 30); // 30일
    } else {
     expdate.setTime(expdate.getTime() - 1); // 쿠키 삭제조건
@@ -123,7 +123,7 @@ $(function(){
   var saveId = getCookie("saveid");
   if(saveId != "") {
    $("#id").val(saveId);
-   $("#chkuser_id").prop("checked",true);
+   $(".chkuser_id").prop("checked",true);
   }
  } //getid()
 </script> 
