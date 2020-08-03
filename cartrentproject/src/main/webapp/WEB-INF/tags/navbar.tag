@@ -178,6 +178,9 @@ $( '#aaaaaa' ).click( function() {
 	    </ul>
 	</div>
 	
+<c:if test="${!fn : contains(URL, 'main.do')}">
+<style>body {margin-top: 100!important;}</style>
+</c:if>
     
 <c:if test="${fn : contains(URL, 'main.do')}">
 <style>
@@ -190,9 +193,6 @@ a:hover {text-decoration: none;}
 </style>
 </c:if>
 <style>
-body {
-	margin-top: 100!important;
-}
 
 .content {
 	margin-top: 140px;
