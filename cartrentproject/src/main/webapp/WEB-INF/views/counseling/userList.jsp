@@ -25,12 +25,22 @@
         
          <div class="tab-menu v1">
             <ul class="unlink tTab" id="reservMenu">
+            	<c:if test="${sessionScope.id == null}">
             	<li class="col-4">
                 	<a href="/buy/userBuyList?tel=${tel}">구매 리스트</a>
                 </li>
                 <li class="col-4 selected">
                     <a href="/counseling/userList?tel=${tel}">상담 리스트</a>
                 </li>
+                </c:if>
+                <c:if test="${sessionScope.id != null}">
+            	<li class="col-4">
+                	<a href="/buy/userBuyList">구매 리스트</a>
+                </li>
+                <li class="col-4 selected">
+                    <a href="/counseling/userList">상담 리스트</a>
+                </li>
+                </c:if>
             </ul>
         </div>
 <article>

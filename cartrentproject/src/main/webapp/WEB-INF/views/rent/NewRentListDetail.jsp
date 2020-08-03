@@ -518,7 +518,7 @@ function colorName(data){
 					<div class="ticker-info ticker-info--direct">
 						
 						<!-- ticker-body//end -->
-						<div class="ticker-head">
+						<div class="ticker-head" style="z-index: 10000">
 							<dl class="dl-horizontal">
 								<dt style="border: none;">월 렌탈료</dt>
 								<dd class="text-r"><strong id="totalRental">${String.format('%,d',rent.price)}</strong>원</dd>
