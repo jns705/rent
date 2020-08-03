@@ -191,7 +191,7 @@ a:hover {text-decoration: none;}
 </c:if>
 <style>
 body {
-	margin-top: 140px;
+	margin-top: 100!important;
 }
 
 .content {
