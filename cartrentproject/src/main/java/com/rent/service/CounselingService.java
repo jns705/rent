@@ -53,7 +53,7 @@ public class CounselingService {
 	}
 	
 	//회원아이디로 상담신청했는지 확인 후 상담한 날짜를 뿌려준다
-	public CounselingVO counselingOK(String id) throws Exception{
+	public List<CounselingVO> counselingOK(String id) throws Exception{
 		return mapper.counselingOK(id);
 	}
 	
@@ -72,5 +72,9 @@ public class CounselingService {
 		return mapper.counselingCount();
 	}
 	
+	//회원탈퇴시 해당아이디에 대한 구매한 정보들을 전부 삭제한다 
+	public int secessionDelete(String id) throws Exception {
+		return mapper.secessionDelete(id);
+	}
 	
 }

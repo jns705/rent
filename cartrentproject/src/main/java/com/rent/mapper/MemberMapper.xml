@@ -9,9 +9,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 회원가입 -->	
 	<insert id="insertProc" parameterType="com.rent.domain.MemberVO">
 		INSERT INTO MEMBER
-		(ID, PASSWORD, NAME, REG_DATE, TEL, ADDRESS, DATE_OF_BIRTH)
+		(ID, PASSWORD, NAME, REG_DATE, TEL, ADDRESS, DATE_OF_BIRTH , gender)
 		VALUES
-		(#{id}, #{password}, #{name}, now(), #{tel}, #{address}, #{date_of_birth})
+		(#{id}, #{password}, #{name}, now(), #{tel}, #{address}, #{date_of_birth}, #{gender})
 	</insert>
 	
 	<!-- 계정 검사 -->	

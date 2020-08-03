@@ -129,14 +129,23 @@ public class BuyController {
 			if(optionList.size() > i+1) options+=", ";	
 		}
 		
-		CounselingVO counseling = couService.counselingOK(id);
+		List<CounselingVO> counseling = couService.counselingOK(id);
+		int num = 0;
+		
+		//가장 최근의 상담날짜를 넣어둔다
+		for(int i=0; i> counseling.size(); i++) {
+			System.out.println("상담 "+i+"개 : " + counseling);
+			num +=1;
+		}
+		
 		if(counseling != null) {
-			buy.setCounseling_date(counseling.getCounseling_date());
+			buy.setCounseling_date(counseling.get(num).getCounseling_date());
 		}else {
-			SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd");
+			SimpleDateFormat format1 = new SimpleDateFormat ("yyyy-MM-dd");
 			Calendar time = Calendar.getInstance();
 			buy.setCounseling_date(format1.format(time.getTime()));
 		}
+		
 		
 		buy.setOption_name(options);
 		

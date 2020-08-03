@@ -7,129 +7,185 @@
 <layoutTag:layout>
 <!DOCTYPE html>
 <html>
+<link href="http://localhost:8082/static/css/ss.css" rel="stylesheet" type="text/css" >
 <head>
 <meta charset="UTF-8">
 <title>회원가입 홈페이지</title>
 </head>
 <body>
 	
-	<div class="container">
-	<br>
+<div class="container">
+
+	<br><br><br><br><br>
+	
 	<label class="control-label"><font size="+3"><b>간편 회원가입</b></font></label><br><br>
-		<form class="form-horizontal" name="insertForm" action="${path}/member/insertProc" method="get">
-			<div class="panel panel-default">
-				<div class="container">
+	<form class="form-horizontal" name="insertForm" action="${path}/member/insertProc" method="get">
+		<div class="panel panel-default">
+			<div class="article-content">
 				<br><br><br>
-				
-				<div class="form-group">
-					<label class="control-label col-sm-2">아이디</label>
-					<div class="col-sm-4">
+					
+				<div class="input-row clearfix pat0 pal0 par0 brt0">
+					<div class="fl col-10">
+						<span class="input essential">
+							<strong class="check">필수</strong>
+							<input type="text" value="아이디" style="width:150px;" readonly="readonly">
+						</span>
+					</div>
+					<div class="fl col-3">
 						<input type="text" class="form-control" name="id" size="10" placeholder="아이디를 입력하세요" oninput="idCheck();"/>
 					</div>
-					<label style="text-align: left; color:red;" id="id" class="control-label col-sm-4"></label>
-				</div>
+						<label style="text-align: left; color:red;" id="id" class="control-label col-sm-4"></label>
+				</div> 
+				    
+				<br>
 				
-				<div class="form-group">
-					<label class="control-label col-sm-2">비밀번호</label>
-					<div class="col-sm-4">
-						<input type="password" class="form-control" name="password" size="10" placeholder="비밀번호를 입력하세요" oninput="pwCheck();"/>
+				<div class="input-row clearfix pat0 pal0 par0 brt0">
+					<div class="fl col-10">
+						<span class="input essential">
+							<strong class="check">필수</strong>
+							<input type="text" value="비밀번호" style="width:150px;" readonly="readonly">
+						</span>
 					</div>
+				<div class="fl col-3">
+					<input type="password" class="form-control" name="password" size="10" placeholder="비밀번호를 입력하세요" oninput="pwCheck();"/>
+				</div>
 					<label style="text-align: left; color:red;" id="password" class="control-label col-sm-4"></label>
 				</div>
 				
-				<div class="form-group">
-					<label class="control-label col-sm-2">비밀번호 확인</label>
-					<div class="col-sm-4">
-						<input type="password" class="form-control" name="rePassword" size="10" placeholder="비밀번호를 입력하세요" oninput="repwCheck();"/>
+				<br>
+				
+				<div class="input-row clearfix pat0 pal0 par0 brt0">
+					<div class="fl col-10">
+						<span class="input essential">
+							<strong class="check">필수</strong>
+							<input type="text" value="비밀번호 확인" style="width:150px;" readonly="readonly">
+						</span>
 					</div>
-					<label style="text-align: left; color:red;" id="rePassword" class="control-label col-sm-4"></label>
+					<div class="fl col-3">
+						 <input type="password" class="form-control" name="rePassword" size="10" placeholder="비밀번호를 입력하세요" oninput="repwCheck();"/>
+					</div>
+						<label style="text-align: left; color:red;" id="rePassword" class="control-label col-sm-4"></label>
 				</div>
 				
-				<div class="form-group">
-					<label class="control-label col-sm-2">이름</label>
-					<div class="col-sm-4">
+				<br>
+				
+				<div class="input-row clearfix pat0 pal0 par0 brt0">
+					<div class="fl col-10">
+						<span class="input essential">
+							<strong class="check">필수</strong>
+							<input type="text" value="이름" style="width:150px;" readonly="readonly">
+						</span>
+					</div>
+					<div class="fl col-3">
 						<input type="text" class="form-control" name="name" size="10" placeholder="이름을 입력하세요" oninput="nameCheck();"/>
 					</div>
-					<label style="text-align: left; color:red;" id="name" class="control-label col-sm-4"></label>
-				</div>
-
-				
-				<div class="form-group">
-					<label class="control-label col-sm-2">전화번호</label>
-						<div class="col-sm-2">
-							<select class="form-control" name="tel1">
-								<option value="010">010</option>
-								<option value="011">011</option>
-								<option value="019">019</option>
-							</select>
-						</div>
-						
-						<div class="col-sm-2">
-							<input type="text" class="form-control" name="tel2" size="10" placeholder="전화번호" oninput="telCheck();"/>
-						</div>
-						<div class="col-sm-2">
-							<input type="text" class="form-control" name="tel3" size="10" placeholder="전화번호" oninput="telCheck();"/>
-						</div>
-					<label style="text-align: left; color:red;" id="tel" class="control-label col-sm-4"></label>
+						<label style="text-align: left; color:red;" id="name" class="control-label col-sm-4"></label>
 				</div>
 				
+				<br>
 				
-					
-		<div class="form-group">
-			<label class="control-label col-sm-2">우편번호</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="zipcode" name="zipcode" maxlength="100" 
+				<div class="input-row clearfix pat0 pal0 par0 brt0">
+					<div class="fl col-10">
+						<span class="input essential">
+							<strong class="check">필수</strong>
+							<input type="text" value="전화번호" style="width:150px;" readonly="readonly">
+						</span>
+					</div>
+					<div class="fl col-3">
+						<input type="text" placeholder="휴대폰번호(-없이 입력) 입력" name="tel" maxlength="11" oninput="telCheck();">
+					</div>
+						<label style="text-align: left; color:red;" id="tel" class="control-label col-sm-4"></label>
+				</div>
+				
+				<br>
+				
+				<div class="input-row clearfix pat0 pal0 par0 brt0">
+					<div class="fl col-10">
+						<span class="input essential">
+							<strong class="check">필수</strong>
+							<input type="text" value="우편번호" style="width:150px;" readonly="readonly">
+						</span>
+					</div>
+					<div class="fl col-3">
+						<input type="text" class="form-control" id="zipcode" name="zipcode" maxlength="100" 
 				placeholder="zipcode"  readonly>
-			</div>
-			<div class="col-sm-2">
-				<input type="button" onclick="daumZipCode()" value="우편번호 찾기" name="addressbtn">
-			</div>
-		</div>
-		
-	<div class="form-group">
-		<label class="control-label col-sm-2">주소</label>
-			<div class="col-sm-6">
-				<input type="text" class="form-control" id="address" name="address" maxlength="100"  readonly
+					</div>
+						<input type="button" onclick="daumZipCode()" value="우편번호 찾기" name="addressbtn">
+				</div>
+				
+				<br>
+				
+				<div class="input-row clearfix pat0 pal0 par0 brt0">
+					<div class="fl col-10">
+						<span class="input essential">
+							<strong class="check">필수</strong>
+							<input type="text" value="주소" style="width:150px;" readonly="readonly">
+						</span>
+					</div>
+					<div class="fl col-3">
+						<input type="text" class="form-control" id="address" name="address" maxlength="100"  readonly
 				placeholder="Address">
-			</div>
-		</div>
-		
-		
-	<div class="form-group">
-		<label class="control-label col-sm-2">상세주소</label>
-			<div class="col-sm-6">
-				<input type="text" class="form-control" id="addressDetail" name="addressDetail" maxlength="100" 
+					</div>
+				</div>
+				
+				<br>
+				
+				<div class="input-row clearfix pat0 pal0 par0 brt0">
+					<div class="fl col-10">
+						<span class="input essential">
+							<strong class="check">필수</strong>
+							<input type="text" value="상세주소" style="width:150px;" readonly="readonly">
+						</span>
+					</div>
+					<div class="fl col-3">
+						<input type="text" class="form-control" id="addressDetail" name="addressDetail" maxlength="100" 
 				placeholder="Enter Address"  oninput="addressCheck();">
-			</div>
-			<label style="text-align: left; color:red;" id="addressM" class="control-label col-sm-4"></label>
-		</div>
-		
-		
-				<div class="form-group">
-					<label class="control-label col-sm-2">생년월일</label>
-						<div class="col-sm-4">
-							<input type="date" class="form-control" name="date_of_birth" oninput="birthCheck();">
-						</div>
-					<label style="text-align: left; color:red;" id="date_of_birth" class="control-label col-sm-4"></label>
-				</div>		
+					</div>
+					<label style="text-align: left; color:red;" id="addressM" class="control-label col-sm-4"></label>
+				</div>
+				
+				<br>
 						
-				<div class="form-group">
-					<label class="control-label col-sm-2">성별</label>
-					<div class="col-sm-2">
-						<select class="form-control" name="gender">
-							<option>남자</option>
-							<option>여자</option>
+				<div class="input-row clearfix pat0 pal0 par0 brt0">
+					<div class="fl col-10">
+						<span class="input essential">
+							<strong class="check">필수</strong>
+							<input type="text" value="생년월일" style="width:150px;" readonly="readonly">
+						</span>
+					</div>
+					<div class="fl col-3">
+						<input type="date" class="form-control" name="date_of_birth" oninput="birthCheck();">
+					</div>
+					<label style="text-align: left; color:red;" id="date_of_birth" class="control-label col-sm-4"></label>
+				</div>
+				
+				<br>
+							
+				<div class="input-row clearfix pat0 pal0 par0 brt0">
+					<div class="fl col-10">
+						<span class="input essential">
+							<strong class="check">필수</strong>
+							<input type="text" value="성별" style="width:150px;" readonly="readonly">
+						</span>
+					</div>
+					<div class="fl col-9">
+						<select class="form-control" name="gender"  style="height:42px;">
+							<option value="남자">남자</option>
+							<option value="여자">여자</option>
 						</select>
 					</div>
 				</div>
 				
 				<br><br>
+				
 					<div class="form-group">
-						<div class="col-sm-offset-1 col-sm-4">
-							<input class="col-sm-1" type="checkbox" id="checkb">
-							<div class=col-sm-8>
-							<p><b>개인정보 수집 동의</b></p>
-							</div>
+					
+					<div class="col-sm-offset-1 col-sm-5">
+					<span class="checkbox v2">
+						<input type="checkbox" id="select-terms2" name="checkb" class="checkb">
+						<label class="label" for="select-terms2"><h4>개인정보 수집 동의<span class="cl-point1">(필수)</span></h4>
+						</label>
+					</span>
 						</div>
 					
 					<div class="panel panel-default col-sm-offset-1 col-sm-10" align="left">
@@ -261,14 +317,10 @@ function checkTotal(data, name, startNum, endNum){
 		return true;
 	//전화번호 입력 시
 	}else if(data == 'tel'){
-		if(!$('[name=tel2]').val())
-			printMsg(data,'tel2','두번째 전화번호를 확인해주세요');
-		else if($('[name=tel2]').val().length != 4)
-			printMsg(data,'tel2', '전화번호는 4글자를 입력해주세요.');
-		else if(!$('[name=tel3]').val())
-			printMsg(data,'tel3','세번째 전화번호를 확인해주세요');
-		else if($('[name=tel3]').val().length != 4)
-			printMsg(data,'tel3', '전화번호는 4글자를 입력해주세요');
+		if(!$('[name=tel]').val())
+			printMsg(data,'tel','전화번호를 확인해주세요');
+		else if($('[name=tel]').val().length != 11)
+			printMsg(data,'tel', '전화번호는 11글자를 입력해주세요.');
 		else printMsg(data,' ',' ');
 		return true;
 	//주소 입력 시
@@ -309,26 +361,36 @@ function checkTotal(data, name, startNum, endNum){
 			if(!$('[name=date_of_birth]').val()){
 				printMsg('date_of_birth','date_of_birth','생년월일을 입력해주세요'); 
 				return true;
+			}else{
+				printMsg('date_of_birth','date_of_birth',' '); 
 			}
 		}
 
 	function inserForm(){
 		
 		if($('#id').html() != '확인되었습니다.'){
+			alert("아디");
 			idCheck(); return false; 
 		}if($('#password').html() != ' '){
+			alert("비번");
 			pwCheck(); return false;
 		}if($('#rePassword').html() != ' '){
+			alert("비확");
 			repwCheck();return false;
 		}if($('#name').html() != ' '){
+			alert("이름");
 			nameCheck();return false;
 		}if($('#tel').html() != ' '){
+			alert("저번");
 			telCheck();  return false;
 		}if($('#addressM').html() != ' '){
+			alert("즈서");
 			addressCheck();return false;
 		}if($('#date_of_birth').html() != ' '){
+			alert("생일 \n"+$('[name=date_of_birth]').val());
 			birthCheck(); return false;
-		}if(!$("input:checkbox[id='checkb']").is(":checked")){
+		}if(!$(".checkb").is(":checked")){
+			alert("체크");
 			alert("개인정보 수집에 동의하셔야 가입이 가능합니다.");
 			return false;
 		}

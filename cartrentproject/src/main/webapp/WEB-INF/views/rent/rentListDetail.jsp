@@ -674,14 +674,14 @@ var a = false;
 					</fieldset>
 				</article>
 <article>
-<div class="ticker-info ticker-info--direct" style="z-index: 10000;">
+<div class="ticker-info ticker-info--direct">
 <div class="ticker-head">
 <dl class="dl-horizontal">
-<dt style="border: none;  text-align: left;">월 렌탈료</dt>
+<dt>월 렌탈료</dt>
 <dd class="text-r">
 <strong id="totalRental">${String.format('%,d',rent.price)}</strong>원
 </dd>
-<dt class="fs-default"  style="border: none; text-align: left;" >(총 차량 소비자가)</dt>
+<dt class="fs-default">(총 차량 소비자가)</dt>
 <dd class="fs-default text-r">
 (<strong class="fs-default" id="totAmt">${String.format('%,d',car.car_price)}</strong>만원)
 </dd>
@@ -695,11 +695,10 @@ var a = false;
 
 <c:choose>
 <c:when test="${sessionScope.id !=null && sessionScope.id != ''}">
-<button formaction="${path}/buy/insert/${rent.rent_id}" onclick="apply();" id="btnDirectContract"></button>
+<button formaction="${path}/buy/insert/${rent.rent_id}" onclick="apply();" id="btnDirectContract">
 </c:when>
 <c:otherwise>
 <button formaction="${path}/rent/rentListDetail/${rent.rent_id}" onclick="alert('로그인 후 사용가능')" id="btnDirectContract">
-</button>
 </c:otherwise>
 </c:choose>
 

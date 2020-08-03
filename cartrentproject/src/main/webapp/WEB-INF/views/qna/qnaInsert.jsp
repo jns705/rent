@@ -59,7 +59,8 @@
                                 <div class="col-lg-10">
 
                                     <div class="checkbox">
-                                        <label><input type="checkbox" id="check_yn"></label>
+                                        <input type="checkbox" id="select-terms3" class="check_yn">
+                                        <label class="label" for="select-terms3"></label>
                                     </div>
 
                                 </div>
@@ -88,8 +89,8 @@ var str ='';
     str += '</div>';
 
 	$(document).ready(function(){
-	    $("#check_yn").change(function(){
-	        if($("#check_yn").is(":checked")){
+	    $(".check_yn").change(function(){
+	        if($(".check_yn").is(":checked")){
 	            $(".pwd").html(str);       
 	        }else{
 	            $('#pwevt').remove();

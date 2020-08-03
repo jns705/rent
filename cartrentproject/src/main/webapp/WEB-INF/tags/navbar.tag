@@ -17,9 +17,11 @@
 				<c:if test="${sessionScope.id == null}"><a href="/member/loginForm" class="awaw">로그인</a></c:if>
 				<c:if test="${sessionScope.id != null}"><a href="/member/logOut" class="awaw">로그아웃</a></c:if>
 				</li>
+				<c:if test="${sessionScope.id != null && sessionScope.id != 'master'}">
 				<li>
-					<a href="/rent/prmt/evnt/evnt_list.do" id="awawaaaa" class="awaw">이벤트</a>
+					<a href="${path}/member/detail/${sessionScope.id}">회원정보</a>
 				</li>
+				</c:if>
 				<li>
 					<a href="/serviceCenter" class="awaw">고객센터</a>
 				</li>
@@ -41,17 +43,6 @@
 				 	</ul>
                     </li>
                     </c:if>	
-             <!-- 삭제할거 -->
-            <c:if test="${sessionScope.id != 'master' && sessionScope.id != null}">
-             <li class="nav-menu nav-estimate primary dropdown" id="estimate-span">
-             <a href=""class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              </span>&nbsp;회원 메뉴&nbsp;<span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-              	<li><a href="${path}/member/detail/${sessionScope.id}">회원정보</a></li>
-              </ul>
-              </li>
-            </c:if>
-            <!-- 삭제할거 -->
 		</nav>
 		<nav class="gnb hc " id="menuHeader12" tabindex="0">
 			<h2 class="sr-only ">메인 메뉴</h2>
@@ -2989,7 +2980,7 @@ input[type="search"] {
   .radio label,
   .checkbox label {
     min-height: 20px;
-    padding-left: 20px;
+    padding-left: 30px;
     margin-bottom: 0;
     font-weight: normal;
     cursor: pointer; }
@@ -2999,7 +2990,7 @@ input[type="search"] {
 .checkbox input[type="checkbox"],
 .checkbox-inline input[type="checkbox"] {
   position: absolute;
-  margin-left: -20px;
+  margin-left: 3px;
   margin-top: 4px \9; }
 
 .radio + .radio,

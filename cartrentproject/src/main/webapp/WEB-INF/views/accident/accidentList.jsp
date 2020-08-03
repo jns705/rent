@@ -80,6 +80,8 @@ $(function() {
 $(window).scroll(function(){
 	
 	//$(window).scrollTop() == $(document).height() - $(window).height() 화면비율이 이상해서?? 한번밖에안됨
+	//100%에서 한번 , 250% 한번,  500% 한번;
+	
 	//$(document).height() <= $(window).scrollTop() + $(window).height() 스크롤 내리면 걍 실행
 	
 	//페이지 끝 도착?

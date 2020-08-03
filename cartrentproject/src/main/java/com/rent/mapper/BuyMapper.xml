@@ -104,4 +104,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		WHERE	TEL = #{tel}
 	</select>
 	
+	<!-- 회원아이디로 구매한 리스트들 출력 -->
+	<select id="buyListMemberId" parameterType="String" resultType="com.rent.domain.BuyVO">
+		select *
+		from buy
+		where id = #{id}
+	</select>
+	
+	<!-- 회원탈퇴시 해당아이디에 대한 구매한 정보들을 전부 삭제한다  -->
+	<delete id="secessionDelete" parameterType="String">
+		delete from buy
+		where id = #{id}
+	</delete>
 </mapper>

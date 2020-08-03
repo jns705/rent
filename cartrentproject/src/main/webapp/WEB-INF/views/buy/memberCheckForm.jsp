@@ -84,7 +84,7 @@ th{text-align: center;}
                         <li>
                             <p>회원으로 예약하셨나요?</p>
                             <span>로그인을 하시면 예약내역 확인이 가능합니다.</span>
-				            	<a href="/member/loginForm" class="btn btn-color<c:if test="${check == 1}">2</c:if><c:if test="${check == 0}">1</c:if> btn-fix3 btn-large">회원 예약확인</a>
+				            	<a href="/member/loginForm?check=1" class="btn btn-color<c:if test="${check == 1}">2</c:if><c:if test="${check == 0}">1</c:if> btn-fix3 btn-large">회원 예약확인</a>
                         </li>
                         <li>
                             <p>비회원으로 예약하셨나요?</p>
