@@ -197,6 +197,12 @@ public class MemberController {
 		counList = couService.counselingListId(member.getId());
 		for(int i=0; i < counList.size(); i++) {
 			
+			//렌트아이디없이 상담한 경우 
+			if(counList.get(i).getRent_id() == null) {
+				couService.counselingDelete(counList.get(i).getCounseling_id());
+				continue;
+			}
+			
 			//i번째 렌트아이디를 가져온다
 			RentVO rentCou = rentService.rentDetail(counList.get(i).getRent_id());
 			

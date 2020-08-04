@@ -152,6 +152,11 @@ public class BuyController {
 		//렌트카를 돈주고 예약 했으니 car테이블에 있는 car_number(재고량)를 뺀다
 		CarVO car = carService.carDetail(car_id);
 		int count = car.getCar_number();
+		
+		//만약 해당 렌트카의 재고가 없으면
+		if(count <= 0) {
+			
+		}
 		count -=1;
 		car.setCar_number(count);
 		
