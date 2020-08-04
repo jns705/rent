@@ -2,10 +2,14 @@
 <%@ page session="true"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags" %>
+
 <layoutTag:layout>
 <!DOCTYPE html>
 <html>
-<head>
+<head>  
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css" rel="stylesheet"> 
+ <link href="http://localhost:8082/static/css/fullpage.css" rel="stylesheet" type="text/css"/>
+ <link href="http://localhost:8082/static/js/fullpage.js" />
 	<meta charset="UTF-8">
 	<title>렌트의 기준 - 솔렌트카</title>
 </head>
@@ -136,12 +140,18 @@
 /* 190930 event! 
 .event-mini-box span:first-child{border-bottom: 1px solid rgba(255,255,255,0.6);width: 43px;margin: 12px 0 4px 14px;line-height: 14px;} 
 .event-mini-box span:last-child{line-height: 19px;margin: 0 0 5px 14px;}*/
-
 	</style>
-<body id="start" style="background-image: url(http://localhost:8082/static/img/main.jpg); background-repeat: no-repeat; background-size: 1800px 850px;">
+	
 
 
+<body id="start" style="background-image: url(http://localhost:8082/static/img/main.jpg); background-repeat: no-repeat;">
 	<div id="content">
+	<script type="text/javascript">
+		var width = $(window).width();
+		var height = $(window).height();
+		$('#start').css("background-size", width+"px "+ height + "px");
+</script>
+
         <div class="content content-default content-original is-expanded" data-type="gate" style="height: 757px; margin-top: 0px;">
             <div class="content-wrapper">
                 <div class="main-service">

@@ -108,12 +108,72 @@ th{text-align: center;}
 		$('#modal-nomember-check').css('display','block');
 		if(data == 'close') $('#modal-nomember-check').css('display','none');
 	}
+
+	function checka(data, data1){
+		if(data == 'name'){
+			if(!$('[name=name]').val()){
+	        	$('#msg-nm').css('font-size','0px');
+	        	$('[name=name]').css('border-color','');
+	        	$('#msg-hpNo').css('font-size','0px');
+	        	$('[name=tel]').css('border-color','');
+	        	
+		$('#msg-nm').css('font-size','15px');
+    	$('#msg-nm').css('margin-top','10px');
+    	$('[name=name]').css('border-color','#eb444b');
+    	if(data1 == 'a')
+        	$('[name=name]').css('border-color','#f68121');
+		}
+		}
+		if(data == 'tel'){
+        	$('#msg-nm').css('font-size','0px');
+        	$('[name=name]').css('border-color','');
+        	$('#msg-hpNo').css('font-size','0px');
+        	$('[name=tel]').css('border-color','');
+			
+			if(!$('[name=tel]').val()){
+    	$('#msg-hpNo').css('font-size','15px');
+    	$('#msg-hpNo').css('margin-top','10px');
+    	$('[name=tel]').css('border-color','#eb444b');
+    	if(data1 == 'a')
+        	$('[name=tel]').css('border-color','#f68121');
+		}
+		}
+	}
 </script>
 
 
         <c:if test="${check == 1}">
         <script type="text/javascript">
+
+		//영역밖 클릭 시
+		$('html').click(function(e) { 
+			if(!$(e.target).hasClass("name")) { 
+				if(!$(e.target).hasClass("btn-block")) { 
+		        	$('#msg-nm').css('font-size','0px');
+		        	$('[name=name]').css('border-color','');
+				}
+			} 
+			if(!$(e.target).hasClass("tel")) { 
+				if(!$(e.target).hasClass("btn-block")) { 
+		        	$('#msg-hpNo').css('font-size','0px');
+		        	$('[name=tel]').css('border-color','');
+				}
+			} 
+		});
+
+
+        //전체 유효성 검사
         function goConfirm(){
+        if(!$('[name=name]').val()){
+			checka('name')
+        	return false;
+        }
+        if(!$('[name=tel]').val()){
+			checka('tel')
+	        	return false;
+        } 
+
+    	
         $('#myform').attr("action", "/member/checkId1");
         myform.submit();
         }	
@@ -121,7 +181,20 @@ th{text-align: center;}
         </c:if>
         <c:if test="${check == 0}">
         <script type="text/javascript">
-        function goConfirm(){ myform.submit(); }
+        function goConfirm(){ 
+            if(!$('[name=name]').val()){
+    			checka('name','a')
+            	return false;
+            }
+            if(!$('[name=tel]').val()){
+    			checka('tel','a')
+    	        return false;
+            } 
+
+            myform.submit(); 
+        }
+
+
         </script>
         </c:if>
         
@@ -139,16 +212,16 @@ th{text-align: center;}
                     <div class="input-row">
                     <span class="input essential input-large" id="span-nm">
                         <strong class="check">필수</strong>
-                        <label><input type="text" placeholder="이름을 입력해주세요." class="onlyKorEng" name="name" id="nm" onkeyup="nmTest();"></label>
+                        <label><input type="text" placeholder="이름을 입력해주세요." class="onlyKorEng name" name="name" id="nm" onfocus="checka('name' <c:if test="${check!=1}">, 'a'</c:if>);" ></label>
                     </span>
-                    <span class="msg-txt cl-point1" id="msg-nm">이름을 입력해주세요.</span>
+                    <span style="color:<c:if test="${check == 1}">#eb444b !important;</c:if>" class="msg-txt 	cl-point1" id="msg-nm">이름을 입력해주세요.</span>
                     </div>
                     <div class="input-row">
                     <span class="input essential input-large" id="span-hpNo">
                         <strong class="check">필수</strong>
-                        <label><input type="number" placeholder="휴대폰 번호를 입력해주세요.(-생략)" class="onlyNumber" name="tel" id="hpNo" onkeyup="hpNoTest();"></label>
+                        <label><input type="number" placeholder="휴대폰 번호를 입력해주세요.(-생략)" class="onlyNumber tel" name="tel" id="hpNo" onfocus="checka('tel' <c:if test="${check!=1}">, 'a'</c:if> );"></label>
                     </span>
-                    <span class="msg-txt cl-point1" id="msg-hpNo">휴대폰 번호를 입력해주세요.</span>
+                    <span style="color:<c:if test="${check == 1}">#eb444b !important;</c:if>"  class="msg-txt cl-point1" id="msg-hpNo">휴대폰 번호를 입력해주세요.</span>
                     </div>
                 </div>
                 <div class="btn-box" id="div-btn">

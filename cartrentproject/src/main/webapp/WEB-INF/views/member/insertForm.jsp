@@ -397,6 +397,11 @@ function checkTotal(data, name, startNum, endNum){
 			
 			insertForm.submit();
 	}
+
+
+	function idCheck(){
+
+	}
 </script>
 </html>
 </layoutTag:layout>

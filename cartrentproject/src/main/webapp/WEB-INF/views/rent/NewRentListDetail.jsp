@@ -16,7 +16,7 @@
 <body id="body" class="longterm-section type-reverse">
 
 <div id="content">
-	<div id="container">
+	<div id="container" style="margin-top: 40px;"> 
 		<div class="breadcrumbs">
 			<h2 class="tit">솔장기렌터카 다이렉트</h2>
 			<input class="hidden" id="pricea" value="${rent.price}">
@@ -518,7 +518,7 @@ function colorName(data){
 					<div class="ticker-info ticker-info--direct">
 						
 						<!-- ticker-body//end -->
-						<div class="ticker-head">
+						<div class="ticker-head" style="z-index: 10000">
 							<dl class="dl-horizontal">
 								<dt style="border: none;">월 렌탈료</dt>
 								<dd class="text-r"><strong id="totalRental">${String.format('%,d',rent.price)}</strong>원</dd>
@@ -1338,9 +1338,10 @@ $(window).scroll(function () {
     var windowHeight = $(window).height();				// Viewport Height
     var documentHeight = $(document).height();			// Viewport Height
     var footerHeight = $('#footers').height();
-    var footerSHeight = windowHeight - 1000;
+    if(documentHeight > 1641) var footerSHeight = windowHeight - 1206;
+    else if(documentHeight > 1538) var footerSHeight = windowHeight - 1206;
 	var scrollValue = $(document).scrollTop();
-	console.log(scrollValue + ' ' + documentHeight + ' ' + windowHeight + ' ' +  windowHeight);
+	console.log(scrollValue + ' ' + documentHeight + ' ' + footerSHeight + ' ' +  windowHeight);
 	if(scrollValue > footerSHeight)
 		$('.ticker-info').addClass("off");
 	else

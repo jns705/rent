@@ -18,6 +18,24 @@
 		background-color: #f5f5f5;
 	}
 
+
+.howmany_box_span{
+    position: absolute;
+    left: -15px;
+    top: 1px;
+    width: 15px;
+    height: 15px;
+    background-image: url(http://localhost:8082/static/img/pc_check_red.png);
+    background-size: 11px;
+    background-repeat: no-repeat;
+}
+
+.select2-selection {
+	height: 60px; 
+}
+.select-box {
+	height: 60px; 
+}
 </style>
 <head>
  <link href="http://localhost:8082/static/css/total.css" rel="stylesheet" type="text/css"/>
@@ -53,14 +71,7 @@
             </ul>
         </div>
         
-<style>
-.select2-selection {
-	height: 60px; 
-}
-.select-box {
-	height: 60px; 
-}
-</style>
+
 		<article class="car-search tab-content" id="tab-direct-user-personal" role="search" style="display: block;">
 			<div class="car-search__wrapper clearfix">
 				<div class="select-area fl" style="width: 670px;" >

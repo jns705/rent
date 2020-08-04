@@ -20,4 +20,9 @@ public class MainController {
 		return "/rent/main.do";
 	}
 	
+	@RequestMapping("/mainma")
+	public String mainma() {
+		return "/mainma";
+	}
+	
 }
