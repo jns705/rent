@@ -21,7 +21,7 @@ tbody tr:hover {
  	<h2 align=center>상담 목록</h2>
  	<form method="post" name="form1">
  	<div align="right">
- 		<button formaction="${path}/counseling/list" >전체</button>
+ 		<button formaction="${path}/counseling/list">전체</button>
  		<button formaction="${path}/counseling/searchList/상담 대기중" >상담 대기중</button>
  		<button formaction="${path}/counseling/searchList/상담완료" >상담완료</button>
  		<button formaction="${path}/counseling/searchList/예약완료" >예약완료</button>

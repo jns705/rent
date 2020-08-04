@@ -39,7 +39,7 @@
 		</div>
 		<div class="input-field v1">
 			<p class="msg-info v1 bt">
-			"중고차장기 상담신청 시 등록하신 유선 또는 이메일로만 답변을 받으실 수 있으며, 홈페이지에서는 답변 확인 불가능합니다."
+			중고차장기 상담신청 시 등록하신 유선 또는 이메일로만 답변을 받으실 수 있으며, 홈페이지에서는 답변 확인 불가능합니다.
 			</p>
 			
 			<div class="input-row clearfix">
@@ -86,7 +86,8 @@
 					</span>
 				</div>
 				<div><p id="telput" style="color:red;"></p></div>
-				
+			</div>
+			<div class="input-row clearfix brt0 pat0">
 				<!-- DB에 안들어가는데 있어서 해봄 -->
 				<div class="fl">
 					<div class="counsel-email-input input-box">
@@ -168,7 +169,7 @@
 					<span class="checkbox v2">
 						<input type="checkbox" id="select-terms1" name="agreeYn1">
 						<label class="label" for="select-terms1">
-						<h4>"개인정보 수집 및 이용동의 "<span class="cl-point1">(필수)</span></h4>
+						<h4>개인정보 수집 및 이용동의<span class="cl-point1">(필수)</span></h4>
 						</label>
 					</span>
 				</div>
@@ -204,16 +205,16 @@
 				</div>
 				
 				<span class="msg-txt cl-point1 text-c" style="display: none;">
-				<span class="ico ico-noti"></span>"개인정보 수집 및 이용에 동의하셔야 상담신청이 가능합니다."
+				<span class="ico ico-noti"></span>개인정보 수집 및 이용에 동의하셔야 상담신청이 가능합니다.
 				</span>
-				<p class="msg-info v1">"고객님께서는 동의를 거부할 권리가 있으나, 미 동의 시 상담이 불가능합니다."</p>
+				<p class="msg-info v1">고객님께서는 동의를 거부할 권리가 있으나, 미 동의 시 상담이 불가능합니다.</p>
 			</div>
 			
 			<div class="terms-list">
 				<div class="terms-header">
 					<span class="checkbox v2">
 						<input type="checkbox" id="select-terms2" name="agreeYn2">
-						<label class="label" for="select-terms2"><h4>"개인정보 위탁안내 "<span class="cl-point1">(필수)</span></h4>
+						<label class="label" for="select-terms2"><h4>개인정보 위탁안내<span class="cl-point1">(필수)</span></h4>
 						</label>
 					</span>
 				</div>
@@ -236,29 +237,27 @@
 						<tbody>
 							<tr>
 								<td class="text-c">
-									"솔렌터카(주)와 자동차 대여 중개 계약을"<br>
-									"체결한 Sales Partner"<br>
-									<a href="#none" class="btn-modal btn btn-small btn-line4" onclick="getCompanyPopList('20200701', '2020070101', 'SP');">자세히보기</a>
+									솔렌터카(주)와 자동차 대여 중개 계약을<br>
+									체결한 Sales Partner<br>
 								</td>
 								
 								<td>
-									"- 자동차 대여 계약 체결의 중개/유지 및 관련 부수 업무 (자동차 대여계약서, 약관, 대여차량에 대한 설명 및 안내)"
+									- 자동차 대여 계약 체결의 중개/유지 및 관련 부수 업무 (자동차 대여계약서, 약관, 대여차량에 대한 설명 및 안내)
 									<br>
-									"- 신규 고객 발굴을 위한 각종 영업활동 등 자동차 대여 중개와 밀접한 관련이 있는 업무 일체"
+									- 신규 고객 발굴을 위한 각종 영업활동 등 자동차 대여 중개와 밀접한 관련이 있는 업무 일체
 								</td>
 							</tr>
 							
 							<tr>
 								<td class="text-c">솔렌터카서비스(주)</td>
 								<td>
-								"장기/중기/단기렌탈 계약 및 지점 운영업무 수행, 고객센터 운영, 당사 상품 및 서비스 안내 TM (단, TM은 사전동의를 얻은 경우에 한함)"
+								장기/중기/단기렌탈 계약 및 지점 운영업무 수행, 고객센터 운영, 당사 상품 및 서비스 안내 TM (단, TM은 사전동의를 얻은 경우에 한함)
 								</td>
 							</tr>
 							
 							<tr>
 								<td class="text-c">
-								"잡플러스, 라온HR, 파인스태프 등 10여 업체"<br>
-								<a href="#none" class="btn-modal btn btn-small btn-line4" onclick="getCompanyPopList('20200701', '2020070101', 'SC');">자세히보기</a>
+								잡플러스, 라온HR, 파인스태프 등 10여 업체<br>
 								</td>
 								<td>영업점/고객센터 업무처리 및 고객상담, 계약 등</td>
 							</tr>
@@ -318,8 +317,8 @@
 				</div>
 				
 				<span class="msg-txt cl-point1 text-c" style="display: none;">
-				<span class="ico ico-noti"></span>"개인정보 위탁안내에 동의하셔야 상담신청이 가능합니다."</span>
-				<p class="msg-info v1">"고객님께서는 동의를 거부할 권리가 있으나, 미 동의 시 상담이 불가능합니다."</p>
+				<span class="ico ico-noti"></span>개인정보 위탁안내에 동의하셔야 상담신청이 가능합니다.</span>
+				<p class="msg-info v1">고객님께서는 동의를 거부할 권리가 있으나, 미 동의 시 상담이 불가능합니다.</p>
 			</div>
 			
 			<div class="terms-list">
@@ -364,7 +363,7 @@
 						</tbody>
 					</table>
 				</div>
-				<p class="msg-info v1">"고객님께서는 동의를 거부할 권리가 있으나, 미 동의 시 상품/서비스 안내에 제한을 받을 수 있습니다."</p>
+				<p class="msg-info v1">고객님께서는 동의를 거부할 권리가 있으나, 미 동의 시 상품/서비스 안내에 제한을 받을 수 있습니다.</p>
 			</div>
 		</div>
 	</article>

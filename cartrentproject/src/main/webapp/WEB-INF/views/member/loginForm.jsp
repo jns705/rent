@@ -55,7 +55,7 @@
                         <span id="login_msg" class="msg-txt cl-point1 text-c"></span>
                     </div>
                 </div>
-                <div class="join-btn-box btn-box text-c">
+                <div class="join-btn-box btn-box text-c" >
                     <button class="btn btn-color2 btn-block btn-large" onClick="saveid(document.new_user_session);">로그인</button>
                 </div>
                 <div id="login-personal" class="tab-content" style="display: block;">

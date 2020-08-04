@@ -1,6 +1,7 @@
 package com.rent.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +27,7 @@ public interface CounselingMapper {
 	public List<CounselingVO> counselingList(PagingVO paging) throws Exception;
 	
 	//전체목록(조건검색)
-	public List<CounselingVO> searchList(String counseling_situation) throws Exception;
+	public List<CounselingVO> searchList(Map<String, Object> map) throws Exception;
 	
 	//상세목록
 	public CounselingVO counselingDetail(String counseling_id) throws Exception;
@@ -42,6 +43,9 @@ public interface CounselingMapper {
 	
 	//상담목록 총 갯수
 	public int counselingCount() throws Exception;
+	
+	//(조건검색)상담목록 총 갯수
+	public int searchListCount(String counseling_situation) throws Exception;
 	
 	//회원탈퇴시 해당아이디에 대한 구매한 정보들을 전부 삭제한다 
 	public int secessionDelete(String id) throws Exception;

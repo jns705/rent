@@ -167,8 +167,30 @@ public class CounselingController {
 	
 	//전체목록(조건검색)
 	@RequestMapping("/searchList/{counseling_situation}")
-	public String searchList(@PathVariable String counseling_situation, Model model) throws Exception {
-		model.addAttribute("counselingList", couService.searchList(counseling_situation));
+	public String searchList(@PathVariable String counseling_situation, Model model, PagingVO paging
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
+		
+		int total = couService.searchListCount(counseling_situation);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		paging.calcStartEnd(Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("counseling_situation", counseling_situation);
+		map.put("start", paging.getStart());
+		map.put("end", paging.getEnd());
+		
+		model.addAttribute("paging", paging);
+		model.addAttribute("counselingList", couService.searchList(map));
 		return "/counseling/counselingList";
 	}
 	
