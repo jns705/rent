@@ -12,51 +12,7 @@
 <meta charset="UTF-8">
 <title>상세정보</title>
 <head>
-</head>
-
-
-<body id="" class="longterm-section type-reverse">
-	<div id="content">
-		<div id="container">
-			<div class="breadcrumbs">
-				<h2 class="tit">솔렌트카 상세정보</h2>
-
-				<div class="clearfix">
-					<span>홈</span> <span>중고렌터카</span> <span class="cl-point2">솔렌터카
-						상세정보</span>
-				</div>
-
-			</div>
-
-			<div class="header-group mab0 form-group"
-				style="padding-bottom: 20px;">
-				<h3 class="col-sm-5">다이렉트 견적조회</h3>
-				<div class="col-sm-offset-10">
-					<a href="#" class="btn btn-line4 btn-fix1 listBtn"
-						onclick="location.href='${path}/rent/rentList'">목록</a>
-				</div>
-			</div>
-			<div class="car-list v1 car-list--inquiry"
-				style="height: 391px; padding: 68px 58px; border: 1px solid #ddd; border-top: none;">
-				<div class="car-list__item-jg">
-					<div class="car-list__thumbnail-jg">
-						<div class="car-list__thumbnail-image-jg user_car">
-
-							<ul class="underimg col-sm-4">
-
-								<div id="slide" style="width: 350px; height: 250px">
-									<a href="#"><ul>
-											<li
-												style="background-repeat:no-repeat;  background-size: 350px 250px; cover; background-image: url('${rentImage[0].rent_url}');">
-											<li>
-										</ul></a>
-									<p class="pos">
-										<span class="font"><span class="checkgl"></span>현재
-											${rent.standby_personnel}명의 고객님이 상담 진행 중입니다.</span>
-									</p>
-								</div>
-
-								<style>
+<style>
 * {
 	margin: 0;
 	padding: 0;
@@ -220,8 +176,148 @@ ul, li {
 	.table>tfoot>tr>th, .table>tfoot>tr>td {
 	vertical-align: middle;
 }
-</style>
+img {
+	margin-right: 30px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
 
+.table th {
+	text-align: center !important;
+	height: 44px !important;
+	width: 200px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.table td {
+	width: 200px;
+	height: 44px;
+	padding: 0px;
+	margin: 0px;
+}
+.age-prefer__graph-num {
+	top: -20px;
+}
+
+.checkgl {
+	style ="content: '';
+	display: inline-block;
+	position: absolute;
+	left: -15px;
+	top: 1px;
+	width: 15px;
+	height: 15px;
+	background-image:
+		url(http://localhost:8082/static/img/pc_check_white.png);
+	background-size: 11px;
+	background-repeat: no-repeat;
+	"
+}
+
+.next-img-btn {
+	right: -40px !important;
+	height: 21px !important;
+	background-image: url(http://localhost:8082/static/img/spr-common.png);
+	background-repeat: no-repeat;
+	background-position: -1333px -590px;
+	-webkit-background-size: 1347px 1290px;
+	background-size: 1347px 1290px;
+	text-indent: 1000%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.imgbtn-box>div {
+	position: absolute !important;
+	width: 20px !important;
+	cursor: pointer !important;
+}
+
+-->
+.gly {
+	position: absolute;
+	width: 41px;
+	right: -40px !important;
+	background-image: url(http://localhost:8082/static/img/spr-common.png);
+	background-repeat: no-repeat;
+	background-position: -1333px -590px;
+	-webkit-background-size: 1347px 1290px;
+	background-size: 1347px 1290px;
+	text-indent: 1000%;
+	white-space: nowrap;
+	margin-top: 300;
+	margin-right: 40;
+}
+
+.glya {
+	position: absolute;
+	width: 41px;
+	left: -40px;
+	background-image: url(http://localhost:8082/static/img/spr-common.png);
+	background-repeat: no-repeat;
+	background-position: -1334px -802px;
+	-webkit-background-size: 1347px 1290px;
+	background-size: 1347px 1290px;
+	text-indent: 1000%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-indent: 1000%;
+	white-space: nowrap;
+	margin-top: 300;
+	margin-left: 70;
+}
+
+.modal-pop {
+	position: fixed;
+	box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px, rgba(0, 0, 0, 0.5) 2px 2px
+		3px 3px;
+	z-index: 10000;
+}
+</style>
+</head>
+
+
+<body id="" class="longterm-section type-reverse">
+	<div id="content">
+		<div id="container">
+			<div class="breadcrumbs">
+				<h2 class="tit">솔렌트카 상세정보</h2>
+
+				<div class="clearfix">
+					<span>홈</span> <span>중고렌터카</span> <span class="cl-point2">솔렌터카
+						상세정보</span>
+				</div>
+
+			</div>
+
+			<div class="header-group mab0 form-group"
+				style="padding-bottom: 20px;">
+				<h3 class="col-sm-5">다이렉트 견적조회</h3>
+				<div class="col-sm-offset-10">
+					<a href="#" class="btn btn-line4 btn-fix1 listBtn"
+						onclick="location.href='${path}/rent/rentList'">목록</a>
+				</div>
+			</div>
+			<div class="car-list v1 car-list--inquiry"
+				style="height: 391px; padding: 68px 58px; border: 1px solid #ddd; border-top: none;">
+				<div class="car-list__item-jg">
+					<div class="car-list__thumbnail-jg">
+						<div class="car-list__thumbnail-image-jg user_car">
+
+							<ul class="underimg col-sm-4">
+
+								<div id="slide" style="width: 350px; height: 250px">
+									<a href="#"><ul>
+											<li
+												style="background-repeat:no-repeat;  background-size: 350px 250px; cover; background-image: url('${rentImage[0].rent_url}');">
+											<li>
+										</ul></a>
+									<p class="pos">
+										<span class="font"><span class="checkgl"></span>현재
+											${rent.standby_personnel}명의 고객님이 상담 진행 중입니다.</span>
+									</p>
+								</div>
 
 							</ul>
 
@@ -539,31 +635,7 @@ ul, li {
 					</table>
 
 				</article>
-
-
-
-				<style>
-img {
-	margin-right: 30px;
-	margin-top: 15px;
-	margin-bottom: 15px;
-}
-
-.table th {
-	text-align: center !important;
-	height: 44px !important;
-	width: 200px;
-	padding: 0px;
-	margin: 0px;
-}
-
-.table td {
-	width: 200px;
-	height: 44px;
-	padding: 0px;
-	margin: 0px;
-}
-</style>
+				
 				<article style="margin-top: 50px;">
 					<div class="header-group estimate-type mab0">
 						<h4>옵션 정보</h4>
@@ -730,86 +802,6 @@ img {
 													</div>
 												</div>
 
-												<style>
-.age-prefer__graph-num {
-	top: -20px;
-}
-
-.checkgl {
-	style ="content: '';
-	display: inline-block;
-	position: absolute;
-	left: -15px;
-	top: 1px;
-	width: 15px;
-	height: 15px;
-	background-image:
-		url(http://localhost:8082/static/img/pc_check_white.png);
-	background-size: 11px;
-	background-repeat: no-repeat;
-	"
-}
-
-.next-img-btn {
-	right: -40px !important;
-	height: 21px !important;
-	background-image: url(http://localhost:8082/static/img/spr-common.png);
-	background-repeat: no-repeat;
-	background-position: -1333px -590px;
-	-webkit-background-size: 1347px 1290px;
-	background-size: 1347px 1290px;
-	text-indent: 1000%;
-	white-space: nowrap;
-	overflow: hidden;
-}
-
-.imgbtn-box>div {
-	position: absolute !important;
-	width: 20px !important;
-	cursor: pointer !important;
-}
-
--->
-.gly {
-	position: absolute;
-	width: 41px;
-	right: -40px !important;
-	background-image: url(http://localhost:8082/static/img/spr-common.png);
-	background-repeat: no-repeat;
-	background-position: -1333px -590px;
-	-webkit-background-size: 1347px 1290px;
-	background-size: 1347px 1290px;
-	text-indent: 1000%;
-	white-space: nowrap;
-	margin-top: 300;
-	margin-right: 40;
-}
-
-.glya {
-	position: absolute;
-	width: 41px;
-	left: -40px;
-	background-image: url(http://localhost:8082/static/img/spr-common.png);
-	background-repeat: no-repeat;
-	background-position: -1334px -802px;
-	-webkit-background-size: 1347px 1290px;
-	background-size: 1347px 1290px;
-	text-indent: 1000%;
-	white-space: nowrap;
-	overflow: hidden;
-	text-indent: 1000%;
-	white-space: nowrap;
-	margin-top: 300;
-	margin-left: 70;
-}
-
-.modal-pop {
-	position: fixed;
-	box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px, rgba(0, 0, 0, 0.5) 2px 2px
-		3px 3px;
-	z-index: 10000;
-}
-</style>
 												<div id="imagepop"
 													class="modal-pop modal-large big-img-show"
 													style="display: none; z-index: 1000000">
@@ -877,59 +869,6 @@ img {
 								</div>
 							</fieldset>
 						</article>
-						<article>
-							<div class="ticker-info ticker-info--direct"
-								style="z-index: 10000;">
-								<div class="ticker-head">
-									<dl class="dl-horizontal">
-										<dt style="border: none; text-align: left;">월 렌탈료</dt>
-										<dd class="text-r">
-											<strong id="totalRental">${String.format('%,d',rent.price)}</strong>원
-										</dd>
-										<dt class="fs-default" style="border: none; text-align: left;">(총
-											차량 소비자가)</dt>
-										<dd class="fs-default text-r">
-											(<strong class="fs-default" id="totAmt">${String.format('%,d',car.car_price)}</strong>만원)
-										</dd>
-									</dl>
-									<div class="btn-box-all">
-										<div class="btn-box-gray btn2">
-											<button onclick="apply();">
-												<span>맞춤형 렌탈료</span> <br>
-												<font color="white">상담신청</font>
-											</button>
-										</div>
-										<div class="btn-box-red btn2">
-
-											<c:choose>
-												<c:when
-													test="${sessionScope.id !=null && sessionScope.id != ''}">
-													<button formaction="${path}/buy/insert/${rent.rent_id}"
-														onclick="apply();" id="btnDirectContract"></button>
-												</c:when>
-												<c:otherwise>
-													<button
-														formaction="${path}/rent/rentListDetail/${rent.rent_id}"
-														onclick="alert('로그인 후 사용가능')" id="btnDirectContract">
-													</button>
-												</c:otherwise>
-											</c:choose>
-
-
-											<span>무방문/무서류</span> <br>
-											<font color="white">다이렉트 계약</font>
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</article>
-
-<<<<<<< HEAD
-						</div>
-						</div>
-					</fieldset>
-				</article>
 <article>
 <div class="ticker-info ticker-info--direct">
 <div class="ticker-head">
@@ -965,56 +904,45 @@ img {
 </div></div></article>
 
 </div></form></div></div></div>
-=======
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
->>>>>>> branch 'master' of https://github.com/jns705/rent.git
 </body>
 	</html>
 	</body>
-	<script>
-		var cost = $
-		{
-			rent.price
-		};
-		var temporaryPrice = 0;
-		function monthShow(e) {
-			$('#monthShow').html(e + "개월");
-			document.getElementById('term').value = e;
-
-			if (e == 1) {
-				$('#totalRental').html(numberWithCommas(cost));
-				$('#span_deposit').html(numberWithCommas(cost * 5));
-				temporaryPrice = cost;
-			} else {
-				var sale = e * 5000;
-				temporaryPrice = cost - sale;
-				$('#totalRental').html(numberWithCommas(temporaryPrice));
-				$('#span_deposit').html(numberWithCommas(temporaryPrice * 5));
-			}
-		}
-		function driving(e) {
-			$('#driving').html(e + "만km 이하/년");
-			document.getElementById('km').value = e;
-			var drPrice = e * 22000;
-			//document.getElementById('totalRental').text();
-			if (e == 1)
-				drPrice = 0;
-			if (temporaryPrice == 0) {
-				var drive = cost + drPrice;
-				$('#totalRental').html(numberWithCommas(drive));
-				$('#span_deposit').html(numberWithCommas(drive * 5));
-			} else if (temporaryPrice != 0) {
-				var a = temporaryPrice + drPrice;
-				$('#totalRental').html(numberWithCommas(a));
-				$('#span_deposit').html(numberWithCommas(a * 5));
-			}
-
-		}
-	</script>
+<script>
+var cost = ${rent.price};
+var temporaryPrice=0;
+function monthShow(e) {
+	$('#monthShow').html(e+"개월");
+	document.getElementById('term').value = e;
+	
+	if(e==1) {
+		$('#totalRental').html(numberWithCommas(cost));
+		$('#span_deposit').html(numberWithCommas(cost*5));
+		temporaryPrice = cost;
+	}else{
+		var sale = e*5000;
+		temporaryPrice=cost-sale;
+		$('#totalRental').html(numberWithCommas(temporaryPrice));
+		$('#span_deposit').html(numberWithCommas(temporaryPrice*5));
+	}
+}
+function driving(e) {
+	$('#driving').html(e+"만km 이하/년");
+	document.getElementById('km').value = e;
+	var drPrice = e*22000;
+	//document.getElementById('totalRental').text();
+	if(e == 1) drPrice =0;
+	if(temporaryPrice == 0) {
+		var drive = cost + drPrice;
+		$('#totalRental').html(numberWithCommas(drive));
+		$('#span_deposit').html(numberWithCommas(drive*5));
+	}else if(temporaryPrice != 0) {
+		var a = temporaryPrice + drPrice;
+		$('#totalRental').html(numberWithCommas(a));
+		$('#span_deposit').html(numberWithCommas(a*5));
+	}
+	
+}
+</script>
 	<script>
 		function btnSlide(id) {
 			//if		($('#'+id).is(":visible")) $('#'+id).slideUp(); 슬라이드 효과

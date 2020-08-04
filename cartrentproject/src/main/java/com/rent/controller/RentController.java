@@ -204,9 +204,11 @@ public class RentController {
 			String id = buyIdList.get(i).getId();
 			//성별
 			String gender = buyService.memberInformation(id).getGender();
-			//나이   mysql에서 소수점 제거해도 소수점 나옴 ;;
+			
+			
+			//나이   mysql에서 소수점 제거해도 소수점 나옴 그래서 substring 써야함
 			int age = Integer.parseInt(buyService.memberInformation(id).getDate_of_birth().substring(0, 2));
-
+			
 			System.out.println("======================================");
 			//id에 해당하는 성별을 추출해서 preferenceVO에 해당 정보에 1씩 더한다 (성별)
 			if(gender.equals("남자")) {

@@ -358,7 +358,18 @@ function checkTotal(data, name, startNum, endNum){
 	function addressCheck(){checkTotal('address','',5,10); return true;}
 	
 	function birthCheck(){
-			if(!$('[name=date_of_birth]').val()){
+		//현재날짜
+		var today = new Date();
+		//현재날짜의 연도를 가져온다
+		var nowYear = today.getFullYear();
+		//회원가입하는 회원의 생일에서 연도를 가져온다
+		var yearOfBirth = $('[name=date_of_birth]').val().substring(0,4);
+		//만 나이 계산
+		var age = nowYear - yearOfBirth;
+			if(age < 20){
+				printMsg('date_of_birth','date_of_birth','20세 이하는 가입할 수 없습니다. 당신의 나이 : '+age);
+				return true;
+			}else if(!$('[name=date_of_birth]').val()){
 				printMsg('date_of_birth','date_of_birth','생년월일을 입력해주세요'); 
 				return true;
 			}else{
@@ -398,10 +409,6 @@ function checkTotal(data, name, startNum, endNum){
 			insertForm.submit();
 	}
 
-
-	function idCheck(){
-
-	}
 </script>
 </html>
 </layoutTag:layout>
