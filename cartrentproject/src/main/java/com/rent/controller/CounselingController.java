@@ -30,14 +30,17 @@ import com.rent.domain.CounselingVO;
 import com.rent.domain.MemberVO;
 import com.rent.domain.OptionCarVO;
 import com.rent.domain.PagingVO;
+import com.rent.domain.PreferenceVO;
 import com.rent.domain.RentListVO;
 import com.rent.domain.RentVO;
 import com.rent.domain.ShortRentVO;
+import com.rent.service.BuyService;
 import com.rent.service.CarColorService;
 import com.rent.service.CarOptionService;
 import com.rent.service.CarService;
 import com.rent.service.CounselingService;
 import com.rent.service.MemberService;
+import com.rent.service.RentImageService;
 import com.rent.service.RentService;
 import com.rent.service.ShortRentService;
 
@@ -47,6 +50,10 @@ public class CounselingController {
 	
 	@Resource(name="com.rent.service.MemberService")
 	MemberService mMemberService;	
+	
+
+	@Resource(name="com.rent.service.RentImageService")
+	RentImageService rentImageService;
 	
 	@Resource(name = "com.rent.service.CarColorService")
 	CarColorService colorService;
@@ -65,6 +72,8 @@ public class CounselingController {
 
 	@Resource(name="com.rent.service.ShortRentService")
 	ShortRentService shortService;
+	@Resource(name="com.rent.service.BuyService")
+	BuyService buyService;
 	
 	@RequestMapping("/insert/{rent_id}")
 	public String counselingSend(Model model, HttpServletRequest request, @PathVariable String rent_id) throws Exception{
@@ -309,7 +318,6 @@ public class CounselingController {
 		buy.setOption_name("null");
 		buy.setMonth("null");
 		buy.setAddress(request.getParameter("zipCode")+"/"+request.getParameter("address")+"/"+request.getParameter("addressDetail"));
-		System.out.println(buy);
 		
 		return "/counseling/short_rent";
 	}
@@ -389,7 +397,6 @@ try {
 	
 	@RequestMapping("/newRent")
 	public String newRent(CounselingVO list, HttpSession session) throws Exception{
-		System.out.println("Aa");
 		list.setId((String)session.getAttribute("id"));
 		if(session.getAttribute("id")==null || session.getAttribute("id").equals("")) list.setId("비회원");
 		list.setOption_name("파퓰러 패키지,빌트인 캠 패키지");
@@ -413,7 +420,19 @@ try {
 			model.addAttribute("tel", tel);
 		else
 			model.addAttribute("tel", list.get(0).getTel());
-			
+		List<String> map = new ArrayList<String>();
+		//렌트가 신찬지 아닌지 조회
+		for(int i = 0; i < list.size(); i++) {
+			CounselingVO List = list.get(i);
+			if(List.getRent_id() != null) {
+			if(rentService.rentDetail(List.getRent_id()).getSpecial_note() != null)
+				map.add(rentService.rentDetail(List.getRent_id()).getSpecial_note());
+			if(rentService.rentDetail(List.getRent_id()).getSpecial_note() == null)
+				map.add("null");
+			}
+				
+		}
+		model.addAttribute("map", map);
 		model.addAttribute("couList", list);		
 		model.addAttribute("carName", carName);		
 		return "/counseling/userList";
@@ -450,5 +469,111 @@ try {
 		couService.counselingInsert(counseling);
 		return "/main";
 	}
+	
+	@RequestMapping("/userListDetail/{rent_id}")
+	public String userListDetail(@PathVariable String rent_id, Model model ,@RequestParam String cou_id)throws Exception{
+		RentVO rent = new RentVO();
+		rent = rentService.rentDetail(rent_id);
+		
+		String onOff[] = new String [8]; 
+		for(int i = 0; i < 8; i++) {
+			onOff[i] = "off";
+		}
+		List<OptionCarVO> list = optService.optionDetail(rent_id);
+		System.out.println(list);
+		for(int i = 0; list.size() > i ; i++) {
+			OptionCarVO List = list.get(i);
+			
+			if(List.getOption_name().equals("가죽시트")) 	onOff[0] = "on";
+			if(List.getOption_name().equals("네비게이션")) 	onOff[1] = "on";
+			if(List.getOption_name().equals("ECM룸미러")) 	onOff[2] = "on";
+			if(List.getOption_name().equals("스마트키")) 	onOff[3] = "on";
+			if(List.getOption_name().equals("썬루프")) 		onOff[4] = "on";
+			if(List.getOption_name().equals("통풍시트")) 	onOff[5] = "on";
+			if(List.getOption_name().equals("후방카메라")) 	onOff[6] = "on";
+		}
+		model.addAttribute("rent"   	, rent);
+		model.addAttribute("car"    	, carService.carDetail(Integer.toString(rent.getCar_id())));
+		model.addAttribute("rentImage" 	, rentImageService.imageList(Integer.parseInt(rent_id)));
+		model.addAttribute("oList"  	, list);
+		model.addAttribute("count"  	, onOff);
+		model.addAttribute("month"  	, couService.counselingDetail(cou_id).getMonth());
+		PreferenceVO preference = new PreferenceVO();
+		List<BuyVO> buyIdList = new ArrayList<BuyVO>();
+		buyIdList = buyService.buyListMember(rent_id); //id가져옴
+		for(int i=0; i < buyIdList.size(); i++) {
+			String id = buyIdList.get(i).getId();
+			//성별
+			String gender = buyService.memberInformation(id).getGender();
+			//나이   mysql에서 소수점 제거해도 소수점 나옴 ;;
+			int age = Integer.parseInt(buyService.memberInformation(id).getDate_of_birth().substring(0, 2));
+
+			System.out.println("======================================");
+			//id에 해당하는 성별을 추출해서 preferenceVO에 해당 정보에 1씩 더한다 (성별)
+			if(gender.equals("남자")) {
+				preference.setMan(preference.getMan()+1);
+				System.out.println("pre Man : "+preference.getMan());;
+			}else {
+				preference.setWomen(preference.getWomen()+1);
+				System.out.println("pre Women : "+preference.getWomen());
+			}
+			//id에 해당하는 정보를 추출해서 preferenceVO에 해당 정보에 1씩 더한다 (나이)
+			if(age >=60) {
+				preference.setSixties(preference.getSixties()+1);
+				System.out.println("60대 "+age);
+			}else if(age >=50) {
+				preference.setFifteen(preference.getFifteen()+1);
+				System.out.println("50대 "+age);
+			}else if(age >=40) {
+				preference.setForties(preference.getForties()+1);
+				System.out.println("40대 "+age);
+			}else if(age >=30) {
+				preference.setThirties(preference.getThirties()+1);
+				System.out.println("30대 "+age);
+			}else if(age >=20) {
+				preference.setTwenties(preference.getTwenties()+1);
+				System.out.println("20대 "+age);
+			}else{
+				System.out.println("나가");
+			}
+			//정보를 추출했으니 총인원수에 +1한다.
+			preference.setTotal(preference.getTotal()+1);
+			
+			System.out.println("아이디 : "+id);
+			System.out.println("나이 : "+ age);
+			System.out.println("성별 : "+ gender);
+			System.out.println();
+			
+		}
+		System.out.println("남자 : "+preference.getMan());
+		System.out.println("여자 : "+preference.getWomen());
+		System.out.println("총인원수 : "+preference.getTotal());
+		System.out.println("20대수 : "+preference.getTwenties());
+		System.out.println("30대수 : "+preference.getThirties());
+		System.out.println("40대수 : "+preference.getForties());
+		System.out.println("50대수 : "+preference.getFifteen());
+		System.out.println("60대수 : "+preference.getSixties());
+		System.out.println("buyIdList.size() : "+ buyIdList.size());
+		int percent;
+		//차를 구매했던 사람이 없으면 0값을 넣어 0을 나누지 못하게한다.
+		if(buyIdList.size() == 0) {
+			percent = 0;
+		}else {
+			percent = 100 / preference.getTotal();
+		}
+		
+		preference.setMan(percent * preference.getMan());
+		preference.setWomen(percent * preference.getWomen());
+		preference.setTwenties(percent * preference.getTwenties());
+		preference.setThirties(percent * preference.getThirties());
+		preference.setForties(percent * preference.getForties());
+		preference.setFifteen(percent * preference.getFifteen());
+		preference.setSixties(percent * preference.getSixties());
+		
+		model.addAttribute("preference", preference);
+		
+		return "/counseling/userListDetail";
+	}
+	
 	
 }

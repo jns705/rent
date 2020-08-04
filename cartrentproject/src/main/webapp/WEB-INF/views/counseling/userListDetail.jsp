@@ -630,7 +630,7 @@ img {
 												<!-- estimate-list__label//end -->
 												<div class="estimate-list__item">
 													<div class="estimate-item__caption clearfix">
-														<p class="estimate-item__caption-text fl" id="monthShow">1개월</p>
+														<p class="estimate-item__caption-text fl" id="monthShow">${month}개월</p>
 													</div>
 													<!-- estimate-item__caption//end -->
 
@@ -656,9 +656,10 @@ img {
 												<div class="col-lg-2">
 													<select id="month" name="cntrTermMm" class="form-control"
 														onchange="monthShow(this.value);">
+														<c:set value="${month}" var="month1" />
 														<c:set value="${rent.max_month}" var="month" />
 														<c:forEach var="i" begin="1" end="${rent.max_month}">
-															<option value="${i}">${i}</option>
+															<option <c:if test="${i eq month1}">selected</c:if>>${i}</option>
 														</c:forEach>
 													</select>
 												</div>

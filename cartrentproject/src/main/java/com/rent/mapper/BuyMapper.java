@@ -29,6 +29,9 @@ public interface BuyMapper {
 	//id에 따른 구매목록(단기전용)
 	public List<BuyVO> buyListSId(String id) throws Exception;
 	
+	//id에 따른 구매목록(장기전용)
+	public List<BuyVO> buyListId(String id) throws Exception;
+	
 	//rent_id를 구매한 사람들의 id를 가져온다
 	public List<BuyVO> buyListMember(String rent_id) throws Exception;
 	

@@ -21,6 +21,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		AND		MONTH = 0
 	</select>
 	
+	<!-- id에 따른 장기 구매목록 -->
+	<select id="buyListId" parameterType="String" resultType="com.rent.domain.BuyVO">
+		SELECT	*
+		FROM	BUY
+		WHERE	ID = #{id}
+		AND		MONTH != 0
+	</select>
+	
 	<!-- 렌트 구매자 목록 -->
 	<!-- 
 	<select id="buyList" parameterType="com.rent.domain.BuyVO" resultType="com.rent.domain.BuyVO">

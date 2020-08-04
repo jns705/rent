@@ -133,13 +133,15 @@ function searchForm(click){
 							'<li>'+ value.location +'</li>'+
 					'</ul>'+
 				'</div>'+
-			'</div>'+
-				'<div class="howmany_box" style="font-size: 12px; background-color: f5f5f5;'+ 
+			'</div>';
+			if(value.standby_personnel > 0){
+				str += '<div class="howmany_box" style="background-color: f5f5f5;'+ 
 				'z-index: -5">'+
-					'<span class="howmany_box_span">&nbsp;&nbsp;&nbsp;&nbsp;현재 <span class="cl-point2 fontbold">'+ 
+					'<span class="howmany_box_span" style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;현재 <span class="cl-point2 fontbold">'+ 
 					+ value.standby_personnel +'</span>명의 고객님이 상담 중입니다.</span>'+
-				'</div>'+
-		'</div></a>';
+				'</div>';
+			}
+		str += '</div></a>';
 				
 			});
 				if(data.count > 1 ){

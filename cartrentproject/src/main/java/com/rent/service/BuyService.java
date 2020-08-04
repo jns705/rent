@@ -26,6 +26,10 @@ public class BuyService {
 	public List<BuyVO> buyListSId(String id) throws Exception{
 		return mapper.buyListSId(id);
 }
+	//고객 아이디로 구매리스트 조회(장기전용)
+	public List<BuyVO> buyListId(String id) throws Exception{
+		return mapper.buyListId(id);
+	}
 	
 	//구매목록
 	public List<BuyVO> buyList(PagingVO paging) throws Exception { 

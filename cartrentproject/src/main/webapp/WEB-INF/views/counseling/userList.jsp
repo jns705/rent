@@ -13,7 +13,7 @@
 <c:if test="${sessionScope.id == null}"><c:set var="id" value="${couList[0].name}"/></c:if>
 <c:if test="${sessionScope.id != null}"><c:set var="id" value="${sessionScope.id}"/></c:if>
 <div id="content">
-    <div id="container">
+    <div id="container"  style="margin-top:40px;">
 <div class="breadcrumbs">
             <h2 class="tit">고객 구매 리스트</h2>
             <div class="clearfix">
@@ -57,12 +57,13 @@
                     <th scope="col">고객 성함</th>
                     <th scope="col">신청 날짜</th>
                     <th scope="col">신청 개월</th>
-                    <th scope="col">현재 상태</th>
+                    <th scope="col">현재 상태 </th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${couList}" var="list" varStatus="status">
-                <tr>
+                <tr <c:if test="${map[status.index] != '신차'}"> onclick="location.href='/counseling/userListDetail/${list.rent_id}?cou_id=${list.counseling_id}'"</c:if>
+                	<c:if test="${map[status.index] eq '신차'}"> onclick="location.href='/rent/NewRentListDetail/${list.rent_id}?cou_id=${list.counseling_id}'"</c:if>>
                     <td>${carName[status.index]}</td>
                     <td>${list.name}</td>
                     <td>${list.counseling_date}</td>
