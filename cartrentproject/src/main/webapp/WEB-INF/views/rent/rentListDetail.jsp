@@ -546,9 +546,9 @@ img {
 							<ul class="review_step1_ul">
 								<li><textarea id="regTextArea" name="content" style="height: 180px; width: 850px; margin-left: 60px;"
 										placeholder="상품에 대한 문의는 100자이내로 작성해 주세요."></textarea></li>
-								<li style="float: left;"><button type="submit"
-										style="margin-top: 0px;  margin-left: 60px;">등록</button> &nbsp; 비밀글 &nbsp; <input
-									type="checkbox" id="check_yn"></li>
+								<li style="float: left;">
+								<button type="submit" style="margin-top: 0px;  margin-left: 60px; height:29px;">등록</button>
+								 &nbsp;<label for="check_yn">비밀글</label>&nbsp; <input type="checkbox" id="check_yn" style="width:25px;height:25px;background-image:url(http://localhost:8082/static/img/total.png);background-repeat:no-repeat;background-position:-1309px -914px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden"></li>
 								<li style="float: right; width: 75%;"><div
 										class="form-group pwd" id="pwd"></div></li>
 							</ul>
