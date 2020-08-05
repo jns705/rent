@@ -174,10 +174,12 @@ max-width:999999px!important;
  */
  #a {
   padding-top: 0px;
+  color:white;
+  font-size:20px;
 }
 #a #span {
   position: absolute;
-  bottom:50px;
+  bottom:100px;
   left: 50%;
   width: 24px;
   height: 24px;
@@ -392,7 +394,7 @@ $('.white_div').hover(function() {
             </div>
         </div>
     </div>
-                            	<a id="a" href="#"><span id="span" style=";"></span></a>
+                            	<a id="a" href="#" ><span id="span"></span>단기렌트</a>
         </div>
     </div>
 <script type="text/javascript">
@@ -701,8 +703,9 @@ $('.white_div').hover(function() {
 							</div>
 						</div>
 					</div>
-				</div><a id="a" href="#"><span id="span" style="border-color:black;"></span></a>
-</form>
+				</div>
+</form><br><br><br><br><br><br><br>
+				<a id="a" href="#"  style="color:black; font-weight:800;"><span id="span" style=""></span>장기렌트</a>
     </div>
     <div class="section" id="section-3"  style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동차1.jpg'); background-repeat: no-repeat; background-size: cover; padding: 0px !important; margin: 0px  !important;">
         <div class="spot long">
@@ -822,11 +825,13 @@ $('.white_div').hover(function() {
 					</div>
 					<!-- [S] 2018-01-25 변경 -->
 				</div>
-					</form><a id="a" href="#"><span id="span" style=";"></span></a>
+					</form><br><br><br><br><br><br><br><br><br><br><br><br><br><br><a id="a" href="#"><span id="span" style=""></span>회사소개</a>
         </div>
+        
     <div class="section" id="section-4">
     </div>
     </div>
+    
 </div>
 
 <ul id="menu">
