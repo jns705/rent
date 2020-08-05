@@ -6,7 +6,7 @@
 
 	    <!-- header 시작 -->
  <c:if test="${URL.substring(36) != 'main.jsp'}">
- <header id="menuHeader11" class="hc <c:if test="${fn : contains(URL, 'service')}">extend</c:if> "  style="border-bottom: 0.1px solid rgb(255, 255, 255, .5) !important; ">
+ <header id="menuHeader11" class="hc <c:if test="${fn : contains(URL, 'service') || fn : contains(URL, 'qna')}">extend</c:if> "  style="border-bottom: 0.1px solid rgb(255, 255, 255, .5); ">
 	<div class="header-wrapper">
 		<h1 id="menuHeaderLogoH1" >
 			<a href="/main">SK렌터카 </a>
@@ -29,7 +29,7 @@
 			<c:if test="${sessionScope.id eq 'master'}">
                     <li class="nav-menu nav-estimate primary dropdown" id="estimate-span">
                     <a href="${path}/admin"class="dropdown-toggle awaw" data-toggle="dropdown" role="button" aria-expanded="false">
-                    </span>&nbsp;관리자 메뉴&nbsp;<span class="caret"></span></a>
+                    &nbsp;관리자 메뉴&nbsp;<span class="caret"></span></a>
 				 	<ul class="dropdown-menu" role="menu">
 				 		<li><a href="${path}/admin/carInsert">차량등록</a></li>
 				 		<li><a href="${path}/admin/rentInsertForm">렌트등록</a></li>
@@ -61,7 +61,7 @@
 				
 				
 				
-<c:if test="${fn : contains(URL, 'service')}">
+<c:if test="${fn : contains(URL, 'service') || fn : contains(URL, 'qna')}">
 	<div class="gnb-localnav">
 		<div class="gnb-wrapper">
 			<div class="gnb-curent customer">
@@ -109,7 +109,7 @@
 						
 		</nav>
 		<div id="pho">
-		<c:if test="${fn : contains(URL, 'main.do')}"><c:set var="hidden" value="hidden"/></c:if>
+		<c:if test="${fn : contains(URL, 'main')}"><c:set var="hidden" value="hidden"/></c:if>
 		<div class="serviceHide header-placeholder ${hidden} plh"><div class="header-placeholder-bg plh ${hidden}"></div></div>
 		
 		</div>

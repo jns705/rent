@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <meta charset="UTF-8">
@@ -18,7 +18,7 @@
 <fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' var="nowDate"/>
 <body style="max-width: 9999px;">
 <form action="/counseling/mainProc" method="get" name="proc">
-				<div class="spot short type2 main" style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동촤2.jpg'); background-repeat: no-repeat;">
+				<div class="spot short type2 main" style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동차1.jpg'); background-repeat: no-repeat;">
 <script type="text/javascript">
 //윈도우 크기 바뀔 때 마다
 $(document).ready(function(){
@@ -31,36 +31,42 @@ function resizeContents() {
     $('.main').css("background-size", $(window).width()+50+"px "+ $(window).height() + "px");
 }
 </script>
+<div class="spot long">
 					<div class="spot-wrapper">
 						<div class="heading">
-							<h2 class="tit">즐거운 여행의 시작</h2>
-							<p class="descp">안전하고 즐거운 여행은 솔렌터카에서 시작됩니다.</p>
+							<h2 class="tit">똑똑한 선택 SK 장기렌터카</h2>
+							<p class="descp">더 좋은 자동차를 갖는 최적의 장기렌터카 솔루션</p>
 						</div>
-						
-						<div class="fast-reserve">
-							<div class="fast-reserve-wrap">
-								<div class="fast-reserve-tab">
-									<div class="item">
-										<label class="label">
-											<input onclick="jeju();" type="radio" checked id="jejuQuickReserve" name="quickReserveType" title="제주" value="jeju"   class="sr-only">
-											<span class="text">제주</span>
-										</label>
-									</div>
-									<div class="item">
-										<label class="label">
-											<input onclick="jeju();" type="radio" id="inlandQuickReserve" name="quickReserveType" value="inland" class="sr-only">
-											<span class="text">내륙</span>
-										</label>
-									</div>
-									<div class="item">
-										<a href="/rent/rentList" class="anchor">중고차</a>
-									</div>
+					</div>
+					<!-- [S] 2018-01-25 변경 -->
+					<!-- 임시오픈을 위한 주석처리 -->
+					<form name="frm" id="frm" action="" method="post">
+					<div class="car-search" role="search">
+						<input type="hidden" name="tabId" id="tabId" value="NEWCAR">
+						<input type="hidden" name="prodId" id="prodId" value="000048">
+						<input type="hidden" name="carMakerId" id="carMakerId" value="">
+						<input type="hidden" name="carSgmntTypeCd" id="carSgmntTypeCd" value="">
+						<input type="hidden" name="cartypeId" id="cartypeId" value="">
+						<div class="car-search__wrapper clearfix" style="background:white; height:100px;">
+							<div class="option-radio">
+								<div class="item" onclick="location.href='/rent/NewRentList'">
+									<label>
+										<input type="radio" name="carSearchType" title="신차 렌터카 검색"  class="sr-only">
+										<em class="title" style="width:500px;">신차 렌터카 검색</em>
+									</label>
 								</div>
-								
-								<style>
-.inputDate{
+								<div class="item">
+									<label>
+										<input type="radio" name="carSearchType" title="중고차 렌터카 검색"  checked class="sr-only">
+										<em class="title" style="width:500px; margin-left:355;">중고차 렌터카 검색</em>
+									</label>
+								</div>
+							</div>
+							
+							<style>
+							.inputDate{
 	font-size:15px !important;
-	width: 100%;
+	width: 90% !important;
     height: 42px;
     padding: 10px 20px;
     border:none;
@@ -85,112 +91,64 @@ function resizeContents() {
     background-repeat: no-repeat;
     }
     
-    .select-box b{
-    background-image: url(http://localhost:8082/static/img/spr-common.png);
-    width: 13px;
-    height: 7px;
-    background-repeat: no-repeat;
-    margin-left:-130px;
-    margin-top:17px;
-    background-position: -1331px -1205px;
-    -webkit-background-size: 1347px 1290px;
-    background-size: 1347px 1290px;
-    text-indent: 1000%;
-    white-space: nowrap;
-    overflow: hidden;
-    position: absolute;
-    
+    .btnda{
+    height: 40px !important;
+    width: 130 !important;
+    margin-top: 15 !important;
+    line-height:2	 !important;
     }
 </style>
-
-								<div class="fast-reserve-content">
-									<div class="option">
-										<div class="option-row clearfix">
-											<span id="sDateSpan" class="fl" >
-												<input class="inputDate" readonly type="text" id="startDate" name="startDate" value="대여일 선택" onchange="changeDate(); changeHour(); todayCheck();">
-											</span>
-											<span class="select-box fl">
-												<select class="inputDate"   name="sHour" id="sHour" class="option01 option02 hour fast-reserve-select" onchange="changeDate(); changeHour();">
-												<c:forEach begin="06" end="22" varStatus="status">
-													<option value="${status.index}">${status.index} 시 </option>
-												</c:forEach>
-												</select>
-												<b role="presentation"></b>
-											</span>
-											<span class="select-box fl">
-												<select class="inputDate"   name="sMinute" id="sMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate();">
-													<option value="00">00 분 </option>
-													<option value="30">30 분 </option>
-												</select>
-												<b role="presentation"></b>
-											</span>
-											<span class="select-box fl" style="width:100px;">
-												<select class="inputDate"   name="sLocation" id="sLocation" class="option01 option02 timeChange fast-reserve-select">
-														<option>제주지점</option>
-												</select>
-												<b role="presentation"></b>
-											</span>
-										</div>
-										<div class="option-row clearfix">
-											<span id="lDateSpan" class="fl">
-												<input class="inputDate"   readonly type="text" id="endDate" name="endDate" value="반납일 선택" onchange="changeDate();  changeHour();">
-											</span>
-											<span  class="select-box fl">
-												<select class="inputDate"   name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate();">
-												<c:forEach begin="06" end="22" varStatus="status">
-													<option value="${status.index}">${status.index} 시</option>
-												</c:forEach>
-												</select>
-												<b role="presentation"></b>
-											</span>
-											<span class="select-box fl">
-												<select class="inputDate"   name="lMinute" id="lMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate();">
-													<option value="00">00 분</option>
-													<option value="30">30 분</option>
-												</select>
-												<b role="presentation"></b>
-											</span>
-											<span class="select-box fl" style="width:100px;">
-												<select class="inputDate"   name="lLocation" id="lLocation" class="option01 option02 timeChange fast-reserve-select">
-														<option>제주지점</option>
-												</select>
-												<b role="presentation"></b>
-											</span>
-											</div>
-										<div class="option-row clearfix">
-											<span class="select-box select-box-car fl">
-												<select class="inputDate"   id="carTab" name=carKind class="option01 option02 fast-reserve-car-select" onchange="submitable()">
-													<c:forEach items="${carKind}" var="carKind">
-														<option>${carKind}</option>
-													</c:forEach>
-												</select>
-												<b role="presentation" style="margin-left: -30px;"></b>
-											</span>
-										</div>
+							<div class="panel is-selected search_input" style="border:none;"> <!-- 중고차 -->
+								<div class="select-area fl" style=" padding-top: 20; padding-left: 30;">
+									<div class="select-col col-3">
+			                        <span class="select-box">
+										<select name="usedCarMakerId" id="usedCarMakerId" class="option01 option02 inputDate" tabindex="-1" aria-hidden="true">
+											<option value="">제조사 선택</option>
+											
+												<option value="HD">현대자동차</option>
+											
+												<option value="KI">기아자동차</option>
+											
+												<option value="DW">GM대우자동차</option>
+											
+												<option value="SM">르노/삼성자동차</option>
+											
+												<option value="BM">BMW</option>
+											
+												<option value="DT">도요타</option>
+											
+												<option value="BE">벤츠</option>
+											
+										</select>
+			                        </span>
 									</div>
-<style>
-	.time-area span{
-		font-size:28px;
-	}
-</style>
-									<div class="time-area">
-										<strong class="title">총 대여시간</strong>
-										<p class="time">
-											<span id="ddd">0</span>일
-											<span id="hhh">0</span>시간
-											<span id="mmm">0</span>분
-										</p>
+									<div class="select-col col-3">
+			                        <span class="select-box">
+										<select name="usedCarSgmntTypeCd" id="usedCarSgmntTypeCd" class="option01 inputDate" disabled="" tabindex="-1" aria-hidden="true">
+											<option value="">차량 유형 선택</option>
+												
+										</select>
+			                        </span>
 									</div>
-									<div class="btn-box">
-										<a id="btn_quick" href="#" onclick="proc.submit();" class="btn btn-color1 btn-large">빠른예약</a>
-									</div>
-									<div class="helper" style="margin-top:15px;">
-												<a href="/buy/memberCheckForm" >예약확인</a>
+									<div class="select-col col-3">
+					                    <span class="select-box">
+											<select name="usedCartypeId" id="usedCartypeId" class="option01 inputDate" disabled="" tabindex="-1" aria-hidden="true">
+												<option value="">차량 선택</option>
+												
+											</select>
+					                    </span>
 									</div>
 								</div>
-							</div>
+								<div class="btn-wrap fr">
+									<a href="#" class="btn btn-color2 btnda" onclick="goUsedSelectSubmit();">검색</a>
+								</div>
+							</div>	
+							<!-- //190621 -->						
 						</div>
 					</div>
+					</form>
+					<!-- [S] 2018-01-25 변경 -->
+				</div>
 				</div>
 </form>
 </body>
