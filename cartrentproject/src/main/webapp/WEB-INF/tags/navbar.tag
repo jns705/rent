@@ -152,6 +152,7 @@ $( '#aaaaaa' ).click( function() {
 
 
     
+<c:if test="${!fn : contains(URL, 'main')}">
  	<div class="quick-menu" style="z-index: 1000 !important;">
 	    <ul>
 	    	<li class="menu1">
@@ -168,7 +169,7 @@ $( '#aaaaaa' ).click( function() {
 	        </li>
 	    </ul>
 	</div>
-	
+</c:if>
 <c:if test="${!fn : contains(URL, 'main.do')}">
 <style>body {margin-top: 100!important;}</style>
 </c:if>
@@ -185,9 +186,7 @@ a:hover {text-decoration: none;}
 </c:if>
 <style>
 
-.content {
-	margin-top: 140px;
-}
+
 header h1 a {
     display: block;
     text-indent: -9999px;

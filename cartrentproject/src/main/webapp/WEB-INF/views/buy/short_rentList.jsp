@@ -22,7 +22,7 @@ th{text-align: center;}
 
 <form action="/buy/short_rentProc" name="insertForm" method="get">
 <div id="content">
-    <div id="container">
+    <div id="container"  style="margin-top:40px;">
         <div class="breadcrumbs">
             <h2 class="tit">단기렌터카 예약/확인<a href="#modal-login-global" class="btn-modal btn-tooltip" style="display:none;" id="reservLogin"></a></h2>
             <div class="clearfix">

@@ -298,7 +298,7 @@ public class BuyController {
 		List<BuyVO> buyList = new ArrayList<BuyVO>();
 		if(tel.equals("n")) {
 			String id = (String)session.getAttribute("id");
-			buyList = buyService.buyListSId(id);
+			buyList = buyService.buyListId(id);
 		}else  buyList = buyService.buyListTel(tel); 
 		List<CarVO> Car = new ArrayList<CarVO>();
 		List<String> situation = new ArrayList<String>();
@@ -313,6 +313,20 @@ public class BuyController {
 		else
 			model.addAttribute("tel", buyList.get(0).getTel());
 		
+
+		List<String> map = new ArrayList<String>();
+		for(int i = 0; i < buyList.size(); i++) {
+			BuyVO List = buyList.get(i);
+			if(List.getRent_id() != null) {
+			if(rentService.rentDetail(List.getRent_id()).getSpecial_note() != null)
+				map.add(rentService.rentDetail(List.getRent_id()).getSpecial_note());
+			if(rentService.rentDetail(List.getRent_id()).getSpecial_note() == null)
+				map.add("null");
+			}
+				
+		}
+		System.out.println(map);
+		model.addAttribute("map", map);
 		model.addAttribute("Buy", buyList);
 		model.addAttribute("Car", Car);
 		model.addAttribute("situation", situation);

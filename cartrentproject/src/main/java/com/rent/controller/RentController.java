@@ -141,8 +141,6 @@ public class RentController {
 		
 		//조회한 정보 갯수
 		int listCount = rentService.newRentListPro(list).get(0).getRent_id();
-		System.out.println(list);
-		System.out.println(listCount);
 		//보여질 아이템 갯수
 		int showCount = 6;
 		int temp  = listCount/showCount+1;

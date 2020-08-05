@@ -75,18 +75,18 @@
                     <div class="article-content">
                         <div class="rent-store-select">
                             <div class="col fl">
-                                <div class="date-time-area clearfix">
-										<span id="sDateSpan" class="fl" >
+                                <div class="date-time-area clearfix" style="width:300px;">
+										<span id="sDateSpan" class="fl"   style="width:130;">
                                             <input style="border-right: none;" class="inputDate" readonly type="text" id="startDate" name="start_date" value="<c:if test ="${sD == null}">대여일 선택</c:if><c:if test ="${sD != null}">${sD}</c:if>" onchange="changeDate(); changeHour(); selectCar(); todayCheck();"/>
                                         </span>
-                                  			<span class="select-box fl">
+                                  			<span class="select-box fl"  style="width:85;">
 												<select class="inputTime" name="sHour" id="sHour"  onchange="changeDate(); changeHour();  selectCar();">
 												<c:forEach begin="06" end="22" varStatus="status">
 													<option <c:if test="${sH == status.index}">selected</c:if> value="${String.format('%02d', status.index)}">${String.format('%02d', status.index)} 시</option>
 												</c:forEach>
 												</select>
 											</span>
-                                   			<span class="select-box fl">
+                                   			<span class="select-box fl"  style="width:85;">
 												<select  class="inputTime" name="sMinute" id="sMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
 													<option <c:if test="${sM == 00}">selected</c:if>  value="00">00 분</option>
 													<option <c:if test="${sM == 30}">selected</c:if>  value="30">30 분</option>
@@ -94,7 +94,7 @@
 											</span>
                                 </div>
                                 <div class="store-area clearfix">
-                                    <span class="select-box fl">
+                                    <span class="select-box fl" style="width:300px;">
 										<select class="inputTime"  name="start_location" id="location" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
 										<c:if test="${sL eq '제주지점'}"><option>제주지점</option></c:if>
 										<c:if test="${sL != '제주지점'}">
@@ -108,18 +108,18 @@
                                 </div>
                             </div>
                             <div class="col fl">
-                                <div class="date-time-area clearfix">
-										<span id="sDateSpan" class="fl" >
+                                <div class="date-time-area clearfix" style="width:300px;">
+										<span id="sDateSpan" class="fl"   style="width:130;">
                                             <input style="border-right: none;"  class="inputDate"  readonly type="text" name="end_date" id="endDate" value="<c:if test ="${eD == null}">반납일 선택</c:if><c:if test ="${eD != null}">${eD}</c:if>" onchange="changeDate(); changeHour(); selectCar();"/>
                                         </span>
-                           				   <span  class="select-box fl">
+                           				   <span  class="select-box fl" style="width:85;">
 												<select class="inputTime"  name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate(); selectCar();">
 												<c:forEach begin="06" end="22" varStatus="status">
 													<option <c:if test="${lH == status.index}">selected</c:if>   value="${String.format('%02d', status.index)}">${String.format('%02d', status.index)} 시</option>
 												</c:forEach>
 												</select>
 											</span>
-											<span class="select-box fl">
+											<span class="select-box fl"  style="width:85;">
 												<select class="inputTime"  name="lMinute" id="lMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
 													<option <c:if test="${lM == 00}">selected</c:if>   value="00">00 분</option>
 													<option <c:if test="${lM == 30}">selected</c:if>   value="30">30 분</option>
@@ -127,7 +127,7 @@
 											</span>
                                 </div>
                                 <div class="store-area clearfix">
-                                       <span class="select-box fl">
+                                       <span class="select-box fl" style="width:300px;">
 												<select class="inputTime"  name="end_location" id="end_location" class="option01 option02 timeChange fast-reserve-select" onchange="selectCar();">
 													<c:if test="${lL eq '제주지점'}"><option>제주지점</option></c:if>
 													<c:if test="${lL != '제주지점'}">
@@ -262,7 +262,7 @@
                                         <span class="input" style="width:280px;">
                                             <label><input oninput="carPrice(); addressCheck();"  type="text" placeholder="나머지 주소 입력"  name="addressDetail" id="addressDetail" maxlength="30" value="${address[2]}" onkeyup="checkingDtlAddr()" /></label>
                                         </span>
-                                        <a href="#none" class="btn btn-default btn-fix2 fr" onclick="daumZipCode();" id="addrSearchBtn">우편번호 검색</a>
+                                        <a href="#none" class="btn btn-color2 btn-fix1 " onclick="daumZipCode();" id="addrSearchBtn" style="margin:0px;width:97; background-color: #f68121;">우편번호</a>
                                     </span><br>
                                 </div>
                             <span class="msg-txt cl-point1" id="span-address" style="display: block;"></span>
@@ -285,7 +285,7 @@
 								<h4>개인정보 제공 활용 동의</h4>
 							</div>
 							<!-- header-group//end -->
-							<div class="terms-list v3">
+							<div class="terms-list v3" id="allcheck">
 								<div class="terms-header">
 									<h4>전체동의</h4>
 									<span class="checkbox v2">
@@ -812,7 +812,7 @@
 							<!-- terms-list//end -->
 						</div>
 						<!-- terms-listbox//end -->
-                        <p class="msg-info v1">고객님께서는 동의를 거부할 권리가 있으나, 미 동의시 렌터카 서비스 이용이 불가능합니다.</p>
+                        <p class="msg-info v1" id="sp">고객님께서는 동의를 거부할 권리가 있으나, 미 동의시 렌터카 서비스 이용이 불가능합니다.</p>
                     </div>
                     <!-- article-content//end -->
                 </article>
@@ -969,7 +969,7 @@
             <div class="step-btn-box btn-box text-c">
                 <a href="javascript:fn_cancel('/rent/rentcar/short_rent_reservation_new_jeju.do')" class="btn btn-line1 btn-large btn-fix2" >취소</a>
                 <!-- 활성화 전에는 btn-color4 , 활성화 후에는 btn-color1로 셋팅 부탁 드립니다 -->
-                <button type="submit" class="btn btn-color1 btn-large btn-fix2" onclick="nextPage();">다음</button>
+                <button type="button" class="btn btn-color1 btn-large btn-fix2" onclick="checkForm();">다음</button>
             </div>
           </div>
         </div>

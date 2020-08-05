@@ -2,11 +2,11 @@
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags" %>
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
 
 <head>
+<script src="//code.jquery.com/jquery.min.js"></script>
 	<style>
 		body {margin-top : 0px !important;}
 		
@@ -91,7 +91,7 @@
 .list_ul li:last-child{font-size:18px!important;line-height: 20px!important;color:#333;}
 
 /* 아이콘 */
-.imgsection img{position: absolute;right: 0;top: 35px;width: 65px;height: 65px;}
+.imgsection img{position: absolute;right: 0;width: 65px;height: 65px;}
              
 /* 화살표 아이콘 */
 .arrowicon{position: relative;}
@@ -108,10 +108,9 @@
 
 /* 200103 인트로 이벤트추가*/
 .rela{position: relative;}
-.event-mini-box{display:none;text-align: left;background-color: #f68121;width: 118px;height: 78px;position: absolute;bottom: 80px;cursor: pointer;z-index: 99;}
-.event-mini-box span{color: #fff;font-size: 14px;display: block;margin: 16px 0 0 14px;}
+.event-mini-box{display:none;text-align: left;background-color: #f68121;width: 118px;height: 78px;position: absolute;bottom: 80px;z-index: 99;}
 .event-long-box{right: 116px;}
-.used-event-long-box{left:380px;}
+.used-event-long-box{left:380px !important;}
 .new-jeju-box{right: 495px;}
 
 /* 200602 내륙단기 > AJ렌터카 로그인안내 팝업창 */
@@ -127,10 +126,6 @@
 .aj_members{background: #f68121;}
 .non_members{background: #444;}
 
-
-/* 190930 event! 
-.event-mini-box span:first-child{border-bottom: 1px solid rgba(255,255,255,0.6);width: 43px;margin: 12px 0 4px 14px;line-height: 14px;} 
-.event-mini-box span:last-child{line-height: 19px;margin: 0 0 5px 14px;}*/
 
 	</style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -193,17 +188,14 @@
     <![endif]-->
     <style id="stylesheet-responsive" type="text/css">@CHARSET "ISO-8859-1";@media screen and (max-width:1135px){.fp-tableCell{font-size:.9em}.examples-wrapper{top:100px;-webkit-transform:none;transform:none}}@media screen and (max-width:1050px){.fp-tableCell{font-size:.85em}}@media screen and (max-width:1030px){#section-3 .intro{width:40%}.shell{width:calc(60% - 54px)}}@media screen and (max-width:900px){#section-3 .intro{display:block;text-align:center;width:100%}#section-3 .intro p{display:none}.shell{width:80%;margin:0}#menu{text-align:center;left:0;right:0}#menu-theme-desktop{display:none!important}#menu-theme-mobile{display:inline-block}.language{left:50%;margin-left:-71px;bottom:70px;top:auto;transition:all 1s ease-in;-webkit-transition:all .3s ease-in;opacity:0;visibility:hidden}.fp-viewing-page1 .language{display:block;opacity:1;visibility:visible}}@media screen and (max-height:500px){.section-1-usedBy{display:none}.fp-slidesNav.bottom{bottom:0}.trusted-by-big{background-position:50% 0;height:54px}}@media screen and (max-height:330px){.fp-section{height:350px!important}}@media screen and (max-width:700px),screen and (max-height:500px){.fp-tableCell{font-size:.8em}#menu a{padding:0 .7em .7em}.my-arrow.left,.my-arrow.right{display:none}.fp-slidesNav.bottom{display:block}}@media screen and (max-width:630px){h1{font-size:6.5em}#menu{letter-spacing:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'}[data-lang=ru] h1{font-size:4em}}@media screen and (max-width:550px){#section-1 h1{font-size:6em}h1{font-size:5em}[data-lang=ru] h1{font-size:3.6em}.intro p{max-width:75%}#menu li a{padding:0 .7em .7em}[data-lang=es] #menu li a,[data-lang=ru] #menu li a{padding:0 .4em .4em}[data-lang=es] #menu,[data-lang=ru] #menu{font-size:.98em}#download,#menu-contact,.mobile-hide{display:none!important}.shell-body{margin:1.6em}#fp-nav.right{right:7px}}@media screen and (max-width:380px){h1{font-size:3.5em}.intro p{max-width:85%}#section-3 .shell{font-size:.8em}.shell-body{margin:1em}}@media only screen and (min-width:551px){.mobile-show{display:none}}</style>
 </head>
-<script type="text/javascript">
-d
-</script>
 <body data-lang="ko">
 <div id="fullpage">
 <script type="text/javascript">
-function goChat(){
-	window.open("/rent/login/pop_chat.do", "pop", "width=450, height=650, fullscreen=no, resizable=yes");
-}
-
-/* 190930 인트로 이벤트 스크립트 추가 */
+$('.white_div').hover(function() {
+	$(this).addClass("hover-border");
+	}, function(){
+		$(this).removeClass("hover-border");
+});
  $(function(){
 	$(".white_div").hover(function(){
 		$(this).addClass("hover-border");
@@ -236,7 +228,6 @@ function goChat(){
 		$(".new-jeju-box").hide();
 	});	
 
-	// 200528 추가
 	$(".tesla-event-box").hover(function(){
 		$(this).show();
 		$(".tesla-ovet-event").addClass("hover-border");
@@ -272,26 +263,6 @@ function goChat(){
 	
 
 });
-
-function goEvent(branch){
-	showloading();
-	if(branch == 'tesla'){
-		location.href="/rent/long/direct/tesla_event_integration.do";
-	}else if (branch == 'event'){
-		location.href="/rent/prmt/evnt/evnt_view.do?pageNo=1&rowPerPage=10&searchEvntClsCd=&searchEvntSeqNo=10250&subMenuType=on&schWord=";
-	}
-}
-
-function goEvents(branch){
-	showloading();
-	if(branch == 'tesla'){
-		location.href="/rent/long/direct/tesla_event_integration.do";
-	}else if (branch == 'events'){
-		window.open('/rent/promotion/long_rental_counsel_dotcom.do?landing=Y');
-		hideloading();
-	}
-}
-
 </script>
     <div class="section fp-table" id="section-1"  style="background-image: url(http://localhost:8082/static/img/main.jpg); background-repeat: no-repeat; background-size: cover;">
         <div class="fp-tableCell">
@@ -305,58 +276,55 @@ function goEvents(branch){
                                 <h2 class="title"  style=" margin: 100px;">똑똑한 선택! 즐거운 여행!</h2>
                             </div>                           
                             <div class="shortcut rela">    
-                              <!-- 200528 테슬라이벤트 추가 -->
-                               <div class="event-mini-box tesla-event-box" style="left:130px;" onclick="javascript:goEvent('tesla');">
-                           			<span>신차<br>상담 신청</span>
-                           		</div>                      	
-                            	<div class="white_div tesla-ovet-event" onclick="location.href='/rent/NewRentList'">
+                            	<div class="white_div tesla-ovet-event" onclick="location.href='/rent/NewRentList'" >
                             		<ul class="list_ul" style="width: 178px; height: 308px;">
-                            			<li>신차 다이렉트</li>
-                            			<li>바</li>
-                            			<li>경제적인 신차구매</li>
-                            			<li>더 좋은 차를 가지는<br>합리적인 방법!</li>
-                            			<li class="imgsection"><img src="http://localhost:8082/static/img/img_car_icon.png"></li>
-                            			<li class="arrowicon">신차 견적 검색</li>
+                            			<li style="margin:0px;">신차 다이렉트</li>
+                            			<li style="margin-right:100px!important">바</li>
+                            			<li style="margin:0px;">경제적인 신차구매</li>
+                            			<li  style="margin-right: 20px; margin-left: 0px">더 좋은 차를 가지는<br>합리적인 방법!</li>
+                            			<li class="imgsection" ><img style="left:110px;" src="http://localhost:8082/static/img/img_car_icon.png"></li>
+                            			<li class="arrowicon" style="top:-40px; left:-20px;">신차 견적 검색</li>
                             		</ul>
                             	</div>
                             	<!-- 200319 중고차상담신청 이벤트 -->   
-								<div class="event-mini-box used-event-long-box" onclick="javascript:goEvents('events');">
-                           			<span>월간 렌터카<br>특가 이벤트</span>
-                           		</div>     
-                            	<div class="white_div used-over-event" onclick="location.href='/rent/rentList'">
+                            	<div class="white_div used-over-event" onclick="location.href='/rent/rentList'" style="position: relative;">
                             		<ul class="list_ul">
-                            			<li>중고차 장기</li>
-                            			<li>바</li>
-                            			<li>믿을 수 있는 중고차렌트</li>
-                            			<li>이젠 사지말고<br>가성비 좋은 렌터카로!</li>
-                            			<li class="imgsection"><img src="http://localhost:8082/static/img/img_car_icon.png"></li>
-                            			<li class="arrowicon">중고차 견적 검색</li>
-                            		</ul>          		
+                            			<li style="margin:0px;">중고차 장기</li>
+                            			<li style="margin-right:100px!important">바</li>
+                            			<li style="margin:0px;">믿을 수 있는 중고차렌트</li>
+                            			<li  style="margin-right: 20px; margin-left: 0px">이젠 사지말고<br>가성비 솔렌터카로!</li>
+                            			<li class="imgsection"><img style="left:110px;" src="http://localhost:8082/static/img/img_car_icon.png"></li>
+                            			<li class="arrowicon" style="top:-40px; left:-20px;">중고차 견적 검색</li>
+                            		</ul>    
+            					<div class="event-mini-box used-event-long-box" onclick="javascript:goEvents('events');" style="position: absolute; margin-left:-385px;" > 
+                           			<span><br>&nbsp;월간 렌터카<br>&nbsp;특가 이벤트</span>
+                           		</div>          		
                             	</div> 
                             	                 	  
                 				<!-- 200103 이벤트 -->   
-								<div class="event-mini-box new-jeju-box" style="right: 495px;" onclick="javascript:goEvent('event');" style="display: none;">
-                           			<span>솔렌터카 최대<br>80% 할인!</span>
-                           		</div>          		
-                            	<div class="white_div over-jeju" onclick="location.href='/rent/main.do'">
+      		
+                            	<div class="white_div over-jeju" onclick="location.href='/rent/main.do'"  style="position: relative;">
                             		<ul class="list_ul">
-                            			<li>제주 단기</li>
-                            			<li>바</li>
-                            			<li>바로 출발 서비스로</li>
-                            			<li>기다림 없이!<br>빠른 렌터카 대여</li>
-                            			<li class="imgsection"><img src="http://localhost:8082/static/img/img_short_icon.png"></li>
-                            			<li class="arrowicon">제주 빠른 예약</li>
+                            			<li style="margin:0px;">제주 단기</li>
+                            			<li style="margin-right:100px!important">바</li>
+                            			<li style="margin:0px;">바로 출발 서비스로</li>
+                            			<li  style="margin-right: 40px; margin-left: 0px">기다림 없이!<br>빠른 렌터카 대여</li>
+                            			<li class="imgsection"><img style="left:110px;" src="http://localhost:8082/static/img/img_short_icon.png"></li>
+                            			<li class="arrowicon" style="top:-40px; left:-20px;">제주 빠른 예약</li>
                             		</ul>
+                    			<div class="event-mini-box new-jeju-box" onclick="javascript:goEvent('event');"  style="position: absolute; margin-right:-385px;">
+                           			<span><br>&nbsp;솔렌터카 최대<br>&nbsp;80% 할인!</span>
+                           		</div>    
                             	</div>
                            		
                             	<div class="white_div over-event" onclick="location.href='/rent/main.do'"> 
                             		<ul class="list_ul">
-                            			<li>내륙 단기</li>
-                            			<li>바</li>
-                            			<li>제휴 할인 혜택으로</li>
-                            			<li>더욱 가볍게!<br>빠른 실시간 예약</li>
-                            			<li class="imgsection"><img src="http://localhost:8082/static/img/img_short_icon.png"></li>
-                            			<li class="arrowicon">내륙 빠른 예약</li>
+                            			<li style="margin:0px;">내륙 단기</li>
+                            			<li style="margin-right:100px!important">바</li>
+                            			<li style="margin:0px;">제휴 할인 혜택으로</li>
+                            			<li  style="margin-right: 40px; margin-left: 0px">더욱 가볍게!<br>빠른 실시간 예약</li>
+                            			<li class="imgsection"><img  style="left:110px;"  src="http://localhost:8082/static/img/img_short_icon.png"></li>
+                            			<li class="arrowicon" style="top:-40px; left:-20px;">내륙 빠른 예약</li>
                             		</ul>
                             	</div>
                             </div><!-- //shortcut -->
@@ -370,70 +338,170 @@ function goEvents(branch){
     </div>
 
     <div class="section" id="section-2">
-        <button class="my-arrow left">
-            <svg width="60px" height="80px" viewbox="0 0 50 80" xml:space="preserve">
-                <polyline fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
-                    45.63,75.8 0.375,38.087 45.63,0.375 ">
-            </polyline></svg>
-        </button>
-        <button class="my-arrow right">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="80px" viewbox="0 0 50 80" xml:space="preserve">
-                <polyline fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
-                    0.375,0.375 45.63,38.087 0.375,75.8 ">
-            </polyline></svg>
-        </button>
-        <div class="slide active">
-            <div class="intro">
-                <h1>열려 있어요</h1>
-                <p>fullPage.js is actively maintained and community driven.</p>
-                <p>2013년부터 개발자가 맞닥뜨리는 문제를 해결하고 있습니다.</p>
+    	<form action="/counseling/mainProc" method="get" name="proc">
+				<div class="spot short type2" style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동촤.gif')">
+					<div class="spot-wrapper">
+						<div class="heading">
+							<h2 class="tit">즐거운 여행의 시작</h2>
+							<p class="descp">안전하고 즐거운 여행은 솔렌터카에서 시작됩니다.</p>
+						</div>
+						
+						<div class="fast-reserve">
+							<div class="fast-reserve-wrap">
+								<div class="fast-reserve-tab">
+									<div class="item">
+										<label class="label">
+											<input onclick="jeju();" type="radio" checked id="jejuQuickReserve" name="quickReserveType" title="제주" value="jeju"   class="sr-only">
+											<span class="text">제주</span>
+										</label>
+									</div>
+									<div class="item">
+										<label class="label">
+											<input onclick="jeju();" type="radio" id="inlandQuickReserve" name="quickReserveType" value="inland" class="sr-only">
+											<span class="text">내륙</span>
+										</label>
+									</div>
+									<div class="item">
+										<a href="/rent/rentList" class="anchor">중고차</a>
+									</div>
+								</div>
+								
+								<style>
+.inputDate{
+	font-size:15px !important;
+	width: 100%;
+    height: 42px;
+    padding: 10px 20px;
+    border:none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    background-color: #fff;
+    font-size: 14px;
+    font-family: NanumBarunGothic;
+    box-sizing: border-box;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: 0;
+    transition: background .2s linear 0s,box-shadow .2s linear 0s;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
+    
+    background-image: url(/resources/img/spr-common.png);
+    background-repeat: no-repeat;
+    }
+    
+    .select-box b{
+    background-image: url(http://localhost:8082/static/img/spr-common.png);
+    width: 13px;
+    height: 7px;
+    background-repeat: no-repeat;
+    margin-left:-130px;
+    margin-top:17px;
+    background-position: -1331px -1205px;
+    -webkit-background-size: 1347px 1290px;
+    background-size: 1347px 1290px;
+    text-indent: 1000%;
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+    
+    }
+</style>
 
-                <ul>
-                    <li class="github-data github-data-1" data-github="commits">
-                        <h4>-</h4>
-                        <span>commits</span>
-                    </li>
-
-                    <li class="github-data github-data-2" data-github="closed_issues">
-                        <h4>-</h4>
-                        <span>해결된 문제</span>
-                    </li>
-
-                    <li class="github-data github-data-3" data-github="contributors">
-                        <h4>-</h4>
-                        <span>기여자</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="sponsors">
-                <div>Sponsored by</div>
-                <a href="https://www.browserstack.com" target="_blank" rel="nofollow noopener noreferrer"></a>
-                <a href="https://stackpath.com" target="_blank" rel="nofollow noopener noreferrer"></a>
-                <a href="https://codepen.io" target="_blank" rel="nofollow noopener noreferrer"></a>
-                <a href="https://hostpresto.com/?utm_source=alvaro" target="_blank" rel="nofollow noopener noreferrer"></a>
-                <a href="https://www.codefirst.co.uk/" target="_blank" rel="noopener"></a>
-            </div>
-        </div>
-        <div class="slide" id="slide-2-2">
-            <div class="intro">
-                <h1>단연 최고!</h1>
-                <p>
-                    가장 완성된 틀임을 자부심 있게 선언합니다.
-                    혁신의 선두를 달리는 기업에게 신뢰받고 있습니다.
-                </p>
-                <div class="bg-image trusted-by-big"></div>
-            </div>
-        </div>
-        <div class="slide">
-            <div class="intro">
-                <h1>훌륭한 호환성</h1>
-                <p>
-                    최신 브라우저뿐만 아니라 예전 버전에서도 작동합니다. 심지어 IE 9에서도 작동합니다!
-                    소수가 아닌 모두를 위한 멋진 웹사이트를 만들어 보세요!
-                </p>
-                <div class="bg-image compatible"></div>
-            </div>
-        </div>
+								<div class="fast-reserve-content">
+									<div class="option">
+										<div class="option-row clearfix">
+											<span id="sDateSpan" class="fl" >
+												<input class="inputDate" readonly type="text" id="startDate" name="startDate" value="대여일 선택" onchange="changeDate(); changeHour(); todayCheck();">
+											</span>
+											<span class="select-box fl">
+												<select class="inputDate"   name="sHour" id="sHour" class="option01 option02 hour fast-reserve-select" onchange="changeDate(); changeHour();">
+												<c:forEach begin="06" end="22" varStatus="status">
+													<option value="${status.index}">${status.index} 시 </option>
+												</c:forEach>
+												</select>
+												<b role="presentation"></b>
+											</span>
+											<span class="select-box fl">
+												<select class="inputDate"   name="sMinute" id="sMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate();">
+													<option value="00">00 분 </option>
+													<option value="30">30 분 </option>
+												</select>
+												<b role="presentation"></b>
+											</span>
+											<span class="select-box fl" style="width:100px;">
+												<select class="inputDate"   name="sLocation" id="sLocation" class="option01 option02 timeChange fast-reserve-select">
+														<option>제주지점</option>
+												</select>
+												<b role="presentation"></b>
+											</span>
+										</div>
+										<div class="option-row clearfix">
+											<span id="lDateSpan" class="fl">
+												<input class="inputDate"   readonly type="text" id="endDate" name="endDate" value="반납일 선택" onchange="changeDate();  changeHour();">
+											</span>
+											<span  class="select-box fl">
+												<select class="inputDate"   name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate();">
+												<c:forEach begin="06" end="22" varStatus="status">
+													<option value="${status.index}">${status.index} 시</option>
+												</c:forEach>
+												</select>
+												<b role="presentation"></b>
+											</span>
+											<span class="select-box fl">
+												<select class="inputDate"   name="lMinute" id="lMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate();">
+													<option value="00">00 분</option>
+													<option value="30">30 분</option>
+												</select>
+												<b role="presentation"></b>
+											</span>
+											<span class="select-box fl" style="width:100px;">
+												<select class="inputDate"   name="lLocation" id="lLocation" class="option01 option02 timeChange fast-reserve-select">
+														<option>제주지점</option>
+												</select>
+												<b role="presentation"></b>
+											</span>
+											</div>
+										<div class="option-row clearfix">
+											<span class="select-box select-box-car fl">
+												<select class="inputDate"   id="carTab" name=carKind class="option01 option02 fast-reserve-car-select" onchange="submitable()">
+													<c:forEach items="${carKind}" var="carKind">
+														<option>${carKind}</option>
+													</c:forEach>
+												</select>
+												<b role="presentation" style="margin-left: -30px;"></b>
+											</span>
+										</div>
+									</div>
+<style>
+	.time-area span{
+		font-size:28px;
+	}
+</style>
+									<div class="time-area">
+										<strong class="title">총 대여시간</strong>
+										<p class="time">
+											<span id="ddd">0</span>일
+											<span id="hhh">0</span>시간
+											<span id="mmm">0</span>분
+										</p>
+									</div>
+									<div class="btn-box">
+										<a id="btn_quick" href="#" onclick="proc.submit();" class="btn btn-color1 btn-large">빠른예약</a>
+									</div>
+									<div class="helper" style="margin-top:15px;">
+												<a href="/buy/memberCheckForm" >예약확인</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+</form>
     </div>
     <div class="section fp-table" id="section-3">
         <div class="fp-tableCell">

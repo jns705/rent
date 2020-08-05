@@ -9,9 +9,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 	<insert id="counselingInsert" parameterType="com.rent.domain.CounselingVO" useGeneratedKeys="true" keyProperty="counseling_id">
 		insert into counseling
 				(counseling_id, id, rent_id, option_name, color, name, address,
-				 tel, counseling_situation, month, counseling_date)
+				 tel, counseling_situation, month, content, counseling_date)
 		values(	#{counseling_id}, #{id}, #{rent_id}, #{option_name}, #{color},
-		 		#{name}, #{address}, #{tel}, #{counseling_situation}, #{month}, now() )
+		 		#{name}, #{address}, #{tel}, #{counseling_situation}, #{month}, #{content} , now() )
 	</insert>
 	
 	<!-- 상담글 상태 현황 변경(상담완료, 예약완료) -->

@@ -12,9 +12,6 @@
 <meta charset="UTF-8">
 <title>상세정보</title>
 <head>
-<<<<<<< HEAD
-<style>
-=======
 </head>
 
 
@@ -62,7 +59,6 @@
 								</div>
 
 								<style>
->>>>>>> branch 'master' of https://github.com/jns705/rent.git
 * {
 	margin: 0;
 	padding: 0;
@@ -226,148 +222,8 @@ ul, li {
 	.table>tfoot>tr>th, .table>tfoot>tr>td {
 	vertical-align: middle;
 }
-img {
-	margin-right: 30px;
-	margin-top: 15px;
-	margin-bottom: 15px;
-}
-
-.table th {
-	text-align: center !important;
-	height: 44px !important;
-	width: 200px;
-	padding: 0px;
-	margin: 0px;
-}
-
-.table td {
-	width: 200px;
-	height: 44px;
-	padding: 0px;
-	margin: 0px;
-}
-.age-prefer__graph-num {
-	top: -20px;
-}
-
-.checkgl {
-	style ="content: '';
-	display: inline-block;
-	position: absolute;
-	left: -15px;
-	top: 1px;
-	width: 15px;
-	height: 15px;
-	background-image:
-		url(http://localhost:8082/static/img/pc_check_white.png);
-	background-size: 11px;
-	background-repeat: no-repeat;
-	"
-}
-
-.next-img-btn {
-	right: -40px !important;
-	height: 21px !important;
-	background-image: url(http://localhost:8082/static/img/spr-common.png);
-	background-repeat: no-repeat;
-	background-position: -1333px -590px;
-	-webkit-background-size: 1347px 1290px;
-	background-size: 1347px 1290px;
-	text-indent: 1000%;
-	white-space: nowrap;
-	overflow: hidden;
-}
-
-.imgbtn-box>div {
-	position: absolute !important;
-	width: 20px !important;
-	cursor: pointer !important;
-}
-
--->
-.gly {
-	position: absolute;
-	width: 41px;
-	right: -40px !important;
-	background-image: url(http://localhost:8082/static/img/spr-common.png);
-	background-repeat: no-repeat;
-	background-position: -1333px -590px;
-	-webkit-background-size: 1347px 1290px;
-	background-size: 1347px 1290px;
-	text-indent: 1000%;
-	white-space: nowrap;
-	margin-top: 300;
-	margin-right: 40;
-}
-
-.glya {
-	position: absolute;
-	width: 41px;
-	left: -40px;
-	background-image: url(http://localhost:8082/static/img/spr-common.png);
-	background-repeat: no-repeat;
-	background-position: -1334px -802px;
-	-webkit-background-size: 1347px 1290px;
-	background-size: 1347px 1290px;
-	text-indent: 1000%;
-	white-space: nowrap;
-	overflow: hidden;
-	text-indent: 1000%;
-	white-space: nowrap;
-	margin-top: 300;
-	margin-left: 70;
-}
-
-.modal-pop {
-	position: fixed;
-	box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px, rgba(0, 0, 0, 0.5) 2px 2px
-		3px 3px;
-	z-index: 10000;
-}
 </style>
-</head>
 
-
-<body id="" class="longterm-section type-reverse">
-	<div id="content">
-		<div id="container">
-			<div class="breadcrumbs">
-				<h2 class="tit">솔렌트카 상세정보</h2>
-
-				<div class="clearfix">
-					<span>홈</span> <span>중고렌터카</span> <span class="cl-point2">솔렌터카
-						상세정보</span>
-				</div>
-
-			</div>
-
-			<div class="header-group mab0 form-group"
-				style="padding-bottom: 20px;">
-				<h3 class="col-sm-5">다이렉트 견적조회</h3>
-				<div class="col-sm-offset-10">
-					<a href="#" class="btn btn-line4 btn-fix1 listBtn"
-						onclick="location.href='${path}/rent/rentList'">목록</a>
-				</div>
-			</div>
-			<div class="car-list v1 car-list--inquiry"
-				style="height: 391px; padding: 68px 58px; border: 1px solid #ddd; border-top: none;">
-				<div class="car-list__item-jg">
-					<div class="car-list__thumbnail-jg">
-						<div class="car-list__thumbnail-image-jg user_car">
-
-							<ul class="underimg col-sm-4">
-
-								<div id="slide" style="width: 350px; height: 250px">
-									<a href="#"><ul>
-											<li
-												style="background-repeat:no-repeat;  background-size: 350px 250px; cover; background-image: url('${rentImage[0].rent_url}');">
-											<li>
-										</ul></a>
-									<p class="pos">
-										<span class="font"><span class="checkgl"></span>현재
-											${rent.standby_personnel}명의 고객님이 상담 진행 중입니다.</span>
-									</p>
-								</div>
 
 							</ul>
 
@@ -596,9 +452,9 @@ img {
 							<ul class="review_step1_ul">
 								<li><textarea id="regTextArea" name="content" style="height: 180px; width: 850px; margin-left: 60px;"
 										placeholder="상품에 대한 문의는 100자이내로 작성해 주세요."></textarea></li>
-								<li style="float: left;">
-								<button type="submit" style="margin-top: 0px;  margin-left: 60px; height:29px;">등록</button>
-								 &nbsp;<label for="check_yn">비밀글</label>&nbsp; <input type="checkbox" id="check_yn" style="width:25px;height:25px;background-image:url(http://localhost:8082/static/img/total.png);background-repeat:no-repeat;background-position:-1309px -914px;-webkit-background-size:1347px 1290px;background-size:1347px 1290px;text-indent:1000%;white-space:nowrap;overflow:hidden"></li>
+								<li style="float: left;"><button type="submit"
+										style="margin-top: 0px;  margin-left: 60px;">등록</button> &nbsp; 비밀글 &nbsp; <input
+									type="checkbox" id="check_yn"></li>
 								<li style="float: right; width: 75%;"><div
 										class="form-group pwd" id="pwd"></div></li>
 							</ul>
@@ -685,7 +541,31 @@ img {
 					</table>
 
 				</article>
-				
+
+
+
+				<style>
+img {
+	margin-right: 30px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.table th {
+	text-align: center !important;
+	height: 44px !important;
+	width: 200px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.table td {
+	width: 200px;
+	height: 44px;
+	padding: 0px;
+	margin: 0px;
+}
+</style>
 				<article style="margin-top: 50px;">
 					<div class="header-group estimate-type mab0">
 						<h4>옵션 정보</h4>
@@ -750,7 +630,7 @@ img {
 												<!-- estimate-list__label//end -->
 												<div class="estimate-list__item">
 													<div class="estimate-item__caption clearfix">
-														<p class="estimate-item__caption-text fl" id="monthShow">1개월</p>
+														<p class="estimate-item__caption-text fl" id="monthShow">${month}개월</p>
 													</div>
 													<!-- estimate-item__caption//end -->
 
@@ -776,9 +656,10 @@ img {
 												<div class="col-lg-2">
 													<select id="month" name="cntrTermMm" class="form-control"
 														onchange="monthShow(this.value);">
+														<c:set value="${month}" var="month1" />
 														<c:set value="${rent.max_month}" var="month" />
 														<c:forEach var="i" begin="1" end="${rent.max_month}">
-															<option value="${i}">${i}</option>
+															<option <c:if test="${i eq month1}">selected</c:if>>${i}</option>
 														</c:forEach>
 													</select>
 												</div>
@@ -852,6 +733,86 @@ img {
 													</div>
 												</div>
 
+												<style>
+.age-prefer__graph-num {
+	top: -20px;
+}
+
+.checkgl {
+	style ="content: '';
+	display: inline-block;
+	position: absolute;
+	left: -15px;
+	top: 1px;
+	width: 15px;
+	height: 15px;
+	background-image:
+		url(http://localhost:8082/static/img/pc_check_white.png);
+	background-size: 11px;
+	background-repeat: no-repeat;
+	"
+}
+
+.next-img-btn {
+	right: -40px !important;
+	height: 21px !important;
+	background-image: url(http://localhost:8082/static/img/spr-common.png);
+	background-repeat: no-repeat;
+	background-position: -1333px -590px;
+	-webkit-background-size: 1347px 1290px;
+	background-size: 1347px 1290px;
+	text-indent: 1000%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.imgbtn-box>div {
+	position: absolute !important;
+	width: 20px !important;
+	cursor: pointer !important;
+}
+
+-->
+.gly {
+	position: absolute;
+	width: 41px;
+	right: -40px !important;
+	background-image: url(http://localhost:8082/static/img/spr-common.png);
+	background-repeat: no-repeat;
+	background-position: -1333px -590px;
+	-webkit-background-size: 1347px 1290px;
+	background-size: 1347px 1290px;
+	text-indent: 1000%;
+	white-space: nowrap;
+	margin-top: 300;
+	margin-right: 40;
+}
+
+.glya {
+	position: absolute;
+	width: 41px;
+	left: -40px;
+	background-image: url(http://localhost:8082/static/img/spr-common.png);
+	background-repeat: no-repeat;
+	background-position: -1334px -802px;
+	-webkit-background-size: 1347px 1290px;
+	background-size: 1347px 1290px;
+	text-indent: 1000%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-indent: 1000%;
+	white-space: nowrap;
+	margin-top: 300;
+	margin-left: 70;
+}
+
+.modal-pop {
+	position: fixed;
+	box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px, rgba(0, 0, 0, 0.5) 2px 2px
+		3px 3px;
+	z-index: 10000;
+}
+</style>
 												<div id="imagepop"
 													class="modal-pop modal-large big-img-show"
 													style="display: none; z-index: 1000000">
@@ -919,8 +880,6 @@ img {
 								</div>
 							</fieldset>
 						</article>
-<<<<<<< HEAD
-=======
 						<article>
 							<div class="ticker-info ticker-info--direct"
 								style="z-index: 10000;">
@@ -969,7 +928,6 @@ img {
 							</div>
 						</article>
 
->>>>>>> branch 'master' of https://github.com/jns705/rent.git
 <article>
 <div class="ticker-info ticker-info--direct">
 <div class="ticker-head">
@@ -1008,42 +966,46 @@ img {
 </body>
 	</html>
 	</body>
-<script>
-var cost = ${rent.price};
-var temporaryPrice=0;
-function monthShow(e) {
-	$('#monthShow').html(e+"개월");
-	document.getElementById('term').value = e;
-	
-	if(e==1) {
-		$('#totalRental').html(numberWithCommas(cost));
-		$('#span_deposit').html(numberWithCommas(cost*5));
-		temporaryPrice = cost;
-	}else{
-		var sale = e*5000;
-		temporaryPrice=cost-sale;
-		$('#totalRental').html(numberWithCommas(temporaryPrice));
-		$('#span_deposit').html(numberWithCommas(temporaryPrice*5));
-	}
-}
-function driving(e) {
-	$('#driving').html(e+"만km 이하/년");
-	document.getElementById('km').value = e;
-	var drPrice = e*22000;
-	//document.getElementById('totalRental').text();
-	if(e == 1) drPrice =0;
-	if(temporaryPrice == 0) {
-		var drive = cost + drPrice;
-		$('#totalRental').html(numberWithCommas(drive));
-		$('#span_deposit').html(numberWithCommas(drive*5));
-	}else if(temporaryPrice != 0) {
-		var a = temporaryPrice + drPrice;
-		$('#totalRental').html(numberWithCommas(a));
-		$('#span_deposit').html(numberWithCommas(a*5));
-	}
-	
-}
-</script>
+	<script>
+		var cost = $
+		{
+			rent.price
+		};
+		var temporaryPrice = 0;
+		function monthShow(e) {
+			$('#monthShow').html(e + "개월");
+			document.getElementById('term').value = e;
+
+			if (e == 1) {
+				$('#totalRental').html(numberWithCommas(cost));
+				$('#span_deposit').html(numberWithCommas(cost * 5));
+				temporaryPrice = cost;
+			} else {
+				var sale = e * 5000;
+				temporaryPrice = cost - sale;
+				$('#totalRental').html(numberWithCommas(temporaryPrice));
+				$('#span_deposit').html(numberWithCommas(temporaryPrice * 5));
+			}
+		}
+		function driving(e) {
+			$('#driving').html(e + "만km 이하/년");
+			document.getElementById('km').value = e;
+			var drPrice = e * 22000;
+			//document.getElementById('totalRental').text();
+			if (e == 1)
+				drPrice = 0;
+			if (temporaryPrice == 0) {
+				var drive = cost + drPrice;
+				$('#totalRental').html(numberWithCommas(drive));
+				$('#span_deposit').html(numberWithCommas(drive * 5));
+			} else if (temporaryPrice != 0) {
+				var a = temporaryPrice + drPrice;
+				$('#totalRental').html(numberWithCommas(a));
+				$('#span_deposit').html(numberWithCommas(a * 5));
+			}
+
+		}
+	</script>
 	<script>
 		function btnSlide(id) {
 			//if		($('#'+id).is(":visible")) $('#'+id).slideUp(); 슬라이드 효과

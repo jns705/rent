@@ -156,6 +156,11 @@
 											</span>
 										</div>
 									</div>
+<style>
+	.time-area span{
+		font-size:28px;
+	}
+</style>
 									<div class="time-area">
 										<strong class="title">총 대여시간</strong>
 										<p class="time">

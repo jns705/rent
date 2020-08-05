@@ -14,7 +14,7 @@
 <c:if test="${sessionScope.id == null}"><c:set var="id" value="${Buy[0].name}"/></c:if>
 <c:if test="${sessionScope.id != null}"><c:set var="id" value="${sessionScope.id}"/></c:if>
 <div id="content">
-    <div id="container">
+    <div id="container"  style="margin-top:40px;">
 <div class="breadcrumbs">
             <h2 class="tit">고객 구매 리스트</h2>
             <div class="clearfix">
@@ -64,7 +64,8 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${Buy}" var="list" varStatus="status">
-                <tr>
+                <tr <c:if test="${map[status.index] != '신차'}"> onclick="location.href='/rent/rentListDetail/${list.rent_id}'"</c:if>
+                	<c:if test="${map[status.index] eq '신차'}"> onclick="location.href='/rent/NewRentListDetail/${list.rent_id}'"</c:if>>
                     <td>${Car[status.index].car_name}</td>
                     <td>${list.name}</td>
                     <td><fmt:formatDate value="${list.buy_date}" var="date" pattern="yyyy-MM-dd"/>${date}</td>

@@ -435,22 +435,26 @@ if($('#startDate').val() == '대여일 선택' || $('#startDate').val() == ''){
 	$('#endDate').focus();
 	ck = false;
 	return false;
-	
-}if($('#modelNm').html()==''){
-    var offset = $("#selectCar").offset();
-    $('html, body').animate({scrollTop : offset.top}, 400);
+}
+var offset = $("#selectCar").offset();
+
+if($('#modelNm').html()==''){
 	$('.tab-content').css('border', '1px solid #f68121');
 	$('.spamM').css('display','block');
 	ck = false;
 
-
+}
+if(ck==false){
+	$('html, body').animate({scrollTop : offset.top-110}, 400);
+	return false;
+}
 if($('[name=name]').val().length < 4){
 	$('[name=name]').css('border-color','#f68121');
 	$('[name=birthday]').css('border-left','1px solid #f68121');
 	$('#span-name').html('이름은 세자리 이상 입력해주세요');
 	ck = false;
 }
-}if(!$('[name=name]').val()){
+if(!$('[name=name]').val()){
 	$('[name=name]').css('border-color','#f68121');
 	$('[name=birthday]').css('border-left','1px solid #f68121');
 	ck = false;
@@ -530,11 +534,23 @@ if(!$('[name=address]').val()){
 	$('#span-address').html('주소를 입력해주세요');
 	ck = false;
 }
+if(ck==false){
+	$('html, body').animate({scrollTop : offset.top+300}, 400);
+	return false;
+}
+
 $('.spamS').css('font-size','14px');
 
-if(ck)
-	
-insertForm.submit();
+if(ck){
+	if($('input:checkbox[id=term-check-all]').is(':checked'))
+	insertForm.submit();
+	else{
+		alert("모든 항목에 동의를 하셔야 회원가입이 가능합니다.");
+	    var offset = $("#allcheck").offset();
+	    $('html, body').animate({scrollTop : offset.top-200}, 400);
+		$('#sp').css('color','#f68121');
+	}
+}
 }
 
 //이름 검사(정규식)
