@@ -177,19 +177,39 @@ public class BuyController {
 	@RequestMapping("/list")
 	public String buyList(Model model, PagingVO paging
 			, @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage
+			, @RequestParam(defaultValue = "") String buyKind
+			, @RequestParam(defaultValue = "") String buySearch ) throws Exception {
 		
-	int total = buyService.buyCount();
-	if (nowPage == null && cntPerPage == null) {
-		nowPage = "1";
-		cntPerPage = "5";
-	} else if (nowPage == null) {
-		nowPage = "1";
-	} else if (cntPerPage == null) { 
-		cntPerPage = "5";
-	}
-	paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		int total = buyService.buyCount();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		List<BuyVO> buy = buyService.buyList(paging);
 		
+		
+		List<String> car_name = new ArrayList<String>();
+		for(int i = 0; i < buy.size(); i++) {
+			String rent_id = buy.get(i).getRent_id();
+			
+			if(rent_id == null) {
+				car_name.add("선택차량없음");
+				System.out.println("if문들어온 차량 : "+car_name);
+				continue;
+			}
+			RentVO ren = rentService.rentListId(rent_id);
+			int car_id = ren.getCar_id();
+			CarVO car = carService.carDetail(Integer.toString(car_id));
+			car_name.add(car.getCar_name());
+		}
+		
+		model.addAttribute("car",car_name);
 		model.addAttribute("paging", paging);
 		model.addAttribute("buyList", buyService.buyList(paging));
 		return "/buy/buyList";
@@ -198,7 +218,18 @@ public class BuyController {
 	//예약자 상세조회
 	@RequestMapping("/detail/{buy_id}")
 	public String buyDetail(@PathVariable int buy_id, Model model) throws Exception {
-		model.addAttribute("detail", buyService.buyDetail(buy_id));
+		BuyVO buy = buyService.buyDetail(buy_id);
+		String rent_id = buy.getRent_id();
+		
+		if(rent_id == null) {
+			
+		}else {
+			RentVO rent = rentService.rentDetail(rent_id);
+			int car_id = rent.getCar_id();
+			CarVO car = carService.carDetail(Integer.toString(car_id));
+			model.addAttribute("car", car);
+		}
+		model.addAttribute("detail", buy);
 		return "/buy/buyDetail";
 	}
 	

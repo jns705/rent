@@ -46,7 +46,7 @@
 				<div class="fl col-3">
 					<span class="input essential">
 						<strong class="check">필수</strong>
-						<label><input type="text" placeholder="이름 입력" name="name" id="name" textname></label>
+						<label><input type="text" placeholder="이름 입력" value="${member.name }" name="name" id="name" textname></label>
 					</span>
 				</div>
 				<div><p id="nameput" style="color:red;"></p></div>
@@ -56,17 +56,17 @@
                  <div class="fl col-10">
                    <span class="input essential">
                    <strong class="check">필수</strong>
-                       <input type="text" placeholder="우편번호" id="zipcode"name="address0"style="width:150px;" readonly="readonly" class="readonly">
+                       <input type="text" placeholder="우편번호" value="${address[0]}" id="zipcode"name="address0"style="width:150px;" readonly="readonly" class="readonly">
                    </span>
                </div>
                  <div class="fl col-3">
                    <span class="input essential">
-                       <input type="text" placeholder="주소" id="address1" name="address1" style="width:310px;" readonly="readonly" class="readonly">
+                       <input type="text" placeholder="주소" value="${address[1]}" id="address1" name="address1" style="width:310px;" readonly="readonly" class="readonly">
                    </span>
                </div>
                  <div class="fl col-3">
                    <span class="input essential">
-                       <input type="text" placeholder="상세 주소" id="address2" name="address2" style="width:310px;" oninput="checkAdd();">
+                       <input type="text" placeholder="상세 주소" value="${address[2]}" id="address2" name="address2" style="width:310px;" oninput="checkAdd();">
                        <p id="addput" style="color:red;"></p>
                    </span>
                </div>
@@ -81,7 +81,7 @@
 				<div class="fl col-3">
 					<span class="input essential">
 						<strong class="check">필수</strong>
-						<label><input type="text" placeholder="휴대폰 번호(-없이) 입력" maxlength="11" id="tel" name="tel" numberOnly></label>
+						<label><input type="text" value="${member.tel}" placeholder="휴대폰 번호(-없이) 입력" maxlength="11" id="tel" name="tel" numberOnly></label>
                         
 					</span>
 				</div>
@@ -93,7 +93,7 @@
 					<div class="counsel-email-input input-box">
 						<span class="input essential col-3">
 							<strong class="check">필수</strong>
-							<label><input type="text" placeholder="이메일 입력" onkeyup="checkingEmailId()" maxlength="30" id="emailId" name="emailId"></label>
+							<label><input type="text" placeholder="이메일 입력" maxlength="30" id="emailId" name="emailId"></label>
 						</span>
 						<span class="input hyphen col-3">
 							<span class="text">@</span>
@@ -459,7 +459,12 @@ function checkInsert() {
     	alert("전화번호 입력하세요");
     	document.getElementById('tel').focus();
     	return;
+    }else if(document.getElementById("tel").value.length != 11) {
+    	alert("전화번호 11자리 입력해주세요.");
+    	document.getElementById('tel').focus();
     }
+
+    
 	//체크박스 상태
 	if(!$("[name=agreeYn1]").is(":checked")) {
 		  alert("동의를 거부할 권리가 있으나, 미 동의 시 상담이 불가능합니다.");

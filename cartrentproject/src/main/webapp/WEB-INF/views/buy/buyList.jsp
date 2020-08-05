@@ -26,6 +26,21 @@ tbody tr:hover {
 <div class="container">
 
  	<h2 align=center>예약 목록</h2>
+ 	
+ 	<div style="float: left;">
+	 	<select name="buyKind">
+	 		<option value="all">전체</option>
+	 		<option value="id">회원 아이디</option>
+	 		<option value="name">회원 이름</option>
+	 		<option value="tel">회원 전화번호</option>
+	 	</select>
+	 	
+	 	<span>
+	 		<input type="text" name="buySearch" placeholder="검색어 입력">
+	 	</span>
+	 	<button onclick="">검색</button>
+	 	
+ 	</div>
  		<div style="float: right;">
 		<select id="cntPerPage" name="sel" onchange="selChange()">
 			<option value="5"
@@ -43,6 +58,7 @@ tbody tr:hover {
 			<tr>
 			<th>buy_id</th>
 				<th style="background: #e3ddcb ;">회원 아이디</th>
+				<th>차량이름</th>
 				<th>렌트아이디</th>
 				<th>계약기간</th>
 				<th>회원 이름</th>
@@ -55,10 +71,11 @@ tbody tr:hover {
 		
 		<tbody>
 		
-			<c:forEach items="${buyList}" var="buy">
+			<c:forEach items="${buyList}" var="buy" varStatus="i">
 			<tr>
-			<td>${buy.buy_id }</td>
+				<td>${buy.buy_id}</td>
 				<td onclick="location.href='${path}/buy/detail/${buy.buy_id}'" style="cursor: pointer;">${buy.id}</td>
+				<td>${car[i.index]}</td>
 				<td onclick="location.href='${path}/rent/rentListDetail/${buy.rent_id}'" style="cursor: pointer;">${buy.rent_id}<input type="hidden" name="rent_id_${buy.buy_id}" value="${buy.rent_id }"></td>
 				<td>${buy.month}개월</td>
 				<td>${buy.name}</td>

@@ -12,57 +12,7 @@
 <meta charset="UTF-8">
 <title>상세정보</title>
 <head>
-<<<<<<< HEAD
 <style>
-=======
-</head>
-
-
-<body id="" class="longterm-section type-reverse">
-	<div id="content">
-		<div id="container">
-			<div class="breadcrumbs">
-				<h2 class="tit">솔렌트카 상세정보</h2>
-
-				<div class="clearfix">
-					<span>홈</span> <span>중고렌터카</span> <span class="cl-point2">솔렌터카
-						상세정보</span>
-				</div>
-
-			</div>
-
-			<div class="header-group mab0 form-group"
-				style="padding-bottom: 20px;">
-				<h3 class="col-sm-5">다이렉트 견적조회</h3>
-				<div class="col-sm-offset-10">
-					<a href="#" class="btn btn-line4 btn-fix1 listBtn"
-						onclick="location.href='${path}/rent/rentList'">목록</a>
-				</div>
-			</div>
-			<div class="car-list v1 car-list--inquiry"
-				style="height: 391px; padding: 68px 58px; border: 1px solid #ddd; border-top: none;">
-				<div class="car-list__item-jg">
-					<div class="car-list__thumbnail-jg">
-						<div class="car-list__thumbnail-image-jg user_car">
-
-							<ul class="underimg col-sm-4">
-
-								<div id="slide" style="width: 350px; height: 250px">
-									<a href="#"><ul>
-											<li
-												style="background-repeat:no-repeat;  background-size: 350px 250px; cover; background-image: url('${rentImage[0].rent_url}');">
-											<li>
-										</ul></a>
-									<c:if test="${rent.standby_personnel > 0}">
-									<p class="pos">
-										<span class="font"><span class="checkgl"></span>현재
-											${rent.standby_personnel}명의 고객님이 상담 진행 중입니다.</span>
-									</p>
-									</c:if>
-								</div>
-
-								<style>
->>>>>>> branch 'master' of https://github.com/jns705/rent.git
 * {
 	margin: 0;
 	padding: 0;
@@ -919,57 +869,6 @@ img {
 								</div>
 							</fieldset>
 						</article>
-<<<<<<< HEAD
-=======
-						<article>
-							<div class="ticker-info ticker-info--direct"
-								style="z-index: 10000;">
-								<div class="ticker-head">
-									<dl class="dl-horizontal">
-										<dt style="border: none; text-align: left;">월 렌탈료</dt>
-										<dd class="text-r">
-											<strong id="totalRental">${String.format('%,d',rent.price)}</strong>원
-										</dd>
-										<dt class="fs-default" style="border: none; text-align: left;">(총
-											차량 소비자가)</dt>
-										<dd class="fs-default text-r">
-											(<strong class="fs-default" id="totAmt">${String.format('%,d',car.car_price)}</strong>만원)
-										</dd>
-									</dl>
-									<div class="btn-box-all">
-										<div class="btn-box-gray btn2">
-											<button onclick="apply();">
-												<span>맞춤형 렌탈료</span> <br>
-												<font color="white">상담신청</font>
-											</button>
-										</div>
-										<div class="btn-box-red btn2">
-
-											<c:choose>
-												<c:when
-													test="${sessionScope.id !=null && sessionScope.id != ''}">
-													<button formaction="${path}/buy/insert/${rent.rent_id}"
-														onclick="apply();" id="btnDirectContract"></button>
-												</c:when>
-												<c:otherwise>
-													<button
-														formaction="${path}/rent/rentListDetail/${rent.rent_id}"
-														onclick="alert('로그인 후 사용가능')" id="btnDirectContract">
-													</button>
-												</c:otherwise>
-											</c:choose>
-
-
-											<span>무방문/무서류</span> <br>
-											<font color="white">다이렉트 계약</font>
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</article>
-
->>>>>>> branch 'master' of https://github.com/jns705/rent.git
 <article>
 <div class="ticker-info ticker-info--direct">
 <div class="ticker-head">

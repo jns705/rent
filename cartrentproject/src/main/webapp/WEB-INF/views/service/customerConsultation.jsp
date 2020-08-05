@@ -472,12 +472,18 @@ function checkInsert() {
     	document.getElementById('address2').focus();
     	return;
     }
+	
+    var telNum = document.getElementById("tel").value.length;
     //전화번호
     if(!document.getElementById("tel").value) {
     	alert("전화번호 입력하세요");
     	document.getElementById('tel').focus();
     	return;
-    }
+    }else if(telNum != 11 ){
+		alert("전화번호는 11자리를 입력해주세요");
+    	document.getElementById('tel').focus();
+    	return;
+   	}
 	//선택 개월수
     if(!document.getElementById("month").value) {
 	   	alert("계약월수를 입력하세요");

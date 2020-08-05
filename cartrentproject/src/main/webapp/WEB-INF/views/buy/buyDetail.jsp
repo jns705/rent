@@ -16,15 +16,20 @@ tbody tr:hover {
 </style>
 </head>
 <body>
-<h2 align=center>${detail.name}님의 상담 상세조회(${detail.id})</h2>
+<h2 align=center>${detail.name}님의 예약 상세조회(${detail.id})</h2>
 <div class="container">
 	<table class="table">
 	
 		<tr>
-			<th>상담 렌트 번호</th>
+			<th>예약 렌트 번호</th>
 			<td align="left">${detail.rent_id}
 				<input type="hidden" name="rent_id_${detail.buy_id}" value="${detail.rent_id }">
 			</td>
+		</tr>
+		
+		<tr>
+			<th>예약 차량이름</th>
+			<td align="left">${car.car_name}</td>
 		</tr>
 		
 		<tr>

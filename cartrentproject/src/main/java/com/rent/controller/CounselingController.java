@@ -78,6 +78,15 @@ public class CounselingController {
 	@RequestMapping("/insert/{rent_id}")
 	public String counselingSend(Model model, HttpServletRequest request, @PathVariable String rent_id) throws Exception{
 		
+		String id = request.getParameter("id");
+		
+		if(id != "") {
+			MemberVO member = mMemberService.memberDetail(id);
+			String address[] = member.getAddress().split("/");
+			model.addAttribute("address",address);
+			model.addAttribute("member" ,member);
+		}
+		
 		String totalPrice = request.getParameter("totalPrice"); // 총합 비용
 		String deposit = request.getParameter("deposit"); //보증금
 		String month = request.getParameter("term"); // 계약날짜
@@ -138,21 +147,6 @@ public class CounselingController {
 	public String counselingList(Model model, PagingVO paging
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
-		List<CounselingVO> cou = couService.counselingList(paging);
-		List<String> car_name = new ArrayList<String>();
-		for(int i = 0; i < cou.size(); i++) {
-			String rent_id = cou.get(i).getRent_id();
-			
-			if(rent_id == null) {
-				car_name.add("선택차량없음");
-				continue;
-			}
-			
-			RentVO ren = rentService.rentListId(rent_id);
-			int car_id = ren.getCar_id();
-			CarVO car = carService.carDetail(Integer.toString(car_id));
-			car_name.add(car.getCar_name());
-		}
 		
 		int total = couService.counselingCount();
 		if (nowPage == null && cntPerPage == null) {
@@ -167,9 +161,27 @@ public class CounselingController {
 		paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		System.out.println("Controller페이지당 글 갯수 "+paging.getCntPerPage());
 		
+		List<CounselingVO> cou = couService.counselingList(paging);
+		List<String> car_name = new ArrayList<String>();
+		System.out.println("couList : "+cou);
+		System.out.println("cou.size : "+cou.size());
+		for(int i = 0; i < cou.size(); i++) {
+			String rent_id = cou.get(i).getRent_id();
+			
+			if(rent_id == null) {
+				car_name.add("선택차량없음");
+				System.out.println("if문들어온 차량 : "+car_name);
+				continue;
+			}
+			System.out.println("차량 이름 : "+car_name);
+			RentVO ren = rentService.rentListId(rent_id);
+			int car_id = ren.getCar_id();
+			CarVO car = carService.carDetail(Integer.toString(car_id));
+			car_name.add(car.getCar_name());
+		}
 		
-		model.addAttribute("paging", paging);
 		model.addAttribute("car",car_name);
+		model.addAttribute("paging", paging);
 		model.addAttribute("counselingList",couService.counselingList(paging));
 		return "/counseling/counselingList";
 	}
@@ -198,6 +210,26 @@ public class CounselingController {
 		map.put("start", paging.getStart());
 		map.put("end", paging.getEnd());
 		
+		List<CounselingVO> cou = couService.counselingList(paging);
+		List<String> car_name = new ArrayList<String>();
+		System.out.println("couList : "+cou);
+		System.out.println("cou.size : "+cou.size());
+		for(int i = 0; i < cou.size(); i++) {
+			String rent_id = cou.get(i).getRent_id();
+			
+			if(rent_id == null) {
+				car_name.add("선택차량없음");
+				System.out.println("if문들어온 차량 : "+car_name);
+				continue;
+			}
+			System.out.println("차량 이름 : "+car_name);
+			RentVO ren = rentService.rentListId(rent_id);
+			int car_id = ren.getCar_id();
+			CarVO car = carService.carDetail(Integer.toString(car_id));
+			car_name.add(car.getCar_name());
+		}
+		
+		model.addAttribute("car",car_name);
 		model.addAttribute("paging", paging);
 		model.addAttribute("counselingList", couService.searchList(map));
 		return "/counseling/counselingList";
@@ -261,6 +293,12 @@ public class CounselingController {
 	//상담글 삭제
 	@RequestMapping("/delete/{counseling_id}")
 	public String counselingDelete(@PathVariable String counseling_id, HttpServletRequest request) throws Exception {
+		
+		//고객센터에서 상담신청 했을경우 rent_id가 없다.
+		if(request.getParameter("rent_id_"+counseling_id) == "") {
+			couService.counselingDelete(counseling_id);
+			return "redirect:/counseling/list";
+		}
 		
 		String rent_id = request.getParameter("rent_id_"+counseling_id);
 		RentVO rent = rentService.rentDetail(rent_id);

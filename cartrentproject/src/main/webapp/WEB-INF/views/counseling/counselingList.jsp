@@ -50,6 +50,7 @@ tbody tr:hover {
 				<td onclick="location.href='${path}/counseling/detail/${couList.counseling_id}'" style="cursor: pointer;">${couList.id}</td>
 				
 				<td>${car[i.index]}</td>
+				
 				<c:if test="${couList.rent_id != null}">
 				<td onclick="location.href='${path}/rent/rentListDetail/${couList.rent_id}'" style="cursor: pointer;">${couList.rent_id}<input type="hidden" name="rent_id_${couList.counseling_id}" value="${couList.rent_id}"></td>
 				</c:if>

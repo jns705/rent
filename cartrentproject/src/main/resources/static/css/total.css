@@ -282,7 +282,7 @@ a .checkbox.v3 label.text-r{padding-right:30px}a:hover {text-decoration: none;}.
  .dl-horizontal dd,.dl-horizontal dt{min-height:20px;font-size:15px;color:#666;line-height:30px}
  .dl-horizontal.v1 dd,.dl-horizontal.v1 dt{padding-top:10px;padding-bottom:10px}
  .dl-horizontal.v1 dt{font-family:NanumBarunGothic; text-align: left !important;}
- .dl-horizontal.v1 dd,.dl-horizontal dt{text-align:right;padding-right:10px;border-bottom:1px solid #ddd;min-height:24px}
+ .dl-horizontal.v1 dd,.dl-horizontal dt{text-align:center;padding-right:10px;min-height:24px}
  dt.won{margin-right:3px}.dl-horizontal.v1 dd.detail ul{padding-top:24px;text-align:left}
  .dl-horizontal.v1 dd.detail ul li{margin-top:4px;clear:both}
  .dl-horizontal.v1 dd.detail ul li:first-child{margin-top:0}
