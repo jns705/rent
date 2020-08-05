@@ -1,5 +1,6 @@
 package com.rent.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -32,8 +33,8 @@ public class BuyService {
 	}
 	
 	//구매목록
-	public List<BuyVO> buyList(PagingVO paging) throws Exception { 
-		return mapper.buyList(paging);
+	public List<BuyVO> buyList(HashMap<String, Object> map) throws Exception { 
+		return mapper.buyList(map);
 	}
 	
 	//구매목록 총 갯수

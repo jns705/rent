@@ -22,5 +22,6 @@ public class BuyVO {
 	private String address;
 	private String tel;
 	private String month;
+	private String buy_situation;
 
 }

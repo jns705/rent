@@ -63,6 +63,18 @@ tbody tr:hover {
 		</tr>
 		
 		<tr>
+			<th>구매 현황</th>
+			<td align="left">
+				<select>
+					<option value="대여중">대여중</option>
+					<option value="반납완료">반납완료</option>
+				</select>
+				<button>수정</button>
+			</td>
+		</tr>
+		
+		
+		<tr>
 			<th>신청 개월수</th>
 			<td align="left">
 				${detail.month}개월

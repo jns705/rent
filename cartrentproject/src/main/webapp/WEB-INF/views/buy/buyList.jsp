@@ -38,7 +38,7 @@ tbody tr:hover {
 	 	<span>
 	 		<input type="text" name="buySearch" placeholder="검색어 입력">
 	 	</span>
-	 	<button onclick="">검색</button>
+	 	<button>검색</button>
 	 	
  	</div>
  		<div style="float: right;">
@@ -64,6 +64,7 @@ tbody tr:hover {
 				<th>회원 이름</th>
 				<th>회원 주소</th>	
 				<th>회원 전화번호</th>
+				<th>구매현황</th>
 				<th>구매 날짜</th>
 				<th>예약 취소</th>
 			</tr>
@@ -81,6 +82,7 @@ tbody tr:hover {
 				<td>${buy.name}</td>
 				<td>${buy.address}</td>
 				<td>${buy.tel}</td>
+				<td>${buy.buy_situation}</td>
 				<td>${buy.buy_date}</td>
 				<td><a onclick="buyDelete(${buy.buy_id})"><span class="glyphicon glyphicon-trash"></span></a></td>
 			</tr>

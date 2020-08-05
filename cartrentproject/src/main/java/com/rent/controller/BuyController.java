@@ -3,7 +3,9 @@ package com.rent.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -148,6 +150,7 @@ public class BuyController {
 		
 		
 		buy.setOption_name(options);
+		buy.setBuy_situation("대여중");
 		
 		//렌트카를 돈주고 예약 했으니 car테이블에 있는 car_number(재고량)를 뺀다
 		CarVO car = carService.carDetail(car_id);
@@ -178,8 +181,8 @@ public class BuyController {
 	public String buyList(Model model, PagingVO paging
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage
-			, @RequestParam(defaultValue = "") String buyKind
-			, @RequestParam(defaultValue = "") String buySearch ) throws Exception {
+			, @RequestParam(defaultValue = "all") String buyKind //검색종류
+			, @RequestParam(defaultValue = "") String buySearch /*검색어*/) throws Exception {
 		
 		int total = buyService.buyCount();
 		if (nowPage == null && cntPerPage == null) {
@@ -191,7 +194,16 @@ public class BuyController {
 			cntPerPage = "5";
 		}
 		paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		List<BuyVO> buy = buyService.buyList(paging);
+		paging.calcStartEnd(Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("buyKind", buyKind);
+		map.put("buySearch", buySearch);
+		map.put("start", paging.getStart());
+		map.put("end", paging.getEnd());
+		
+		List<BuyVO> buy = buyService.buyList(map);
 		
 		
 		List<String> car_name = new ArrayList<String>();
@@ -211,7 +223,7 @@ public class BuyController {
 		
 		model.addAttribute("car",car_name);
 		model.addAttribute("paging", paging);
-		model.addAttribute("buyList", buyService.buyList(paging));
+		model.addAttribute("buyList", buyService.buyList(map));
 		return "/buy/buyList";
 	}
 	

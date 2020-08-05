@@ -1,5 +1,6 @@
 package com.rent.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ public interface BuyMapper {
 	public int rentBuyInsert(BuyVO buy) throws Exception;
 	
 	//구매목록
-	public List<BuyVO> buyList(PagingVO paging) throws Exception;
+	public List<BuyVO> buyList(HashMap<String, Object> map) throws Exception;
 	
 	//구매목록 총 갯수
 	public int buyCount() throws Exception;

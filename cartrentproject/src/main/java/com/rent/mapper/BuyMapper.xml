@@ -8,9 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 	<!-- 렌트차량 구매 -->
 	<insert id="rentBuyInsert" parameterType="com.rent.domain.BuyVO" useGeneratedKeys="true" keyProperty="buy_id">
 		insert into buy
-			(buy_id, id, rent_id, option_name, color, buy_date, counseling_date, name, address, tel, month)
+			(buy_id, id, rent_id, option_name, color, buy_date, counseling_date, name, address, tel, month, buy_situation)
 		values (#{buy_id}, #{id}, #{rent_id}, #{option_name}, #{color}, now(), #{counseling_date},
-				 #{name}, #{address}, #{tel}, #{month})
+				 #{name}, #{address}, #{tel}, #{month}, #{buy_situation})
 	</insert>
 	
 	<!-- id에 따른 구매목록 -->
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 	</select>
 	
 	<!-- 페이징 처리 후 렌트 목록 조회 -->
-	<select id="buyList" parameterType="com.rent.domain.PagingVO" resultType="com.rent.domain.BuyVO">
+	<select id="buyList" parameterType="hashMap" resultType="com.rent.domain.BuyVO">
 		<!-- rownum 사용 -->
 		select *
 		from (
@@ -52,6 +52,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		  (
 		    select *
 		    from buy
+		    where
+       		<if test="buyKind == 'all'"> 
+       			id like '%${moVal}%' 
+				or name like '%${moVal}%' 
+				or tel like '%${moVal}%' 
+			</if>
+	   		<if test="buyKind != 'all'"> 
+		   		<if test="buyKind == 'id'">id </if>	
+		   		<if test="buyKind == 'name'">name </if>
+		   		<if test="buyKind == 'tel'">tel </if>
+				like '%${buySearch}%' 
+			</if>
 		  ) A,
 		  ( select @NO := 0 ) B
 		) C
