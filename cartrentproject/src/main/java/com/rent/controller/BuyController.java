@@ -245,6 +245,48 @@ public class BuyController {
 		return "/buy/buyDetail";
 	}
 	
+	//예약현황 수정 (대여중, 반납완료)
+	@RequestMapping("/update")
+	public String buyUpdate(HttpServletRequest re, BuyVO buy) throws Exception {
+		String buy_situation = re.getParameter("buy_situation");
+		String existing_situation = re.getParameter("existing_situation");
+		String rent_id = re.getParameter("rent_id");
+		
+		RentVO rent = rentService.rentDetail(rent_id);
+		String car_id = Integer.toString(rent.getCar_id());
+		CarVO car = carService.carDetail(car_id);
+		int count = car.getCar_number();
+		
+		//잘못 눌렀을 경우 (반납완료 -> 반납완료)
+		if(buy_situation.equals(existing_situation)) {
+			System.out.println("같은값누르면 새로고침");
+			return "redirect:/buy/detail/"+buy.getBuy_id();
+		}
+		
+		//기본값은 대여중이다.
+		//만약 반납완료 -> 대여중으로 바꾸면 (넘어온값이 대여중)
+		if(buy_situation.equals("대여중")) {
+			rent.setSituation("렌트완료");
+			if(count <= 0) {
+				car.setCar_number(0);
+			}else {
+				car.setCar_number(count-1);
+			}
+			
+		}else if(buy_situation.equals("반납완료")) {
+			rent.setSituation("예약가능");
+			car.setCar_number(count+1);
+		}
+		
+		//수정한다.
+		rentService.situation(rent);
+		carService.carNumberAdding(car);
+		buyService.rentBuyUpdate(buy);
+		System.out.println("수정완료");
+		return "redirect:/buy/detail/"+buy.getBuy_id();
+	}
+	
+	
 	//예약 취소
 	@RequestMapping("/delete/{buy_id}")
 	public String buyDelete(@PathVariable int buy_id, HttpServletRequest request) throws Exception {

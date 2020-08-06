@@ -54,9 +54,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		    from buy
 		    where
        		<if test="buyKind == 'all'"> 
-       			id like '%${moVal}%' 
-				or name like '%${moVal}%' 
-				or tel like '%${moVal}%' 
+       			id like '%${buySearch}%' 
+				or name like '%${buySearch}%' 
+				or tel like '%${buySearch}%' 
 			</if>
 	   		<if test="buyKind != 'all'"> 
 		   		<if test="buyKind == 'id'">id </if>	
@@ -82,6 +82,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		from buy
 		where buy_id = #{buy_id}
 	</select>
+	
+	<!-- 예약현황 수정 (대여중, 반납완료) -->
+	<update id="rentBuyUpdate" parameterType="com.rent.domain.BuyVO">
+		update buy
+		set buy_situation = #{buy_situation}
+		where buy_id = #{buy_id}
+	</update>
 	
 	<!-- 차량 구매한 사람들의아이디를 가져온다. -->
 	<select id="buyListMember" parameterType="String" resultType="com.rent.domain.BuyVO">

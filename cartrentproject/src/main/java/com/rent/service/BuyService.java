@@ -47,6 +47,11 @@ public class BuyService {
 		return mapper.rentBuyDelete(buy_id);
 	}
 	
+	//예약현황 수정 (대여중, 반납완료)
+	public int rentBuyUpdate(BuyVO buy) throws Exception {
+		return mapper.rentBuyUpdate(buy);
+	}
+	
 	//예약자 상세조회
 	public BuyVO buyDetail(int buy_id) throws Exception {
 		return mapper.buyDetail(buy_id);
