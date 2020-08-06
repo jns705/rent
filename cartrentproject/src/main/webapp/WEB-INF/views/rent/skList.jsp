@@ -80,7 +80,7 @@
 							<select style="" name="manufacturer" id="usedCarMakerId" class="select2-selection select2-selection--single option01" onchange="carKind(); searchForm();">
 								<option value="">제조사 선택</option>
 								<c:forEach items="${manufacturer}" var="manufacturer" varStatus="status">
-									<option>${manufacturer.manufacturer}</option>
+									<option <c:if test="${ma != null and ma eq manufacturer.manufacturer}"> selected</c:if>>${manufacturer.manufacturer}</option>
 								</c:forEach>
 							</select>
 						</span>
@@ -231,7 +231,9 @@
 </div>
 </body>
 <script type="text/javascript">
-searchForm();
+
+
+
 $('#ex1').slider({});  //대여기간
 $("#ex2").slider({});  //월렌탈료
 $("#ex3").slider({});  //주행거리

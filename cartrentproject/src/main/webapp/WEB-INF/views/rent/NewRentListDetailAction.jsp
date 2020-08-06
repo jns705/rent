@@ -8,10 +8,10 @@ function checkForm(data){
 	var ck = true;
 
 if(!$('input:checkbox[id=term-check-all]').is(':checked')){
+	alert("모든 항목에 동의를 하셔야 회원가입이 가능합니다.");
   var offset = $("#allcheck").offset();
   $('html, body').animate({scrollTop : offset.top-600}, 400);
 	$('#sp').css('color','#f68121');
-	alert("모든 항목에 동의를 하셔야 회원가입이 가능합니다.");
 	return false;
 }
 

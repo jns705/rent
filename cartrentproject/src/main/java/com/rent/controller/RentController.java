@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -60,7 +61,13 @@ public class RentController {
 	
 	//렌트목록
 	@RequestMapping("/rentList")
-	public String rentList(Model model) throws Exception {
+	public String rentList(Model model, HttpServletRequest requset) throws Exception {
+		//메인.doa에서 받아온 값이 있으면
+		if(requset.getParameter("manufacturer") != null) {
+		model.addAttribute("ma", requset.getParameter("manufacturer"));
+		model.addAttribute("ck", requset.getParameter("carKind"));
+		model.addAttribute("cn", requset.getParameter("carName"));
+		}
 		//제조사 정보 출력을 위한 정보
 		model.addAttribute("manufacturer", carService.manufacturer());
 		//연료 정보 출력을 위한 정보
