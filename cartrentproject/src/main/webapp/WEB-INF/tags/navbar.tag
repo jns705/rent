@@ -5,7 +5,6 @@
 <c:set var="URL" value="${pageContext.request.requestURL}" />
 
 	    <!-- header 시작 -->
- <c:if test="${URL.substring(36) != 'main.jsp'}">
  <header id="menuHeader11" class="hc <c:if test="${fn : contains(URL, 'service') || fn : contains(URL, 'qna')}">extend</c:if> "  style="border-bottom: 0.1px solid rgb(255, 255, 255, .5); ">
 	<div class="header-wrapper">
 		<h1 id="menuHeaderLogoH1" >
@@ -50,7 +49,7 @@
 				<ul class="gnb-listbox" >
 					<li class="gnb-listitem gnb-listitem-long">
 					
-						<a href="/rent/rentList" class="gnb-anchor awaw aa1 serviceLong" style="left: auto; right: 0px;">장기렌터카</a>
+						<a href="/main.doa" class="gnb-anchor awaw aa1 serviceLong" style="left: auto; right: 0px;">장기렌터카</a>
 					</li>
 					<li class="gnb-listitem gnb-listitem-short">
 						<a href="/rent/main.do" class="gnb-anchor awaw aa2 serviceShort"   style="left: 60px; width: 100px;">단기렌터카</a>
@@ -68,19 +67,7 @@
 				<ul><li class="selected">
 				<a id="P0401" href="#none" data-name="customer" data-role="true">고객센터</a>
 			<div class="gnb-depth-layer">
-<ul><li>
-<a id="P040101" href="/rent/custcnte/notice/notice_list.do">공지사항</a>
-</li><li>
-<a id="P040102" href="/serviceCenter/customerConsultation">고객상담</a>
-</li><li>
-<a id="P040103" href="/serviceCenter/faq">자주찾는 질문</a>
-</li><li>
-<a id="P040104" href="/rent/custcnte/branch/shortBranch_list.do">지점안내</a>
-</li><li>
-<a href="/rent/custcnte/garage/skGarage_list.do">정비매장</a>
-</li><li>
-<a id="P040105" href="/rent/custcnte/html/form_download.do">양식다운로드</a>
-</li></ul></div></li></ul></div>
+<ul></ul></div></li></ul></div>
 <div class="gnb-local-depth"><ul><li>
 <a id="P040101" href="/serviceCenter">공지사항</a>
 </li><li>
@@ -120,7 +107,6 @@
 <div class="quick-top" style="z-index: 10000;">
     <a id="aaaaaa" class="btn-top">TOP</a>
 </div>
-</c:if>
 
 
 
@@ -5117,7 +5103,6 @@ button.list-group-item-danger {
 .panel {
   margin-bottom: 20px;
   background-color: #fff;
-  border: 1px solid transparent;
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript">
+$(document).ready(function(){
+	carKind();
+	selectCar();
+	//시간차를둬야 가능
+	setTimeout(function() {searchForm();}, 60);
+});
 //숫자 세자리 , 찍는 정규식
 function numberFormat(inputNumber) {
 	   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -9,6 +15,9 @@ function numberFormat(inputNumber) {
 function selectCar() {
 	var car_kind 	 = $('#usedCarSgmntTypeCd').val();
 	var manufacturer = $('#usedCarMakerId').val();
+	if(car_kind == '')
+		var car_kind 	 = '${ck}';
+	var cn = '${cn}';
 	$.ajax({
 		url		: '/rent/selectCar',
 		data	: {'car_kind' : car_kind, 'manufacturer' : manufacturer},
@@ -16,7 +25,10 @@ function selectCar() {
 		success : function(data){
 			var str = '<option value="">차량 선택</option>';
 			$.each(data.map, function(key, value){
-				str += '<option>'+ value.car_name + '</option>';
+				str += '<option';
+				if(cn.replace(/(\s*)/g, "") === value.car_name.replace(/(\s*)/g, ""))
+					str += ' selected ';
+				str += '>'+ value.car_name + '</option>';
 			});
 			$('#usedCartypeId').html(str);
 		}
@@ -26,6 +38,7 @@ function selectCar() {
 //차량 유형 선택
 function carKind(){
 	var manufacturer = $('#usedCarMakerId').val();
+	var ck = '${ck}';
 	$.ajax({
 		url		: '/rent/carKind',
 		data	: {'manufacturer' : manufacturer},
@@ -34,7 +47,10 @@ function carKind(){
 		success : function(data){
 			var str = '<option value="">차량 유형 선택</option>';
 			$.each(data.map, function(key, value){
-				str += '<option>'+ value.car_kind + '</option>';
+				str += '<option';
+				if(ck == value.car_kind)
+					str += ' selected ';
+				str += '>'+ value.car_kind + '</option>';
 			});
 			$('#usedCarSgmntTypeCd').html(str);
 			$('#usedCartypeId').html('<option value="">차량 선택</option>')
@@ -77,7 +93,6 @@ function ac(data){
 function searchForm(click){
 	if(click != 'click') $('[name=limit]').val('');
 	var forms = $('.listForm').serialize();
-		
 	$.ajax({
 		url  : '/rent/rentListProc',
 		data : forms,

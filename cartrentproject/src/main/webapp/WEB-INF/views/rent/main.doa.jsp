@@ -97,50 +97,106 @@ function resizeContents() {
     margin-top: 15 !important;
     line-height:2	 !important;
     }
+    
+    
+    
+.select-box b {
+    background-image: url(http://localhost:8082/static/img/spr-common.png);
+    left:350px;
+    width: 13px;
+    height: 7px;
+    background-repeat: no-repeat;
+    margin-left: -130px;
+    margin-top: 17px;
+    background-position: -1331px -1205px;
+    -webkit-background-size: 1347px 1290px;
+    background-size: 1347px 1290px;
+    text-indent: 1000%;
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+}
 </style>
+
+<script type="text/javascript">
+//차량 유형 선택
+function carKind(){
+	var manufacturer = $('#usedCarMakerId').val();
+	$.ajax({
+		url		: '/rent/carKind',
+		data	: {'manufacturer' : manufacturer},
+		type	: 'post',
+		dataType : 'json',
+		success : function(data){
+			var str = '<option value="">차량 유형 선택</option>';
+			$.each(data.map, function(key, value){
+				str += '<option>'+ value.car_kind + '</option>';
+			});
+			$('#usedCarSgmntTypeCd').html(str);
+			$('#usedCartypeId').html('<option value="">차량 선택</option>')
+		},
+		error : function(data){alert("carKind오류");}
+	});
+}
+
+//제조사 선택
+function selectCar() {
+	var car_kind 	 = $('#usedCarSgmntTypeCd').val();
+	var manufacturer = $('#usedCarMakerId').val();
+	$.ajax({
+		url		: '/rent/selectCar',
+		data	: {'car_kind' : car_kind, 'manufacturer' : manufacturer},
+		type	: 'post',
+		success : function(data){
+			var str = '<option value="">차량 선택</option>';
+			$.each(data.map, function(key, value){
+				str += '<option>'+ value.car_name + '</option>';
+			});
+			$('#usedCartypeId').html(str);
+		}
+	});
+}
+
+//리스트로 가는 url
+function goList(){
+	var manufacturer 	= $('[name=usedCarMakerId]').val();
+	var carKind 		= $('[name=usedCarSgmntTypeCd]').val();
+	var carName 		= $('[name=usedCartypeId]').val();
+	location.href="/rent/rentList?manufacturer="+manufacturer+"&carKind="+carKind+"&carName="+carName+"";
+}
+</script>
 							<div class="panel is-selected search_input" style="border:none;"> <!-- 중고차 -->
 								<div class="select-area fl" style=" padding-top: 20; padding-left: 30;">
 									<div class="select-col col-3">
 			                        <span class="select-box">
-										<select name="usedCarMakerId" id="usedCarMakerId" class="option01 option02 inputDate" tabindex="-1" aria-hidden="true">
+										<select name="usedCarMakerId" id="usedCarMakerId" class="option01 option02 inputDate"  onchange="carKind();">
 											<option value="">제조사 선택</option>
-											
-												<option value="HD">현대자동차</option>
-											
-												<option value="KI">기아자동차</option>
-											
-												<option value="DW">GM대우자동차</option>
-											
-												<option value="SM">르노/삼성자동차</option>
-											
-												<option value="BM">BMW</option>
-											
-												<option value="DT">도요타</option>
-											
-												<option value="BE">벤츠</option>
-											
+											<c:forEach items="${manufacturer}" var="manufacturer" varStatus="status">
+												<option>${manufacturer.manufacturer}</option>
+											</c:forEach>
 										</select>
+												<b role="presentation"></b>
 			                        </span>
 									</div>
 									<div class="select-col col-3">
 			                        <span class="select-box">
-										<select name="usedCarSgmntTypeCd" id="usedCarSgmntTypeCd" class="option01 inputDate" disabled="" tabindex="-1" aria-hidden="true">
+										<select name="usedCarSgmntTypeCd" id="usedCarSgmntTypeCd" class="option01 inputDate"  onchange="selectCar();">
 											<option value="">차량 유형 선택</option>
-												
 										</select>
+									<b role="presentation"></b>
 			                        </span>
 									</div>
 									<div class="select-col col-3">
 					                    <span class="select-box">
-											<select name="usedCartypeId" id="usedCartypeId" class="option01 inputDate" disabled="" tabindex="-1" aria-hidden="true">
+											<select name="usedCartypeId" id="usedCartypeId" class="option01 inputDate" tabindex="-1" aria-hidden="true">
 												<option value="">차량 선택</option>
-												
 											</select>
+										<b role="presentation"></b>
 					                    </span>
 									</div>
 								</div>
 								<div class="btn-wrap fr">
-									<a href="#" class="btn btn-color2 btnda" onclick="goUsedSelectSubmit();">검색</a>
+									<a href="#" class="btn btn-color2 btnda" onclick="goList();">검색</a>
 								</div>
 							</div>	
 							<!-- //190621 -->						

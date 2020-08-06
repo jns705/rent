@@ -394,7 +394,7 @@ $('.white_div').hover(function() {
             </div>
         </div>
     </div>
-                            	<a id="a" href="#" ><span id="span"></span>단기렌트</a>
+                            	<a id="a" href="/main#page2" ><span id="span"></span>단기렌트</a>
         </div>
     </div>
 <script type="text/javascript">
@@ -705,41 +705,6 @@ $('.white_div').hover(function() {
 					</div>
 				</div>
 </form><br><br><br><br><br><br><br>
-				<a id="a" href="#"  style="color:black; font-weight:800;"><span id="span" style=""></span>장기렌트</a>
-    </div>
-    <div class="section" id="section-3"  style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동차1.jpg'); background-repeat: no-repeat; background-size: cover; padding: 0px !important; margin: 0px  !important;">
-        <div class="spot long">
-					<div class="spot-wrapper">
-						<div class="heading">
-							<h2 class="tit">똑똑한 선택 SK 장기렌터카</h2>
-							<p class="descp">더 좋은 자동차를 갖는 최적의 장기렌터카 솔루션</p>
-						</div>
-					</div>
-					<!-- [S] 2018-01-25 변경 -->
-					<!-- 임시오픈을 위한 주석처리 -->
-					<form name="frm" id="frm" action="" method="post">
-					<div class="car-search" role="search">
-						<input type="hidden" name="tabId" id="tabId" value="NEWCAR">
-						<input type="hidden" name="prodId" id="prodId" value="000048">
-						<input type="hidden" name="carMakerId" id="carMakerId" value="">
-						<input type="hidden" name="carSgmntTypeCd" id="carSgmntTypeCd" value="">
-						<input type="hidden" name="cartypeId" id="cartypeId" value="">
-						<div class="car-search__wrapper clearfix" style="background:white; height:100px;">
-							<div class="option-radio">
-								<div class="item" onclick="location.href='/rent/NewRentList'">
-									<label>
-										<input type="radio" name="carSearchType" title="신차 렌터카 검색"  class="sr-only">
-										<em class="title" style="width:500px;">신차 렌터카 검색</em>
-									</label>
-								</div>
-								<div class="item">
-									<label>
-										<input type="radio" name="carSearchType" title="중고차 렌터카 검색"  checked class="sr-only">
-										<em class="title" style="width:500px; left:355px;">중고차 렌터카 검색</em>
-									</label>
-								</div>
-							</div>
-							
 							<style>
 							.inputDate{
 	font-size:15px !important;
@@ -774,8 +739,39 @@ $('.white_div').hover(function() {
     margin-top: 20px !important;
     line-height:2	 !important;
     }
+    .panel{
+    	border:none !important;
+    }
 </style>
-							<div class="panel is-selected search_input" style="border:none;"> <!-- 중고차 -->
+				<a id="a" href="/main#page3"  style="color:black; font-weight:800;"><span id="span" style=""></span>장기렌트</a>
+    </div>
+    <div class="section" id="section-3"  style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동차1.jpg'); background-repeat: no-repeat; background-size: cover; padding: 0px !important; margin: 0px  !important;">
+        <div class="spot long">
+					<div class="spot-wrapper">
+						<div class="heading">
+							<h2 class="tit">똑똑한 선택 SK 장기렌터카</h2>
+							<p class="descp">더 좋은 자동차를 갖는 최적의 장기렌터카 솔루션</p>
+						</div>
+					</div>
+					<form name="frm" id="frm" action="" method="post">
+					<div class="car-search" role="search" style="border:none;">
+						<div class="car-search__wrapper clearfix" style="background:white; height:100px;">
+							<div class="option-radio">
+								<div class="item" onclick="location.href='/rent/NewRentList'">
+									<label>
+										<input type="radio" name="carSearchType" title="신차 렌터카 검색"  class="sr-only">
+										<em class="title" style="width:500px;">신차 렌터카 검색</em>
+									</label>
+								</div>
+								<div class="item">
+									<label>
+										<input type="radio" name="carSearchType" title="중고차 렌터카 검색"  checked class="sr-only">
+										<em class="title" style="width:500px; left:355px;">중고차 렌터카 검색</em>
+									</label>
+								</div>
+							</div>
+							
+							<div class="panel is-selected search_input" style="border:none !important;"> <!-- 중고차 -->
 								<div class="select-area fl" style=" padding-top: 20px; padding-left: 30px;">
 									<div class="select-col col-3">
 			                        <span class="select-box">
@@ -823,9 +819,10 @@ $('.white_div').hover(function() {
 							<!-- //190621 -->						
 						</div>
 					</div>
+					</form>
 					<!-- [S] 2018-01-25 변경 -->
 				</div>
-					</form><br><br><br><br><br><br><br><br><br><br><br><br><br><br><a id="a" href="#"><span id="span" style=""></span>회사소개</a>
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><a id="a" href="/main#page4"><span id="span" style=""></span>회사소개</a>
         </div>
         
     <div class="section" id="section-4">

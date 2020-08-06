@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.rent.service.CarService;
 import com.rent.service.RentService;
 
 @Controller
@@ -17,6 +18,9 @@ public class MainController {
 
 	@Resource(name = "com.rent.service.RentService")
 	RentService rentService;
+
+	@Resource(name = "com.rent.service.CarService")
+	CarService carService;
 	
 	//메인 홈페이지
 	@RequestMapping("/main")
@@ -33,7 +37,10 @@ public class MainController {
 	}
 	
 	@RequestMapping("/main.doa")
-	public String maindoa() {
+	public String maindoa(Model model)throws Exception {	//제조사 정보 출력을 위한 정보
+		model.addAttribute("manufacturer", carService.manufacturer());
+		model.addAttribute("fuel", carService.fuel());
+		model.addAttribute("location", rentService.location());
 		return "/rent/main.doa";
 	}
 	
