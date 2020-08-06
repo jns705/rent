@@ -824,13 +824,170 @@ $('.white_div').hover(function() {
 				</div>
 					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><a id="a" href="/main#page4"><span id="span" style=""></span>회사소개</a>
         </div>
-        
-    <div class="section" id="section-4">
-    </div>
-    </div>
+	    <div class="section" id="section-4">
+	    	<div>
+	    		<div class="a">
+	    			<ul class="list">
+	    			
+	    				<li>
+		    				<h4>We Redesign Our Mobility Life</h4>
+		    				<br>
+		    				<p style="font-size:35px;">매일매일의 Mobility Life를 보다 가치있게 Redesing 하는일,</p>
+		    				<br>
+							<p style="font-size:35px;">미래를 준비하는 KS렌터카의 다음 미션입니다.</p>
+						</li>
+						
+						<li>
+		    				<h4>"Smart Way"</h4>
+		    				<h3>고객을 위한 똑똑한 길잡이</h3>
+		    				<br>
+		    				<p style="font-size:30px;">KS렌터카의 Visual Identiyu인 "SMART WAY"는 앞으로 나아가는 '길'의 모습을 형상화하였습니다.</p>
+		    				<br>
+							<p style="font-size:30px;">KS렌터카가 제안드리는 Smaert한 가격과 Total Car Care 프로그램이 역동적인 길 위에 얹어지고,</p>
+							<br>
+		    				<p style="font-size:30px;">끊임없는 도전과 열정의 Red 따뜻한 고객 사랑의 Orange Color를 더하여</p>
+		    				<br>
+		    				<p style="font-size:30px;">'고객 만족을 위한 똑똑한 길잡이'가 되기 위해 끊임없이 노력하는 KS렌터카의 의지를 표현하고 있습니다.</p>
+		    				
+						</li>
+						
+						<li>
+		    				<h4>3333333333</h4>
+		    				<br>
+		    				<p style="font-size:35px;">33333333333</p>
+		    				<br>
+							<p style="font-size:35px;">33333</p>
+						</li>
+						
+						<li>
+		    				<h4>W444</h4>
+		    				<br>
+		    				<p style="font-size:35px;">4</p>
+		    				<br>
+							<p style="font-size:35px;">44</p>
+						</li>
+	    			</ul>
+	    		</div>
+	    		
+  				
+	    		
+	    		<div class="b">
+	    			<button class="prev">이전</button>
+	    			<button class="next">다음</button>
+	    			<button onclick="black()">ㅋㅋ</button>
+	    		</div>
+	    	</div>
+		</div>
     
 </div>
+<style>
+h4{
+color: #FF0000;
+font-size:55px;
+top:10px;
+}
+h3 {
+color: #282828;
+font-size:40px;
+}
+.b{
+	position: relative;
+    margin-left: 300px;
+    width: 600px;
+    height: 100px;
+    top: 0x;
+    right: -380px;
+}
+.a {
+	position: relative;
+    margin-left: 300px;
+    width: 1400px;
+    height: 380px;
+    top: -100px;
+    right: 0;
+	border:1px solid;
+  	overflow: hidden;
+}
 
+ul {
+  list-style: none;
+}
+.a .list {
+  width: 5600px;
+  margin-left: -1400px;
+}
+
+.a .list:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.a .list li {
+  float: left;
+  height: 380px;
+  width: 4200px;
+}
+h2 {
+  font-family: 'Arial';
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 0.75;
+}
+
+span {
+  display: block;
+}
+
+span:not(.light) {
+  opacity: 0;
+  -webkit-animation: flashText .5s ease-out alternate infinite;
+          animation: flashText .5s ease-out alternate infinite;
+}
+
+span.light {
+  position: relative;
+  display: inline-block;
+}
+span.light:before {
+  position: absolute;
+  left: 0;
+  top: -10%;
+  width: 100%;
+  height: 120%;
+  background: red;
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
+  content: "";
+  opacity: 0;
+  -webkit-animation: flash .5s ease-out alternate infinite;
+          animation: flash .5s ease-out alternate infinite;
+}
+
+@-webkit-keyframes flash {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes flash {
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes flashText {
+  to {
+    opacity: 0.15;
+  }
+}
+@keyframes flashText {
+  to {
+    opacity: 0.15;
+  }
+}
+</style>
 <ul id="menu">
     <li class="menu-active menu-wordpress">
         <ul class="submenu plugins">
@@ -880,10 +1037,53 @@ $('.white_div').hover(function() {
             controlArrows: false
         });
 
+
+        $(document).ready(function() {
+            
+        	  $('.next').click(function() {
+        	    $('.list').stop().animate({
+        	      'margin-left': '-2800px'
+        	    }, function() {
+        	      $('.list li:first-child').appendTo('.list');
+        	      $('.list').css({
+        	        'margin-left': '-1400px'
+        	      });
+        	    });
+        	  });
+        	  
+        	  $('.prev').click(function() {
+        	    $('.list').stop().animate({
+        	      'margin-left': '0px'
+        	    }, function() {
+        	      $('.list li:last-child').prependTo('.list');
+        	      $('.list').css({
+        	        'margin-left': '-1400px'
+        	      });
+        	    });
+        	  });
+
+          	   var auto = setInterval(function(){
+          	   		$('.list').stop().animate({'margin-left':'-2800px'},function(){
+          	   			$('.list li:first-child').appendTo('.list');
+          	            $('.list').css({'margin-left':'-1400px'});
+          	       });
+          	   },4000);
+
+        	  
+        	});
+function black() {
+	var str ='';
+	str +='<span>Theres</span>';
+	str +='<span class="light">light</span>';
+	str +='<span> even in</span>';
+	str +='<span>the darkest</span>';
+	str +='<span>places</span>';
+	$('.a').html(str);
+}
 </script>
 
 <script type="text/javascript">!function(i,a){"use strict";var e,t,n,s=fp_utils.$,o=fp_utils.after,l=fp_utils.hasClass,u=fp_utils.addClass,r=fp_utils.toggleClass,c=fp_utils.removeClass,f=fp_utils.siblings,d=fp_utils.preventDefault,p=".language",h=s("#menu-line")[0],g=s(".menu-active").offsetWidth,v=0,m=40,L="active";function E(){m=2*parseFloat(getComputedStyle(fp_utils.$(".menu-active a")[0]).paddingLeft)}function y(){var e,t,n,i,a;e="GET",t="https://alvarotrigo.com/fullPage/routes/github-api.php",n=null,i=function(e){var n=JSON.parse(e);Object.keys(n).forEach(function(e){var t=s('[data-github="'+e+'"] h4')[0];t&&(t.innerHTML=n[e])})},(a=new XMLHttpRequest).open(e,t,!0),a.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),a.send(n),a.onreadystatechange=function(){4===a.readyState&&(200===a.status?i(a.responseText):console.log("Error: "+a.status))}}function w(e){switch(e.keyCode){case 27:l(s(".examples")[0],L)&&T()}}function b(){l(this,"left")?fullpage_api.moveSlideLeft():fullpage_api.moveSlideRight()}function _(){var e,t,n;e="https://alvarotrigo.com/fullPage/dist/non-critical.min.css?v=2",t=a.document.createElement("link"),a.document.styleSheets,t.rel="stylesheet",t.href=e,o(s("#stylesheet-critical")[0],t),s(".github-stars")[0].setAttribute("src","https://ghbtns.com/github-btn.html?user=alvarotrigo&repo=fullpage.js&type=star&count=true&size=large"),(n=decodeURIComponent(a.location.hash.substr(1))).length&&s("."+n,i).length&&fp_utils.trigger(s(".show-examples")[0],"click"),y()}function k(){clearTimeout(e),e=setTimeout(x,350)}function x(){if(g=s(".menu-active")[0].offsetWidth,a.innerWidth<=900){E();var e=s("#menu a")[0];R.call(e),v=e.offsetLeft}else 900<a.innerWidth&&(E(),R.call(s("#menu a")[0]),v=0)}function T(){clearTimeout(t),t=setTimeout(function(){S(".examples"),fullpage_api.setAllowScrolling(!0)},300)}function C(e){S(".examples"),fullpage_api.setAllowScrolling(!1)}function S(e){r(s(e)[0],L)}function A(e){void 0!==e&&(d(e),(e||a.event).stopPropagation()),S(p)}function W(e){c(s(p)[0],L)}function R(){var e=this.parentNode;D(e.offsetLeft,e.offsetWidth)}function j(){D(v,g)}function D(e,t){h.style.left=e+m/2+"px",h.style.width=t-m+"px"}function H(e){d(e);var t=this.getAttribute("href").substr(1);u(this,L),c(f(this),L);var n=s('[data-tab="'+t+'"]')[0];u(n,L),c(f(n),L)}E(),h.style.width=g-m+"px",h.style.left="20px","en"!==(!(n=navigator.language||navigator.userLanguage)||n.indexOf("-")<0?n:n.split("-")[0])&&A(),k(),s(".menu-active a")[0].addEventListener("click",function(e){e.preventDefault()}),s("#menu li a").forEach(function(e){e.addEventListener("mouseover",R),e.addEventListener("mouseout",j)}),a.addEventListener("resize",k),a.addEventListener("load",_),s(".shell-tab").forEach(function(e){e.addEventListener("click",H)}),s(".language-current")[0].addEventListener("click",A),s("html")[0].addEventListener("click",W),s(".info-close")[0].addEventListener("touchstart",T),s(".info-close")[0].addEventListener("click",T),s(".show-examples")[0].addEventListener("click",C),i.addEventListener("keydown",w),s(".my-arrow").forEach(function(e){e.addEventListener("click",b)}),function(){function e(){dataLayer.push(arguments)}a.dataLayer=a.dataLayer||[],e("js",new Date),e("config","UA-94005074-1"),e("config","AW-1012934304")}()}(document,window);</script>
-
+x
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94005074-1"></script>
 
 
