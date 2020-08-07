@@ -8,9 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 	<!-- 렌트차량 구매 -->
 	<insert id="rentBuyInsert" parameterType="com.rent.domain.BuyVO" useGeneratedKeys="true" keyProperty="buy_id">
 		insert into buy
-			(buy_id, id, rent_id, option_name, color, buy_date, counseling_date, name, address, tel, month)
+			(buy_id, id, rent_id, option_name, color, buy_date, counseling_date, name, address, tel, month, buy_situation)
 		values (#{buy_id}, #{id}, #{rent_id}, #{option_name}, #{color}, now(), #{counseling_date},
-				 #{name}, #{address}, #{tel}, #{month})
+				 #{name}, #{address}, #{tel}, #{month}, #{buy_situation})
 	</insert>
 	
 	<!-- id에 따른 구매목록 -->
@@ -19,6 +19,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		FROM	BUY
 		WHERE	ID = #{id}
 		AND		MONTH = 0
+	</select>
+	
+	<!-- id에 따른 장기 구매목록 -->
+	<select id="buyListId" parameterType="String" resultType="com.rent.domain.BuyVO">
+		SELECT	*
+		FROM	BUY
+		WHERE	ID = #{id}
+		AND		MONTH != 0
 	</select>
 	
 	<!-- 렌트 구매자 목록 -->
@@ -35,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 	</select>
 	
 	<!-- 페이징 처리 후 렌트 목록 조회 -->
-	<select id="buyList" parameterType="com.rent.domain.PagingVO" resultType="com.rent.domain.BuyVO">
+	<select id="buyList" parameterType="hashMap" resultType="com.rent.domain.BuyVO">
 		<!-- rownum 사용 -->
 		select *
 		from (
@@ -44,6 +52,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		  (
 		    select *
 		    from buy
+		    where
+       		<if test="buyKind == 'all'"> 
+       			id like '%${buySearch}%' 
+				or name like '%${buySearch}%' 
+				or tel like '%${buySearch}%' 
+			</if>
+	   		<if test="buyKind != 'all'"> 
+		   		<if test="buyKind == 'id'">id </if>	
+		   		<if test="buyKind == 'name'">name </if>
+		   		<if test="buyKind == 'tel'">tel </if>
+				like '%${buySearch}%' 
+			</if>
 		  ) A,
 		  ( select @NO := 0 ) B
 		) C
@@ -62,6 +82,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		from buy
 		where buy_id = #{buy_id}
 	</select>
+	
+	<!-- 예약현황 수정 (대여중, 반납완료) -->
+	<update id="rentBuyUpdate" parameterType="com.rent.domain.BuyVO">
+		update buy
+		set buy_situation = #{buy_situation}
+		where buy_id = #{buy_id}
+	</update>
 	
 	<!-- 차량 구매한 사람들의아이디를 가져온다. -->
 	<select id="buyListMember" parameterType="String" resultType="com.rent.domain.BuyVO">
@@ -104,4 +131,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		WHERE	TEL = #{tel}
 	</select>
 	
+	<!-- 회원아이디로 구매한 리스트들 출력 -->
+	<select id="buyListMemberId" parameterType="String" resultType="com.rent.domain.BuyVO">
+		select *
+		from buy
+		where id = #{id}
+	</select>
+	
+	<!-- 회원탈퇴시 해당아이디에 대한 구매한 정보들을 전부 삭제한다  -->
+	<delete id="secessionDelete" parameterType="String">
+		delete from buy
+		where id = #{id}
+	</delete>
 </mapper>

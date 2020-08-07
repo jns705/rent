@@ -16,15 +16,20 @@ tbody tr:hover {
 </style>
 </head>
 <body>
-<h2 align=center>${detail.name}님의 상담 상세조회(${detail.id})</h2>
+<h2 align=center>${detail.name}님의 예약 상세조회(${detail.id})</h2>
 <div class="container">
 	<table class="table">
 	
 		<tr>
-			<th>상담 렌트 번호</th>
+			<th>예약 렌트 번호</th>
 			<td align="left">${detail.rent_id}
 				<input type="hidden" name="rent_id_${detail.buy_id}" value="${detail.rent_id }">
 			</td>
+		</tr>
+		
+		<tr>
+			<th>예약 차량이름</th>
+			<td align="left">${car.car_name}</td>
 		</tr>
 		
 		<tr>
@@ -56,7 +61,22 @@ tbody tr:hover {
 			<th>상담 신청일</th>
 			<td align="left">${detail.counseling_date}</td>
 		</tr>
-		
+	<form method="post">
+		<tr>
+			<th>구매 현황</th>
+			<td align="left">
+				<input type="hidden" name="buy_id" value="${detail.buy_id}">
+				<input type="hidden" name="rent_id" value="${detail.rent_id}">
+				<input type="hidden" name="existing_situation" value="${detail.buy_situation}">
+				<input type="hidden" id="buy_situation" name="buy_situation" value="${detail.buy_situation}">
+				<select id="reStatus" onchange="changeValue(this.value);">
+					<option value="대여중">대여중</option>
+					<option value="반납완료">반납완료</option>
+				</select>
+				<button formaction="${path}/buy/update">수정</button>
+			</td>
+		</tr>
+	</form>
 		<tr>
 			<th>신청 개월수</th>
 			<td align="left">
@@ -86,6 +106,14 @@ tbody tr:hover {
 </div>
 </body>
 <script>
+$(function() {
+	document.getElementById('reStatus').value = document.getElementById('buy_situation').value;
+});
+
+function changeValue(situation) {
+	document.getElementById('buy_situation').value = $('#reStatus').val();
+}
+
 function dateAddDel(sDate, nNum, type) {
     var yy = parseInt(sDate.substr(0, 4), 10);
     var mm = parseInt(sDate.substr(5, 2), 10);

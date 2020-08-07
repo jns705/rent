@@ -16,10 +16,22 @@
 <jsp:useBean id="toDay" class="java.util.Date" />
 <fmt:formatDate value='${toDay}' pattern='HH' var="nowHour"/>
 <fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' var="nowDate"/>
-<body>
+<body style="max-width: 9999px;">
 <form action="/counseling/mainProc" method="get" name="proc">
-				<div class="spot short type2" style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동촤.gif')">
-					<div class="spot-wrapper">
+				<div class="spot short type2 main" style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동촤2.jpg'); background-repeat: no-repeat;">
+<script type="text/javascript">
+//윈도우 크기 바뀔 때 마다
+$(document).ready(function(){
+    $(window).resize(resizeContents);
+    resizeContents();
+});
+
+function resizeContents() {
+    $(".main").height($(window).height());$("#section-1").width($(window).width());
+    $('.main').css("background-size", $(window).width()+50+"px "+ $(window).height() + "px");
+}
+</script>
+					<div class="spot-wrapper" >
 						<div class="heading">
 							<h2 class="tit">즐거운 여행의 시작</h2>
 							<p class="descp">안전하고 즐거운 여행은 솔렌터카에서 시작됩니다.</p>
@@ -156,6 +168,11 @@
 											</span>
 										</div>
 									</div>
+<style>
+	.time-area span{
+		font-size:28px;
+	}
+</style>
 									<div class="time-area">
 										<strong class="title">총 대여시간</strong>
 										<p class="time">
@@ -209,6 +226,7 @@ function jeju(){
                       //시작일(startDate) datepicker가 닫힐때
                       //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
                      $("#endDate").datepicker( "option", "minDate", selectedDate );
+                     $("#endDate").focus();
                  }    
  
             });

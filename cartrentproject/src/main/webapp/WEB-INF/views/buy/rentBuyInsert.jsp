@@ -10,6 +10,52 @@
 <meta charset="UTF-8">
 <title>상세정보</title>
 <head>
+<style>
+@-webkit-keyframes sparkle {
+  from {
+    background-position: 0% 100%;
+  }
+  to {
+    background-position: 200% 100%;
+  }
+}
+
+@keyframes sparkle {
+  from {
+    background-position: 0% 100%;
+  }
+  to {
+    background-position: 200% 100%;
+  }
+}
+.test {
+  background: white;
+  display: inline-block;
+  padding: 1em;
+  font-family: Helvetica Neue;
+  border-radius: 100px;
+  position: relative;
+}
+.test:before {
+  -webkit-animation: sparkle 4s infinite linear;
+          animation: sparkle 4s infinite linear;
+  background: -webkit-gradient(linear, left top, right top, from(#7FEFBD), color-stop(11%, #FFF689), color-stop(22%, #EC0B43), color-stop(33%, #7FEFBD), color-stop(44%, #FFF689), color-stop(55%, #EC0B43), color-stop(66%, #7FEFBD), color-stop(77%, #FFF689), color-stop(88%, #EC0B43), to(#7FEFBD));
+  background: linear-gradient(90deg, #000000 0%, #000002 11%, #CCCCCC 22%, #999999 33%, #888888 44%, #555555 55%, #444444 66%, #333333 77%, #222222 88%, #111111 100%);
+  background-size: 300% 100%;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  -webkit-filter: blur(3px);
+          filter: blur(3px);
+  z-index: -1;
+  -webkit-transform: scale(0.99) translateY(3px);
+          transform: scale(0.99) translateY(3px);
+}
+</style>
 </head>
 
 
@@ -181,7 +227,7 @@
 					</div>
 					<fieldset>
 						<legend class="sr-only">렌트 선택 폼</legend>
-						<div class="form-group form-group--estimate">
+						<div class="form-group form-group--estimate test">
 							<input type="text" id="sDate" readonly="readonly" placeholder="계약시작일" name="sDate" value="" style="display:none;" >
 									<div class="form-group__list">
 									<div class="form-group__header">
@@ -262,7 +308,7 @@
 							</div>
 							<div class="estimate-list__item">
 								<div class="estimate-item__caption clearfix">
-									<input type="text" class="form-control" name="name"value="${member.name }">
+									<input type="text" class="form-control" id="name" name="name"value="${member.name }">
 								</div>
 							</div>
 						</div>
@@ -275,8 +321,7 @@
 							</div>
 							<div class="estimate-list__item">
 								<div class="estimate-item__caption clearfix">
-									<input type="text" class="col-sm-10" id="address" name="address" value="${member.address}" style="border: 1px double #D1D0CE;background-color: #e2e2e2;" readonly/>
-									<input type="button" class="col-sm-2" onclick="daumZipCode()" value="주소찾기">
+									<input type="text" class="form-control" id="address" name="address" value="${member.address}" style="border: 1px double #D1D0CE;background-color: #e2e2e2;" readonly/>
 								</div>
 							</div>
 						</div>
@@ -289,66 +334,29 @@
 							</div>
 							<div class="estimate-list__item">
 								<div class="estimate-item__caption clearfix">
-									<input type="text" class="form-control" id="tel" name="tel"value="${member.tel}">
+									<input type="text" class="form-control" id="tel" name="tel"value="${member.tel}" maxlength="11">
 								</div>
 							</div>
 						</div>
 					</div>
-					
-					
 				</article>
-				<div class="counsel-btn-box btn-box text-c">
-					<button type="submit" class="btn btn-color1 btn-large btn-fix3">예약완료</button>
+				
+				<div class="btn-box text-c">
+					<button type="submit" class="btn btn-color1 btn-large btn-fix3 m-link sm-link_padding-all sm-link5">
+						<span>예약완료</span>
+					</button>
 				</div>
 				
-				
-				
-
 </div></form></div></div>
 </body>
-</html>
-</body>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-function daumZipCode() {
-	new daum.Postcode({
-		oncomplete: function(data) {
-			//팝업에서 검색한 결과 항목을 클릭하였을 경우 실행할 코드를 작성하는 부분이다.
-	
-			//각 주소의 노출 규칙에 따라 주소를 조합한다.
-			//내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기한다.
-			var fullAddr  = '';	//최종 주소 변수
-			var extraAddr = '';	//조합형 주소 변수
-	
-			//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-			if(data.userSelectedType == 'R') {	//도로명 주소를 선택한 경우
-				fullAddr = data.roadAddress;
-			} else {	//지번 주소를 선택한 경우
-				fullAddr = data.jibunAddress;
-			}
+$("#name").on("keyup", function() {
+    $(this).val($(this).val().replace(/[^a-zA-Zㄱ-힣]/gi,""));
+});
 
-			//사용자가 선택한 주소가 도로명 타입일때 조합한다.
-			if(data.userSelectedType == 'R') {
-				//법정동명이 있을 경우 추가한다.
-				if(data.bname != '') {
-					extraAddr += data.bname;
-				}
-				//건물명이 있을 경우에 추가한다.
-				if(data.buildingName != '') {
-					extraAddr += (extraAddr != '' ? ', ' + data.buildingName : data.buildingName);
-				}
-				//조합형 주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-				fullAddr += (extraAddr != '' ? ' (' + extraAddr + ')' : '' );
-			}
-
-			//우편번호와 주소정보를 해당 필드에 넣는다.
-			document.getElementById('address').value = fullAddr;
-
-			//커서를 상세주소 입력 필드로 이동한다.
-			document.getElementById('tel').focus();
-		}
-	}).open();
-}
+$("#tel").on("keyup", function() {
+    $(this).val($(this).val().replace(/[^0-9]/g,""));
+});
 </script>
 </html>
 </layoutTag:layout>

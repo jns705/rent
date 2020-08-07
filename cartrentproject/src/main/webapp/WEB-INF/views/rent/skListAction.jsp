@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript">
+$(document).ready(function(){
+	carKind();
+	selectCar();
+	//시간차를둬야 가능
+	setTimeout(function() {searchForm();}, 60);
+});
 //숫자 세자리 , 찍는 정규식
 function numberFormat(inputNumber) {
 	   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -9,6 +15,9 @@ function numberFormat(inputNumber) {
 function selectCar() {
 	var car_kind 	 = $('#usedCarSgmntTypeCd').val();
 	var manufacturer = $('#usedCarMakerId').val();
+	if(car_kind == '')
+		var car_kind 	 = '${ck}';
+	var cn = '${cn}';
 	$.ajax({
 		url		: '/rent/selectCar',
 		data	: {'car_kind' : car_kind, 'manufacturer' : manufacturer},
@@ -16,7 +25,10 @@ function selectCar() {
 		success : function(data){
 			var str = '<option value="">차량 선택</option>';
 			$.each(data.map, function(key, value){
-				str += '<option>'+ value.car_name + '</option>';
+				str += '<option';
+				if(cn.replace(/(\s*)/g, "") === value.car_name.replace(/(\s*)/g, ""))
+					str += ' selected ';
+				str += '>'+ value.car_name + '</option>';
 			});
 			$('#usedCartypeId').html(str);
 		}
@@ -26,6 +38,7 @@ function selectCar() {
 //차량 유형 선택
 function carKind(){
 	var manufacturer = $('#usedCarMakerId').val();
+	var ck = '${ck}';
 	$.ajax({
 		url		: '/rent/carKind',
 		data	: {'manufacturer' : manufacturer},
@@ -34,12 +47,15 @@ function carKind(){
 		success : function(data){
 			var str = '<option value="">차량 유형 선택</option>';
 			$.each(data.map, function(key, value){
-				str += '<option>'+ value.car_kind + '</option>';
+				str += '<option';
+				if(ck == value.car_kind)
+					str += ' selected ';
+				str += '>'+ value.car_kind + '</option>';
 			});
 			$('#usedCarSgmntTypeCd').html(str);
 			$('#usedCartypeId').html('<option value="">차량 선택</option>')
 		},
-		error : function(data){alert("carKind오류");}
+		error : function(data){}
 	});
 }
 
@@ -77,7 +93,6 @@ function ac(data){
 function searchForm(click){
 	if(click != 'click') $('[name=limit]').val('');
 	var forms = $('.listForm').serialize();
-		
 	$.ajax({
 		url  : '/rent/rentListProc',
 		data : forms,
@@ -102,7 +117,7 @@ function searchForm(click){
 					'<ul class="result_rental">'+
 						'<li style="font-size: 14px; margin-top: 70px;">렌탈료</li>'+
 						'<li>'+
-							'<span class="result_rental_price"  style="margin-top: 68px;">'
+							'<span class="result_rental_price"  style="margin-top: 66px;">'
 							+ numberFormat(value.price) +'<font size="-1">원~</font></span>'+
 						'</li><li></li>'+
 					'</ul>'+
@@ -133,13 +148,15 @@ function searchForm(click){
 							'<li>'+ value.location +'</li>'+
 					'</ul>'+
 				'</div>'+
-			'</div>'+
-				'<div class="howmany_box" style="font-size: 12px; background-color: f5f5f5;'+ 
+			'</div>';
+			if(value.standby_personnel > 0){
+				str += '<div class="howmany_box" style="background-color: f5f5f5;'+ 
 				'z-index: -5">'+
-					'<span class="howmany_box_span">현재 <span class="cl-point2 fontbold">'+ 
-					+ value.standby_personnel +'</span>명의 고객님이 상담 진행 중입니다.</span>'+
-				'</div>'+
-		'</div></a>';
+					'<span class="howmany_box_span" style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;현재 <span class="cl-point2 fontbold">'+ 
+					+ value.standby_personnel +'</span>명의 고객님이 상담 중입니다.</span>'+
+				'</div>';
+			}
+		str += '</div></a>';
 				
 			});
 				if(data.count > 1 ){

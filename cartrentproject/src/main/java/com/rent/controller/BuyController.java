@@ -3,7 +3,9 @@ package com.rent.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -129,20 +131,35 @@ public class BuyController {
 			if(optionList.size() > i+1) options+=", ";	
 		}
 		
-		CounselingVO counseling = couService.counselingOK(id);
+		List<CounselingVO> counseling = couService.counselingOK(id);
+		int num = 0;
+		
+		//가장 최근의 상담날짜를 넣어둔다
+		for(int i=0; i> counseling.size(); i++) {
+			System.out.println("상담 "+i+"개 : " + counseling);
+			num +=1;
+		}
+		
 		if(counseling != null) {
-			buy.setCounseling_date(counseling.getCounseling_date());
+			buy.setCounseling_date(counseling.get(num).getCounseling_date());
 		}else {
-			SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd");
+			SimpleDateFormat format1 = new SimpleDateFormat ("yyyy-MM-dd");
 			Calendar time = Calendar.getInstance();
 			buy.setCounseling_date(format1.format(time.getTime()));
 		}
 		
+		
 		buy.setOption_name(options);
+		buy.setBuy_situation("대여중");
 		
 		//렌트카를 돈주고 예약 했으니 car테이블에 있는 car_number(재고량)를 뺀다
 		CarVO car = carService.carDetail(car_id);
 		int count = car.getCar_number();
+		
+		//만약 해당 렌트카의 재고가 없으면
+		if(count <= 0) {
+			
+		}
 		count -=1;
 		car.setCar_number(count);
 		
@@ -163,30 +180,112 @@ public class BuyController {
 	@RequestMapping("/list")
 	public String buyList(Model model, PagingVO paging
 			, @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage
+			, @RequestParam(defaultValue = "all") String buyKind //검색종류
+			, @RequestParam(defaultValue = "") String buySearch /*검색어*/) throws Exception {
 		
-	int total = buyService.buyCount();
-	if (nowPage == null && cntPerPage == null) {
-		nowPage = "1";
-		cntPerPage = "5";
-	} else if (nowPage == null) {
-		nowPage = "1";
-	} else if (cntPerPage == null) { 
-		cntPerPage = "5";
-	}
-	paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		int total = buyService.buyCount();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		paging.calcStartEnd(Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("buyKind", buyKind);
+		map.put("buySearch", buySearch);
+		map.put("start", paging.getStart());
+		map.put("end", paging.getEnd());
+		
+		List<BuyVO> buy = buyService.buyList(map);
+		
+		
+		List<String> car_name = new ArrayList<String>();
+		for(int i = 0; i < buy.size(); i++) {
+			String rent_id = buy.get(i).getRent_id();
+			
+			if(rent_id == null) {
+				car_name.add("선택차량없음");
+				System.out.println("if문들어온 차량 : "+car_name);
+				continue;
+			}
+			RentVO ren = rentService.rentListId(rent_id);
+			int car_id = ren.getCar_id();
+			CarVO car = carService.carDetail(Integer.toString(car_id));
+			car_name.add(car.getCar_name());
+		}
+		
+		model.addAttribute("car",car_name);
 		model.addAttribute("paging", paging);
-		model.addAttribute("buyList", buyService.buyList(paging));
+		model.addAttribute("buyList", buyService.buyList(map));
 		return "/buy/buyList";
 	}
 	
 	//예약자 상세조회
 	@RequestMapping("/detail/{buy_id}")
 	public String buyDetail(@PathVariable int buy_id, Model model) throws Exception {
-		model.addAttribute("detail", buyService.buyDetail(buy_id));
+		BuyVO buy = buyService.buyDetail(buy_id);
+		String rent_id = buy.getRent_id();
+		
+		if(rent_id == null) {
+			
+		}else {
+			RentVO rent = rentService.rentDetail(rent_id);
+			int car_id = rent.getCar_id();
+			CarVO car = carService.carDetail(Integer.toString(car_id));
+			model.addAttribute("car", car);
+		}
+		model.addAttribute("detail", buy);
 		return "/buy/buyDetail";
 	}
+	
+	//예약현황 수정 (대여중, 반납완료)
+	@RequestMapping("/update")
+	public String buyUpdate(HttpServletRequest re, BuyVO buy) throws Exception {
+		String buy_situation = re.getParameter("buy_situation");
+		String existing_situation = re.getParameter("existing_situation");
+		String rent_id = re.getParameter("rent_id");
+		
+		RentVO rent = rentService.rentDetail(rent_id);
+		String car_id = Integer.toString(rent.getCar_id());
+		CarVO car = carService.carDetail(car_id);
+		int count = car.getCar_number();
+		
+		//잘못 눌렀을 경우 (반납완료 -> 반납완료)
+		if(buy_situation.equals(existing_situation)) {
+			System.out.println("같은값누르면 새로고침");
+			return "redirect:/buy/detail/"+buy.getBuy_id();
+		}
+		
+		//기본값은 대여중이다.
+		//만약 반납완료 -> 대여중으로 바꾸면 (넘어온값이 대여중)
+		if(buy_situation.equals("대여중")) {
+			rent.setSituation("렌트완료");
+			if(count <= 0) {
+				car.setCar_number(0);
+			}else {
+				car.setCar_number(count-1);
+			}
+			
+		}else if(buy_situation.equals("반납완료")) {
+			rent.setSituation("예약가능");
+			car.setCar_number(count+1);
+		}
+		
+		//수정한다.
+		rentService.situation(rent);
+		carService.carNumberAdding(car);
+		buyService.rentBuyUpdate(buy);
+		System.out.println("수정완료");
+		return "redirect:/buy/detail/"+buy.getBuy_id();
+	}
+	
 	
 	//예약 취소
 	@RequestMapping("/delete/{buy_id}")
@@ -284,7 +383,7 @@ public class BuyController {
 		List<BuyVO> buyList = new ArrayList<BuyVO>();
 		if(tel.equals("n")) {
 			String id = (String)session.getAttribute("id");
-			buyList = buyService.buyListSId(id);
+			buyList = buyService.buyListId(id);
 		}else  buyList = buyService.buyListTel(tel); 
 		List<CarVO> Car = new ArrayList<CarVO>();
 		List<String> situation = new ArrayList<String>();
@@ -299,6 +398,20 @@ public class BuyController {
 		else
 			model.addAttribute("tel", buyList.get(0).getTel());
 		
+
+		List<String> map = new ArrayList<String>();
+		for(int i = 0; i < buyList.size(); i++) {
+			BuyVO List = buyList.get(i);
+			if(List.getRent_id() != null) {
+			if(rentService.rentDetail(List.getRent_id()).getSpecial_note() != null)
+				map.add(rentService.rentDetail(List.getRent_id()).getSpecial_note());
+			if(rentService.rentDetail(List.getRent_id()).getSpecial_note() == null)
+				map.add("null");
+			}
+				
+		}
+		System.out.println(map);
+		model.addAttribute("map", map);
 		model.addAttribute("Buy", buyList);
 		model.addAttribute("Car", Car);
 		model.addAttribute("situation", situation);

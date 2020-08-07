@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -60,7 +61,13 @@ public class RentController {
 	
 	//렌트목록
 	@RequestMapping("/rentList")
-	public String rentList(Model model) throws Exception {
+	public String rentList(Model model, HttpServletRequest requset) throws Exception {
+		//메인.doa에서 받아온 값이 있으면
+		if(requset.getParameter("manufacturer") != null) {
+		model.addAttribute("ma", requset.getParameter("manufacturer"));
+		model.addAttribute("ck", requset.getParameter("carKind"));
+		model.addAttribute("cn", requset.getParameter("carName"));
+		}
 		//제조사 정보 출력을 위한 정보
 		model.addAttribute("manufacturer", carService.manufacturer());
 		//연료 정보 출력을 위한 정보
@@ -141,8 +148,6 @@ public class RentController {
 		
 		//조회한 정보 갯수
 		int listCount = rentService.newRentListPro(list).get(0).getRent_id();
-		System.out.println(list);
-		System.out.println(listCount);
 		//보여질 아이템 갯수
 		int showCount = 6;
 		int temp  = listCount/showCount+1;
@@ -204,9 +209,11 @@ public class RentController {
 			String id = buyIdList.get(i).getId();
 			//성별
 			String gender = buyService.memberInformation(id).getGender();
-			//나이   mysql에서 소수점 제거해도 소수점 나옴 ;;
+			
+			
+			//나이   mysql에서 소수점 제거해도 소수점 나옴 그래서 substring 써야함
 			int age = Integer.parseInt(buyService.memberInformation(id).getDate_of_birth().substring(0, 2));
-
+			
 			System.out.println("======================================");
 			//id에 해당하는 성별을 추출해서 preferenceVO에 해당 정보에 1씩 더한다 (성별)
 			if(gender.equals("남자")) {

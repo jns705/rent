@@ -115,8 +115,9 @@
 			</c:if>
 		</c:forEach>
 			
-		<c:if test="${SSize/listNum < startNum +1 }"> <c:set var="sn" value="${pagingSize}"/> </c:if>
+		<c:if test="${SSize/listNum < startNum +1}"> <c:set var="sn" value="${pagingSize}"/> </c:if>
 		<c:if test="${SSize/listNum > startNum +1}"> <c:set var="sn" value="${startNum+listNum}"/> </c:if>
+		<c:if test="${SSize/listNum <= listNum}"> <c:set var="sn" value="${pagingSize}"/> </c:if>
 		<a href="/serviceCenter?number=${sn}&moVal=${moVal}&moKind=${moKind}" class="next" title="다음 쪽으로 이동"></a>
 		 
 		<a href="/serviceCenter?number=${pagingSize}&moVal=${moVal}&moKind=${moKind}" onclick="getPList(22, 10); return false;" class="last" title="마지막 쪽으로 이동"></a>

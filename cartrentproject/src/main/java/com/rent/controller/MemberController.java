@@ -20,6 +20,7 @@ import com.rent.domain.BuyVO;
 import com.rent.domain.CarVO;
 import com.rent.domain.CounselingVO;
 import com.rent.domain.MemberVO;
+import com.rent.domain.RentVO;
 import com.rent.domain.ShortRentVO;
 import com.rent.service.BuyService;
 import com.rent.service.CarOptionService;
@@ -59,7 +60,9 @@ public class MemberController {
 	
 	//로그인 홈페이지
 	@RequestMapping("/loginForm")
-	public String loginForm() throws Exception{
+	public String loginForm(@RequestParam(defaultValue = "0") int check, Model model, HttpServletRequest request) throws Exception{
+		model.addAttribute("check", check);
+		model.addAttribute("Referer", request.getHeader("Referer"));
 		return "/member/loginForm";
 	}
 	
@@ -72,37 +75,45 @@ public class MemberController {
 	//회원가입
 	@RequestMapping("/insertProc")
 	public String insertProc(HttpServletRequest request, MemberVO member) throws Exception{
-		member.setTel(request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3"));
 		member.setAddress(request.getParameter("zipcode")+"-"+request.getParameter("address")+"-"+request.getParameter("addressDetail"));
 		mMemberService.insertProc(member);
 		return "/member/loginForm";
 	}
 	
+	//계정검사 AJAX
+	@RequestMapping("/loginProcAjax")
+	@ResponseBody
+	public int loginProcAjax(MemberVO member, Model model)throws Exception{
+		int check = 0;
+		if		(mMemberService.accountCheck(member.getId())==null) check = 0;
+		else if	(!mMemberService.accountCheck(member.getId()).equals(member.getPassword())) check = 1;
+		else if	(mMemberService.accountCheck(member.getId()).equals(member.getPassword()))  check = 2;
+		return check;
+	}
+	
 	//계정 검사
 	@RequestMapping("/loginProc")
-	public String loginProc(@RequestParam String id, @RequestParam String password, HttpSession session, Model model)throws Exception{
-		String login_msg = "";
-		if		(mMemberService.accountCheck(id)==null) login_msg = "아이디가 틀렸습니다.";
-		else if	(!mMemberService.accountCheck(id).equals(password)) login_msg = "비밀번호가 틀렸습니다.";
-		
+	public String loginProc(@RequestParam(defaultValue = "0") int check, @RequestParam String Referer , @RequestParam String id, HttpSession session, Model model)throws Exception{
+		System.out.println("loginProc : " + check);
 		//아이디, 비밀번호가 있으면 세션을 등록한다
-		else if	(mMemberService.accountCheck(id).equals(password))  
-			session.setAttribute("id", id);
-		model.addAttribute("msg", login_msg);
-		
-		return "/member/memberAlert";
+		session.setAttribute("id", id);
+		if(Referer.equals("http://localhost:8082/buy/memberCheckForm")) return "redirect:/counseling/userList";
+		if(Referer.equals("http://localhost:8082/buy/memberCheckForm?check=1")) return "redirect:/counseling/userList";
+		return "redirect:" + Referer.substring(21);
 	}
 	//맴버 알람 페이지 
 	@RequestMapping("/memberAlert")
-	public String memberAlert() {
+	public String memberAlert(@RequestParam(defaultValue = "0") int check, Model model) {
+		System.out.println("Alert : " + check);
+		model.addAttribute("check", check);
 		return "/member/memberAlert";
 	}
 	
 	//로그아웃
 	@RequestMapping("/logOut")
-	public String logOut(HttpSession session) {
+	public String logOut(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
-		return "/main";
+		return "redirect:" + request.getHeader("Referer").substring(21);
 	}
 	
 	//아이디 중복검사
@@ -182,9 +193,74 @@ public class MemberController {
 	
 	//회원탈퇴
 	@RequestMapping("/delete")
-	public String memberDelete(MemberVO member) throws Exception {
+	public String memberDelete(MemberVO member, HttpSession session) throws Exception {
 		System.out.println(member.getId()+"회원 탈퇴");
+		//예약 상담 삭제해야함
+		
+		//1. 회원아이디에 해당하는 상담들을 삭제한다.
+		List<CounselingVO> counList = new ArrayList<CounselingVO>();
+		counList = couService.counselingListId(member.getId());
+		for(int i=0; i < counList.size(); i++) {
+			
+			//렌트아이디없이 상담한 경우 
+			if(counList.get(i).getRent_id() == null) {
+				couService.counselingDelete(counList.get(i).getCounseling_id());
+				continue;
+			}
+			
+			//i번째 렌트아이디를 가져온다
+			RentVO rentCou = rentService.rentDetail(counList.get(i).getRent_id());
+			
+			//회원이 상담신청을 했는데 상담 대기중일 경우
+			if(counList.get(i).getCounseling_situation().equals("상담 대기중")) {
+				int standby = rentCou.getStandby_personnel();
+				
+				//상담인원수가 1이면
+				if(standby == 1) {
+					//-1하면 0명이니까 예약가능으로 바꾼다.
+					rentCou.setStandby_personnel(standby-1);
+					rentCou.setSituation("예약가능");
+				}else if(standby == 0) { //혹시 모르니 만들어둠
+					rentCou.setStandby_personnel(0);
+					rentCou.setSituation("예약가능");
+				}else {
+					//상담인원수 -1한다
+					rentCou.setStandby_personnel(standby-1);
+				}
+				//상담인원수를 수정한다.
+				rentService.rentStandby(rentCou);
+			}
+			//회원의 상담을 삭제한다.
+			couService.counselingDelete(counList.get(i).getCounseling_id());
+		}
+		
+		//2. 회원아이디에 해당하는 구매(예약)목록을 삭제한다.
+		
+		List<BuyVO> buyList = new ArrayList<BuyVO>();
+		//회원 아이디에 해당하는 구매목록들을 전부 가져온다.
+		buyList = buyService.buyListMemberId(member.getId());
+		
+		for(int i=0; i < buyList.size(); i++) {
+			//예약을 취소 했으니 car 재고량을 1증가시킨다
+			RentVO rentBuy = rentService.rentDetail(buyList.get(i).getRent_id());
+			CarVO car = carService.carDetail(Integer.toString(rentBuy.getCar_id()));
+			int count = car.getCar_number();
+			car.setCar_number(count+1);
+			carService.carNumberAdding(car);
+			
+			//예약을 취소 했으니 렌트예약가능으로 바꾼다
+			rentBuy.setSituation("예약가능");
+			rentService.rentStandby(rentBuy);
+			
+			//회원아이디에 해당하는 구매목록을 삭제한다.
+			int buy_id = buyList.get(i).getBuy_id();
+			buyService.rentBuyDelete(buy_id);
+			
+		}
+		
+		//3. 마지막으로 회원아이디를 삭제 후 로그인세션을 종료시킨다.
 		mMemberService.memberDelete(member);
+		session.invalidate();
 		return "/main";
 	}
 	

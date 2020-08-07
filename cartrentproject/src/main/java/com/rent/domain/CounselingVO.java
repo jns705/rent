@@ -20,6 +20,7 @@ public class CounselingVO {
 	private String counseling_situation;
 	private String month;
 	private String counseling_date;
+	private String content;
 	
 
 

@@ -177,7 +177,7 @@
                 </div>
                 <div class="article-content">
                     <div class="terms-list"><!-- 경고 알럿 노출 될 경우 msg-alert 추가 부탁 드립니다. -->
-                        <p class="tit-deafult">SK렌터카㈜는 적법하고 공정한 방법으로 개인정보를 수집하며, 고객의 개인정보를 최우선으로 생각하여 안전하게 보유·관리하고 있습니다.</p>
+                        <p class="tit-deafult">솔렌터카㈜는 적법하고 공정한 방법으로 개인정보를 수집하며, 고객의 개인정보를 최우선으로 생각하여 안전하게 보유·관리하고 있습니다.</p>
                         <div class="terms-header">
                             <span class="checkbox v2">
                                 <input type="checkbox" id="select-terms1" name="agreeYn1">
@@ -243,33 +243,31 @@
                                 </thead>
                                 <tbody>
                                 	<tr>
-										<td class="text-c">SK렌터카(주)와 자동차 대여 중개 계약을<br>체결한 Sales Partner<br>
-											<a href="#none" class="btn-modal btn btn-small btn-line4" onclick="getCompanyPopList('20200701', '2020070101', 'SP');">자세히보기</a></td>
+										<td class="text-c">솔렌터카(주)와 자동차 대여 중개 계약을<br>체결한 Sales Partner<br>
 										<td>- 자동차 대여 계약 체결의 중개/유지 및 관련 부수 업무 (자동차 대여계약서, 약관, 대여차량에 대한 설명 및 안내)<br>
 											- 신규 고객 발굴을 위한 각종 영업활동 등 자동차 대여 중개와 밀접한 관련이 있는 업무 일체</td>
 									</tr>
 									<tr>
-										<td class="text-c">SK렌터카서비스(주)</td>
+										<td class="text-c">솔렌터카서비스(주)</td>
 										<td>장기/중기/단기렌탈 계약 및 지점 운영업무 수행, 고객센터 운영, 당사 상품 및 서비스 안내 TM 
 										(단, TM은 사전동의를 얻은 경우에 한함)</td>
 									</tr>
 									<tr>
 										<td class="text-c">잡플러스, 라온HR, 파인스태프 등 10여 업체<br>
-										<a href="#none" class="btn-modal btn btn-small btn-line4" onclick="getCompanyPopList('20200701', '2020070101', 'SC');">자세히보기</a>
 										</td>
 										<td>영업점/고객센터 업무처리 및 고객상담, 계약 등</td>
 									</tr>
                                     <tr>
-                                        <td>SK주식회사 C&amp;C, (주)AJ네트웍스, (주)알엔비소프트</td>
+                                        <td>솔주식회사 C&amp;C, (주)AJ네트웍스, (주)알엔비소프트</td>
                                         <td>정보시스템 개발 및 유지/관리, 인프라 및 DB운영</td>
                                     </tr>
                                     <tr>
-										<td class="text-c">SK인포섹(주)</td>
+										<td class="text-c">송인포섹(주)</td>
 										<td>정보시스템 보안관리</td>
 									</tr>									
 									<tr>
 										<td class="text-c">(주)더홍, 미디어포스원</td>
-										<td>SK렌터카, 빌리카 홈페이지 관리/운영</td>
+										<td>솔렌터카, 빌리카 홈페이지 관리/운영</td>
 									</tr>
 									<tr>
 										<td class="text-c">(주)다우기술</td>
@@ -474,12 +472,18 @@ function checkInsert() {
     	document.getElementById('address2').focus();
     	return;
     }
+	
+    var telNum = document.getElementById("tel").value.length;
     //전화번호
     if(!document.getElementById("tel").value) {
     	alert("전화번호 입력하세요");
     	document.getElementById('tel').focus();
     	return;
-    }
+    }else if(telNum != 11 ){
+		alert("전화번호는 11자리를 입력해주세요");
+    	document.getElementById('tel').focus();
+    	return;
+   	}
 	//선택 개월수
     if(!document.getElementById("month").value) {
 	   	alert("계약월수를 입력하세요");

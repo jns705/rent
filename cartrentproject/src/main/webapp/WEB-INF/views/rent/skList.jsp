@@ -18,8 +18,27 @@
 		background-color: #f5f5f5;
 	}
 
+
+.howmany_box_span{
+    position: absolute;
+    left: -15px;
+    top: 1px;
+    width: 15px;
+    height: 15px;
+    background-image: url(http://localhost:8082/static/img/pc_check_red.png);
+    background-size: 11px;
+    background-repeat: no-repeat;
+}
+
+.select2-selection {
+	height: 60px; 
+}
+.select-box {
+	height: 60px; 
+}
 </style>
 <head>
+<link rel="shortcut icon" href="http://localhost:8082/static/img/favicon.ico"/>
  <link href="http://localhost:8082/static/css/total.css" rel="stylesheet" type="text/css"/>
 <%@ include file="slider.jsp" %>
 <%@ include file="skListAction.jsp" %>
@@ -53,14 +72,7 @@
             </ul>
         </div>
         
-<style>
-.select2-selection {
-	height: 60px; 
-}
-.select-box {
-	height: 60px; 
-}
-</style>
+
 		<article class="car-search tab-content" id="tab-direct-user-personal" role="search" style="display: block;">
 			<div class="car-search__wrapper clearfix">
 				<div class="select-area fl" style="width: 670px;" >
@@ -69,7 +81,7 @@
 							<select style="" name="manufacturer" id="usedCarMakerId" class="select2-selection select2-selection--single option01" onchange="carKind(); searchForm();">
 								<option value="">제조사 선택</option>
 								<c:forEach items="${manufacturer}" var="manufacturer" varStatus="status">
-									<option>${manufacturer.manufacturer}</option>
+									<option <c:if test="${ma != null and ma eq manufacturer.manufacturer}"> selected</c:if>>${manufacturer.manufacturer}</option>
 								</c:forEach>
 							</select>
 						</span>
@@ -214,13 +226,16 @@
 		
 		</article>
 	</div>
+		
 	<br><br>
 </form>
 		
 </div>
 </body>
 <script type="text/javascript">
-searchForm();
+
+
+
 $('#ex1').slider({});  //대여기간
 $("#ex2").slider({});  //월렌탈료
 $("#ex3").slider({});  //주행거리

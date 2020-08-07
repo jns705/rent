@@ -6,6 +6,7 @@
 <layoutTag:layout>
 <!DOCTYPE html>
 <head>
+<%@ include file="short_rentAction.jsp" %>
 <style>
 </style>
 <jsp:useBean id="toDay" class="java.util.Date" />
@@ -13,165 +14,16 @@
 <fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' var="nowDate"/>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> 
 <link rel="stylesheet" href="http://localhost:8082/static/css/ss.css" type="text/css" /> 
+<link rel="stylesheet" href="http://localhost:8082/static/css/short_rent.css" type="text/css" /> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
     <meta charset="UTF-8">
     <title>솔렌터카</title>
 </head>
-<style>
-#car-type6, #car-type1, #car-type2, #car-type3, #car-type4, #car-type5 {display: none;}
-footer{
-	padding: 0px; margin: 0px;
-}
 
-
-
-
-</style>
-
-
-
-<script type="text/javascript">
-
-//날짜에 따른 시간 변경 
-//금일일시 현재시간 + 1
-//시작날짜 마지막날짜가 같을 시 마지막시간을 시작시간 + 1로 맞춘다
-function todayCheck(){
-	var nowDate = $('#nowDate').val();
-	var nowHour = Number($('#nowHour').val());
-	//시작날짜가 현재 날짜일 시
-	if(nowDate == $('#startDate').val()){
-		 var str1  = '';
-		 //현재시간+1부터 시작
-	     for(i = nowHour+1; i < 22; i++ ){
-		     if(i < 10) i = "0"+i;
-		     str1 += '<option value="'+ i +'">'+ i +'시</option>';
-	     }
-	}else{
-		var str1  = '';
-		//아닐 시 6 ~ 23시 까지
-	     for(i = 6; i < 23; i++ ){
-		     if(i < 10) i = "0"+i;
-	    	 str1 += '<option value="'+ i +'">'+ i +'시</option>';
-    	 }
-	}
-    $('#sHour').html(str1);
-    changeHour();
-}
-function changeHour(){
-	//시작날짜와 마지막 날짜가 같을 시
-   	if($('#startDate').val() == $('#endDate').val()){
-   	   	//마지막 시간을 시작시간+1로 바꾼다
-	   	var hour = Number($('#sHour').val())+1;
-	   	var str  = '';
-	   	for(i = hour; i < 23; i++ ){
-		     if(i < 10) i = "0"+i;
-	       str += '<option value="'+ i +'">'+ i +'시</option>';
-     	}
-	//아닐 시 06~23시로 바꾼다
-    }else{
-		var str  = '';
-		//아닐 시 6 ~ 23시 까지
-	     for(i = 6; i < 23; i++ ){
-		     if(i < 10) i = "0"+i;
-	    	 str += '<option value="'+ i +'">'+ i +'시</option>';
-    	 }
-	}
-   $('#lHour').html(str);
-	   
-   changeDate();
-}
-
-
-
-$(document).ready(function () {
-	changeDate();
-    $.datepicker.setDefaults($.datepicker.regional['ko']); 
-    $( "#startDate" ).datepicker({
-         changeMonth: true, 
-         changeYear: true,
-         nextText: '다음 달',
-         prevText: '이전 달', 
-         dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-         dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
-         monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-         dateFormat: "yy-mm-dd",
-         minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
-         onClose: function( selectedDate ) {    
-              //시작일(startDate) datepicker가 닫힐때
-              //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-             $("#endDate").datepicker( "option", "minDate", selectedDate );
-         }    
-
-    });
-    $( "#endDate" ).datepicker({
-         changeMonth: true, 
-         changeYear: true,
-         nextText: '다음 달',
-         prevText: '이전 달', 
-         dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-         dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
-         monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-         dateFormat: "yy-mm-dd",
-         minDate: 0,           
-         //maxDate: 0,                       // 선택할수있는 최대날짜, ( 0 : 오늘 이후 날짜 선택 불가)
-         onClose: function( selectedDate ) {    
-             // 종료일(endDate) datepicker가 닫힐때
-             // 시작일(sta	rtDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 시작일로 지정
-             $("#startDate").datepicker( "option", "maxDate", selectedDate );
-         }    
-
-    });    
-});
-
-//대여시간 구하기
-function changeDate() {
-//시작날짜와 마지막 날짜를 가져온다
-var sdt = new Date($('#startDate').val());
-var edt = new Date($('#endDate').val());
-//식별자
-var stemp = -1;
-//둘의날짜가 같은경우 stemp = 0
-if(sdt == edt) stemp = 0;
-//날짜의 차이를 구하여 stemp를 더한다
-var dateDiff = Math.ceil((edt.getTime()-sdt.getTime())/(1000*3600*24))+stemp;
-//값이 Invalid Date일 시(24시간 미만) 0일
-if (dateDiff == 'Invalid Date') dateDiff = 0;
-
-//시간 분을 가져온다
-var lHour 	= Number($('#lHour').val());
-var lMinute = Number($('#lMinute').val());
-var sHour 	= Number($('#sHour').val());
-var sMinute = Number($('#sMinute').val());
-var temp = 0;
-var minute = 0;
-//분 합쳐서 60일경우 시간에 +1
-//합쳐서 30인 경우는 분을 30
-if(lMinute + sMinute == 60)
-	temp = 1;
-if(lMinute + sMinute == 30)
-	minute = 30;
-
-//대여 시간을 구한다
-var hour = 24 - sHour + lHour + temp;
-
-//대여시간이 24시간 이상일 경우 날짜에 1을 더한다
-if(hour > 23){
-	hour 	 -= 24;
-	dateDiff += 1;
-	}
-//각자 값을 넣는다.
-$('#ddd').html(dateDiff); $('#mmm').html(minute); $('#hhh').html(hour);
-$('[name=rental_time]').val(dateDiff+'_'+hour+'_'+minute);
-if(isNaN(dateDiff)){ $('#ddd').html('0');} 
-
-}
-</script>
 <form action="/buy/short_rentProc" name="insertForm" method="get">
 <div id="content">
-    <div id="container">
+    <div id="container" style="margin-top:40px;">
         <div class="breadcrumbs">
             <h2 class="tit">단기렌터카 예약/확인<a href="#modal-login-global" class="btn-modal btn-tooltip" style="display:none;" id="reservLogin"></a></h2>
             <div class="clearfix">
@@ -223,52 +75,18 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                     <div class="article-content">
                         <div class="rent-store-select">
                             <div class="col fl">
-                                <div class="date-time-area clearfix">
-<style>
-  .inputDate{
-	font-size:15px !important;
-	font-weight:100;
-    width: 132px !important;
-    height: 42px;
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    border-radius: 0;
-    background-color: #fff;
-    font-size: 14px;
-    font-family: NanumBarunGothic;
-    box-sizing: border-box;
-    color: #333;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: 0;
-    transition: background .2s linear 0s,box-shadow .2s linear 0s;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-                                }
-                                
-.inputTime{
-    padding-left: 10px;
-	text-align:center !important;
-	font-size:17px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    height: 42px;
-    border-radius: 0;
-                                }
-</style>
-										<span id="sDateSpan" class="fl" >
+                                <div class="date-time-area clearfix" style="width:300px;">
+										<span id="sDateSpan" class="fl"   style="width:130;">
                                             <input style="border-right: none;" class="inputDate" readonly type="text" id="startDate" name="start_date" value="<c:if test ="${sD == null}">대여일 선택</c:if><c:if test ="${sD != null}">${sD}</c:if>" onchange="changeDate(); changeHour(); selectCar(); todayCheck();"/>
                                         </span>
-                                  			<span class="select-box fl">
+                                  			<span class="select-box fl"  style="width:85;">
 												<select class="inputTime" name="sHour" id="sHour"  onchange="changeDate(); changeHour();  selectCar();">
 												<c:forEach begin="06" end="22" varStatus="status">
 													<option <c:if test="${sH == status.index}">selected</c:if> value="${String.format('%02d', status.index)}">${String.format('%02d', status.index)} 시</option>
 												</c:forEach>
 												</select>
 											</span>
-                                   			<span class="select-box fl">
+                                   			<span class="select-box fl"  style="width:85;">
 												<select  class="inputTime" name="sMinute" id="sMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
 													<option <c:if test="${sM == 00}">selected</c:if>  value="00">00 분</option>
 													<option <c:if test="${sM == 30}">selected</c:if>  value="30">30 분</option>
@@ -276,7 +94,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 											</span>
                                 </div>
                                 <div class="store-area clearfix">
-                                    <span class="select-box fl">
+                                    <span class="select-box fl" style="width:300px;">
 										<select class="inputTime"  name="start_location" id="location" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
 										<c:if test="${sL eq '제주지점'}"><option>제주지점</option></c:if>
 										<c:if test="${sL != '제주지점'}">
@@ -290,18 +108,18 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                                 </div>
                             </div>
                             <div class="col fl">
-                                <div class="date-time-area clearfix">
-										<span id="sDateSpan" class="fl" >
+                                <div class="date-time-area clearfix" style="width:300px;">
+										<span id="sDateSpan" class="fl"   style="width:130;">
                                             <input style="border-right: none;"  class="inputDate"  readonly type="text" name="end_date" id="endDate" value="<c:if test ="${eD == null}">반납일 선택</c:if><c:if test ="${eD != null}">${eD}</c:if>" onchange="changeDate(); changeHour(); selectCar();"/>
                                         </span>
-                           				   <span  class="select-box fl">
+                           				   <span  class="select-box fl" style="width:85;">
 												<select class="inputTime"  name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate(); selectCar();">
 												<c:forEach begin="06" end="22" varStatus="status">
 													<option <c:if test="${lH == status.index}">selected</c:if>   value="${String.format('%02d', status.index)}">${String.format('%02d', status.index)} 시</option>
 												</c:forEach>
 												</select>
 											</span>
-											<span class="select-box fl">
+											<span class="select-box fl"  style="width:85;">
 												<select class="inputTime"  name="lMinute" id="lMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
 													<option <c:if test="${lM == 00}">selected</c:if>   value="00">00 분</option>
 													<option <c:if test="${lM == 30}">selected</c:if>   value="30">30 분</option>
@@ -309,7 +127,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 											</span>
                                 </div>
                                 <div class="store-area clearfix">
-                                       <span class="select-box fl">
+                                       <span class="select-box fl" style="width:300px;">
 												<select class="inputTime"  name="end_location" id="end_location" class="option01 option02 timeChange fast-reserve-select" onchange="selectCar();">
 													<c:if test="${lL eq '제주지점'}"><option>제주지점</option></c:if>
 													<c:if test="${lL != '제주지점'}">
@@ -344,148 +162,13 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                 </article>
 <!-- 개편된 기간,지점 선택 (끝) -->                   
             <article id="selectCar">
-<script type="text/javascript">
-	//숫자에 콤마를 찍는 정규식
-   function numberFormat(inputNumber) {
-   	   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-   }
-
-   //차량 가격
-   function carPrice(car_name, rent_id, price, index){
-	   if(rent_id != null) $('#rent_id').val(rent_id);
-	   //차가격이 없을 시 컨트롤러에서 가져온다
-       if(price == null) price = $('#realPrice').html();
-       //날짜를 가져오되 0일 시 계산을 위해 1로 바꾼다
-       var ddd = Number($('#ddd').html()); if(ddd==0) ddd = 1;
-       var hhh = Number($('#hhh').html()); if(hhh==0) hhh = 1;
-       var mmm = Number($('#mmm').html()); if(mmm==0) mmm = 1;
-       //시간에 따른 가격을 구한다.
-       var time = (price/30 * ddd) + (price/30/24 * hhh) + (price/30/24/72 * mmm);
-       //컨트롤러에서 가져온 시간을 realPrice에 넣는다
-       $('#realPrice').html(price);
-       //계산한 값을 보여준다 세자리 이하 내림
-       $('#rentPayment').html(numberFormat(Math.ceil(time/1000)*1000));
-       $('#rateAmt').html(numberFormat(Math.ceil(time/1000)*1000));
-       //모든 글씨의 선택CSS를 제거한다
-       $('[name=carI]').removeClass('cl-point1 wg-bold');
-       //해당 글씨에 CSS(class값)를 넣는다.
-       $('.'+index).addClass('cl-point1 wg-bold');
-       //퀵하단 메뉴에 값을 넣는다
-       var email = "";
-       if($('#email1').val() != "") email = "@"+ $('#email1').val();
-       
-	   if($('#startDate').val() != '대여일 선택')
-       $('#s_date_end').html($('#startDate').val()+" "+ $('[name=sHour]').val() + "시 " + $('[name=sMinute]').val() + "분");
-	   if($('#endDate').val() != '반납일 선택')
-       $('#e_date_end').html($('#endDate').val()+" "+ $('[name=lHour]').val() + "시 " + $('[name=lMinute]').val() + "분");
-	   $('#sel2_che').html($('#location').val());
-	   $('#sel2_che2').html($('[name=end_location]').val());
-	   $('#modelNm').html(car_name);
-	   $('#reservNm').html($('[name=name]').val());
-	   $('#reservHp').html($('[name=tel]').val());
-	   $('#reservBirth').html($('#birth').val());
-	   $('#reservEmail').html($('#emailId').val()+email);
-	   
-   }
-   //시작 시 로딩
-   selectCar();
-
-   //차량선택 메뉴 ajax
-   function selectCar(){
-		$.ajax({
-			url  	: '${path}/counseling/short_rentDetail',
-			type 	: 'get',
-			data	: $('[name=insertForm]').serialize(),
-			success : function(data){
-				var str = "";
-				str += '<div class="header-group">'+
-		                 '<h3>차량 선택 <p>예약완료된 차량은 선택이 불가합니다.</p></h3></div>'+
-		                 '<div class="article-content">'+
-		                     '<div class="rent-car-select" id="alert-cartype">'+
-		                        	'<div class="tab-menu v2"><ul><li class="c0 col-7';
-		                 if($('#kindCar').val() == '차량 선택' || $('#kindCar').val() == "") str += ' selected ';
-		                 str += '" ><a onclick="selectMenu(0);">전체</a></li>';
-				$.each(data.carKind, function(key, value){
-					str += '<li class="c'+ (key+1) +' col-7';
-		                  if($('#kindCar').val() == value ) str += ' selected ';
-					str += '"><a onclick="selectMenu('+ (key+1) +');">'+ value +'</a></li>';
-				});
-				str += '</ul></div>';
-		
-				str += '<div id="car-type0" class="tab-content bg-line1" ><ul class="carList openPop">';
-				$.each(data.a0, function(key, value){
-					str += '<li><a href="javascript:void(0);"';
-					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ', \'a' + key +'\');" name="carI" class="a'+key+'">';					
-					str += value.car_name+'</a></li>';
-				});
-				str += '</ul></div>';
-				
-				str += '<div id="car-type1" class="tab-content bg-line1" ><ul class="carList openPop">';
-				$.each(data.a1, function(key, value){
-					str += '<li><a href="javascript:void(0);"';
-					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ', \'b' + key +'\')" name="carI"  class="b'+key+'">';					
-					str += value.car_name+'</a></li>';
-				});
-				str += '</ul></div>';
-				
-				str += '<div id="car-type2" class="tab-content bg-line1" ><ul class="carList openPop">';
-				$.each(data.a2, function(key, value){
-					str += '<li><a href="javascript:void(0);"';
-					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ', \'c' + key +'\')" name="carI"  class="c'+key+'">';					
-					str += value.car_name+'</a></li>';
-				});
-				str += '</ul></div>';
-				
-				str += '<div id="car-type3" class="tab-content bg-line1" ><ul class="carList openPop">';
-				$.each(data.a3, function(key, value){
-					str += '<li><a href="javascript:void(0);"';
-					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ',  \'d' + key +'\')" name="carI"  class="d'+key+'">';					
-					str += value.car_name+'</a></li>';
-				});
-				str += '</ul></div>';
-				
-				str += '<div id="car-type4" class="tab-content bg-line1" ><ul class="carList openPop">';
-				$.each(data.a4, function(key, value){
-					str += '<li><a href="javascript:void(0);"';
-					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ', \'e' + key +'\')" name="carI"  class="e'+key+'">';					
-					str += value.car_name+'</a></li>';
-				});
-				str += '</ul></div>';
-				
-				str += '<div id="car-type5" class="tab-content bg-line1" ><ul class="carList openPop">';
-				$.each(data.a5, function(key, value){
-					str += '<li><a href="javascript:void(0);"';
-					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ',  \'f' + key +'\')" name="carI"  class="f'+key+'">';					
-					str += value.car_name+'</a></li>';
-				});
-				str += '</ul></div>';
-				
-				str += '<div id="car-type6" class="tab-content bg-line1" ><ul class="carList openPop">';
-				$.each(data.a6, function(key, value){
-					str += '<li><a href="javascript:void(0);"';
-					if(value.situation != '예약가능') str += ' class="cl-thin"> ';	
-					else str += ' onclick="carPrice(\''+ value.car_name +'\','+ value.rent_id + ','+ value.price + ',  \'g' + key +'\')" name="carI"  class="g'+key+'">';					
-					str += value.car_name+'</a></li>';
-				});
-				str += '</ul></div>';
-				
-		
-				$('#selectCar').html(str);
-				
-				carPrice();
-			}
-		});
-    }
-</script>
+				<script type="text/javascript">
+				 	selectCar();
+				</script>
                 
             </article>
-
+            <span class="cl-point1 spamM" style="margin-left: 30px; display: none;">차량을 선택해 주세요!</span>
+<br><br>
 <!--  계약자 정보(제1운전자) start -->
             <article>
                      <div class="header-group">
@@ -506,42 +189,34 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                             <div class="fl col-3">
                             <span class="input essential" id="alert-name">
                                 <strong class="check">필수</strong>
-                                <label><input type="text"  oninput="carPrice();" type="text" placeholder="이름 입력" name="name" class="onlyKorEng" maxlength="20" value="${detail.name}"/></label>
+                                <label><input type="text"  oninput="carPrice(); idCheck();" type="text" placeholder="이름 입력" name="name" class="onlyKorEng" maxlength="20" value="${detail.name}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-name"></span>
                             </div>
                       		 <div class="fl col-3">
                             <span class="input essential" id="alert-birth">
                              <strong class="check">필수</strong>
-                                <label><input type="text" maxlength="8" oninput="carPrice();" id="birth" type="text" maxlength="8" placeholder="생년월일(20170101) 입력" class="onlyNumber" name="birthday" value="${detail.date_of_birth}"/></label>
+                                <label><input type="text" maxlength="8" oninput="carPrice(); birthCheck();" id="birth" type="text" maxlength="8" placeholder="생년월일(20170101) 입력" class="onlyNumber" name="birthday" value="${detail.date_of_birth}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-birth"></span>
                             </div>
                             <div class="fl col-3">
                             <span class="input essential" id="alert-mobile">
                                <strong class="check">필수</strong>
-                                <label><input oninput="carPrice();" type="text" placeholder="휴대폰번호(-없이 입력) 입력" class="onlyNumber" name="tel"  value="${tel[0]}${tel[1]}${tel[2]}"/></label>
+                                <label><input oninput="carPrice(); telCheck();" maxlength="11" type="text" placeholder="휴대폰번호(-없이 입력) 입력" class="onlyNumber" name="tel"  value="${tel[0]}${tel[1]}${tel[2]}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-mobile"></span>
                             </div>
                         </div>
-                        
-<script type="text/javascript">
-	//이메일 선택 시 메일 값을 넣는다
-	function emailInput(){
-		$('#email1').val($('#email2').val());
-	}
-	
-</script>                        
                         <div class="input-row clearfix">
                         	<div class="email-input input-box col-1 maa0" id="alert-email">
                         		<span class="input essential col-3">
                                     <strong class="check">필수</strong>
-                                    <label><input oninput="carPrice();" type="text" placeholder="이메일 입력" class="checkEmail" name="emailId" id="emailId" value=""  maxlength="30"/></label>
+                                    <label><input oninput="carPrice(); emailCheck();" type="text" placeholder="이메일 입력" class="checkEmail" name="emailId" id="emailId" value=""  maxlength="30" style="border-right:none;"/></label>
                                 </span>
                                 <span class="input hyphen col-3">
                                     <span class="text">@</span>
-                                    <input oninput="carPrice();" type="text" placeholder="직접 입력" class="checkEmail" name="domain" id="email1" value=""  maxlength="30"  tabindex="-1" aria-hidden="true"/>
+                                    <input oninput="carPrice();  emailCheck1();" type="text" placeholder="직접 입력" class="checkEmail" name="domain" id="email1" value=""  maxlength="30"  tabindex="-1" aria-hidden="true"/>
                                 </span>
                                 <span class="select-box col-3">
                                     <select id="email2" class="option01 inputTime" onchange="emailInput(); carPrice(); " tabindex="-1" aria-hidden="true">
@@ -582,21 +257,22 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                                         </span>
                                         <span class="input essential">
                                    			<strong class="check">필수</strong>
-                                            <label><input oninput="carPrice();"  type="text" class="readonly" readonly="readonly" placeholder="주소 입력" name="address" id="address" value="${address[1]}" /></label>
+                                            <label><input oninput="carPrice(); address1Check();"  type="text" class="readonly" readonly="readonly" placeholder="주소 입력" name="address" id="address" value="${address[1]}" /></label>
                                         </span>
                                         <span class="input" style="width:280px;">
-                                            <label><input oninput="carPrice();"  type="text" placeholder="나머지 주소 입력"  name="addressDetail" id="addressDetail" maxlength="30" value="${address[2]}" onkeyup="checkingDtlAddr()" /></label>
+                                            <label><input oninput="carPrice(); addressCheck();"  type="text" placeholder="나머지 주소 입력"  name="addressDetail" id="addressDetail" maxlength="30" value="${address[2]}" onkeyup="checkingDtlAddr()" /></label>
                                         </span>
-                                        <a href="#none" class="btn btn-default btn-fix2 fr" onclick="daumZipCode();" id="addrSearchBtn">우편번호 검색</a>
-                                    </span>
-                                    <span class="msg-txt cl-point1" id="span-addr"></span>
+                                        <a href="#none" class="btn btn-color2 btn-fix1 " onclick="daumZipCode();" id="addrSearchBtn" style="margin:0px;width:97; background-color: #f68121;">우편번호</a>
+                                    </span><br>
                                 </div>
+                            <span class="msg-txt cl-point1" id="span-address" style="display: block;"></span>
                             </div>
   
                     </div>
                 </div>
-            </article>
- 
+            </article><br>
+            
+<br><br>
               <article><!-- 이용약관 -->
                     <div class="header-group">
                         <h3>이용약관</h3>
@@ -609,7 +285,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 								<h4>개인정보 제공 활용 동의</h4>
 							</div>
 							<!-- header-group//end -->
-							<div class="terms-list v3">
+							<div class="terms-list v3" id="allcheck">
 								<div class="terms-header">
 									<h4>전체동의</h4>
 									<span class="checkbox v2">
@@ -628,34 +304,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                                         <label class="label" for="term-check-1" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
-<script type="text/javascript">
-//모두 동의 체크박스
-function checkBox(){
-	//체크박스가 전부 체크일 시 체크박스를 풀고 아닐시 선택으로 바꾼다
-	if($("input:checkbox[name=is_check]:checked").length == 5)
-	$("input[name=is_check]:checkbox").attr("checked", false);
-	else
-	$("input[name=is_check]:checkbox").prop("checked", true);
-}
 
-function boxCheck(){
-//다른 5개의 체크박스가 모두 선택됬을 시 모두동의 체크박스를 체크 아닐 시 반대
-	if($("input:checkbox[name=is_check]:checked").length == 5)
-		$("input[id='term-check-all']:checkbox").attr("checked", true);
-	else
-		$("input[id='term-check-all']:checkbox").attr("checked", false);
-}
-
-
-//이용약관 CSS
-function btnSlide(id){
-	//모든 약관을 숨긴다
-	for(i=1; i < 7; i++){$('#a'+i).slideUp();}
-	//약관이 숨겨져있을 경우 보여준다 아닐 시 반대
-    if		($('#'+id).is(":visible")) $('#'+id).slideUp();
-    else  	$('#'+id).slideDown();
-}    
-</script>
 								<div class="terms-content notice" id="a1" >
 									<ul class="terms-content__listbox">
 										<li class="color_bold">
@@ -1163,7 +812,7 @@ function btnSlide(id){
 							<!-- terms-list//end -->
 						</div>
 						<!-- terms-listbox//end -->
-                        <p class="msg-info v1">고객님께서는 동의를 거부할 권리가 있으나, 미 동의시 렌터카 서비스 이용이 불가능합니다.</p>
+                        <p class="msg-info v1" id="sp">고객님께서는 동의를 거부할 권리가 있으나, 미 동의시 렌터카 서비스 이용이 불가능합니다.</p>
                     </div>
                     <!-- article-content//end -->
                 </article>
@@ -1251,11 +900,11 @@ function btnSlide(id){
                                         <h4>대여현황</h4>
                                     </div>
                                    	<dl class="dl-horizontal v1">
-                                        <dt id="reserv">대여일시<span id="s_date_end" ></span></dt>
-                                        <dt id="reserv">반납일시<span id="e_date_end"></span></dt>
+                                        <dt id="reserv">대여일시<span id="s_date_end" style="font-size: 14px;"></span></dt>
+                                        <dt id="reserv">반납일시<span id="e_date_end" style="font-size: 14px;"></span></dt>
                                         <dt id="reserv">대여지점<span id="sel2_che" ></span></dt>
                                         <dt id="reserv">반납지점<span id="sel2_che2"></span></dt>
-                                        <dt id="reserv">대여차량<span id="modelNm"></span></dt>
+                                        <dt id="reserv">대여차량<span id="modelNm" style="white-space: normal;"></span></dt>
                                     </dl>
                                 </div>
                                 <!-- state//end -->
@@ -1268,22 +917,6 @@ function btnSlide(id){
                                     </div>
                                     <dl class="dl-horizontal v1">
                                     
-                              <style>
-                              
-#reserv {
-	width:260;
-}
--->
-.p_point {
-    font-size: 13px;
-    color: #666;
-    margin-top: 210px;
-    line-height: 13px;
-}
-.glyphicons {
-	margin-left:-280px;
-}
-</style>      
                                     
                                     	<dt id="reserv">이름<span id="reservNm"></span></dt>
                                         <dt id="reserv">휴대폰<span id="reservHp"></span></dt>
@@ -1326,7 +959,7 @@ function btnSlide(id){
                         </dl>
                         <div class="btn-box">
                             <a href="#none" class="btn btn-line3 btn-fix1" onClick="location.reload(true);">초기화</a>
-                            <div class="btn btn-color2 btn-fix1 " onclick="insertForm.submit()">결제하기</div>
+                            <div class="btn btn-color2 btn-fix1 " onclick="checkForm();">결제하기</div>
                         </div>
                     </div>
                     <!-- ticker-head//end -->
@@ -1336,107 +969,13 @@ function btnSlide(id){
             <div class="step-btn-box btn-box text-c">
                 <a href="javascript:fn_cancel('/rent/rentcar/short_rent_reservation_new_jeju.do')" class="btn btn-line1 btn-large btn-fix2" >취소</a>
                 <!-- 활성화 전에는 btn-color4 , 활성화 후에는 btn-color1로 셋팅 부탁 드립니다 -->
-                <button type="submit" class="btn btn-color1 btn-large btn-fix2" onclick="nextPage();">다음</button>
+                <button type="button" class="btn btn-color1 btn-large btn-fix2" onclick="checkForm();">다음</button>
             </div>
           </div>
         </div>
         </form>
     <!-- container//end -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript">
-//주소를 가져오기 위한 검색
-function daumZipCode(){
-	new daum.Postcode({	
-		oncomplete : function(data){
-		//팝업에서 검색한 결과 항목을 클릭하였을 경우 실행할 코드를 작성하는 부분이다.
-
-		//각주소의 노출 규칙에 따라 주소를 조합한다.
-        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-        var fullAddr = '';		//최종 주소
-        var	extraAddr = '';		//조합형 주소 변수
-
-        //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-        if(data.userSelectedType == 'R'){	//도로명 주소를 선택할 경우
-			fullAddr = data.roadAddress;
-        } else {							//지번 주소를 선택한 경우
-			fullAddr = data.jibunAddress;
-        }
-
-		//사용자가 선택한 주소가 도로명 타입일 때 조합한다.
-		if(data.userSelectedType == 'R'){
-			//법정동명이 있을 경우 추가한다.
-			if(data.bname != ''){
-				extraAddr += data.bname;
-			}
-			//건물명이 있을 경우 추가한다.
-			if(data.buildingName != ''){
-				extraAddr += (extraAddr != '' ? ', ' + data.buildingName : data.buildingName);
-			}
-			//조합형 주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-			fullAddr += (extraAddr != '' ? ' (' + extraAddr + ')' : '' );
-		}
-
-		//우편번호와 주소정보를 해당 필드에 넣는다.
-		document.getElementById('zipcode').value 	= data.zonecode;	//5자리 새 우편 번호
-		document.getElementById('address').value 	= fullAddr;		//주소
-
-		//커서를 상세주소 입력 필드로 이동한다.
-		document.getElementById('addressDetail').focus();
-
-		}
-  	}).open();
-	
-	
-}
-</script>
-
-<script type="text/javascript">
-//footerSHeight값 이상일시 class를 바꾼다
-$(window).scroll(function () {
-    var windowHeight = $(window).height();				// Viewport Height
-    var documentHeight = $(document).height();			// Viewport Height
-    var footerHeight = $('#footers').height();
-    var footerSHeight = documentHeight - windowHeight - footerHeight - 274;
-	var scrollValue = $(document).scrollTop();
-	console.log(scrollValue + ' ' + footerSHeight + ' ' + documentHeight + ' ' +  windowHeight + ' ' + footerHeight );
-	if(scrollValue > footerSHeight)
-		$('.ticker-info').addClass("off");
-	else
-		$('.ticker-info').removeClass("off");
-});
-
-
-
-//차량 선택 시 CSS, class 값 변경	
-function selectMenu(data){
-	for(i=0; i < 7; i++){
-		$('#car-type'+i).css("display","none");
-		$('.c'+i).removeClass("selected");
-	}
-	$('#car-type'+data).css("display","block");
-	$('.c'+data).addClass("selected");
-}
-
-//하단 퀵메뉴 CSS
-function tickerHead(){
-	if($('#tH').html() == '<br><span class="glyphicon glyphicon-menu-up"></span><br>더보기'){
-		$('.ticker-info').animate({bottom: '0px'}, 500, 'swing');
-		$('#tH').html('<br><span class="glyphicon glyphicon-menu-down"></span><br>닫기');
-	} else{
-		$('.ticker-info').animate({bottom: '-545px'}, 500, 'swing');
-		$('#tH').html('<br><span class="glyphicon glyphicon-menu-up"></span><br>더보기');
-	}
-}
-
-$(document).click(function(e){
-	if($('#tH').html() == '<br><span class="glyphicon glyphicon-menu-down"></span><br>닫기'){
-		    if( !$('#tinfo').has(e.target).length ){
-				$('.ticker-info').animate({bottom: '-545px'}, 500, 'swing');
-				$('#tH').html('<br><span class="glyphicon glyphicon-menu-up"></span><br>더보기');
-		    }	
-	}
-});
-</script>
 
 </body>
 </html>

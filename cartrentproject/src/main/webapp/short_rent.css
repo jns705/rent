@@ -1,0 +1,52 @@
+@charset "UTF-8";
+#car-type6, #car-type1, #car-type2, #car-type3, #car-type4, #car-type5 {display: none;}
+footer{
+	padding: 0px; margin: 0px;
+}
+
+  .inputDate{
+	font-size:15px !important;
+	font-weight:100;
+    width: 132px !important;
+    height: 42px;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    background-color: #fff;
+    font-size: 14px;
+    font-family: NanumBarunGothic;
+    box-sizing: border-box;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: 0;
+    transition: background .2s linear 0s,box-shadow .2s linear 0s;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+                                }
+                                
+.inputTime{
+    padding-left: 10px;
+	text-align:center !important;
+	font-size:17px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    height: 42px;
+    border-radius: 0;
+                                }
+                                
+#reserv {
+	width:260;
+}
+-->
+.p_point {
+    font-size: 13px;
+    color: #666;
+    margin-top: 210px;
+    line-height: 13px;
+}
+.glyphicons {
+	margin-left:-280px;
+}

@@ -22,7 +22,7 @@ th{text-align: center;}
 
 <form action="/buy/short_rentProc" name="insertForm" method="get">
 <div id="content">
-    <div id="container">
+    <div id="container"  style="margin-top:40px;">
         <div class="breadcrumbs">
             <h2 class="tit">단기렌터카 예약/확인<a href="#modal-login-global" class="btn-modal btn-tooltip" style="display:none;" id="reservLogin"></a></h2>
             <div class="clearfix">
@@ -113,6 +113,7 @@ th{
                  	</table>
             <div class="under-tab">
                 <ul class="list-info v1">
+                	<li><span class="cl-point1">구매 취소</span>를 원하시면 <span class="cl-point1">고객센터</span>에 문의해주시기 바랍니다.</li>
                     <li>대여자격 기준에 적합하지 않은 면허증을 소지하신 경우 대여가 취소 될 수 있으니 이점 유념하여 주시기 바랍니다.</li>
                     <li>대여 당일 운전면허증 미 지참 시 차량 대여가 불가하오니, 꼭 지참 후 방문부탁드립니다.</li>
                     <li>상담 신청 후 24시간 이내로 유선연락이 가오니 이점 유념하여 주시기 바랍니다.</li>

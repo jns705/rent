@@ -1,5 +1,6 @@
 package com.rent.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -26,10 +27,14 @@ public class BuyService {
 	public List<BuyVO> buyListSId(String id) throws Exception{
 		return mapper.buyListSId(id);
 }
+	//고객 아이디로 구매리스트 조회(장기전용)
+	public List<BuyVO> buyListId(String id) throws Exception{
+		return mapper.buyListId(id);
+	}
 	
 	//구매목록
-	public List<BuyVO> buyList(PagingVO paging) throws Exception { 
-		return mapper.buyList(paging);
+	public List<BuyVO> buyList(HashMap<String, Object> map) throws Exception { 
+		return mapper.buyList(map);
 	}
 	
 	//구매목록 총 갯수
@@ -40,6 +45,11 @@ public class BuyService {
 	//예약삭제
 	public int rentBuyDelete(int buy_id) throws Exception {
 		return mapper.rentBuyDelete(buy_id);
+	}
+	
+	//예약현황 수정 (대여중, 반납완료)
+	public int rentBuyUpdate(BuyVO buy) throws Exception {
+		return mapper.rentBuyUpdate(buy);
 	}
 	
 	//예약자 상세조회
@@ -70,5 +80,15 @@ public class BuyService {
 	//전화번호로 리스트 출력
 	public List<BuyVO> buyListTel(String tel)throws Exception{
 		return mapper.buyListTel(tel);
+	}
+	
+	//회원아이디로 구매한 리스트들 출력
+	public List<BuyVO> buyListMemberId(String id) throws Exception {
+		return mapper.buyListMemberId(id);
+	}
+	
+	//회원탈퇴시 해당아이디에 대한 구매한 정보들을 전부 삭제한다 
+	public int secessionDelete(String id) throws Exception {
+		return mapper.secessionDelete(id);
 	}
 }

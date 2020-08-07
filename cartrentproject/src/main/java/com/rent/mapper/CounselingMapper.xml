@@ -9,9 +9,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 	<insert id="counselingInsert" parameterType="com.rent.domain.CounselingVO" useGeneratedKeys="true" keyProperty="counseling_id">
 		insert into counseling
 				(counseling_id, id, rent_id, option_name, color, name, address,
-				 tel, counseling_situation, month, counseling_date)
+				 tel, counseling_situation, month, content, counseling_date)
 		values(	#{counseling_id}, #{id}, #{rent_id}, #{option_name}, #{color},
-		 		#{name}, #{address}, #{tel}, #{counseling_situation}, #{month}, now() )
+		 		#{name}, #{address}, #{tel}, #{counseling_situation}, #{month}, #{content} , now() )
 	</insert>
 	
 	<!-- 상담글 상태 현황 변경(상담완료, 예약완료) -->
@@ -50,12 +50,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		where C.rnum between #{start} and #{end}
 	</select>
 	
-	<!-- (해당상담상태)전체목록 기본 내림차순-->
-	<select id="searchList" parameterType="String" resultType="com.rent.domain.CounselingVO">
-		select * 
-		from counseling
-		where counseling_situation = #{counseling_situation}
-		order by counseling_date asc
+	<!-- (해당상담상태)전체목록 기본 내림차순(조건검색)-->
+	<select id="searchList" parameterType="hashMap" resultType="com.rent.domain.CounselingVO">
+		select *
+		from (
+		select @rownum := @rownum + 1 AS rnum, A.*
+		from
+		  (
+    		select * 
+			from counseling
+			where counseling_situation = #{counseling_situation}
+			order by counseling_date asc
+		  ) A,
+		  ( select @rownum := 0 ) B
+		) C
+		where C.rnum between #{start} and #{end}
 	</select>
 	
 	<!-- 상세목록 -->
@@ -92,5 +101,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		select count(*)
 		from counseling
 	</select>
+	
+		<!-- 상담목록 총 갯수 -->
+	<select id="searchListCount" parameterType="String" resultType="int">
+		select count(*)
+		from counseling
+		where counseling_situation = #{counseling_situation}
+	</select>
+	
+	<!-- 회원탈퇴시 해당아이디에 대한 구매한 정보들을 전부 삭제한다  -->
+	<delete id="secessionDelete" parameterType="String">
+		delete from counseling
+		where id = #{id}
+	</delete>
 </mapper>
 

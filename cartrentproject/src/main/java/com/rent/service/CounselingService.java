@@ -1,6 +1,7 @@
 package com.rent.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -43,8 +44,8 @@ public class CounselingService {
 	}
 	
 	//전체목록(조건검색)
-	public List<CounselingVO> searchList(String counseling_situation) throws Exception {
-		return mapper.searchList(counseling_situation);
+	public List<CounselingVO> searchList(Map<String, Object> map) throws Exception {
+		return mapper.searchList(map);
 	}
 	
 	//상세목록
@@ -53,7 +54,7 @@ public class CounselingService {
 	}
 	
 	//회원아이디로 상담신청했는지 확인 후 상담한 날짜를 뿌려준다
-	public CounselingVO counselingOK(String id) throws Exception{
+	public List<CounselingVO> counselingOK(String id) throws Exception{
 		return mapper.counselingOK(id);
 	}
 	
@@ -72,5 +73,14 @@ public class CounselingService {
 		return mapper.counselingCount();
 	}
 	
+	//(조건검색)상담목록 총 갯수
+	public int searchListCount(String counseling_situation) throws Exception {
+		return mapper.searchListCount(counseling_situation);
+	}
+	
+	//회원탈퇴시 해당아이디에 대한 구매한 정보들을 전부 삭제한다 
+	public int secessionDelete(String id) throws Exception {
+		return mapper.secessionDelete(id);
+	}
 	
 }

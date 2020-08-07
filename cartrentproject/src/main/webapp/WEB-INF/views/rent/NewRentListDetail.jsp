@@ -8,15 +8,16 @@
 <!DOCTYPE html>
 <html lang="ko"> 
 <head>
+<%@ include file="NewRentListDetailAction.jsp" %>
 
 <link rel="stylesheet" href="http://localhost:8082/static/css/ss.css" type="text/css" />
     <title>솔렌터카</title>
 </head>
-<form action="${path}/counseling/newRent" method="get" id="newCarForm">
+<form action="${path}/counseling/newRent" name="formsol" method="get" id="newCarForm">
 <body id="body" class="longterm-section type-reverse">
 
-<div id="content">
-	<div id="container">
+<div id="content" >
+	<div id="container"  style="margin-top: 40px;"> 
 		<div class="breadcrumbs">
 			<h2 class="tit">솔장기렌터카 다이렉트</h2>
 			<input class="hidden" id="pricea" value="${rent.price}">
@@ -518,7 +519,7 @@ function colorName(data){
 					<div class="ticker-info ticker-info--direct">
 						
 						<!-- ticker-body//end -->
-						<div class="ticker-head">
+						<div class="ticker-head" style="z-index: 10000">
 							<dl class="dl-horizontal">
 								<dt style="border: none;">월 렌탈료</dt>
 								<dd class="text-r"><strong id="totalRental">${String.format('%,d',rent.price)}</strong>원</dd>
@@ -538,6 +539,7 @@ function colorName(data){
 							<script type="text/javascript">
 								function direct(){
 									$('#article').css("display","block");
+									$('#addrSearchBtn').css("background-color","#eb444b");
 									$('.buy').removeClass('hidden');
 									$('.counseling').addClass('hidden');
 									$('#term-check-2').focus();
@@ -545,6 +547,7 @@ function colorName(data){
 
 								function counseling(){
 										$('#article').css("display","block");
+										$('#addrSearchBtn').css("background-color","#f68121");
 										$('.counseling').removeClass('hidden');
 										$('.buy').addClass('hidden');
 										$('#term-check-2').focus();
@@ -997,7 +1000,7 @@ function btnSlide(id){
 								</div>
 							</div>
 							<!-- terms-list//end -->							
-							<div class="terms-list v3 list">
+							<div class="terms-list v3 list" id="allcheck">
 								<div class="terms-header subject"  onclick="btnSlide('a6');">
 									<h4 class="pal0">개인정보 위탁안내</h4>
 								</div>
@@ -1122,7 +1125,7 @@ function btnSlide(id){
 							<!-- terms-list//end -->
 						</div>
 						<!-- terms-listbox//end -->
-                        <p class="msg-info v1">고객님께서는 동의를 거부할 권리가 있으나, 미 동의시 렌터카 서비스 이용이 불가능합니다.</p>
+                        <p class="msg-info v1" id="sp">고객님께서는 동의를 거부할 권리가 있으나, 미 동의시 렌터카 서비스 이용이 불가능합니다.</p>
                     </div> <br><br>
                     <!-- article-content//end -->
                      <div class="header-group">
@@ -1137,21 +1140,21 @@ function btnSlide(id){
                             <div class="fl col-3">
                             <span class="input essential" id="alert-name">
                                 <strong class="check">필수</strong>
-                                <label><input type="text"  oninput="carPrice();" type="text" placeholder="이름 입력" name="name" class="onlyKorEng" maxlength="20" value="${detail.name}"/></label>
+                                <label><input type="text"  oninput="idCheck();" type="text" placeholder="이름 입력" name="name" class="onlyKorEng" maxlength="20" value="${detail.name}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-name"></span>
                             </div>
                       		 <div class="fl col-3">
                             <span class="input essential" id="alert-birth">
                              <strong class="check">필수</strong>
-                                <label><input type="text" maxlength="8" oninput="carPrice();" id="birth" type="text" maxlength="8" placeholder="생년월일(20170101) 입력" class="onlyNumber" name="birthday" value="${detail.date_of_birth}"/></label>
+                                <label><input type="text" maxlength="8" oninput="birthCheck();" id="birth" type="text" maxlength="8" placeholder="생년월일(20170101) 입력" class="onlyNumber" name="birthday" value="${detail.date_of_birth}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-birth"></span>
                             </div>
                             <div class="fl col-3">
                             <span class="input essential" id="alert-mobile">
                                <strong class="check">필수</strong>
-                                <label><input oninput="carPrice();" type="text" placeholder="휴대폰번호(-없이 입력) 입력" class="onlyNumber" name="tel"  value="${tel[0]}${tel[1]}${tel[2]}"/></label>
+                                <label><input oninput=" telCheck();" type="text" maxlength="11" placeholder="휴대폰번호(-없이 입력) 입력" class="onlyNumber" name="tel"  value="${tel[0]}${tel[1]}${tel[2]}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-mobile"></span>
                             </div>
@@ -1182,14 +1185,14 @@ function btnSlide(id){
                         	<div class="email-input input-box col-1 maa0" id="alert-email">
                         		<span class="input essential col-3">
                                     <strong class="check">필수</strong>
-                                    <label><input oninput="carPrice();" type="text" placeholder="이메일 입력" class="checkEmail" name="emailId" id="emailId" value=""  maxlength="30"/></label>
+                                    <label><input oninput=" emailCheck();" type="text" placeholder="이메일 입력" class="checkEmail" name="emailId" id="emailId" value=""  maxlength="30"/></label>
                                 </span>
                                 <span class="input hyphen col-3">
                                     <span class="text">@</span>
-                                    <input oninput="carPrice();" type="text" placeholder="직접 입력" class="checkEmail" name="domain" id="email1" value=""  maxlength="30"  tabindex="-1" aria-hidden="true"/>
+                                    <input oninput=" emailCheck1();" type="text" placeholder="직접 입력" class="checkEmail" name="domain" id="email1" value=""  maxlength="30"  tabindex="-1" aria-hidden="true"/>
                                 </span>
                                 <span class="select-box col-3">
-                                    <select id="email2" class="option01 inputTime" onchange="emailInput(); carPrice(); " tabindex="-1" aria-hidden="true">
+                                    <select id="email2" class="option01 inputTime" onchange="emailInput();  " tabindex="-1" aria-hidden="true">
                                         <option value="">직접 입력</option>
 	                                    	<option value="chol.com">chol.com</option>	
 	                                    	<option value="dreamwiz.com">dreamwiz.com</option>	
@@ -1223,16 +1226,16 @@ function btnSlide(id){
                                 <div class="address-input col-1">
                                     <span class="input-box">
                                         <span class="input">
-                                            <label><input oninput="carPrice();"  type="number" class="readonly" readonly="readonly" placeholder="우편번호 검색"  placeholder="우편번호" name="zipcode" id="zipcode" value="${address[0]}" /></label>
+                                            <label><input oninput=""  type="number" class="readonly" readonly="readonly" placeholder="우편번호 검색"  placeholder="우편번호" name="zipcode" id="zipcode" value="${address[0]}" /></label>
                                         </span>
                                         <span class="input essential">
                                    			<strong class="check">필수</strong>
-                                            <label><input oninput="carPrice();"  type="text" class="readonly" readonly="readonly" placeholder="주소 입력" name="address" id="address" value="${address[1]}" /></label>
+                                            <label><input oninput=""  type="text" class="readonly" readonly="readonly" placeholder="주소 입력" name="address" id="address" value="${address[1]}" /></label>
                                         </span>
                                         <span class="input" style="width:280px;">
-                                            <label><input oninput="carPrice();"  type="text" placeholder="나머지 주소 입력"  name="addressDetail" id="addressDetail" maxlength="30" value="${address[2]}" onkeyup="checkingDtlAddr()" /></label>
+                                            <label><input oninput="  addressCheck();"  type="text" placeholder="나머지 주소 입력"  name="addressDetail" id="addressDetail" maxlength="30" value="${address[2]}" onkeyup="checkingDtlAddr()" /></label>
                                         </span>
-                                        <a href="#none" class="btn btn-default btn-fix2 fr" onclick="daumZipCode();" id="addrSearchBtn">우편번호 검색</a>
+                                        <a style="margin:0px;width:97; background-color: #f68121;" href="#none" class="btn btn-default btn-fix2 fr" onclick="daumZipCode();" id="addrSearchBtn">우편번호</a>
                                     </span>
                                     <span class="msg-txt cl-point1" id="span-addr"></span>
                                 </div>
@@ -1243,15 +1246,15 @@ function btnSlide(id){
                    <div class="input-row">
                     	 	<div class="address-input col-1">
                              	<div class="col-1">
-									<textarea class="counseling hidden" placeholder="문의 내용 입력" name="contents"></textarea>
+									<textarea class="counseling hidden" placeholder="문의 내용 입력" name="content"></textarea>
                 				</div>
                    		  	</div>
                    </div>
                             
                <div class="input-row">
                      <div class="address-input col-1" align="center">
-		                 <button type="button" class="btn btn-color2 btn-large btn-fix2 buy hidden" style="margin-right: 10px;" onclick="nextPage();">구매신청</button>
-		               	 <button type="submit" class="btn btn-color1 btn-large btn-fix2 counseling hidden"   style="margin-right: 10px;">상담신청</button>
+		                 <button type="button" class="btn btn-color2 btn-large btn-fix2 buy hidden" style="margin-right: 10px;" onclick="checkForm('1');">구매신청</button>
+		               	 <button type="button" class="btn btn-color1 btn-large btn-fix2 counseling hidden"   style="margin-right: 10px;" onclick="checkForm();">상담신청</button>
 	               		 <a href="#" class="btn btn-line1 btn-large btn-fix2" >취소</a>
                 	</div>
                 </div>
@@ -1265,6 +1268,30 @@ function btnSlide(id){
                 </article>
 			</div>
 	</div>
+	<div id="loading" style="display: none;"> s  	</div>		
+	<div id="aaaa"  style="display: none;"> s  	</div>		
+<style>
+#aaaa{
+	position: fixed;
+	box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px, rgba(0, 0, 0, 0.5) 2px 2px
+		3px 3px;
+	z-index: 10000;
+}
+#loading {
+	
+background-color:red;
+position: fixed; /* */
+width:50000px !important;
+height:50000px !important;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+width: 48%;
+height: 59%;
+z-index: 10000;
+   background: url('http://localhost:8082/static/img/Preloader_5.gif') no-repeat center center;
+}
+</style>
 	
 	<!-- container//end -->
 </body>
@@ -1338,9 +1365,10 @@ $(window).scroll(function () {
     var windowHeight = $(window).height();				// Viewport Height
     var documentHeight = $(document).height();			// Viewport Height
     var footerHeight = $('#footers').height();
-    var footerSHeight = windowHeight - 1000;
+    if(documentHeight > 1641) var footerSHeight = windowHeight - 1206;
+    else if(documentHeight > 1538) var footerSHeight = windowHeight - 1206;
 	var scrollValue = $(document).scrollTop();
-	console.log(scrollValue + ' ' + documentHeight + ' ' + windowHeight + ' ' +  windowHeight);
+	console.log(scrollValue + ' ' + documentHeight + ' ' + footerSHeight + ' ' +  windowHeight);
 	if(scrollValue > footerSHeight)
 		$('.ticker-info').addClass("off");
 	else
@@ -1348,5 +1376,8 @@ $(window).scroll(function () {
 });
 
 </script>
+
+
+
 </html>
 </layoutTag:layout>

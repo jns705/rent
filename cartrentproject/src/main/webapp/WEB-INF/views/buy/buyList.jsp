@@ -13,6 +13,25 @@
 tbody tr:hover {
 	background-color : #F5F0C5;
 }
+select {
+    width: 150px; /* 원하는 너비설정 */
+    padding: .8em .5em; /* 여백으로 높이 설정 */
+    font-family: inherit;  /* 폰트 상속 */
+    background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 */
+    border: 1px solid #999;
+    border-radius: 0px; /* iOS 둥근모서리 제거 */
+    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    -moz-appearance: none;
+    appearance: none;
+}
+input {
+	border: 1px solid #999;
+	padding: .8em .5em;
+}
+#btnSearch{
+	border: 1px solid #999;
+	padding: .8em .5em;
+}
 </style>
 <script>
 	function selChange() {
@@ -26,6 +45,21 @@ tbody tr:hover {
 <div class="container">
 
  	<h2 align=center>예약 목록</h2>
+ 	
+ 	<div style="float: left;">
+	 	<select name="buyKind">
+	 		<option value="all">전체</option>
+	 		<option value="id">회원 아이디</option>
+	 		<option value="name">회원 이름</option>
+	 		<option value="tel">회원 전화번호</option>
+	 	</select>
+	 	
+	 	<span>
+	 		<input type="text" name="buySearch" placeholder="검색어 입력">
+	 	</span>
+	 	<button id="btnSearch">검색</button>
+	 	
+ 	</div>
  		<div style="float: right;">
 		<select id="cntPerPage" name="sel" onchange="selChange()">
 			<option value="5"
@@ -43,11 +77,13 @@ tbody tr:hover {
 			<tr>
 			<th>buy_id</th>
 				<th style="background: #e3ddcb ;">회원 아이디</th>
+				<th>차량이름</th>
 				<th>렌트아이디</th>
 				<th>계약기간</th>
 				<th>회원 이름</th>
 				<th>회원 주소</th>	
 				<th>회원 전화번호</th>
+				<th>구매현황</th>
 				<th>구매 날짜</th>
 				<th>예약 취소</th>
 			</tr>
@@ -55,15 +91,17 @@ tbody tr:hover {
 		
 		<tbody>
 		
-			<c:forEach items="${buyList}" var="buy">
+			<c:forEach items="${buyList}" var="buy" varStatus="i">
 			<tr>
-			<td>${buy.buy_id }</td>
+				<td>${buy.buy_id}</td>
 				<td onclick="location.href='${path}/buy/detail/${buy.buy_id}'" style="cursor: pointer;">${buy.id}</td>
+				<td>${car[i.index]}</td>
 				<td onclick="location.href='${path}/rent/rentListDetail/${buy.rent_id}'" style="cursor: pointer;">${buy.rent_id}<input type="hidden" name="rent_id_${buy.buy_id}" value="${buy.rent_id }"></td>
 				<td>${buy.month}개월</td>
 				<td>${buy.name}</td>
 				<td>${buy.address}</td>
 				<td>${buy.tel}</td>
+				<td>${buy.buy_situation}</td>
 				<td>${buy.buy_date}</td>
 				<td><a onclick="buyDelete(${buy.buy_id})"><span class="glyphicon glyphicon-trash"></span></a></td>
 			</tr>

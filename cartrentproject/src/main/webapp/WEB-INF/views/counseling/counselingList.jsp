@@ -21,7 +21,7 @@ tbody tr:hover {
  	<h2 align=center>상담 목록</h2>
  	<form method="post" name="form1">
  	<div align="right">
- 		<button formaction="${path}/counseling/list" >전체</button>
+ 		<button formaction="${path}/counseling/list">전체</button>
  		<button formaction="${path}/counseling/searchList/상담 대기중" >상담 대기중</button>
  		<button formaction="${path}/counseling/searchList/상담완료" >상담완료</button>
  		<button formaction="${path}/counseling/searchList/예약완료" >예약완료</button>
@@ -50,6 +50,7 @@ tbody tr:hover {
 				<td onclick="location.href='${path}/counseling/detail/${couList.counseling_id}'" style="cursor: pointer;">${couList.id}</td>
 				
 				<td>${car[i.index]}</td>
+				
 				<c:if test="${couList.rent_id != null}">
 				<td onclick="location.href='${path}/rent/rentListDetail/${couList.rent_id}'" style="cursor: pointer;">${couList.rent_id}<input type="hidden" name="rent_id_${couList.counseling_id}" value="${couList.rent_id}"></td>
 				</c:if>
