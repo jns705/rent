@@ -29,7 +29,7 @@ function resizeContents() {
     $('#section-3').css("background-size", width+"px "+ height + "px");
 }
 </script>
-	<style>s
+	<style>a
 	header img{margin-top:0px!important;}
 	#fp-nav ul li .active span{
 	background:#f68121!important;
