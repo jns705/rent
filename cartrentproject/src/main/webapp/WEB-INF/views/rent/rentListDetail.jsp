@@ -1000,17 +1000,17 @@ function driving(e) {
 				function() {
 					var windowHeight = $(window).height(); // Viewport Height
 					var documentHeight = $(document).height(); // Viewport Height
-					var footerHeight = $('#footer').height();
-					console.log(windowHeight-footerHeight-1055);
-					if(documentHeight > 2457) 
-				        var footerSHeight = 1050;
-				    else if(documentHeight > 2421) var footerSHeight = 1136;
-				    else if(documentHeight > 2411) var footerSHeight = 1195;
-				    else if(documentHeight > 2400) var footerSHeight = 1308;
+					var footerSHeight = 0;
+					if	(documentHeight == 2319)     footerSHeight = 919;
+				    else if(documentHeight == 2275)  footerSHeight = 1065;
+				    else if(documentHeight == 2267)  footerSHeight = 1161;
+				    else if(documentHeight == 2287)  footerSHeight = 1265;
+				    else if(documentHeight == 2279)  footerSHeight = 1324;
 					
 					var scrollValue = $(document).scrollTop();
-
-					console.log('스크롤'+scrollValue + ' 푸터' + windowHeight + ' 도큐' + documentHeight + ' 윈도우' +  windowHeight + ' ' );
+					var a = documentHeight - $('#footer').height() -945; //264
+					var a = documentHeight - $('#footer').height() -945; //264
+					console.log( a + '스크롤'+scrollValue + ' 푸터' + footerSHeight + ' 도큐' + documentHeight + ' 윈도우' +  windowHeight + ' ' );
 					if (scrollValue > footerSHeight)
 						$('.ticker-info').addClass("off");
 					else
