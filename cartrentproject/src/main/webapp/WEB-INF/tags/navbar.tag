@@ -114,9 +114,6 @@
 </header>
 
 
-<div class="quick-top" style="z-index: 10000;">
-	<a id="aaaaaa" class="btn-top">TOP</a>
-</div>
 
 <!-- header 끝 -->
 
@@ -136,23 +133,7 @@
 
 
 <!-- top 버튼 스크립트 -->
-<script type="text/javascript">
-	$('#aaaaaa').css('display', 'none');
-	$(window).scroll(function() {
-		if ($(this).scrollTop() > 400) {
-			$('#aaaaaa').fadeIn();
-		} else {
-			$('#aaaaaa').fadeOut();
-		}
-	});
 
-	$('#aaaaaa').click(function() {
-		$('html, body').animate({
-			scrollTop : 0
-		}, 400);
-		return false;
-	});
-</script>
 
 <c:if test="${!fn : contains(URL, 'main.do')}"> <style>body {margin-top: 100 !important;}</style> </c:if>
 

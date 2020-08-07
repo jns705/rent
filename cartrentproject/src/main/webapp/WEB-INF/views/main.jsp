@@ -174,7 +174,8 @@ max-width:999999px!important;
  * Copyright (C) 2018 http://alvarotrigo.com/fullPage - A project by Alvaro Trigo
  */
  #a {
-  padding-top: 0px;
+  position: absolute;
+  margin-top: -20px;
   color:white;
   font-size:20px;
 }
@@ -540,6 +541,16 @@ $('.white_div').hover(function() {
   		
   	}});
 
+  function jeju(){
+		if($('#jejuQuickReserve').prop("checked")){
+			$('#sLocation').html('<option>제주지점</option>');
+			$('#lLocation').html('<option>제주지점</option>');
+		}else if($('#inlandQuickReserve').prop("checked")){
+			var str = '<option>서울지점</option><option>인천지점</option><option>대구지점</option><option>부산지점</option>'
+			$('#sLocation').html(str);
+			$('#lLocation').html(str);
+		}
+	}
 </script>
     <div class="section" id="section-2"  style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동촤2.jpg'); background-repeat: no-repeat;  padding: 0px !important; margin: 0px  !important;">
     	<form action="/counseling/mainProc" method="get" name="proc">
@@ -637,8 +648,8 @@ $('.white_div').hover(function() {
 												</select>
 												<b role="presentation"></b>
 											</span>
-											<span class="select-box fl" style="width:100px;">
-												<select class="inputDate"   name="sLocation" id="sLocation" class="option01 option02 timeChange fast-reserve-select">
+											<span class="select-box fl">
+												<select  style="width:100px !important;" class="inputDate"   name="sLocation" id="sLocation" class="option01 option02 timeChange fast-reserve-select">
 														<option>제주지점</option>
 												</select>
 												<b role="presentation"></b>
@@ -663,8 +674,8 @@ $('.white_div').hover(function() {
 												</select>
 												<b role="presentation"></b>
 											</span>
-											<span class="select-box fl" style="width:100px;">
-												<select class="inputDate"   name="lLocation" id="lLocation" class="option01 option02 timeChange fast-reserve-select">
+											<span class="select-box fl">
+												<select  style="width:100px !important;" class="inputDate"   name="lLocation" id="lLocation" class="option01 option02 timeChange fast-reserve-select">
 														<option>제주지점</option>
 												</select>
 												<b role="presentation"></b>

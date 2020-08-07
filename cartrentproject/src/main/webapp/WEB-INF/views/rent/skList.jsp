@@ -9,6 +9,7 @@
 <fmt:formatDate value='${now}' pattern='yyyy' var="now"/>
 <html>
 <style>
+header img{margin-top:0px;}
 	.container {
 		width: 1030px; 
 	}
