@@ -38,6 +38,7 @@
 }
 </style>
 <head>
+<link rel="shortcut icon" href="http://localhost:8082/static/img/favicon.ico"/>
  <link href="http://localhost:8082/static/css/total.css" rel="stylesheet" type="text/css"/>
 <%@ include file="slider.jsp" %>
 <%@ include file="skListAction.jsp" %>
@@ -225,6 +226,7 @@
 		
 		</article>
 	</div>
+		
 	<br><br>
 </form>
 		

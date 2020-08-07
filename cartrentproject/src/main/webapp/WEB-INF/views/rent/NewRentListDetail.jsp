@@ -16,8 +16,8 @@
 <form action="${path}/counseling/newRent" name="formsol" method="get" id="newCarForm">
 <body id="body" class="longterm-section type-reverse">
 
-<div id="content">
-	<div id="container" style="margin-top: 40px;"> 
+<div id="content" >
+	<div id="container"  style="margin-top: 40px;"> 
 		<div class="breadcrumbs">
 			<h2 class="tit">솔장기렌터카 다이렉트</h2>
 			<input class="hidden" id="pricea" value="${rent.price}">
@@ -1268,6 +1268,30 @@ function btnSlide(id){
                 </article>
 			</div>
 	</div>
+	<div id="loading" style="display: none;"> s  	</div>		
+	<div id="aaaa"  style="display: none;"> s  	</div>		
+<style>
+#aaaa{
+	position: fixed;
+	box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px, rgba(0, 0, 0, 0.5) 2px 2px
+		3px 3px;
+	z-index: 10000;
+}
+#loading {
+	
+background-color:red;
+position: fixed; /* */
+width:50000px !important;
+height:50000px !important;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+width: 48%;
+height: 59%;
+z-index: 10000;
+   background: url('http://localhost:8082/static/img/Preloader_5.gif') no-repeat center center;
+}
+</style>
 	
 	<!-- container//end -->
 </body>

@@ -30,6 +30,7 @@ function resizeContents() {
 }
 </script>
 	<style>
+	header img{margin-top:0px!important;}
 	#fp-nav ul li .active span{
 	background:#f68121!important;
 	}
@@ -159,7 +160,7 @@ max-width:999999px!important;
 
 	</style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>fullPage.js | 한 페이지 스크롤 구역 사이트 플러그인</title>
+    <title>렌트의 즐거움! KS렌터카</title>
 
 
     <style type="text/css">/*!
@@ -363,7 +364,7 @@ $('.white_div').hover(function() {
                             	                 	  
                 				<!-- 200103 이벤트 -->   
       		
-                            	<div class="white_div over-jeju" onclick="location.href='/rent/main.do'"  style="position: relative;">
+                            	<div class="white_div over-jeju" onclick="location.href='counseling/short_rent?sL=제주지점'"  style="position: relative;">
                             		<ul class="list_ul">
                             			<li style="margin:0px;">제주 단기</li>
                             			<li style="margin-right:100px!important">바</li>
@@ -377,7 +378,7 @@ $('.white_div').hover(function() {
                            		</div>    
                             	</div>
                            		
-                            	<div class="white_div over-event" onclick="location.href='/rent/main.do'"> 
+                            	<div class="white_div over-event" onclick="location.href='/counseling/short_rent'"> 
                             		<ul class="list_ul">
                             			<li style="margin:0px;">내륙 단기</li>
                             			<li style="margin-right:100px!important">바</li>
@@ -743,13 +744,84 @@ $('.white_div').hover(function() {
     	border:none !important;
     }
 </style>
+<script type="text/javascript">
+//차량 유형 선택
+function carKind(){
+	var manufacturer = $('#usedCarMakerId').val();
+	$.ajax({
+		url		: '/rent/carKind',
+		data	: {'manufacturer' : manufacturer},
+		type	: 'post',
+		dataType : 'json',
+		success : function(data){
+			var str = '<option value="">차량 유형 선택</option>';
+			$.each(data.map, function(key, value){
+				str += '<option>'+ value.car_kind + '</option>';
+			});
+			$('#usedCarSgmntTypeCd').html(str);
+			$('#usedCartypeId').html('<option value="">차량 선택</option>')
+		},
+		error : function(data){alert("carKind오류");}
+	});
+}
+
+//제조사 선택
+function selectCar() {
+	var car_kind 	 = $('#usedCarSgmntTypeCd').val();
+	var manufacturer = $('#usedCarMakerId').val();
+	$.ajax({
+		url		: '/rent/selectCar',
+		data	: {'car_kind' : car_kind, 'manufacturer' : manufacturer},
+		type	: 'post',
+		success : function(data){
+			var str = '<option value="">차량 선택</option>';
+			$.each(data.map, function(key, value){
+				str += '<option>'+ value.car_name + '</option>';
+			});
+			$('#usedCartypeId').html(str);
+		}
+	});
+}
+
+//리스트로 가는 url
+function goList(){
+	var manufacturer 	= $('[name=usedCarMakerId]').val();
+	var carKind 		= $('[name=usedCarSgmntTypeCd]').val();
+	var carName 		= $('[name=usedCartypeId]').val();
+	location.href="/rent/rentList?manufacturer="+manufacturer+"&carKind="+carKind+"&carName="+carName+"";
+}
+
+//스크롤에 따른 css
+$(window).scroll(function () {
+	var scrollValue = $(document).scrollTop();
+	//스크롤이 맨위에 있을 시
+	if(scrollValue != 0){
+		$('#menuHeader11').css('background-color','white');
+		$('#menuHeader12').css('background-color','white');
+		$('.plh').removeClass('hidden');
+		$('.awaw').attr('style','color:black !important; text-decoration: none;' )
+		$('.aa1').attr('style','color:black !important; left: auto; right: 0px; text-decoration: none;')
+		$('.aa2').attr('style','color:black !important; left: 60px; width: 100px; text-decoration: none;')
+
+	}else{
+		$('#menuHeader11').css('background-color','transparent');
+		$('#menuHeader12').css('background-color','transparent');
+		$('#menuHeader12').css('background-color','transparent');
+		$('.plh').addClass('hidden');
+		$('.awaw').attr('style','color:white !important text-decoration: none;')
+		$('.aa1').attr('style','color:white !important; left: auto; right: 0px; text-decoration: none;')
+		$('.aa2').attr('style','color:white !important; left: 60px; width: 100px; text-decoration: none;')
+		
+	}});
+
+</script>
 				<a id="a" href="/main#page3"  style="color:black; font-weight:800;"><span id="span" style=""></span>장기렌트</a>
     </div>
     <div class="section" id="section-3"  style="margin-bottom:50px; height:700px; background-image: url('http://localhost:8082/static/img/자동차1.jpg'); background-repeat: no-repeat; background-size: cover; padding: 0px !important; margin: 0px  !important;">
         <div class="spot long">
 					<div class="spot-wrapper">
 						<div class="heading">
-							<h2 class="tit">똑똑한 선택 SK 장기렌터카</h2>
+							<h2 class="tit">똑똑한 선택 KS 장기렌터카</h2>
 							<p class="descp">더 좋은 자동차를 갖는 최적의 장기렌터카 솔루션</p>
 						</div>
 					</div>
@@ -775,45 +847,31 @@ $('.white_div').hover(function() {
 								<div class="select-area fl" style=" padding-top: 20px; padding-left: 30px;">
 									<div class="select-col col-3">
 			                        <span class="select-box">
-										<select name="usedCarMakerId" id="usedCarMakerId" class="option01 option02 inputDate" tabindex="-1" aria-hidden="true">
+										<select name="usedCarMakerId" id="usedCarMakerId" class="option01 option02 inputDate" tabindex="-1" aria-hidden="true"  onchange="carKind();">
 											<option value="">제조사 선택</option>
-											
-												<option value="HD">현대자동차</option>
-											
-												<option value="KI">기아자동차</option>
-											
-												<option value="DW">GM대우자동차</option>
-											
-												<option value="SM">르노/삼성자동차</option>
-											
-												<option value="BM">BMW</option>
-											
-												<option value="DT">도요타</option>
-											
-												<option value="BE">벤츠</option>
-											
+											<c:forEach items="${manufacturer}" var="manufacturer" varStatus="status">
+												<option <c:if test="${ma != null and ma eq manufacturer.manufacturer}"> selected</c:if>>${manufacturer.manufacturer}</option>
+											</c:forEach>
 										</select>
 			                        </span>
 									</div>
 									<div class="select-col col-3">
 			                        <span class="select-box">
-										<select name="usedCarSgmntTypeCd" id="usedCarSgmntTypeCd" class="option01 inputDate" disabled="" tabindex="-1" aria-hidden="true">
+										<select name="usedCarSgmntTypeCd" id="usedCarSgmntTypeCd" class="option01 inputDate"   onchange="selectCar(); searchForm();"> 
 											<option value="">차량 유형 선택</option>
-												
 										</select>
 			                        </span>
 									</div>
 									<div class="select-col col-3">
 					                    <span class="select-box">
-											<select name="usedCartypeId" id="usedCartypeId" class="option01 inputDate" disabled="" tabindex="-1" aria-hidden="true">
+											<select name="usedCartypeId" id="usedCartypeId" class="option01 inputDate"   onclick="searchForm();" >
 												<option value="">차량 선택</option>
-												
 											</select>
 					                    </span>
 									</div>
 								</div>
 								<div class="btn-wrap fr">
-									<a href="#" class="btn btn-color2 btnda" onclick="goUsedSelectSubmit();">검색</a>
+									<a href="#" class="btn btn-color2 btnda" onclick="goList();">검색</a>
 								</div>
 							</div>	
 							<!-- //190621 -->						

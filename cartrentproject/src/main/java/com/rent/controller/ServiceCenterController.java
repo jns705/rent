@@ -49,8 +49,7 @@ public class ServiceCenterController {
 		List<ServiceVO> sList = service.getTotal(map);
 		int SSize = service.getTotalSize(map);
 		
-		int pagingSize = SSize/listNum + (listNum%sSize != 0 ? 1 : 0);
-		
+		int pagingSize = SSize/listNum + (SSize%listNum != 0 ? 1 : 0);
 		model.addAttribute("number"	, number);
 		model.addAttribute("moVal"	, moVal);
 		model.addAttribute("moKind"	, moKind);

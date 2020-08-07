@@ -5,6 +5,7 @@
 <script type="text/javascript">
 //유효성 검사
 function checkForm(data){
+	
 	var ck = true;
 
 if(!$('input:checkbox[id=term-check-all]').is(':checked')){
@@ -108,11 +109,22 @@ if(!$('[name=address]').val()){
 $('.spamS').css('font-size','14px');
 
 if(ck==true){
+	
 	if(data=='1'){
-		$("#newCarForm").attr("action", "${path}/buy/newRent");
-		$("#newCarForm").submit();
+		$('#loading').css('display','block');
+		$('#aaaa').css('display','block');
+		setTimeout(function() {
+			$("#newCarForm").attr("action", "${path}/buy/newRent");
+			$("#newCarForm").submit();
+		}, 3000);
+		
 	}else
-		formsol.submit();
+	$('#loading').css('display','block');
+	$('#aaaa').css('display','block');
+		setTimeout(function() {
+			formsol.submit();
+		}, 3000);
+		
 }
 }
 

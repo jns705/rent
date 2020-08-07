@@ -205,6 +205,9 @@
 			</div>
 		</form>
 	</div>
+	
+	<div id="loading" style="display:none;"> s  	</div>		
+	<div id="aaaa"  style="display:none;"> s  	</div>		
 </body>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -405,8 +408,12 @@ function checkTotal(data, name, startNum, endNum){
 			alert("개인정보 수집에 동의하셔야 가입이 가능합니다.");
 			return false;
 		}
+
+		//프리로더
+		$('#loading').css('display','block');
+		$('#aaaa').css('display','block');
+		setTimeout(function() {insertForm.submit();}, 2500);
 			
-			insertForm.submit();
 	}
 
 </script>

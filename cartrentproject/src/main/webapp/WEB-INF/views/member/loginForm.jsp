@@ -40,6 +40,7 @@
                     <div class="input-row">
                         <span class="input input-large">
 							<input type="text" class="form-control idinput" id="id" name="id" size="10" placeholder="아이디를 입력하세요"/>
+							<input class="hidden" name="Referer" value="${Referer}">
                         </span>
                     </div>
                     <div class="input-row">
@@ -56,7 +57,7 @@
                     </div>
                 </div>
                 <div class="join-btn-box btn-box text-c" >
-                    <button class="btn btn-color2 btn-block btn-large" onClick="saveid(document.new_user_session);">로그인</button>
+                    <button type="button" class="btn btn-color2 btn-block btn-large" onClick="saveid(document.new_user_session);">로그인</button>
                 </div>
                 <div id="login-personal" class="tab-content" style="display: block;">
 	                <div class="join-alert">
@@ -69,9 +70,39 @@
     </div>
     
 </div>
+	<div id="loading" style="display: none;"> s  	</div>		
+	<div id="aaaa"  style="display: none;"> s  	</div>		
+<style>
+img{
+	margin-top:-20px;
+}
+#aaaa{
+	position: fixed;
+	box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px, rgba(0, 0, 0, 0.5) 2px 2px
+		3px 3px;
+	z-index: 10000;
+}
+#loading {
 	
+background-color:red;
+position: fixed; /* */
+width:50000px !important;
+height:50000px !important;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+width: 48%;
+height: 59%;
+z-index: 10000;
+   background: url('http://localhost:8082/static/img/Preloader_5.gif') no-repeat center center;
+}
+.swal2-checkbox input {
+	display:none;
+}
+</style>
 </body>
 <script>
+
 $(function(){
 	var check = document.getElementById('check').value;
 	getid();
@@ -89,13 +120,62 @@ $(function(){
     expdate.setTime(expdate.getTime() - 1); // 쿠키 삭제조건
    }
    setCookie("saveid", $("#id").val(), expdate);
-
 	if(check == 1) {
 		alert("zzdasd");
 		document.form1.action="${path}/member/loginProc?check="+check;
 		document.form1.submit();
 	}
+
+
 	
+
+	$.ajax({
+		url 	: '/member/loginProcAjax',
+		data 	: $('[name=form1]').serialize(),
+		type	: 'get',
+		success : function(data){
+			if(data == 0){
+				$('#aaaa').css('display','none');
+				$('#loading').css('display','none'); 
+					Swal.fire({
+			        title: 'Error!', /*상단 타이틀*/
+			        text: '아이디를 확인해주세요', /*내용*/
+			        icon: 'error', /*아이콘 타입*/
+			        confirmButtonText: '확인' /*확인버튼 클가*/
+			    });
+
+			}
+			if(data == 1){
+				$('#aaaa').css('display','none');
+				$('#loading').css('display','none'); 
+				
+				Swal.fire({
+			        title: 'Error!', /*상단 타이틀*/
+			        text: '비밀번호를 확인해주세요', /*내용*/
+			        icon: 'error', /*아이콘 타입*/
+			        confirmButtonText: '확인' /*확인버튼 클가*/
+			    });
+			}
+			if(data == 2){
+			    Swal.fire({
+			        title: 'success!', /*상단 타이틀*/
+			        text: '로그인 되었습니다', /*내용*/
+			        icon: 'success', /*아이콘 타입*/
+			        confirmButtonText: '확인' /*확인버튼 클가*/
+			    }).then(function(){
+			    	//프리로더
+					$('#loading').css('display','block');
+					$('#aaaa').css('display','block');
+					
+					setTimeout(function() { form1.submit(); }, 2000);
+			    });
+				
+			}
+		}
+	}); //ajax end
+		
+
+
  } //saveid()
  
  function setCookie (name, value, expires) {

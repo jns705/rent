@@ -176,7 +176,7 @@ ul, li {
 	.table>tfoot>tr>th, .table>tfoot>tr>td {
 	vertical-align: middle;
 }
-img {
+.img img {
 	margin-right: 30px;
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -278,9 +278,9 @@ img {
 </head>
 
 
-<body id="" class="longterm-section type-reverse">
+<body  class="longterm-section type-reverse" style="overflow-y: auto;">
 	<div id="content">
-		<div id="container">
+		<div id="container" style="margin-top:20px;">
 			<div class="breadcrumbs">
 				<h2 class="tit">솔렌트카 상세정보</h2>
 
@@ -640,7 +640,7 @@ img {
 					<div class="header-group estimate-type mab0">
 						<h4>옵션 정보</h4>
 					</div>
-					<div>
+					<div class="img">
 						<img
 							src="http://localhost:8082/static/img/icon_가죽시트_${count[0]}.png">
 						<img
@@ -904,6 +904,7 @@ img {
 </div></div></article>
 
 </div></form></div></div></div>
+<div id="sds"></div>
 </body>
 	</html>
 	</body>
@@ -990,15 +991,17 @@ function driving(e) {
 		}
 	</script>
 	<script>
-		var isVisible = false;
 
+
+
+	
 		//footerSHeight값 이상일시 class를 바꾼다
 		$(window).scroll(
 				function() {
 					var windowHeight = $(window).height(); // Viewport Height
 					var documentHeight = $(document).height(); // Viewport Height
-					var footerHeight = $('#ssss').height();
-
+					var footerHeight = $('#footer').height();
+					console.log(windowHeight-footerHeight-1055);
 					if(documentHeight > 2457) 
 				        var footerSHeight = 1050;
 				    else if(documentHeight > 2421) var footerSHeight = 1136;
@@ -1007,7 +1010,7 @@ function driving(e) {
 					
 					var scrollValue = $(document).scrollTop();
 
-					console.log('스크롤'+scrollValue + ' 푸터' + footerSHeight + ' 도큐' + documentHeight + ' 윈도우' +  windowHeight + ' ' );
+					console.log('스크롤'+scrollValue + ' 푸터' + windowHeight + ' 도큐' + documentHeight + ' 윈도우' +  windowHeight + ' ' );
 					if (scrollValue > footerSHeight)
 						$('.ticker-info').addClass("off");
 					else

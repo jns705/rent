@@ -26,6 +26,9 @@ public class MainController {
 	@RequestMapping("/main")
 	public String main(Model model) throws Exception  {
 		String [] carKind = {"차량 선택", "소형", "중형", "준중형", "대형", "RV", "친환경차"};
+		model.addAttribute("manufacturer", carService.manufacturer());
+		model.addAttribute("fuel", carService.fuel());
+		model.addAttribute("location", rentService.location());
 		model.addAttribute("carKind",  carKind);
 		model.addAttribute("location", rentService.location());
 		return "/main";

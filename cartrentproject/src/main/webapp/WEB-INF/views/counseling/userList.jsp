@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>header img {margin-top : -20px;}</style>
 <meta charset="UTF-8">
 <title>고객 상담 리스트</title>
 </head>

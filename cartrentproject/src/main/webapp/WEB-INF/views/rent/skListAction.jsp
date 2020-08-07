@@ -55,7 +55,7 @@ function carKind(){
 			$('#usedCarSgmntTypeCd').html(str);
 			$('#usedCartypeId').html('<option value="">차량 선택</option>')
 		},
-		error : function(data){alert("carKind오류");}
+		error : function(data){}
 	});
 }
 

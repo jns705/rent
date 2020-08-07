@@ -60,9 +60,9 @@ public class MemberController {
 	
 	//로그인 홈페이지
 	@RequestMapping("/loginForm")
-	public String loginForm(@RequestParam(defaultValue = "0") int check, Model model) throws Exception{
+	public String loginForm(@RequestParam(defaultValue = "0") int check, Model model, HttpServletRequest request) throws Exception{
 		model.addAttribute("check", check);
-		System.out.println("loginFormcheck : "+check);
+		model.addAttribute("Referer", request.getHeader("Referer"));
 		return "/member/loginForm";
 	}
 	
@@ -80,21 +80,26 @@ public class MemberController {
 		return "/member/loginForm";
 	}
 	
+	//계정검사 AJAX
+	@RequestMapping("/loginProcAjax")
+	@ResponseBody
+	public int loginProcAjax(MemberVO member, Model model)throws Exception{
+		int check = 0;
+		if		(mMemberService.accountCheck(member.getId())==null) check = 0;
+		else if	(!mMemberService.accountCheck(member.getId()).equals(member.getPassword())) check = 1;
+		else if	(mMemberService.accountCheck(member.getId()).equals(member.getPassword()))  check = 2;
+		return check;
+	}
+	
 	//계정 검사
 	@RequestMapping("/loginProc")
-	public String loginProc(@RequestParam(defaultValue = "0") int check, @RequestParam String id, @RequestParam String password, HttpSession session, Model model)throws Exception{
+	public String loginProc(@RequestParam(defaultValue = "0") int check, @RequestParam String Referer , @RequestParam String id, HttpSession session, Model model)throws Exception{
 		System.out.println("loginProc : " + check);
-		String login_msg = "";
-		if		(mMemberService.accountCheck(id)==null) login_msg = "아이디가 틀렸습니다.";
-		else if	(!mMemberService.accountCheck(id).equals(password)) login_msg = "비밀번호가 틀렸습니다.";
-		
 		//아이디, 비밀번호가 있으면 세션을 등록한다
-		else if	(mMemberService.accountCheck(id).equals(password))  
-			session.setAttribute("id", id);
-		model.addAttribute("msg", login_msg);
-		model.addAttribute("check", check);
-		
-		return "/member/memberAlert";
+		session.setAttribute("id", id);
+		if(Referer.equals("http://localhost:8082/buy/memberCheckForm")) return "redirect:/counseling/userList";
+		if(Referer.equals("http://localhost:8082/buy/memberCheckForm?check=1")) return "redirect:/counseling/userList";
+		return "redirect:" + Referer.substring(21);
 	}
 	//맴버 알람 페이지 
 	@RequestMapping("/memberAlert")
@@ -106,9 +111,9 @@ public class MemberController {
 	
 	//로그아웃
 	@RequestMapping("/logOut")
-	public String logOut(HttpSession session) {
+	public String logOut(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
-		return "/main";
+		return "redirect:" + request.getHeader("Referer").substring(21);
 	}
 	
 	//아이디 중복검사

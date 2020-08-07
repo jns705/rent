@@ -31,7 +31,7 @@ function resizeContents() {
     $('.main').css("background-size", $(window).width()+50+"px "+ $(window).height() + "px");
 }
 </script>
-					<div class="spot-wrapper">
+					<div class="spot-wrapper" >
 						<div class="heading">
 							<h2 class="tit">즐거운 여행의 시작</h2>
 							<p class="descp">안전하고 즐거운 여행은 솔렌터카에서 시작됩니다.</p>
