@@ -30,6 +30,7 @@ tbody tr:hover {
 		<thead style="background: #e7e6d2 ;">
 			<tr>
 				<th style="background: #e3ddcb ;">회원 아이디</th>
+				<th>차량 이름</th>
 				<th>렌트 아이디</th>
 				<th>계약기간</th>
 				<th>회원 이름</th>
@@ -42,10 +43,20 @@ tbody tr:hover {
 		</thead>
 		
 		<tbody>
-			<c:forEach items="${counselingList}" var="couList" >
+			<c:forEach items="${counselingList}" var="couList" varStatus="i" >
 			<tr>
+				
+				
 				<td onclick="location.href='${path}/counseling/detail/${couList.counseling_id}'" style="cursor: pointer;">${couList.id}</td>
+				
+				<td>${car[i.index]}</td>
+				<c:if test="${couList.rent_id != null}">
 				<td onclick="location.href='${path}/rent/rentListDetail/${couList.rent_id}'" style="cursor: pointer;">${couList.rent_id}<input type="hidden" name="rent_id_${couList.counseling_id}" value="${couList.rent_id}"></td>
+				</c:if>
+				<c:if test="${couList.rent_id eq null }">
+				<td>${couList.rent_id}<input type="hidden" name="rent_id_${couList.counseling_id}" value="${couList.rent_id}"></td>
+				</c:if>
+				
 				<td>${couList.month}개월</td>
 				<td>${couList.name}</td>
 				<td>${couList.address}</td>
@@ -57,6 +68,28 @@ tbody tr:hover {
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	
+		<div style="display: block; text-align: center;">		
+		<c:if test="${paging.startPage != 1 }">									<!-- &lt; 는 기호(<)의 코드값이다  -->
+			<a href="/counseling/list?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+					<b>${p }</b>
+				</c:when>
+				<c:when test="${p != paging.nowPage }">
+					<a href="/counseling/list?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage}">				<!-- &gt; 는 기호(>)의 코드값이다  -->
+			<a href="/counseling/list?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+		</c:if>
+	</div>
+	
+	
 	</form>
 </div>
 </body>

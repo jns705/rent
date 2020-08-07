@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags" %>
@@ -26,7 +26,7 @@
 				<span class="cl-point2">솔장기렌터카 다이렉트</span>
 			</div>
 		</div>	
-	<form action="${path}/counseling/insertProc" method="post">
+	<form action="${path}/counseling/insertProc" method="post" name="insertForm">
 	
 	<input type="hidden" name="id" value="${sessionScope.id}"> <!-- 회원이면 id값 비회원이면 null -->
 	<input type="hidden" name="rent_id" value="${rent.rent_id}">	<!-- 렌트차량 고유아이디 -->
@@ -46,28 +46,47 @@
 				<div class="fl col-3">
 					<span class="input essential">
 						<strong class="check">필수</strong>
-						<label><input type="text" placeholder="이름 입력" name="name" id="name"></label>
+						<label><input type="text" placeholder="이름 입력" name="name" id="name" textname></label>
 					</span>
 				</div>
-				
-				<div class="area-input select-input clearfix">
-					<div class="form-group">
-						<label for="address1">주소</label>
-						<input type="text" class="form-control" id="address" name="address" placeholder="주소를 입력하세요." readonly/>
-						<input type="button" class="form-control" onclick="daumZipCode()" value="주소찾기">
-					</div>
-				</div>
+				<div><p id="nameput" style="color:red;"></p></div>
 			</div>
+			
+			 <div class="input-row clearfix brt0 pat0">
+                 <div class="fl col-10">
+                   <span class="input essential">
+                   <strong class="check">필수</strong>
+                       <input type="text" placeholder="우편번호" id="zipcode"name="address0"style="width:150px;" readonly="readonly" class="readonly">
+                   </span>
+               </div>
+                 <div class="fl col-3">
+                   <span class="input essential">
+                       <input type="text" placeholder="주소" id="address1" name="address1" style="width:310px;" readonly="readonly" class="readonly">
+                   </span>
+               </div>
+                 <div class="fl col-3">
+                   <span class="input essential">
+                       <input type="text" placeholder="상세 주소" id="address2" name="address2" style="width:310px;" oninput="checkAdd();">
+                       <p id="addput" style="color:red;"></p>
+                   </span>
+               </div>
+                	<div class="fl col-11">
+                   <span class="input">
+                       <input type="button" value="주소검색" id="add" class="btn" style="background-color:#E8C2C2;" onclick="daumZipCode()">
+                   </span>
+               	</div>
+           </div>
 			
 			<div class="input-row clearfix brt0 pat0">
 				<div class="fl col-3">
 					<span class="input essential">
 						<strong class="check">필수</strong>
-						<label>
-						<input type="number" placeholder="휴대폰 번호(-없이) 입력" id="hpNo" name="tel">
-						</label>
+						<label><input type="text" placeholder="휴대폰 번호(-없이) 입력" maxlength="11" id="tel" name="tel" numberOnly></label>
+                        
 					</span>
 				</div>
+				<div><p id="telput" style="color:red;"></p></div>
+				
 				<!-- DB에 안들어가는데 있어서 해봄 -->
 				<div class="fl">
 					<div class="counsel-email-input input-box">
@@ -124,7 +143,7 @@
 				<div class="col-1">
 					<span class="input textarea essential">
 					<strong class="check">필수</strong>
-					<textarea placeholder="문의 내용 입력" name="contents">
+					<textarea id="a" placeholder="문의 내용 입력" name="contents">
 모델명 : ${car.car_name}
 차량 번호 : ${rent.car_number}
 계약기간 : ${month}개월
@@ -350,7 +369,7 @@
 		</div>
 	</article>
 	<div class="counsel-btn-box btn-box text-c">
-		<button type="submit" class="btn btn-color1 btn-large btn-fix3" id="insertBtn">신청완료</button>
+		<button type="button" class="btn btn-color1 btn-large btn-fix3" id="insertBtn" onclick="checkInsert();">신청완료</button>
 	</div>
 	</form>
 </div>
@@ -358,6 +377,104 @@
 
 </div>
 </body>
+<script>
+//한글, 영어만 가능
+$("input:text[textname]").on("keyup", function() {
+    $(this).val($(this).val().replace(/[^a-zA-Zㄱ-힣]/gi,""));
+	
+	var hechar = /[^a-zA-Zㄱ-힣]/gi;
+	
+	if(!document.getElementById("name").value) {
+    	document.getElementById("nameput").innerHTML = "이름을 입력하세요";
+	}else{
+		document.getElementById("nameput").innerHTML = "";
+	}
+    
+});
+//숫자만 가능
+$("input:text[numberOnly]").on("keyup", function() {
+    $(this).val($(this).val().replace(/[^0-9]/g,""));
+
+    var nchar = /[^0-9]/g;
+    var number = document.getElementById("tel").value;
+	if(!document.getElementById("tel").value) {
+    	document.getElementById("telput").innerHTML = "전화번호를 입력해주세요";
+	}else if(number.length < 11) {
+		document.getElementById("telput").innerHTML = "11자리를 입력해주세요";
+	}else {
+		document.getElementById("telput").innerHTML = "";
+	}
+});
+$(function() {
+	/* 체크여부 확인
+	$('[name=agreeYn1]').click(function() {
+		alert("클릭함");
+		if($("[name=agreeYn1]").is(":checked")) {
+		  alert("체크박스 체크됨");
+		}else {
+			alert("체크박스 해제");
+		}
+	});
+	*/
+});
+
+//주소
+function checkAdd() {
+    if(!document.getElementById("zipcode").value) {
+    	document.getElementById("addput").innerHTML = "우편번호/주소/상세주소를 입력하세요";
+    	document.getElementById('add').focus();
+    	return;
+    }else if(!document.getElementById("address2").value) {
+    	document.getElementById("addput").innerHTML = "상세주소를 입력하세요";
+    	document.getElementById('address2').focus();
+    	return;
+    }else {
+		document.getElementById("addput").innerHTML = "";
+	}
+}
+
+//등록
+function checkInsert() {
+    //이름
+    if(!document.getElementById("name").value) {
+    	alert("이름을 입력하세요");
+    	document.getElementById('name').focus();
+    	return;
+    }
+    //주소
+    if(!document.getElementById("zipcode").value) {
+    	alert("주소 입력하세요");
+    	document.getElementById('add').focus();
+    	return;
+    }else if(!document.getElementById("address1").value) {
+    	alert("주소 입력하세요");
+    	document.getElementById('add').focus();
+    	return;
+    }else if(!document.getElementById("address2").value) {
+    	alert("주소 입력하세요");
+    	document.getElementById('address2').focus();
+    	return;
+    }
+    //전화번호
+    if(!document.getElementById("tel").value) {
+    	alert("전화번호 입력하세요");
+    	document.getElementById('tel').focus();
+    	return;
+    }
+	//체크박스 상태
+	if(!$("[name=agreeYn1]").is(":checked")) {
+		  alert("동의를 거부할 권리가 있으나, 미 동의 시 상담이 불가능합니다.");
+		  document.getElementById('select-terms1').focus();
+		  return;
+	}else if(!$("[name=agreeYn2]").is(":checked")) {
+		  alert("동의를 거부할 권리가 있으나, 미 동의 시 상담이 불가능합니다.");
+		  document.getElementById('select-terms2').focus();
+		  return;
+	}
+    
+    document.insertForm.submit();
+}
+</script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 function daumZipCode() {
@@ -390,12 +507,13 @@ function daumZipCode() {
 				//조합형 주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
 				fullAddr += (extraAddr != '' ? ' (' + extraAddr + ')' : '' );
 			}
-
+			
 			//우편번호와 주소정보를 해당 필드에 넣는다.
-			document.getElementById('address').value = fullAddr;
+			document.getElementById('zipcode').value = data.zonecode; //5자리 새 우편 번호
+			document.getElementById('address1').value = fullAddr;
 
 			//커서를 상세주소 입력 필드로 이동한다.
-			document.getElementById('hpNo').focus();
+			document.getElementById('address2').focus();
 		}
 	}).open();
 }

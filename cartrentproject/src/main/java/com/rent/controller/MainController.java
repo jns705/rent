@@ -20,6 +20,4 @@ public class MainController {
 		return "/rent/main.do";
 	}
 	
-	
-	
 }

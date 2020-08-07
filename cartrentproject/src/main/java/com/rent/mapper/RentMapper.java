@@ -47,6 +47,9 @@ public interface RentMapper {
 	//렌트리스트 최종
 	public List<RentVO> rentListPro(RentListVO list) throws Exception;
 	
+	//렌트리스트 최종
+	public List<RentVO> newRentListPro(RentListVO list) throws Exception;
+	
 	//렌트리스트 숫자
 	public int rentListCount(RentListVO list) throws Exception;
 	
@@ -63,4 +66,10 @@ public interface RentMapper {
 	
 	//삭제
 	public int priceDelete(String rentPrice_id) throws Exception;
+	
+	//차량아이디로 금액
+	public String getPrice(String car_id)throws Exception;
+	
+	//렌트아이디로 차량이름 추출
+	public String carName(String rent_id)throws Exception;
 }

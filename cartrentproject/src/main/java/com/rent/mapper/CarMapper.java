@@ -49,6 +49,9 @@ public interface CarMapper {
 	//차가 팔려서 사용횟수를 증가시킨다.
 	public int carNumberAdding(CarVO car) throws Exception;
 	
+	//렌트아이디로 차량이름 조회
+	public String carName(String car_id)throws Exception;
+	
 	//차목록(조건검색)
 	//public List<CarVO> carListSelect(String 월대여료, 차명, 연료...) throws Exception;
 }

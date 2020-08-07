@@ -29,8 +29,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 사고이력 전체목록 -->
 	<select id="accidentList" resultType="com.rent.domain.AccidentVO">
-		select * 
+		select *
 		from accident
+		order by accident_id asc
+		limit 0 , 5
+	</select>
+	
+	<!-- 사고이력 전체목록 스크롤페이징 -->
+	
+	<select id="accidentListPaging" parameterType="com.rent.domain.PagingVO" resultType="com.rent.domain.AccidentVO">
+		select *
+		from (
+		select @rownum := @rownum + 1 AS rnum, A.*
+		from
+		  (
+		    select *
+		    from accident
+		  ) A,
+		  ( select @rownum := 0 ) B
+		) C
+		where C.rnum between #{start} and #{end}
 	</select>
 	
 	<!-- rent_id에 따른 사고이력 전체목록 -->
@@ -39,5 +57,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from accident
 		where rent_id = #{rent_id}
 	</select>
-
+	
+	<!-- 전체목록 갯수 -->
+	<select id="totalCount" resultType="int">
+		select count(*)
+		from accident
+	</select>
+	
 </mapper>

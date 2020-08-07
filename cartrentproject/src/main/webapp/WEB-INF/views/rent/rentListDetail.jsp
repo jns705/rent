@@ -27,85 +27,143 @@
 			
 		</div>
 
-			<div class="header-group mab0 form-group">
+			<div class="header-group mab0 form-group" style="padding-bottom:20px;">
 				<h3 class="col-sm-5">다이렉트 견적조회</h3>
 				<div class="col-sm-offset-10">
-				<a href="#" class="btn btn-line4 btn-fix1 listBtn" onclick="location.href='${path}/rent/rentList'"   >목록</a>
+				<a href="#" class="btn btn-line4 btn-fix1 listBtn" onclick="location.href='${path}/rent/rentList'">목록</a>
 				</div>
 			</div>
-			<div class="car-list v1 car-list--inquiry">
+			<div class="car-list v1 car-list--inquiry" style="height: 391px;padding: 68px 58px;border: 1px solid #ddd;border-top: none;">
 				<div class="car-list__item-jg">
 					<div class="car-list__thumbnail-jg">
 						<div class="car-list__thumbnail-image-jg user_car">
-							<div class="howmany_jg" >
-							    <span class="howmany_jg_font">현재 ${rent.standby_personnel}명의 고객님이 상담 진행 중입니다.</span>
-							</div>
 
 							<ul class="underimg col-sm-4">
-								<c:forEach items="${rentImage}" var="image">
-									<li><img src="${image.rent_url}" width="230" height="120"></li>
-								</c:forEach>
-							</ul>
+							
+<div id="slide" style="width: 350px; height: 250px">
+   <a href="#"><ul><li  style="background-repeat:no-repeat;  background-size: 350px 250px; cover; background-image: url('${rentImage[0].rent_url}');"><li></ul></a>
+  <p class="pos"><span class="font"><span class="checkgl"></span>현재 ${rent.standby_personnel}명의 고객님이 상담 진행 중입니다.</span></p>
+</div>
+
+<style>
+*{margin:0;padding:0;}
+	ul,li{list-style:none;}
+	#slide{height:300px;position:relative;overflow:hidden;}
+	#slide ul{width:400%;height:100%;transition:1s;}
+	#slide ul:after{content:"";display:block;clear:both;}
+	#slide li{float:left;width:25%;height:100%;}
+	#slide li:nth-child(1){background:#faa; }
+	#slide li:nth-child(2){background:#ffa;}
+	#slide li:nth-child(3){background:#faF;}
+	#slide li:nth-child(4){background:#aaf;}
+	#slide input{display:none;}
+	#slide label{display:inline-block;vertical-align:middle;width:10px;height:10px;border:2px solid #666;background:#fff;transition:0.3s;border-radius:50%;cursor:pointer;}
+	#slide .pos{text-align:center;position:absolute;left:0;width:100%;text-align:center;}
+	#pos1:checked~ul{margin-left:0%;}
+	#pos2:checked~ul{margin-left:-100%;}
+	#pos3:checked~ul{margin-left:-200%;}
+	#pos4:checked~ul{margin-left:-300%;}
+	#pos1:checked~.pos>label:nth-child(1){background:#666;}
+	#pos2:checked~.pos>label:nth-child(2){background:#666;}
+	#pos3:checked~.pos>label:nth-child(3){background:#666;}
+	#pos4:checked~.pos>label:nth-child(4){background:#666;}
+	
+	.pd{
+		padding-bottom : 7px !important;
+	}
+	.car-list__caption-title-jg{
+    font-size: 22px !important;
+    width: 464px;
+    line-height: 32px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #333;
+    }
+    .car-list__caption-jg{
+    	padding-bottom:20px;
+    }
+    .pd{padding-top:20px} .pb{padding-bottom:20px;}
+    .rentalPrice{   padding: 5px 5px; margin-top : 30px; margin-right :0px; border: 1px solid #333; color: #333;  width: 100px; text-align: center; height:50px;}
+    .pos{height: 30px;
+    background-color: rgba(0,0,0,0.5);
+    text-align: center;
+    position: absolute;
+    bottom: 0; color:white;}
+    .font{
+        position: relative;
+    font-size: 13px;
+    color: #fff;
+    margin-left: 5px;
+    line-height: 31px;}
+    .table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td{
+    	vertical-align:middle;
+    }
+</style>						
+							
+							
+										</ul>				
+
 						</div>
 					</div>
-					<div class="car-list__caption-jg">
-					<div style="padding-bottom:15px;">
-						<p class="car-list__caption-title">${car.car_name}</p>
+					<div class="car-list__caption-jg"  style="margin-left: 400px;">
+					<div style="padding-bottom:30px;">
+						<p class="car-list__caption-title-jg">${car.car_name}</p>
+						<p class="car-list__caption-subject">변화를 넘어선 진화, ${car.car_name} 프리미어</p>										
 					</div>
-					<div class="bg-line-tran col-sm-8">
-					<hr>
-
-						<table style="table-layout-fixed;word-break:break-all;" >
-							<tr>
-								<td style="width:100px;" >∙ 모델명</td>
-								<td>
-									${car.car_name}
-								</td>
+					<div class="bg-line-tran" style="left: 1000px;">
+					<div class="car-list__caption-jg" >
+						<table style="table-layout-fixed;word-break:break-all; border:1px solid #ddd; border-right: none; border-left: none; ">
+							<tbody><tr style="padding-top:20px;">
+								<td class="pd" style="width:100px;">∙ 모델명</td>
+								<td  class="pd" > ${car.car_name}  </td>
 							</tr>
 							<tr>
-								<td>∙ 소비자가</td>
-								<td>
+									<td style="padding-bottom:7px;">∙ 소비자가</td>
+								<td  style="padding-bottom:7px;" >
 									${String.format('%,d',rent.price)}원
 								</td>
 							</tr>
 							<tr>
-								<td>∙ 계약기간</td>
-								<td>최대${rent.max_month}개월</td>
+								<td  class="pb" >∙ 계약기간</td>
+								<td  class="pb" >최대${rent.max_month}개월</td>
 							</tr>
-						</table>
+						</tbody></table>
                      </div>
                      <div class="month_price_div">
                             <ul class="month_price">
-                                <li>표준 렌탈료</li>
-                                <li><span class="month_price_number">${String.format('%,d',rent.price)}</span>원</li>				
+                                <li><span class="rentalPrice">표준 렌탈료</span>&nbsp;&nbsp;&nbsp;&nbsp; <font color="#eb444b"><span  class="month_price_number" style="    font-size: 24px;   margin-right: 5px;">${String.format('%,d',rent.price)}</span>원</font>   </li>
                             </ul>
                      </div>				
+					</div>
+					
 					</div>
 				</div>
 				<!-- car-list__item//end -->
 			</div>
 			<!-- car-list//end -->
-			
+<script>
+
+</script>
 			<!-- 190103 아코디언 메뉴 추가  -->
 						<div class="estimate-search-list__information">
 							<div class="tab-menu v8 js-tab-opener2">
 								<ul class="tab-menu__listbox">
-									<li class="tab-menu__list col-6">
+									<li class="preference tab-menu__list col-6" >
 										<a href="#tab-prefer-information1" class="tab-menu__anchor" onclick="btnSlide('preference');">차량선호도</a>
 									</li>
 								<c:if test="${sessionScope.id != null}">
-									<li class="tab-menu__list col-6">
+									<li class="product tab-menu__list col-6" >
 										<a href="#tab-customer-information1" class="tab-menu__anchor" onclick="btnSlide('product')">상품 문의</a>
 									</li>
 								</c:if>	
 								<c:if test="${sessionScope.id == null}">
-									<li class="tab-menu__list col-6">
+									<li class="product tab-menu__list col-6">
 										<a href="#tab-customer-information1" class="tab-menu__anchor" onclick="alert('로그인 후 문의가능')">상품 문의</a>
 									</li>
 								</c:if>
 								</ul>
 							</div>
-							
 							<div id="preference" class="tab-content" style="display: none;" >
 								<div class="estimate-car-prefer clearfix">
 									<div
@@ -113,10 +171,7 @@
 										<div class="estimate-car-prefer__title">전체 차량 판매순위</div>
 										<div class="estimate-car-prefer__data">
 											<p class="estimate-car-prefer__data-desc">
-											
-												<strong class="estimate-car-prefer__data-num">52</strong>위
-												
-											
+												<strong class="estimate-car-prefer__data-num" id="abr"></strong>위
 											</p>
 										</div>
 									</div>
@@ -126,10 +181,7 @@
 										<div class="estimate-car-prefer__title">동급 차량 판매순위</div>
 										<div class="estimate-car-prefer__data">
 											<p class="estimate-car-prefer__data-desc">
-											
-												<strong class="estimate-car-prefer__data-num">3</strong>위
-											
-											
+												<strong class="estimate-car-prefer__data-num" id=dbr></strong>위
 											</p>
 										</div>
 									</div>
@@ -141,20 +193,20 @@
 											<div class="gender-prefer clearfix">
 												<div class="gender-prefer__list gender-prefer__list--men">
 													<div class="gender-prefer__graph">
-														<div class="gender-prefer__graph-num" style="height:50%;">남성</div>
+														<div class="gender-prefer__graph-num" style="height:${preference.man}%;">남성</div>
 														<span class="gender-prefer__graph-avatar" aria-hidden="true"></span>
 													</div>
 													<p class="estimate-car-prefer__data-desc">
-														<strong class="estimate-car-prefer__data-num">50</strong>%
+														<strong class="estimate-car-prefer__data-num">${preference.man}</strong>%
 													</p>
 												</div>
-												<div class="gender-prefer__list gender-prefer__list--women">
-													<div class="gender-prefer__graph">
-														<div class="gender-prefer__graph-num" style="height:50%;">여성</div>
-														<span class="gender-prefer__graph-avatar" aria-hidden="true"></span>
+												<div class="gender-prefer__list gender-prefer__list--women" style="margin-left:20;">
+													<div class="gender-prefer__graph" >
+														<div class="gender-prefer__graph-num" style="height:${preference.women}%;">여성</div>
+														<span class="gender-prefer__graph-avatar" aria-hidden="true" ></span>
 													</div>
 													<p class="estimate-car-prefer__data-desc">
-														<strong class="estimate-car-prefer__data-num">50</strong>%
+														<strong class="estimate-car-prefer__data-num">${preference.women}</strong>%
 													</p>
 												</div>
 											</div>
@@ -169,8 +221,8 @@
 											<div class="age-prefer clearfix">
 												<div class="age-prefer__list fl">
 													<div class="age-prefer__graph">
-														<div class="age-prefer__graph-value" style="height:0%;">
-															<div class="age-prefer__graph-num" >0%</div>
+														<div class="age-prefer__graph-value" style="height:${preference.twenties}%;">
+															<div class="age-prefer__graph-num" >${preference.twenties}%</div>
 															<span class="age-prefer__graph-stick v1" aria-hidden="true"></span>
 														</div>
 													</div>
@@ -179,8 +231,8 @@
 												<!-- age-prefer__list//end -->
 												<div class="age-prefer__list fl">
 													<div class="age-prefer__graph">
-														<div class="age-prefer__graph-value" style="height:0%;">
-															<div class="age-prefer__graph-num" >0%</div>
+														<div class="age-prefer__graph-value" style="height:${preference.thirties}%;">
+															<div class="age-prefer__graph-num" >${preference.thirties}%</div>
 															<span class="age-prefer__graph-stick v2" aria-hidden="true"></span>
 														</div>
 													</div>
@@ -189,8 +241,8 @@
 												<!-- age-prefer__list//end -->
 												<div class="age-prefer__list fl">
 													<div class="age-prefer__graph">
-														<div class="age-prefer__graph-value" style="height:67%;">
-															<div class="age-prefer__graph-num" >67%</div>
+														<div class="age-prefer__graph-value" style="height:${preference.forties}%;">
+															<div class="age-prefer__graph-num" >${preference.forties}%</div>
 															<span class="age-prefer__graph-stick v3" aria-hidden="true"></span>
 														</div>
 													</div>
@@ -199,8 +251,8 @@
 												<!-- age-prefer__list//end -->
 												<div class="age-prefer__list fl">
 													<div class="age-prefer__graph">
-														<div class="age-prefer__graph-value" style="height:17%;">
-															<div class="age-prefer__graph-num" >17%</div>
+														<div class="age-prefer__graph-value" style="height:${preference.fifteen}%;">
+															<div class="age-prefer__graph-num" >${preference.fifteen}%</div>
 															<span class="age-prefer__graph-stick v4" aria-hidden="true"></span>
 														</div>
 													</div>
@@ -209,8 +261,8 @@
 												<!-- age-prefer__list//end -->
 												<div class="age-prefer__list fl">
 													<div class="age-prefer__graph">
-														<div class="age-prefer__graph-value" style="height:17%;">
-															<div class="age-prefer__graph-num" >17%</div>
+														<div class="age-prefer__graph-value" style="height:${preference.sixties}%;">
+															<div class="age-prefer__graph-num" >${preference.sixties}%</div>
 															<span class="age-prefer__graph-stick v5" aria-hidden="true"></span>
 														</div>
 													</div>
@@ -241,24 +293,28 @@
 								<div class="estimate-car-prefer-info">
 									
 									<p class="msg-info v1">출고일은 제조사 상황에 따라 다를 수 있습니다.</p>
+									<c:if test="${preference.total eq 0}">
+									<p class="msg-info v1"><font color="red" size="5px">해당 자동차는 표본이 적어서 분석할 수 없습니다.</font></p>
+									</c:if>
 								</div>		
 								<!-- estimate-car-prefer-info//end -->
 							</div>
 								
-	<div class="pd25"  >
-	
 							<form class="bs-example form-horizontal" action="${path}/qna/insertProc" method="post">		
 								<input type="hidden" name="rent_id" value="${rent.rent_id }">
 								<input type="hidden" name="subject" value="${car.car_name}">
 								<input type="hidden" name="writer" value="${sessionScope.id}">
-								<div class="review_bigbox" id="product"  style="display: none;">
+								
+							<div class="review_bigbox" id="product"  style="display: none;">
+								<div class="tab-content" >
 									<ul class="review_step1_ul">
 										<li id="lockSt" class="lock_off"></li>
 										<li><textarea id="regTextArea" name="content" placeholder="상품에 대한 문의는 100자이내로 작성해 주세요."></textarea></li>
-										<li><button type="submit" >등록</button> &nbsp; 비밀글<label><input type="checkbox" id="check_yn"></label></li>
-										<li><div class="form-group pwd" id="pwd"><div id="pwevt"></div></div></li>
+										<li style="float :left;"><button type="submit" style="margin-top: 0px;">등록</button> &nbsp; 비밀글  &nbsp; <input type="checkbox" id="check_yn"></li>
+										<li style="float :right; width:75%;"><div class="form-group pwd" id="pwd"></div></li>
 									</ul>	
 								</div>
+							</div>
 <script>
 var str ='';
 	str += '<div id="pwevt">';
@@ -366,8 +422,8 @@ img {
 	margin: 0px;
 }
 </style>
-			<article>
-				<div class="header-group estimate-type mab0">
+			<article style="margin-top: 50px;">
+				<div class="header-group estimate-type mab0" >
 					<h4>옵션 정보</h4>
 				</div>
 				<div>
@@ -393,7 +449,7 @@ img {
         	
 			<div class="form-gorup-list js-accordion-group" id="abc">
 
-				<article>
+				<article  style="margin-top: 30px;">
 					<!-- 20180223 : s -->
 					<div class="header-group estimate-type clearfix mab0">
 						<h4 class="fl">렌트 조건 선택</h4>
@@ -419,6 +475,9 @@ img {
 													<p class="estimate-item__caption-text fl" id="monthShow">1개월</p>
 												</div>
 												<!-- estimate-item__caption//end -->
+												
+												
+												
 											</div>
 											<!-- estimate-list__item//end -->
 											<div class="estimate-list__action">
@@ -484,18 +543,128 @@ img {
 										<div class="estimate-list__label">
 											<p class="estimate-list__label-title">보증금</p>
 										</div>
-										<div class="estimate-item__caption clearfix">
+										<div class="estimate-item__caption clearfix"   style="padding-left:0px;">
 											<!-- estimate-item__caption//end -->
 											<div class="col-sm-10">
-												<p class="estimate-item__caption-text" id="prmsDtcClsCd_view">보증금<span id="span_deposit" class="cl-point2 ml10">&nbsp;${String.format('%,d',rent.price*5)}&nbsp;</span>원(렌탈료 1개월분 * 5)<span id="span_deposit_after" ></span></p>
+												<p class="estimate-item__caption-text" id="prmsDtcClsCd_view" style="padding-bottom:0px;">보증금<span id="span_deposit" class="cl-point2 ml10">&nbsp;${String.format('%,d',rent.price*5)}&nbsp;</span>원(렌탈료 1개월분 * 5)<span id="span_deposit_after" ></span></p>
 											</div>
-											<div class="col-sm-12">
-												<p class="estimate-item__caption-subtext">※ 보증금 납부 후 차량이 출고되며, 입금(가상)계좌는 계약완료 후 문자 발송됩니다.</p>
+											<div class="col-sm-12" style="padding-bottom:12px;">
+												<p id="ssss" class="estimate-item__caption-subtext">※ 보증금 납부 후 차량이 출고되며, 입금(가상)계좌는 계약완료 후 문자 발송됩니다.</p>
 											</div>
 										</div>
 									</div>
 									</div>
 									</div>
+		
+<style>
+.age-prefer__graph-num{
+	top:-20px;
+}
+
+.checkgl{
+style="content: '';
+    display: inline-block;
+    position: absolute;
+    left: -15px;
+    top: 1px;
+    width: 15px;
+    height: 15px;
+    background-image: url(http://localhost:8082/static/img/pc_check_white.png);
+    background-size: 11px;
+    background-repeat: no-repeat;"
+}
+.next-img-btn {
+    right: -40px !important;
+    height: 21px !important;
+    background-image: url(http://localhost:8082/static/img/spr-common.png);
+    background-repeat: no-repeat;
+    background-position: -1333px -590px;
+    -webkit-background-size: 1347px 1290px;
+    background-size: 1347px 1290px;
+    text-indent: 1000%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.imgbtn-box>div {
+    position: absolute !important;
+    width: 20px!important;
+    cursor: pointer!important;
+}-->
+.gly{
+    position: absolute;
+    width: 41px;
+    right: -40px !important;
+    background-image: url(http://localhost:8082/static/img/spr-common.png);
+    background-repeat: no-repeat;
+    background-position: -1333px -590px;
+    -webkit-background-size: 1347px 1290px;
+    background-size: 1347px 1290px;
+    text-indent: 1000%;
+    white-space: nowrap;
+    margin-top: 300;
+    margin-right: 40;
+}
+.glya{
+    position: absolute;
+    width: 41px;
+    left: -40px;
+    background-image: url(http://localhost:8082/static/img/spr-common.png);
+    background-repeat: no-repeat;
+    background-position: -1334px -802px;
+    -webkit-background-size: 1347px 1290px;
+    background-size: 1347px 1290px;
+    text-indent: 1000%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-indent: 1000%;
+    white-space: nowrap;
+    margin-top: 300;
+    margin-left:70;
+}
+.modal-pop {
+	position:fixed;
+	box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px, rgba(0,0,0,0.5) 2px 2px 3px 3px;
+	z-index : 10000;
+}
+</style>							
+<div id="imagepop" class="modal-pop modal-large big-img-show" style="display: none; z-index: 1000000">
+	<div class="modal-box">
+		<div class="modal-header" style="margin-bottom:15px;">
+			<a href="#" class="modal-close">레이어 닫기</a>
+			<a href="#" class="gly" onclick="gly();">></a>
+			<a href="#" class="glya" onclick="gly();">></a>
+			<h3>차량 이미지</h3>
+		</div>
+		<article class="bigimg-box-article">
+			<div id="popImageList" class="article-content bigimg-box" >
+				<span id="cimg"><img src="${rentImage[0].rent_url}" width="640" height="480"></span>
+				<span class="jg_img_font" >※ 차량 이미지(주행거리)는 고객님의 이해를 돕기 위한 것으로 실제 차량과 다를 수 있습니다.</span>				
+			</div>
+		</article>
+	</div>
+</div>
+
+<script type="text/javascript">
+var a = false;
+	$('.modal-close').click(function(){$('.modal-pop').css('display','none');});
+
+	$('#slide').click(function(){$('.modal-pop').css('display','block');});
+	
+	var img = '${rentImage[0].rent_url}';
+	var img1 = '${rentImage[1].rent_url}';
+	function gly(){
+		if(a == false){
+			$('#cimg').html('<img src="'+ img1 +'" width="640" height="480">');
+			a = true;
+		} else{
+			$('#cimg').html('<img src="'+ img +'" width="640" height="480">');
+			a = false;
+		}
+	}
+
+	
+</script>
 								
 								</div>
 							</div>
@@ -504,51 +673,42 @@ img {
 						</div>
 					</fieldset>
 				</article>
-				<article>
-					<div class="ticker-info ticker-info--direct">
-					
-						<!-- ticker-body//end -->
-						<div class="ticker-head">
-							<dl class="dl-horizontal">
-								<dt>월 렌탈료</dt>
-								<dd class="text-r">
-								<div class="col-sm-4">
-								<strong id="totalRental" style="">${String.format('%,d',rent.price)}</strong>원
-								</div>
-								<div class="col-sm-offset-1 col-sm-3" style="margin-left: 30px;">
-									<button onclick="apply();">상담신청</button>
-								</div>
-								<div class="col-sm-4">
-								<c:choose>
-									<c:when test="${sessionScope.id !=null && sessionScope.id != ''}">
-										<button formaction="${path}/buy/insert/${rent.rent_id}" onclick="apply();">다이렉트 계약</button>
-									</c:when>
-									<c:otherwise>
-										<button formaction="${path}/rent/rentListDetail/${rent.rent_id}" onclick="alert('로그인 후 사용가능')">다이렉트 계약</button>
-									</c:otherwise>
-								</c:choose>
-								</div>
-								</dd>
-								<dt class="fs-default">(총 차량 소비자가)</dt>
-								<dd class="fs-default text-r">
-								<div class="col-sm-4" >
-								(<strong class="fs-default" id="totAmt">${String.format('%,d',car.car_price)}</strong>만원)
-								</div>
-								</dd>
-							</dl>
-							<dl>
-								<dt>ddsd</dt>
-							</dl>
-											
-							<div>
-							</div>
-				
-						</div>
-					</div>
-					<!-- ticker-info//end -->
-				</article>
+<article>
+<div class="ticker-info ticker-info--direct" style="z-index: 10000;">
+<div class="ticker-head">
+<dl class="dl-horizontal">
+<dt style="border: none;  text-align: left;">월 렌탈료</dt>
+<dd class="text-r">
+<strong id="totalRental">${String.format('%,d',rent.price)}</strong>원
+</dd>
+<dt class="fs-default"  style="border: none; text-align: left;" >(총 차량 소비자가)</dt>
+<dd class="fs-default text-r">
+(<strong class="fs-default" id="totAmt">${String.format('%,d',car.car_price)}</strong>만원)
+</dd>
+</dl>
+<div class="btn-box-all">
+<div class="btn-box-gray btn2">
+<button onclick="apply();">
+<span>맞춤형 렌탈료</span>
+<br><font color="white">상담신청</font></button></div>
+<div class="btn-box-red btn2">
 
-</div></form></div></div></div></div>
+<c:choose>
+<c:when test="${sessionScope.id !=null && sessionScope.id != ''}">
+<button formaction="${path}/buy/insert/${rent.rent_id}" onclick="apply();" id="btnDirectContract"></button>
+</c:when>
+<c:otherwise>
+<button formaction="${path}/rent/rentListDetail/${rent.rent_id}" onclick="alert('로그인 후 사용가능')" id="btnDirectContract">
+</button>
+</c:otherwise>
+</c:choose>
+
+
+<span>무방문/무서류</span>
+<br><font color="white">다이렉트 계약</font></button></div></div>
+</div></div></article>
+
+</div></form></div></div></div>
 </body>
 </html>
 </body>
@@ -589,13 +749,34 @@ function driving(e) {
 }
 </script>
 <script>
-    function btnSlide(id){
-            if		($('#'+id).is(":visible")) $('#'+id).slideUp();
-            else  	$('#'+id).slideDown();
-    }    
-    
-    function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+function btnSlide(id){
+	//if		($('#'+id).is(":visible")) $('#'+id).slideUp(); 슬라이드 효과
+	//else  	$('#'+id).slideDown();
+	if($('#'+id).is(":visible")) {
+		 $('#'+id).hide();
+		 $('.'+id).removeClass("selected");
+		 if(id == 'preference')
+			 $('.product').css("border-bottom","");
+	}else{
+	  	$('#'+id).show();
+	  	$('.'+id).addClass("selected");
+		 if(id == 'preference')
+			 $('.product').css("border-bottom","1px solid red");
+	}
+	
+	if(id == "product") {
+		//if		($('#'+id).is(":visible")) $("#preference").slideUp();
+		if		($('#'+id).is(":visible")) $("#preference").hide();
+		 $(".preference").removeClass("selected");
+	}else if(id == "preference") {
+		//if		($('#'+id).is(":visible")) $("#product").slideUp();
+		if		($('#'+id).is(":visible")) $("#product").hide();
+		 $(".product").removeClass("selected");
+	}
+}    
+
+function numberWithCommas(x) {
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function apply() {
@@ -605,17 +786,50 @@ function apply() {
     
 </script>
 <script>
-//문서 로딩시 스크롤값 얻기  1233도착하면 멈추기
-$(document).scrollTop();
-//실시간(현재) 스크롤값 얻기 (현재 스크롤값이 로깅됨)
+var isVisible = false;
+
+
+
+//footerSHeight값 이상일시 class를 바꾼다
 $(window).scroll(function () {
+    var windowHeight = $(window).height();				// Viewport Height
+    var documentHeight = $(document).height();			// Viewport Height
+    var footerHeight = $('#ssss').height();
+    var footerSHeight = documentHeight + footerHeight - 1050;
 	var scrollValue = $(document).scrollTop();
-	//alert(scrollValue);
-	if(scrollValue > 1333)
+
+
+    
+	console.log(scrollValue + ' ' + footerSHeight + ' ' + documentHeight + ' ' +  footerHeight + ' ' + footerHeight );
+	if(scrollValue > footerSHeight)
 		$('.ticker-info').addClass("off");
 	else
 		$('.ticker-info').removeClass("off");
 });
+
+var abr = Math.floor(Math.random()*50)+1;
+document.getElementById('abr').innerHTML = abr;
+
+var dbr = Math.floor(Math.random()*10)+1;
+document.getElementById('dbr').innerHTML = dbr;
+
+
+//모두 동의 체크박스
+function checkBox(){
+	//체크박스가 전부 체크일 시 체크박스를 풀고 아닐시 선택으로 바꾼다
+	if($("input:checkbox[name=is_check]:checked").length == 5)
+	$("input[name=is_check]:checkbox").attr("checked", false);
+	else
+	$("input[name=is_check]:checkbox").prop("checked", true);
+}
+
+function boxCheck(){
+//다른 5개의 체크박스가 모두 선택됬을 시 모두동의 체크박스를 체크 아닐 시 반대
+	if($("input:checkbox[name=is_check]:checked").length == 5)
+		$("input[id='term-check-all']:checkbox").attr("checked", true);
+	else
+		$("input[id='term-check-all']:checkbox").attr("checked", false);
+}
 </script>
 
 </html>

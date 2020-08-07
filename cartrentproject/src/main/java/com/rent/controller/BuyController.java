@@ -20,6 +20,7 @@ import com.rent.domain.CarVO;
 import com.rent.domain.CounselingVO;
 import com.rent.domain.MemberVO;
 import com.rent.domain.OptionCarVO;
+import com.rent.domain.PagingVO;
 import com.rent.domain.RentVO;
 import com.rent.domain.ShortRentVO;
 import com.rent.service.BuyService;
@@ -158,11 +159,25 @@ public class BuyController {
 		return "redirect:/rent/rentList";
 	}
 	
-	//예약자 리스트
+	//예약자 리스트(페이징)
 	@RequestMapping("/list")
-	public String buyList(Model model) throws Exception {
+	public String buyList(Model model, PagingVO paging
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
 		
-		model.addAttribute("buyList", buyService.buyList());
+	int total = buyService.buyCount();
+	if (nowPage == null && cntPerPage == null) {
+		nowPage = "1";
+		cntPerPage = "5";
+	} else if (nowPage == null) {
+		nowPage = "1";
+	} else if (cntPerPage == null) { 
+		cntPerPage = "5";
+	}
+	paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		model.addAttribute("paging", paging);
+		model.addAttribute("buyList", buyService.buyList(paging));
 		return "/buy/buyList";
 	}
 	
@@ -195,6 +210,7 @@ public class BuyController {
 	@RequestMapping("/short_rentProc")
 	public String short_rentProc(@RequestParam String rent_id, ShortRentVO sRent, BuyVO buy, Model model, HttpSession session, HttpServletRequest request) throws Exception{
 		String id = (String)(session.getAttribute("id"));
+		if(id==null) id = "비회원";
 		RentVO rent = new RentVO();
 		rent.setRent_id(Integer.parseInt(rent_id));
 		rent.setStandby_personnel(0);
@@ -213,14 +229,18 @@ public class BuyController {
 		sRent.setEnd_time(request.getParameter("lHour")+":"+request.getParameter("lMinute"));
 		shortService.shortInsert(sRent);
 		rentService.rentStandby(rent);
-		return "redirect:/buy/short_rentList";
+		return "redirect:/buy/short_rentList?buy_id="+buy.getBuy_id();
 	}
 	
 	@RequestMapping("/short_rentList")
-	public String short_rentList(Model model, HttpSession session) throws Exception{
+	public String short_rentList(Model model, HttpSession session, @RequestParam(defaultValue = "n") String buy_id) throws Exception{
 		String id = (String)(session.getAttribute("id"));
-		if(id != null) {
-			List<BuyVO> Buy = buyService.buyListSId(id);
+		List<BuyVO> Buy = new ArrayList<BuyVO>();
+		if(id != null) 
+			Buy = buyService.buyListSId(id);
+		else
+			Buy = buyService.buyListBuyId(buy_id);
+		
 			List<CarVO> Car = new ArrayList<CarVO>();
 			List<ShortRentVO> SRent = new ArrayList<ShortRentVO>();
 			List<String> situation = new ArrayList<String>();
@@ -233,8 +253,56 @@ public class BuyController {
 		model.addAttribute("Car", Car);
 		model.addAttribute("SRent", SRent);
 		model.addAttribute("situation", situation);
-		}
+		
 		return "/buy/short_rentList";
+	}
+	
+	@RequestMapping("/newRent")
+	public String newRent(BuyVO list, HttpSession session) throws Exception{
+		list.setId((String)session.getAttribute("id"));
+		if(session.getAttribute("id")==null || session.getAttribute("id").equals("")) list.setId("비회원");
+		list.setOption_name("파퓰러 패키지,빌트인 캠 패키지");
+		buyService.rentBuyInsert(list);
+		return "redirect:/buy/userBuyList?tel="+list.getTel();
+	}
+	
+	@RequestMapping("/memberCheckForm")
+	public String memberCheckForm(@RequestParam(defaultValue = "0") int check, Model model) {
+			model.addAttribute("check", check);
+		return "/buy/memberCheckForm";
+	}
+	
+	//경고메세지
+	@RequestMapping("/buyAlert")
+	public String buyAlert(@RequestParam(defaultValue = "0") String check, Model model) {
+		model.addAttribute("check", check);
+		return "/buy/buyAlert";
+	}
+	
+	@RequestMapping("/userBuyList")
+	public String userBuyList(Model model, HttpSession session, @RequestParam(defaultValue = "n") String tel) throws Exception{
+		List<BuyVO> buyList = new ArrayList<BuyVO>();
+		if(tel.equals("n")) {
+			String id = (String)session.getAttribute("id");
+			buyList = buyService.buyListSId(id);
+		}else  buyList = buyService.buyListTel(tel); 
+		List<CarVO> Car = new ArrayList<CarVO>();
+		List<String> situation = new ArrayList<String>();
+		
+		for(BuyVO buy : buyList) {
+			Car.add(carService.carDetail(Integer.toString(rentService.rentDetail(buy.getRent_id()).getCar_id())));
+			situation.add(rentService.rentDetail(buy.getRent_id()).getSituation());
+		}
+		
+		if(buyList.isEmpty())
+			model.addAttribute("tel", tel);
+		else
+			model.addAttribute("tel", buyList.get(0).getTel());
+		
+		model.addAttribute("Buy", buyList);
+		model.addAttribute("Car", Car);
+		model.addAttribute("situation", situation);
+		return "/buy/userBuyList";
 	}
 	
 	

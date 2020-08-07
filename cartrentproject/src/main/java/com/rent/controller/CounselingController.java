@@ -1,5 +1,6 @@
 package com.rent.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,13 +29,17 @@ import com.rent.domain.BuyVO;
 import com.rent.domain.CounselingVO;
 import com.rent.domain.MemberVO;
 import com.rent.domain.OptionCarVO;
+import com.rent.domain.PagingVO;
+import com.rent.domain.RentListVO;
 import com.rent.domain.RentVO;
+import com.rent.domain.ShortRentVO;
 import com.rent.service.CarColorService;
 import com.rent.service.CarOptionService;
 import com.rent.service.CarService;
 import com.rent.service.CounselingService;
 import com.rent.service.MemberService;
 import com.rent.service.RentService;
+import com.rent.service.ShortRentService;
 
 @Controller
 @RequestMapping("/counseling")
@@ -53,6 +62,9 @@ public class CounselingController {
 	
 	@Resource(name="com.rent.service.CarOptionService")
 	CarOptionService optService;
+
+	@Resource(name="com.rent.service.ShortRentService")
+	ShortRentService shortService;
 	
 	@RequestMapping("/insert/{rent_id}")
 	public String counselingSend(Model model, HttpServletRequest request, @PathVariable String rent_id) throws Exception{
@@ -78,6 +90,12 @@ public class CounselingController {
 	private String counselingInsert(CounselingVO counseling, HttpServletRequest request) throws Exception{
 		
 		String rent_id = request.getParameter("rent_id");
+		String zipcode = request.getParameter("address0");
+		String address1 = request.getParameter("address1");
+		String address2 = request.getParameter("address2");
+		String address = zipcode+"/"+address1+"/"+address2;
+		
+		counseling.setAddress(address);
 		
 		List<OptionCarVO> optionList = optService.optionDetail(rent_id);
 		//rent_id에 해당하는 option_name들을 합친다.
@@ -108,8 +126,42 @@ public class CounselingController {
 	
 	//상담 전체 목록
 	@RequestMapping("/list")
-	public String counselingList(Model model) throws Exception {
-		model.addAttribute("counselingList",couService.counselingList());
+	public String counselingList(Model model, PagingVO paging
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
+		List<CounselingVO> cou = couService.counselingList(paging);
+		List<String> car_name = new ArrayList<String>();
+		for(int i = 0; i < cou.size(); i++) {
+			String rent_id = cou.get(i).getRent_id();
+			
+			if(rent_id == null) {
+				car_name.add("선택차량없음");
+				continue;
+			}
+			
+			RentVO ren = rentService.rentListId(rent_id);
+			int car_id = ren.getCar_id();
+			CarVO car = carService.carDetail(Integer.toString(car_id));
+			car_name.add(car.getCar_name());
+		}
+		
+		int total = couService.counselingCount();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		System.out.println("Controller페이지당 글 갯수 "+paging.getCntPerPage());
+		
+		
+		model.addAttribute("paging", paging);
+		model.addAttribute("car",car_name);
+		model.addAttribute("counselingList",couService.counselingList(paging));
 		return "/counseling/counselingList";
 	}
 	
@@ -123,6 +175,18 @@ public class CounselingController {
 	//상담글 상세보기
 	@RequestMapping("/detail/{counseling_id}")
 	public String counselingDetail(@PathVariable String counseling_id, Model model) throws Exception {
+		CounselingVO cou = couService.counselingDetail(counseling_id);
+		String rent_id = cou.getRent_id();
+		
+		if(rent_id == null) {
+			
+		}else {
+			RentVO rent = rentService.rentDetail(rent_id);
+			int car_id = rent.getCar_id();
+			CarVO car = carService.carDetail(Integer.toString(car_id));
+			model.addAttribute("car", car);
+		}
+		
 		model.addAttribute("detail", couService.counselingDetail(counseling_id));
 		return "/counseling/counselingDetail";
 	}
@@ -220,7 +284,7 @@ public class CounselingController {
 	}
 	
 	@RequestMapping("/short_rent")
-	public String short_rent(Model model, HttpSession session) throws Exception{
+	public String short_rent(Model model, HttpSession session, @RequestParam(defaultValue = "서울지점") String sL) throws Exception{
 		String id = (String)(session.getAttribute("id"));
 		if(id != null) {
 		MemberVO list = mMemberService.accountDetail(id);
@@ -232,6 +296,7 @@ public class CounselingController {
 		model.addAttribute("detail", list);
 		}
 		model.addAttribute("location", rentService.location());
+		model.addAttribute("sL",sL);
 		return "/counseling/short_rent";
 	}
 	
@@ -251,18 +316,139 @@ public class CounselingController {
 	
 	@RequestMapping("/short_rentDetail")
 	@ResponseBody
-	public Map<String, Object> short_rentDetail(Model model, RentVO rent) throws Exception{
+	public Map<String, Object> short_rentDetail(Model model, HttpSession session, HttpServletRequest request) throws Exception{
 		String [] carKind = {"소형", "중형", "준중형", "대형", "RV", "친환경차"};
+		RentVO rent = new RentVO();
+		rent.setLocation(request.getParameter("start_location"));
+		List<ShortRentVO> sList = shortService.getTimeList();
 		Map<String, Object> map = new HashMap<String, Object>();
+		List<String> rent_id = new ArrayList<String>();
+try {		
+		if(!request.getParameter("start_date").equals("대여일 선택") || !request.getParameter("end_date").equals("반납일 선택") ) {
+			Date start_date = Date.valueOf(request.getParameter("start_date"));
+			Date end_date   = Date.valueOf(request.getParameter("end_date"));
+			int sHour = Integer.parseInt(request.getParameter("sHour"))+1;
+			int lHour = Integer.parseInt(request.getParameter("lHour"))+1;
+
+			for(ShortRentVO sho : sList) {
+				boolean cnt  = false;
+				System.out.println(sho.getEnd_date().compareTo(start_date) + "  "  + sho.getStart_date().compareTo(end_date) );
+				if(sho.getEnd_date().compareTo(start_date) == -1  ||  sho.getStart_date().compareTo(end_date) == 1)
+					cnt = true;
+					
+				if(sho.getEnd_date().compareTo(start_date) == 0)
+					if(Integer.parseInt(sho.getEnd_time().substring(0,2)) < sHour)
+						cnt = true;
+
+				if(sho.getStart_date().compareTo(end_date) == 0)
+					if(Integer.parseInt(sho.getStart_time().substring(0,2)) > lHour)
+						cnt = true;
+				
+				if(cnt) rent_id.add(Integer.toString(sho.getRent_id()));
+			}
+			
+		}//end - if(!request.getParameter("start_date").equals("대여일 선택") || !request.getParameter("end_date").equals("반납일 선택") )
+		
+		
+		System.out.println("rent  " + rent_id);
 		for(int i = 0; i < 7; i ++) {
 			rent.setCar_id(i);
-			map.put("a"+i,rentService.carKindList(rent));
-			System.out.println(rentService.carKindList(rent));
+			List<CarVO> carList = rentService.carKindList(rent);
+			List<CarVO> car = new ArrayList<CarVO>();
+			for(CarVO cv : carList) {
+				if(sList != null) {
+					for(ShortRentVO sv : sList) {
+						 if(sv.getRent_id() == cv.getRent_id()) {
+							 cv.setSituation("X");
+								if(!rent_id.isEmpty()) {
+									for(String rt : rent_id) {
+										if(Integer.parseInt(rt) == cv.getRent_id()) {
+											cv.setSituation("예약가능");
+											break;
+										}
+									}//end - for(String rt : rent_id)
+								}
+						 }
+					}//end - for(ShortRentVO sv : sList)
+				}
+				car.add(cv);
+			}// end - for(CarVO cv : carList)
+			map.put("a"+i,car);
 		}
+}catch (Exception e) {
+	System.out.println("null무시");
+}
+
+
+		
+		map.put("rent_id", rent_id);
 		map.put("carKind",  carKind);
+		map.put("short", sList);
 		return map;
 	}
 	
+	@RequestMapping("/newRent")
+	public String newRent(CounselingVO list, HttpSession session) throws Exception{
+		System.out.println("Aa");
+		list.setId((String)session.getAttribute("id"));
+		if(session.getAttribute("id")==null || session.getAttribute("id").equals("")) list.setId("비회원");
+		list.setOption_name("파퓰러 패키지,빌트인 캠 패키지");
+		list.setCounseling_situation("상담 대기중");
+		couService.counselingInsert(list);
+		return "redirect:/counseling/userList?tel="+list.getTel();
+	}
 	
+	@RequestMapping("/userList")
+	public String userList(Model model, HttpSession session, @RequestParam(defaultValue = "n")String tel)throws Exception{
+		List<CounselingVO> list = new ArrayList<CounselingVO>();
+		if(tel.equals("n"))
+			list = couService.counselingListId((String)session.getAttribute("id"));
+		else
+			list = couService.counselingListTel(tel);
+		List<String> carName = new ArrayList<String>();
+		for(CounselingVO List : list) {
+			carName.add(carService.carName(rentService.carName(List.getRent_id())));
+		}
+		if(list.isEmpty())
+			model.addAttribute("tel", tel);
+		else
+			model.addAttribute("tel", list.get(0).getTel());
+			
+		model.addAttribute("couList", list);		
+		model.addAttribute("carName", carName);		
+		return "/counseling/userList";
+	}
+	
+	//고객센터->상담신청  등록해준다.
+	@RequestMapping("/asInsertProc")
+	public String asConsultationInsert(HttpServletRequest rq, CounselingVO counseling) throws Exception {
+		String zipcode = rq.getParameter("address0");
+		String address1 = rq.getParameter("address1");
+		String address2 = rq.getParameter("address2");
+		
+		String carType = rq.getParameter("carType");
+		String contents1 = rq.getParameter("contents1");
+		String contents2 = rq.getParameter("contents2");
+		String contents3 = rq.getParameter("contents3");
+		
+		String address = zipcode+"/"+address1+"/"+address2;
+		String option_name = "선택차종 : " + carType + "<br>" +
+		"희망차량 : " + contents1 + "<br>"+
+		"희망옵션 : " + contents2 + "<br>"+
+		"문의내용 : " + contents3;
+				
+		counseling.setAddress(address);
+		counseling.setOption_name(option_name);
+		counseling.setCounseling_situation("상담 대기중");
+		
+		//회원이면 아이디값 , 비회원이면 비회원 넣기
+		String id = rq.getParameter("id");
+		if(id == "") {
+			counseling.setId("비회원");
+		}
+		
+		couService.counselingInsert(counseling);
+		return "/main";
+	}
 	
 }

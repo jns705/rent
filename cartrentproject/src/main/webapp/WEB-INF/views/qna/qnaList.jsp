@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="../service/serviceHeader.jsp" %>
+<link href="http://localhost:8082/static/css/ss.css" rel="stylesheet" type="text/css" >
 <meta charset="UTF-8">
 <title>QNA 목록 페이지</title>
 </head>

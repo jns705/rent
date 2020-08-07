@@ -84,27 +84,70 @@ function searchForm(click){
 		traditional : true,
 		type : 'get',
 		success : function(data){
-			var str = '';
+			var str = '<div class="result_bigbox" id="result_bigbox_list" style="margin:0px">';
 			$.each(data.rentList, function(key, value){
-				str+= '<a href="#"><div class="form-group" onclick="location.href=\'${path}/rent/rentListDetail/'+ value.rent_id +'\'"><div style="padding-bottom: 30px;" class="col-sm-6"><table class="table table-bordered">';
-				str+= '<tr><td width="200">&nbsp;<img src ="'+ value.rent_url + '" width="160" height="90"></td>';
-				str+= '<td width="320">'+ value.car_name +'</td></tr>';
-				str+= '<tr><td>소비자가 : '+ numberFormat(value.car_price*10000) +'원</td>';
-				str+= '<td>월 렌탈료 : '+ numberFormat(value.price) +'원</td></tr>';
-				str+= '<td colspan=2><div><ul class="col-sm-6">';
-				str+= '<li>차량등록&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ value.reg_date.substring(0,4)+'년</li>';
-				str+= '<li>계약기간&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최대 '+ value.max_month+'개월</li>';
-				str+= '</ul><ul class="col-sm-6">';
-				str+= '<li>주행거리&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ value.milage +'Km</li>';
-				str+= '<li>지역&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	'+ value.location +'</li></ul></div></td>';
-				str+= '</table></div></div></a>';
+				str += '<a href="#"><div class="result_box" onclick="location.href=\'/rent/rentListDetail/'+ value.rent_id +'\'">'+
+				'<div class="car-list__sticker joonggo">중고차</div>'+
+			'<div class="result_box_top ">'+
+					'<div class="result_img user_car">'+
+							'<img src="'+value.rent_url+'" alt="기아자동차 2017 K7 2.4 GDI[가솔린] 리미티드" class="user_img">'+
+						'<span class="car_number">'+ value.car_number +'</span>'+
+					'</div>'+
+				'<div class="result_top_right">'+
+					'<p>'+ value.manufacturer +'</p>'+
+					'<p style="width: 200px;">'+ value.car_name +'</p>'+
+						'<ul class="sticker_box">'+
+							'<li class="sticker_membership">멤버십</li>'+
+						'</ul>'+
+					'<ul class="result_rental">'+
+						'<li style="font-size: 14px; margin-top: 70px;">렌탈료</li>'+
+						'<li>'+
+							'<span class="result_rental_price"  style="margin-top: 68px;">'
+							+ numberFormat(value.price) +'<font size="-1">원~</font></span>'+
+						'</li><li></li>'+
+					'</ul>'+
+				'</div>'+
+				'<ul class="normal_price" style="width: 500px !important;">'+
+					'<li style="font-size: 14px;">금  액</li>'+
+					'<li><span>'+ numberFormat(value.car_price*10000) +'</span>원</li>'+
+				'</ul>'+
+			'</div>'+
+			'<div class="result_box_bottom" style="height	: 114px;">'+
+				'<div class="result_bottom">'+
+					'<ul class="result_bottom_left_ul_dot">'+
+						'<li>차량등록</li>'+
+						'<li>주행거리</li>'+
+					'</ul>'+
+					'<ul class="result_bottom_left_ul">'+
+						'<li> '+ value.reg_date.substring(0,4)+'년 </li>'+
+						'<li> '+ value.milage +'km </li>'+
+					'</ul>'+
+				'</div>'+
+				'<div class="result_bottom">'+
+					'<ul class="result_bottom_left_ul_dot">'+
+						'<li>계약기간</li>'+
+						'<li>지역</li>'+
+					'</ul>'+
+					'<ul class="result_bottom_left_ul">'+
+							'<li>'+ value.max_month+'개월</li>'+
+							'<li>'+ value.location +'</li>'+
+					'</ul>'+
+				'</div>'+
+			'</div>'+
+				'<div class="howmany_box" style="font-size: 12px; background-color: f5f5f5;'+ 
+				'z-index: -5">'+
+					'<span class="howmany_box_span">현재 <span class="cl-point2 fontbold">'+ 
+					+ value.standby_personnel +'</span>명의 고객님이 상담 진행 중입니다.</span>'+
+				'</div>'+
+		'</div></a>';
+				
 			});
 				if(data.count > 1 ){
-				str+= '</div><br><br><div class="col-sm-12">';
-				str+= '<button class="col-sm-12 btn" id="moreBtn" type="button" onclick="more('+ data.count +');">더보기&nbsp;<span class="glyphicon glyphicon-menu-down"></span></button></div>';
+				str+= '</div></div><div class="col-sm-12" style="padding:0px; border:none !important;">';
+				str+= '<button style="background-color:#e0e0e0;" class="col-sm-12 btn" id="moreBtn" type="button" onclick="more('+ data.count +');">더보기&nbsp;<span class="glyphicon glyphicon-menu-down"></span></button></div>';
 				}
 				
-				$('#total').html('검색결과 (총 '+data.total+'건)');
+				$('#total').html('(총 '+data.total+'건)');
 			$('#aa').html(str);
 		}
 	});

@@ -14,15 +14,34 @@ tbody tr:hover {
 	background-color : #F5F0C5;
 }
 </style>
+<script>
+	function selChange() {
+		var sel = document.getElementById('cntPerPage').value;
+		location.href="/buy/list?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	}
+</script>
 </head>
 <body>
 <form method="post" name="form1">
 <div class="container">
 
  	<h2 align=center>예약 목록</h2>
+ 		<div style="float: right;">
+		<select id="cntPerPage" name="sel" onchange="selChange()">
+			<option value="5"
+				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
+			<option value="10"
+				<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기</option>
+			<option value="15"
+				<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄 보기</option>
+			<option value="20"
+				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
+		</select>
+	</div> <!-- 옵션선택 끝 -->
 	<table class="table">
 		<thead style="background: #e7e6d2 ;">
 			<tr>
+			<th>buy_id</th>
 				<th style="background: #e3ddcb ;">회원 아이디</th>
 				<th>렌트아이디</th>
 				<th>계약기간</th>
@@ -38,6 +57,7 @@ tbody tr:hover {
 		
 			<c:forEach items="${buyList}" var="buy">
 			<tr>
+			<td>${buy.buy_id }</td>
 				<td onclick="location.href='${path}/buy/detail/${buy.buy_id}'" style="cursor: pointer;">${buy.id}</td>
 				<td onclick="location.href='${path}/rent/rentListDetail/${buy.rent_id}'" style="cursor: pointer;">${buy.rent_id}<input type="hidden" name="rent_id_${buy.buy_id}" value="${buy.rent_id }"></td>
 				<td>${buy.month}개월</td>
@@ -50,6 +70,27 @@ tbody tr:hover {
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<div style="display: block; text-align: center;">		
+		<c:if test="${paging.startPage != 1 }">									<!-- &lt; 는 기호(<)의 코드값이다  -->
+			<a href="/buy/list?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+					<b>${p }</b>
+				</c:when>
+				<c:when test="${p != paging.nowPage }">
+					<a href="/buy/list?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage}">				<!-- &gt; 는 기호(>)의 코드값이다  -->
+			<a href="/buy/list?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+		</c:if>
+	</div>
+	
+	
 </div>
 
 </form>

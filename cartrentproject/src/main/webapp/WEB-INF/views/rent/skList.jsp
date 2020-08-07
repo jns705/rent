@@ -15,12 +15,12 @@
 	
 	#moreBtn {
 		margin-top: 30px;
-		background-color: #e0e0e0;
+		background-color: #f5f5f5;
 	}
+
 </style>
 <head>
  <link href="http://localhost:8082/static/css/total.css" rel="stylesheet" type="text/css"/>
- <link href="http://localhost:8082/static/css/bootstrap-slider.css" rel="stylesheet" type="text/css"/>
 <%@ include file="slider.jsp" %>
 <%@ include file="skListAction.jsp" %>
 	<meta charset="UTF-8">
@@ -31,27 +31,42 @@
 <form class="listForm" action="/rent/rentListProc" method="post">
 	<div class="container">
 		<div class="breadcrumbs">
+		
 			<h2 class="tit">장기렌트카 리스트</h2>
-			
 			<div class="clearfix">
 				<span>홈</span>
 				<span class="cl-point2">장기렌트카 리스트</span>
 			</div>
 		</div>	
-		<div class="container">
-		<div class="tab-menu v1">
-			<ul>
-				<li class="col-4"><a href="#">신차 렌트카</a></li>
-				<li class="col-4 selected"><a href="#">중고차 렌트카</a></li>
-			</ul>
-		</div>
-		
+		<div class="container" style="padding-left: 0px; width: 1014px;">
+       <div class="tab-menu v1">
+            <ul class="unlink tTab" id="reservMenu">
+            	<li class="col-3">
+                	<a href="/rent/NewRentList">신차 렌트카</a>
+                </li>
+                <li class="col-3 selected">
+                    <a href="/rent/rentList">중고차 렌트카</a>
+                </li>
+                <li class="col-3" >
+		           <a href="/buy/memberCheckForm?check=1">예약 확인</a>
+                </li>
+            </ul>
+        </div>
+        
+<style>
+.select2-selection {
+	height: 60px; 
+}
+.select-box {
+	height: 60px; 
+}
+</style>
 		<article class="car-search tab-content" id="tab-direct-user-personal" role="search" style="display: block;">
 			<div class="car-search__wrapper clearfix">
-				<div class="select-area fl">
-					<div class="select-col col-3">
-						<span class="select-box"> 
-							<select name="manufacturer" id="usedCarMakerId" class="select2-selection select2-selection--single option01" onchange="carKind(); searchForm();">
+				<div class="select-area fl" style="width: 670px;" >
+					<div class="select-col col-3" >
+						<span class="select-box" > 
+							<select style="" name="manufacturer" id="usedCarMakerId" class="select2-selection select2-selection--single option01" onchange="carKind(); searchForm();">
 								<option value="">제조사 선택</option>
 								<c:forEach items="${manufacturer}" var="manufacturer" varStatus="status">
 									<option>${manufacturer.manufacturer}</option>
@@ -75,8 +90,8 @@
 					</div>
 
 				</div>
-				<div class="btn-wrap fr">
-					<a class="btn btn-color2" id="usedcarSearchButton" onclick="searchForm();">검색</a>
+				<div class="btn-wrap fr col-sm-1">
+					<a class="btn btn-color2" id="usedcarSearchButton" style="margin-top:-1px; margin-left:-23px; width: 200px;"  onclick="searchForm();">검색</a>
 				</div>
 			</div>
 			
@@ -89,8 +104,9 @@
 								<span>1개월</span> <span>48개월</span>
 							</div>
 							<input class="sildeBar" size="100" id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="1" data-slider-max="48" data-slider-step="1" data-slider-value="1" onchange="searchForm();" />
-							<div class="area-value">
-								<input id="divUsedcarCntrPsblTermAreaValue" name="Max_month" type="text" class="range-val duration-val" readonly>개월이상 ~
+							<input id="divUsedcarCntrPsblTermAreaValue" name="Max_month" type="text" class="range-val duration-val hidden" readonly>
+							<div class="area-value" id="area-valueRed">
+								1개월이상 ~
 							</div>
 						</div>
 						<div class="step1">
@@ -164,7 +180,7 @@
 						<div class="searchBar">
 							<input name="car_number" id="usedCarNo" class="searchBar_input" type="text" title="키워드" placeholder="차량번호로 검색">
 							<div class="searchBarBtn" >
-								<font size="+1"><span class="glyphicon glyphicon-search"  onclick="searchForm();"></span></font>
+								<font size="+1" ><span class="glyphicon glyphicon-search"  onclick="searchForm();" style="margin-top: 9px;"></span></font>
 							</div>
 						</div>
 					</div>
@@ -172,22 +188,33 @@
 			</div>
 		</article>
 	</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" id="total"></label>	
-			<div align="right" class="col-sm-offset-8 col-sm-2">
-			<select name="orderBy" onchange="searchForm();" class="form-control ">
-				<option value="0">낮은 가격 순</option>
-				<option value="1">높은 가격 순</option>
-				<option value="2">짧은 주행거리 순</option>
-				<option value="3">최근 등록 순</option>
-				<option value="4">인기 순</option>
-			</select>
-			</div>
-		</div>
-		<hr>
+	
+	
+	<article id="artcleCarModlList" >
+				<div class="header-group clearfix">
+						<h3>
+							검색 결과 <span class="result_span" id="total"></span>
+						</h3>
+					<div class="select-col result_kind_new">
+						<span class="select-box"> 
+							<select name="orderBy" onchange="searchForm();" class="form-control ">
+								<option value="0">낮은 가격 순</option>
+								<option value="1">높은 가격 순</option>
+								<option value="2">짧은 주행거리 순</option>
+								<option value="3">최근 등록 순</option>
+								<option value="4">인기 순</option>
+							</select>
+						</span>
+					</div>
+				</div>
+				
+			
 		<div id="aa"></div>
 		
+		
+		</article>
 	</div>
+	<br><br>
 </form>
 		
 </div>
@@ -202,6 +229,7 @@ $("#ex4").slider({});  //차량등록
 //대여기간
 $('#ex1').on('slide',function(data){
 	$( "#divUsedcarCntrPsblTermAreaValue" ).val(data.value);
+	$( "#area-valueRed" ).html(data.value+"개월이상~");
 });
 
 //월렌탈료

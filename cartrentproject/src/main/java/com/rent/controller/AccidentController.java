@@ -11,10 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rent.domain.AccidentVO;
+import com.rent.domain.CommentVO;
+import com.rent.domain.PagingVO;
 import com.rent.service.AccidentService;
 import com.rent.service.RentService;
 
@@ -28,13 +33,42 @@ public class AccidentController {
 	@Resource(name = "com.rent.service.RentService")
 	RentService rentService;
 	
-
+	/**
+	 * 사고이력 목록
+	 * @param paging
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/list")
 	public String accidentList(Model model) throws Exception{
+		
 		model.addAttribute("accident", service.accidentList());
-		model.addAttribute("rent", rentService.rentList());
+		
 		return "/accident/accidentList";
 	}
+	
+	//스크롤페이징
+	@RequestMapping("/pagingList")
+	@ResponseBody
+	public List<AccidentVO> accidentListPaging(Model model, PagingVO paging
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception{
+		int total = service.totalCount();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", paging);
+		return service.accidentListPaging(paging);
+	}
+	
 	/**
 	 * 사고이력 등록
 	 * @param accident
@@ -95,4 +129,5 @@ public class AccidentController {
 		}
 		return "redirect:/accident/list";
 	}
+	
 }

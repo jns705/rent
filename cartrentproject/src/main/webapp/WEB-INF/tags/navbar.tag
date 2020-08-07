@@ -5,41 +5,29 @@
 <c:set var="URL" value="${pageContext.request.requestURL}" />
 
 	    <!-- header 시작 -->
-    <nav class="navbar navbar-default">
-    	<a class="navbar-brand" href="${path}/main">
-    		<!-- <img alt="Brand" src="/resources/images/toplogo_w.png" /> -->
-    		<img alt="Brand" src="http://localhost:8082/static/img/logo2.png"  style="margin-top:-10px;" height="50" width="70px;"/>
-    	</a>
-        <div class="container" style="width: 1000px;">
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse"
-                id="bs-example-navbar-collapse-1" style="width: 1000px;">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-menu <c:if test="${fn : contains(URL, 'List')}">active</c:if> " id="longRent"><a href="${path}/rent/rentList">장기렌트</a></li>
-                    <li class="nav-menu" id="lease">
-                    	<a href="/rent/main.do">
-                    		<span>리스 </span>
-                    		<span style="font-size: 13px;">(화물차포함)</span>
-                    	</a>
-                    </li>
-                    <li class="nav-menu" id="secondhand"><a href="#">재렌트·재리스</a></li>
-                    
-                    <li class="nav-menu" id="month"><a href="#">월렌트</a></li>
-                    
-                    <li class="nav-menu nav-estimate primary" id="estimate-span"><a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;실시간 견적</a></li>
-                    
-                    <li class="nav-menu nav-call primary" id="company"><a href="${path}/qna/insert"><span class="glyphicon glyphicon-earphone"></span>&nbsp;간편상담</a></li>
-                    	<c:if test="${sessionScope.id eq null}">
-						<li class="nav-menu nav-login <c:if test="${fn : contains(URL, 'login')}"> active</c:if> "><a href="${path}/member/loginForm"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-						</c:if>
-                    	<c:if test="${sessionScope.id != null}">
-						<li class="nav-menu nav-login <c:if test="${fn : contains(URL, 'login')}"> active</c:if> "><a href="${path}/member/logOut"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
-						</c:if>
-						
-					<c:if test="${sessionScope.id eq 'master'}">
+ <c:if test="${URL.substring(36) != 'main.jsp'}">
+ <header id="menuHeader11" class="hc <c:if test="${fn : contains(URL, 'service')}">extend</c:if> "  style="border-bottom: 0.1px solid rgb(255, 255, 255, .5) !important; ">
+	<div class="header-wrapper">
+		<h1 id="menuHeaderLogoH1" >
+			<a href="/main">SK렌터카 </a>
+		</h1>		
+		<nav id="util" >
+			<ul>
+				<li>
+				<c:if test="${sessionScope.id == null}"><a href="/member/loginForm" class="awaw">로그인</a></c:if>
+				<c:if test="${sessionScope.id != null}"><a href="/member/logOut" class="awaw">로그아웃</a></c:if>
+				</li>
+				<li>
+					<a href="/rent/prmt/evnt/evnt_list.do" id="awawaaaa" class="awaw">이벤트</a>
+				</li>
+				<li>
+					<a href="/serviceCenter" class="awaw">고객센터</a>
+				</li>
+				
+			<c:if test="${sessionScope.id eq 'master'}">
                     <li class="nav-menu nav-estimate primary dropdown" id="estimate-span">
-                    <a href="${path}/admin"class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;관리자 메뉴&nbsp;<span class="caret"></span></a>
+                    <a href="${path}/admin"class="dropdown-toggle awaw" data-toggle="dropdown" role="button" aria-expanded="false">
+                    </span>&nbsp;관리자 메뉴&nbsp;<span class="caret"></span></a>
 				 	<ul class="dropdown-menu" role="menu">
 				 		<li><a href="${path}/admin/carInsert">차량등록</a></li>
 				 		<li><a href="${path}/admin/rentInsertForm">렌트등록</a></li>
@@ -53,50 +41,188 @@
 				 	</ul>
                     </li>
                     </c:if>	
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-    </nav>
+             <!-- 삭제할거 -->
+            <c:if test="${sessionScope.id != 'master' && sessionScope.id != null}">
+             <li class="nav-menu nav-estimate primary dropdown" id="estimate-span">
+             <a href=""class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              </span>&nbsp;회원 메뉴&nbsp;<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+              	<li><a href="${path}/member/detail/${sessionScope.id}">회원정보</a></li>
+              </ul>
+              </li>
+            </c:if>
+            <!-- 삭제할거 -->
+		</nav>
+		<nav class="gnb hc " id="menuHeader12" tabindex="0">
+			<h2 class="sr-only ">메인 메뉴</h2>
+			<div class="gnb-wrapper">
+				<ul class="gnb-listbox" >
+					<li class="gnb-listitem gnb-listitem-long">
+					
+						<a href="/rent/rentList" class="gnb-anchor awaw aa1 serviceLong" style="left: auto; right: 0px;">장기렌터카</a>
+					</li>
+					<li class="gnb-listitem gnb-listitem-short">
+						<a href="/rent/main.do" class="gnb-anchor awaw aa2 serviceShort"   style="left: 60px; width: 100px;">단기렌터카</a>
+					</li>
+				</ul>
+			</div>
+				<div class="service">
+				
+				
+				
+<c:if test="${fn : contains(URL, 'service')}">
+	<div class="gnb-localnav">
+		<div class="gnb-wrapper">
+			<div class="gnb-curent customer">
+				<ul><li class="selected">
+				<a id="P0401" href="#none" data-name="customer" data-role="true">고객센터</a>
+			<div class="gnb-depth-layer">
+<ul><li>
+<a id="P040101" href="/rent/custcnte/notice/notice_list.do">공지사항</a>
+</li><li>
+<a id="P040102" href="/serviceCenter/customerConsultation">고객상담</a>
+</li><li>
+<a id="P040103" href="/serviceCenter/faq">자주찾는 질문</a>
+</li><li>
+<a id="P040104" href="/rent/custcnte/branch/shortBranch_list.do">지점안내</a>
+</li><li>
+<a href="/rent/custcnte/garage/skGarage_list.do">정비매장</a>
+</li><li>
+<a id="P040105" href="/rent/custcnte/html/form_download.do">양식다운로드</a>
+</li></ul></div></li></ul></div>
+<div class="gnb-local-depth"><ul><li>
+<a id="P040101" href="/serviceCenter">공지사항</a>
+</li><li>
+<a id="P040102" href="/serviceCenter/customerConsultation">고객상담</a>
+</li><li>
+<a id="P040103" href="/serviceCenter/faq">자주찾는 질문</a>
+</li><li>
+<a href="${path}/qna/list">QNA</a>
+</li>
+
+
+<c:if test="${sessionScope.id eq 'master'}">	
+	<li><a id="P040104" href="${path}/serviceCenter/noticeInsertForm">공지사항 글쓰기</a>
+	</li><li>
+</c:if>
+
+</div></div></div>
+
+	
+
+</c:if>   
+				
+				
+				
+				</div>
+						
+		</nav>
+		<div id="pho">
+		<c:if test="${fn : contains(URL, 'main.do')}"><c:set var="hidden" value="hidden"/></c:if>
+		<div class="serviceHide header-placeholder ${hidden} plh"><div class="header-placeholder-bg plh ${hidden}"></div></div>
+		
+		</div>
+	</div>
+</header>
+
+
+<div class="quick-top" style="z-index: 10000;">
+    <a id="aaaaaa" class="btn-top">TOP</a>
+</div>
+</c:if>
+
+
+
     <!-- header 끝 -->
     
-    	<div class="quick-menu">
+    
+<script type="text/javascript">
+$( '#aaaaaa' ).css('display','none');
+$( window ).scroll( function() {
+	if ( $( this ).scrollTop() > 400 ) {
+		$( '#aaaaaa' ).fadeIn();
+	} else {
+		$( '#aaaaaa' ).fadeOut();
+	}
+} );
+
+$( '#aaaaaa' ).click( function() {
+	$( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+	return false;
+} );
+</script>
+
+
+
+
+
+
+
+
+
+    
+ 	<div class="quick-menu" style="z-index: 1000 !important;">
 	    <ul>
 	    	<li class="menu1">
-	    	
-            
-            
-            	<a href="/rent/rentcar/short_rent_reservation_new_jeju.do">단기예약</a>
-            
-            
+            	<a href="/rent/main.do">단기예약</a>
 	       	</li>
 	    	<li class="menu2">
-	            <a href="/rent/rentcar/html/monthly_guide.do">중고차 렌터카</a>
+	            <a href="/rent/rentList">중고차 렌터카</a>
 	        </li>
 	        <li class="menu3">
-	            <a href="/rent/long/direct/sub_main_integration.do?tabId=NEWCAR">다이렉트견적</a>
-	        </li>
-	        <li class="menu4">
-	            <a href="/rent/custcnte/branch/shortBranch_list.do">지점안내</a>
-	        </li>
-	        <li class="menu5">
-	            <a href="/rent/custcnte/garage/skGarage_list.do">정비매장</a>
+	            <a href="/rent/NewRentList">다이렉트견적</a>
 	        </li>
 	        <li class="menu6">
-	        
-            
-            
-            	<a href="/rent/custcnte/counsel/long_reqt_form.do">상담신청</a>
-            
-            
-	        </li>
-	        <li class="menu7"><!-- 테슬라퀵메뉴 추가 200603 -->
-	        	<img onclick="javascript:location.href='/rent/long/direct/tesla_event_integration.do';" src="/resources/img/tesla_quick.jpg?v=2" alt="테슬라사전예약" />
+            	<a href="/serviceCenter/customerConsultation">상담신청</a>
 	        </li>
 	    </ul>
 	</div>
+	
     
+<c:if test="${fn : contains(URL, 'main.do')}">
 <style>
+a:hover {text-decoration: none;}
+header a {color : white !important;}
+#menuHeader11 , #menuHeader12{
+	background-color:  transparent;
+a:hover {text-decoration: none;}
+}
+</style>
+</c:if>
+<style>
+body {
+	margin-top: 140px;
+}
+
+.content {
+	margin-top: 140px;
+}
+header h1 a {
+    display: block;
+    text-indent: -9999px;
+    width: 107px;
+    height: 51px;
+    background-image: url(/resources/img/spr-common.png);
+    background-repeat: no-repeat;
+    background-position: -264px -586px;
+    -webkit-background-size: 1347px 1290px;
+    background-size: 1347px 1290px;
+    text-indent: 1000%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+header .gnb .gnb-anchor {
+    position: absolute;
+    top: 30px;
+    z-index: 1;
+    font-family: NanumBarunGothic;
+    font-size: 22px;
+    line-height: 1.5em;
+    color: #333;
+    letter-spacing: -.020em;
+    -webkit-transition: color .3s ease-out;
+    transition: color .3s ease-out;
+}
 @charset "UTF-8";
 * {
   font-family: Noto Sans KR,sans-serif;
@@ -124,7 +250,6 @@ label {
 .btn-default-reverse:hover, .btn-default-reverse:focus, .btn-default-reverse.active {
   color: #fff !important; }
 
-/* layout > header > navbar */
 .nav > li > a {
   font-size: 17px;
   padding-left: 15px !important;
@@ -348,7 +473,6 @@ details,
 figcaption,
 figure,
 footer,
-header,
 hgroup,
 main,
 menu,
@@ -1139,8 +1263,6 @@ th {
 .glyphicon-cutlery:before {
   content: "\e179"; }
 
-.glyphicon-header:before {
-  content: "\e180"; }
 
 .glyphicon-compressed:before {
   content: "\e181"; }
@@ -1404,8 +1526,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857;
-  color: #333333;
-  background-color: #f6f6f6; }
+  color: #333333;}
 
 input,
 button,
@@ -1678,10 +1799,6 @@ a.bg-danger:hover,
 a.bg-danger:focus {
   background-color: #e4b9b9; }
 
-.page-header {
-  padding-bottom: 9px;
-  margin: 40px 0 20px;
-  border-bottom: 1px solid #eeeeee; }
 
 ul,
 ol {
@@ -3246,9 +3363,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
   pointer-events: none; }
 
 .btn-default {
-  color: #22B500;
-  background-color: #fff;
-  border-color: #22B500; }
+  color: #22B500;}
   .btn-default:focus, .btn-default.focus {
     color: #22B500;
     background-color: #e6e6e6;
@@ -3585,13 +3700,6 @@ tbody.collapse.in {
   left: 0;
   right: auto; }
 
-.dropdown-header {
-  display: block;
-  padding: 3px 20px;
-  font-size: 12px;
-  line-height: 1.42857;
-  color: #777777;
-  white-space: nowrap; }
 
 .dropdown-backdrop {
   position: fixed;
@@ -4026,14 +4134,6 @@ tbody.collapse.in {
     .navbar {
       border-radius: 0px; } }
 
-.navbar-header:before, .navbar-header:after {
-  content: " ";
-  display: table; }
-.navbar-header:after {
-  clear: both; }
-@media (min-width: 768px) {
-  .navbar-header {
-    float: left; } }
 
 .navbar-collapse {
   overflow-x: visible;
@@ -4073,16 +4173,12 @@ tbody.collapse.in {
     .navbar-fixed-bottom .navbar-collapse {
       max-height: 200px; } }
 
-.container > .navbar-header,
 .container > .navbar-collapse,
-.container-fluid > .navbar-header,
 .container-fluid > .navbar-collapse {
   margin-right: -15px;
   margin-left: -15px; }
   @media (min-width: 768px) {
-    .container > .navbar-header,
     .container > .navbar-collapse,
-    .container-fluid > .navbar-header,
     .container-fluid > .navbar-collapse {
       margin-right: 0;
       margin-left: 0; } }
@@ -5456,17 +5552,6 @@ button.close {
     opacity: 0.5;
     filter: alpha(opacity=50); }
 
-.modal-header {
-  padding: 15px;
-  border-bottom: 1px solid #e5e5e5; }
-  .modal-header:before, .modal-header:after {
-    content: " ";
-    display: table; }
-  .modal-header:after {
-    clear: both; }
-
-.modal-header .close {
-  margin-top: -2px; }
 
 .modal-title {
   margin: 0;

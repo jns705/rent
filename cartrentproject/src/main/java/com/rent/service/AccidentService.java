@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.rent.domain.AccidentVO;
+import com.rent.domain.PagingVO;
 import com.rent.mapper.AccidentMapper;
 
 @Service("com.rent.service.AccidentService")
@@ -39,12 +40,21 @@ public class AccidentService {
 		return mapper.accidentList();
 	}
 	
+	//전체목록 스크롤페이징
+	public List<AccidentVO> accidentListPaging(PagingVO paging) throws Exception{
+		System.out.println("accidentList() 실행중. . .");
+		return mapper.accidentListPaging(paging);
+	}
+	
 	//렌트 아이디에 따른 전체목록
 	public List<AccidentVO> accidentListId(String rent_id) throws Exception{
 		System.out.println("accidentListId() 실행중. . .");
 		return mapper.accidentListId(rent_id);
 	}
 	
-	
+	//전체목록 갯수
+	public int totalCount() throws Exception {
+		return mapper.totalCount();
+	}
 	
 }

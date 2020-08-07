@@ -26,4 +26,10 @@ public class ShortRentService {
 	public ShortRentVO shortDetail(int buy_id)throws Exception{
 		return mapper.shortDetail(buy_id);
 	}
+	
+	//시간과 렌트아이디 리스트를 구한다
+	public List<ShortRentVO> getTimeList()throws Exception{
+		return mapper.getTimeList();
+		
+	}
 }

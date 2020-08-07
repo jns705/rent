@@ -58,6 +58,10 @@ public class RentService {
 	public List<RentVO> rentListPro(RentListVO list) throws Exception{
 		return mapper.rentListPro(list);
 	}
+
+	public List<RentVO> newRentListPro(RentListVO list) throws Exception{
+		return mapper.newRentListPro(list);
+	}
 	
 	public int rentListCount(RentListVO list) throws Exception{
 		return mapper.rentListCount(list);
@@ -71,6 +75,15 @@ public class RentService {
 		return mapper.carKindList(temp);
 	}
 	
+	//차량 아이디로 금액
+	public String getPrice(String car_id)throws Exception{
+		return mapper.getPrice(car_id);
+	}
+	
+	//렌트 아이디로 차량이름 추출
+	public String carName(String car_id)throws Exception{
+		return mapper.carName(car_id);
+	}
 	
 	
 }

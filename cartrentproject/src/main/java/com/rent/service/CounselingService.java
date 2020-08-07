@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.rent.domain.CounselingVO;
+import com.rent.domain.PagingVO;
 import com.rent.mapper.CounselingMapper;
 
 @Service("com.rent.service.CounselingService")
@@ -29,10 +30,16 @@ public class CounselingService {
 	public int counselingDelete(String counseling_id) throws Exception {
 		return mapper.counselingDelete(counseling_id);
 	}
-	
+	/*
 	//전체목록(관리자)
 	public List<CounselingVO> counselingList() throws Exception {
 		return mapper.counselingList();
+	}
+	*/
+	//전체목록(관리자) 페이징
+	public List<CounselingVO> counselingList(PagingVO paging) throws Exception {
+		System.out.println("Service페이지당 글 갯수 "+paging.getCntPerPage());
+		return mapper.counselingList(paging);
 	}
 	
 	//전체목록(조건검색)
@@ -50,6 +57,20 @@ public class CounselingService {
 		return mapper.counselingOK(id);
 	}
 	
+	//회원 아이디 목록
+	public List<CounselingVO> counselingListId(String id) throws Exception{
+		return mapper.counselingListId(id);
+	}
+	
+	//회원 전화번호로 리스트 출력
+	public List<CounselingVO> counselingListTel(String tel) throws Exception{
+		return mapper.counselingListTel(tel);
+	}
+	
+	//상담목록 총 갯수
+	public int counselingCount() throws Exception {
+		return mapper.counselingCount();
+	}
 	
 	
 }

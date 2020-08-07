@@ -12,6 +12,7 @@
 <fmt:formatDate value='${toDay}' pattern='HH' var="nowHour"/>
 <fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' var="nowDate"/>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> 
+<link rel="stylesheet" href="http://localhost:8082/static/css/ss.css" type="text/css" /> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
     <meta charset="UTF-8">
@@ -19,13 +20,6 @@
 </head>
 <style>
 #car-type6, #car-type1, #car-type2, #car-type3, #car-type4, #car-type5 {display: none;}
-html,body {
-
-	margin: 0;
-
-	padding: 0;
-
-}
 footer{
 	padding: 0px; margin: 0px;
 }
@@ -181,21 +175,21 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
         <div class="breadcrumbs">
             <h2 class="tit">단기렌터카 예약/확인<a href="#modal-login-global" class="btn-modal btn-tooltip" style="display:none;" id="reservLogin"></a></h2>
             <div class="clearfix">
-                <span>홈</span>
+                <span class="glyphicon glyphicon-home"></span>
                 <span>단기렌터카</span>
                 <span>단기렌터카 예약/확인</span>
             </div>
         </div>
         <div class="tab-menu v1">
             <ul class="unlink tTab" id="reservMenu">
-                <li class="col-3 selected">
-                	<a href="/rent/rentcar/short_rent_reservation_new_jeju.do">제주예약</a>
+                <li class="col-3 <c:if test="${sL eq '제주지점'}">selected</c:if>">
+                	<a href="/counseling/short_rent?sL=제주지점">제주예약</a>
+                </li>
+                <li class="col-3 <c:if test="${sL != '제주지점'}">selected</c:if>">
+                    <a href="/counseling/short_rent">내륙예약</a>
                 </li>
                 <li class="col-3">
-                    <a href="/rent/rentcar/short_rent_reservation_new.do">내륙예약</a>
-                </li>
-                <li class="col-3">
-		            	<a href="/buy/short_rentList">예약확인</a>
+		            	<a href="/buy/memberCheckForm">예약확인</a>
                 </li>
             </ul>
         </div>
@@ -210,7 +204,6 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                 </li>
                 <li class="fl col-3 ing">
                     <span>
-                        <strong>2</strong>
                         <span>할인/결제</span>
                     </span>
                 </li>
@@ -230,49 +223,86 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                     <div class="article-content">
                         <div class="rent-store-select">
                             <div class="col fl">
-                            
                                 <div class="date-time-area clearfix">
+<style>
+  .inputDate{
+	font-size:15px !important;
+	font-weight:100;
+    width: 132px !important;
+    height: 42px;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    background-color: #fff;
+    font-size: 14px;
+    font-family: NanumBarunGothic;
+    box-sizing: border-box;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: 0;
+    transition: background .2s linear 0s,box-shadow .2s linear 0s;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+                                }
+                                
+.inputTime{
+    padding-left: 10px;
+	text-align:center !important;
+	font-size:17px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    height: 42px;
+    border-radius: 0;
+                                }
+</style>
 										<span id="sDateSpan" class="fl" >
-                                            <input type="text" id="startDate" name="start_date" value="${sD}" onchange="changeDate(); changeHour(); selectCar(); todayCheck();"/>
+                                            <input style="border-right: none;" class="inputDate" readonly type="text" id="startDate" name="start_date" value="<c:if test ="${sD == null}">대여일 선택</c:if><c:if test ="${sD != null}">${sD}</c:if>" onchange="changeDate(); changeHour(); selectCar(); todayCheck();"/>
                                         </span>
                                   			<span class="select-box fl">
-												<select name="sHour" id="sHour"  onchange="changeDate(); changeHour();  selectCar();">
+												<select class="inputTime" name="sHour" id="sHour"  onchange="changeDate(); changeHour();  selectCar();">
 												<c:forEach begin="06" end="22" varStatus="status">
 													<option <c:if test="${sH == status.index}">selected</c:if> value="${String.format('%02d', status.index)}">${String.format('%02d', status.index)} 시</option>
 												</c:forEach>
 												</select>
 											</span>
                                    			<span class="select-box fl">
-												<select name="sMinute" id="sMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
+												<select  class="inputTime" name="sMinute" id="sMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
 													<option <c:if test="${sM == 00}">selected</c:if>  value="00">00 분</option>
 													<option <c:if test="${sM == 30}">selected</c:if>  value="30">30 분</option>
 												</select>
 											</span>
                                 </div>
                                 <div class="store-area clearfix">
-                                        <span class="select-box fl">
-												<select name="start_location" id="location" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
-													<c:forEach items="${location}" var="location" >
-														<option <c:if test="${sL == location.location}">selected</c:if> >${location.location}</option>
-													</c:forEach>
-												</select>
-											</span>
+                                    <span class="select-box fl">
+										<select class="inputTime"  name="start_location" id="location" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
+										<c:if test="${sL eq '제주지점'}"><option>제주지점</option></c:if>
+										<c:if test="${sL != '제주지점'}">
+										<option <c:if test="${sL eq '서울지점'}">selected</c:if>>서울지점</option>
+										<option <c:if test="${sL eq '인천지점'}">selected</c:if>>인천지점</option>
+										<option <c:if test="${sL eq '대구지점'}">selected</c:if>>대구지점</option>
+										<option <c:if test="${sL eq '부산지점'}">selected</c:if>>부산지점</option>
+										</c:if>
+										</select>
+									</span>
                                 </div>
                             </div>
                             <div class="col fl">
                                 <div class="date-time-area clearfix">
 										<span id="sDateSpan" class="fl" >
-                                            <input type="text" name="end_date" id="endDate" value="${eD}" onchange="changeDate(); changeHour(); selectCar();"/>
+                                            <input style="border-right: none;"  class="inputDate"  readonly type="text" name="end_date" id="endDate" value="<c:if test ="${eD == null}">반납일 선택</c:if><c:if test ="${eD != null}">${eD}</c:if>" onchange="changeDate(); changeHour(); selectCar();"/>
                                         </span>
                            				   <span  class="select-box fl">
-												<select name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate(); selectCar();">
+												<select class="inputTime"  name="lHour" id="lHour" class="option01 option02 hour fast-reserve-select"  onchange="changeDate(); selectCar();">
 												<c:forEach begin="06" end="22" varStatus="status">
 													<option <c:if test="${lH == status.index}">selected</c:if>   value="${String.format('%02d', status.index)}">${String.format('%02d', status.index)} 시</option>
 												</c:forEach>
 												</select>
 											</span>
 											<span class="select-box fl">
-												<select name="lMinute" id="lMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
+												<select class="inputTime"  name="lMinute" id="lMinute" class="option01 option02 timeChange fast-reserve-select" onchange="changeDate(); selectCar();">
 													<option <c:if test="${lM == 00}">selected</c:if>   value="00">00 분</option>
 													<option <c:if test="${lM == 30}">selected</c:if>   value="30">30 분</option>
 												</select>
@@ -280,10 +310,14 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                                 </div>
                                 <div class="store-area clearfix">
                                        <span class="select-box fl">
-												<select name="end_location" id="end_location" class="option01 option02 timeChange fast-reserve-select" onchange="selectCar();">
-													<c:forEach items="${location}" var="location">
-														<option <c:if test="${lL == location.location}">selected</c:if>  >${location.location}</option>
-													</c:forEach>
+												<select class="inputTime"  name="end_location" id="end_location" class="option01 option02 timeChange fast-reserve-select" onchange="selectCar();">
+													<c:if test="${lL eq '제주지점'}"><option>제주지점</option></c:if>
+													<c:if test="${lL != '제주지점'}">
+													<option <c:if test="${lL eq '서울지점'}">selected</c:if>>서울지점</option>
+													<option <c:if test="${lL eq '인천지점'}">selected</c:if>>인천지점</option>
+													<option <c:if test="${lL eq '대구지점'}">selected</c:if>>대구지점</option>
+													<option <c:if test="${lL eq '부산지점'}">selected</c:if>>부산지점</option>
+													</c:if>
 												</select>
 											</span>
                                 </div>
@@ -353,7 +387,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 	   $('#reservEmail').html($('#emailId').val()+email);
 	   
    }
-   //다시 리로딩
+   //시작 시 로딩
    selectCar();
 
    //차량선택 메뉴 ajax
@@ -361,7 +395,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 		$.ajax({
 			url  	: '${path}/counseling/short_rentDetail',
 			type 	: 'get',
-			data	: {'location' : $('#location').val()},
+			data	: $('[name=insertForm]').serialize(),
 			success : function(data){
 				var str = "";
 				str += '<div class="header-group">'+
@@ -369,7 +403,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 		                 '<div class="article-content">'+
 		                     '<div class="rent-car-select" id="alert-cartype">'+
 		                        	'<div class="tab-menu v2"><ul><li class="c0 col-7';
-		                 if($('#kindCar').val() == '차량 선택') str += ' selected ';
+		                 if($('#kindCar').val() == '차량 선택' || $('#kindCar').val() == "") str += ' selected ';
 		                 str += '" ><a onclick="selectMenu(0);">전체</a></li>';
 				$.each(data.carKind, function(key, value){
 					str += '<li class="c'+ (key+1) +' col-7';
@@ -455,7 +489,7 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 <!--  계약자 정보(제1운전자) start -->
             <article>
                      <div class="header-group">
-                     	<input class="hidden" id="rent_id" name="rent_id" value="">
+                     	<input class="hidden" id="rent_id" name="rent_id" value="1">
                      	<input class="hidden" name=rental_time value="">
                      	<input class="hidden" id="kindCar" value="${carKind}">
                      	<input class="hidden" id="nowHour" value="${nowHour}">
@@ -467,21 +501,25 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 						<p class="cl-point1">※ 실제 운전자 정보를 입력해주세요! 입력한 제1운전자와 예약자가 상이할 경우 대여가 제한될 수 있습니다.</p>
                         <div class="input-field input-field--shortterm">
                         
-                        <div class=" clearfix">
+                        
+                        <div class="input-row clearfix">
                             <div class="fl col-3">
-                            <span class="essential" id="alert-name">
-                                <label><input oninput="carPrice();" type="text" placeholder="이름 입력" name="name" class="onlyKorEng" maxlength="20" value="${detail.name}"/></label>
+                            <span class="input essential" id="alert-name">
+                                <strong class="check">필수</strong>
+                                <label><input type="text"  oninput="carPrice();" type="text" placeholder="이름 입력" name="name" class="onlyKorEng" maxlength="20" value="${detail.name}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-name"></span>
                             </div>
-                            <div class="fl col-3">
-                            <span class="essential" id="alert-birth">
-                                <label><input oninput="carPrice();" id="birth" type="text" maxlength="8" placeholder="생년월일(20170101) 입력" class="readonly onlyNumber" name="birthday" value="${detail.date_of_birth}"/></label>
+                      		 <div class="fl col-3">
+                            <span class="input essential" id="alert-birth">
+                             <strong class="check">필수</strong>
+                                <label><input type="text" maxlength="8" oninput="carPrice();" id="birth" type="text" maxlength="8" placeholder="생년월일(20170101) 입력" class="onlyNumber" name="birthday" value="${detail.date_of_birth}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-birth"></span>
                             </div>
                             <div class="fl col-3">
-                            <span class="essential" id="alert-mobile">
+                            <span class="input essential" id="alert-mobile">
+                               <strong class="check">필수</strong>
                                 <label><input oninput="carPrice();" type="text" placeholder="휴대폰번호(-없이 입력) 입력" class="onlyNumber" name="tel"  value="${tel[0]}${tel[1]}${tel[2]}"/></label>
                             </span>
                             <span class="msg-txt cl-point1" id="span-mobile"></span>
@@ -495,18 +533,18 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 	}
 	
 </script>                        
-                        
-                        <div class=" clearfix">
-                        	<div class="email-input  col-1 maa0" id="alert-email"><!-- 20170705 : 경고 알럿 노출 될 경우 msg-alert 추가 부탁 드립니다. -->
-                                <span class="col-3">
+                        <div class="input-row clearfix">
+                        	<div class="email-input input-box col-1 maa0" id="alert-email">
+                        		<span class="input essential col-3">
+                                    <strong class="check">필수</strong>
                                     <label><input oninput="carPrice();" type="text" placeholder="이메일 입력" class="checkEmail" name="emailId" id="emailId" value=""  maxlength="30"/></label>
                                 </span>
-                                <span class="hyphen col-3">
+                                <span class="input hyphen col-3">
                                     <span class="text">@</span>
-                                    <input oninput="carPrice();" type="text" placeholder="직접 입력" class="checkEmail" name="domain" id="email1" value=""  maxlength="30" />
+                                    <input oninput="carPrice();" type="text" placeholder="직접 입력" class="checkEmail" name="domain" id="email1" value=""  maxlength="30"  tabindex="-1" aria-hidden="true"/>
                                 </span>
                                 <span class="select-box col-3">
-                                    <select name="" id="email2" class="option01" onchange="emailInput(); carPrice();">
+                                    <select id="email2" class="option01 inputTime" onchange="emailInput(); carPrice(); " tabindex="-1" aria-hidden="true">
                                         <option value="">직접 입력</option>
 	                                    	<option value="chol.com">chol.com</option>	
 	                                    	<option value="dreamwiz.com">dreamwiz.com</option>	
@@ -536,16 +574,17 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
                         </div>
                         
   
-                         <div class="">
+                          <div class="input-row">
                                 <div class="address-input col-1">
-                                    <span class="">
-                                        <span class="">
+                                    <span class="input-box">
+                                        <span class="input">
                                             <label><input oninput="carPrice();"  type="number" class="readonly" readonly="readonly" placeholder="우편번호 검색"  placeholder="우편번호" name="zipcode" id="zipcode" value="${address[0]}" /></label>
                                         </span>
-                                        <span class=" essential">
+                                        <span class="input essential">
+                                   			<strong class="check">필수</strong>
                                             <label><input oninput="carPrice();"  type="text" class="readonly" readonly="readonly" placeholder="주소 입력" name="address" id="address" value="${address[1]}" /></label>
                                         </span>
-                                        <span class="">
+                                        <span class="input" style="width:280px;">
                                             <label><input oninput="carPrice();"  type="text" placeholder="나머지 주소 입력"  name="addressDetail" id="addressDetail" maxlength="30" value="${address[2]}" onkeyup="checkingDtlAddr()" /></label>
                                         </span>
                                         <a href="#none" class="btn btn-default btn-fix2 fr" onclick="daumZipCode();" id="addrSearchBtn">우편번호 검색</a>
@@ -585,8 +624,8 @@ if(isNaN(dateDiff)){ $('#ddd').html('0');}
 								<div class="terms-header subject">
 									<h4>고유식별정보 수집 및 이용에 관한 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
-                                        <input id="term-check-1" type="checkbox"  name="is_check" onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" for="term-check-1">동의</label>
+                                        <input id="term-check-1" type="checkbox"  name="is_check" onclick="event.cancelBubble=true; boxCheck();"/>
+                                        <label class="label" for="term-check-1" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 <script type="text/javascript">
@@ -647,7 +686,7 @@ function btnSlide(id){
 									<h4>개인정보의 수집 항목 및 이용목적 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
                                         <input type="checkbox" id="term-check-2" name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" for="term-check-2">동의</label>
+                                        <label class="label" for="term-check-2" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 								<div class="terms-content notice"  id="a2"  >
@@ -680,8 +719,8 @@ function btnSlide(id){
 								<div class="terms-header subject">
 									<h4>자동차 표준 대여 약관 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
-                                        <input type="checkbox" id="term-check-3"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" >동의</label>
+                                        <input type="checkbox" id="term-check-3"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true;"/>
+                                        <label class="label"  for="term-check-3" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 								<div class="terms-content notice" id="a3">
@@ -968,7 +1007,7 @@ function btnSlide(id){
 									<h4>취소 및 위약금 규정 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
                                         <input type="checkbox" id="term-check-4"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" for="term-check-4">동의</label>
+                                        <label class="label" for="term-check-4" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 								<div class="terms-content notice" id="a4">
@@ -986,7 +1025,7 @@ function btnSlide(id){
 									<h4>대여자격 확인 동의 <strong class="cl-point1">(필수)</strong></h4>
 									<span class="checkbox v2">
                                         <input type="checkbox" id="term-check-5"  name="is_check"  onclick="boxCheck(); event.cancelBubble=true"/>
-                                        <label class="label" for="term-check-5">동의</label>
+                                        <label class="label" for="term-check-5" onclick="event.cancelBubble=true;">동의</label>
                                     </span>
 								</div>
 								<div class="terms-content notice" id="a5">
@@ -1204,7 +1243,7 @@ function btnSlide(id){
 <!-- modal-pop//end -->
             <article id="tinfo" >
                 <div class="ticker-info tickerHead" >
-                    <div class="ticker-body">
+                    <div class="ticker-body" style="height:630px;">
                         <div class="clearfix">
                             <div class="fl">
                                 <div class="reserve-state">
@@ -1212,11 +1251,11 @@ function btnSlide(id){
                                         <h4>대여현황</h4>
                                     </div>
                                    	<dl class="dl-horizontal v1">
-                                        <dt>대여일시<span id="s_date_end" ></span></dt>
-                                        <dt>반납일시<span id="e_date_end"></span></dt>
-                                        <dt>대여지점<span id="sel2_che" ></span></dt>
-                                        <dt>반납지점<span id="sel2_che2"></span></dt>
-                                        <dt>대여차량<span id="modelNm"></span></dt>
+                                        <dt id="reserv">대여일시<span id="s_date_end" ></span></dt>
+                                        <dt id="reserv">반납일시<span id="e_date_end"></span></dt>
+                                        <dt id="reserv">대여지점<span id="sel2_che" ></span></dt>
+                                        <dt id="reserv">반납지점<span id="sel2_che2"></span></dt>
+                                        <dt id="reserv">대여차량<span id="modelNm"></span></dt>
                                     </dl>
                                 </div>
                                 <!-- state//end -->
@@ -1229,12 +1268,27 @@ function btnSlide(id){
                                     </div>
                                     <dl class="dl-horizontal v1">
                                     
+                              <style>
+                              
+#reserv {
+	width:260;
+}
+-->
+.p_point {
+    font-size: 13px;
+    color: #666;
+    margin-top: 210px;
+    line-height: 13px;
+}
+.glyphicons {
+	margin-left:-280px;
+}
+</style>      
                                     
-                                    
-                                    	<dt>이름<span id="reservNm"></span></dt>
-                                        <dt>휴대폰<span id="reservHp"></span></dt>
-                                        <dt>생년월일<span id="reservBirth"></span></dt>
-                                        <dt>이메일<span id="reservEmail"></span></dt>
+                                    	<dt id="reserv">이름<span id="reservNm"></span></dt>
+                                        <dt id="reserv">휴대폰<span id="reservHp"></span></dt>
+                                        <dt id="reserv">생년월일<span id="reservBirth"></span></dt>
+                                        <dt id="reserv">이메일<span id="reservEmail"></span></dt>
                                     
                                     
                                         
@@ -1248,13 +1302,13 @@ function btnSlide(id){
                                     <div class="header-group mab0">
                                         <h4>예약금액</h4>
                                     </div>
-                                    <dl class="dl-horizontal v1">
-                                        <dt>표준요금<span id="reservEmail"><strong class="won cl-point2" id="rateAmt">0</strong>원</span></dt>
-                                        <dt>편도수수료<span id="reservEmail"><strong class="won cl-point2" id="oneWay">0</strong>원</span></dt>
-                                        <dt class="detail">총 할인금액<span id="reservEmail"><span class="conclusion"><strong class="won cl-point2" id="discountAmt">-0</strong>원</span></span></dt>
-                                        <dt>이벤트추가할인<span id="reservEmail"><span class="conclusion"><strong class="won cl-point2" id="eventAmt">-0</strong>원</span></span></dt>
+                                    <dl class="dl-horizontal v1" style="margin-bottom: 0px;">
+                                        <dt id="reserv">표준요금<span id="reservEmail"><strong class="won cl-point2" id="rateAmt">0</strong>원</span></dt>
+                                        <dt id="reserv">편도수수료<span id="reservEmail"><strong class="won cl-point2" id="oneWay">0</strong>원</span></dt>
+                                        <dt class="detail" id="reserv">총 할인금액<span id="reservEmail"><span class="conclusion"><strong class="won cl-point2" id="discountAmt">-0</strong>원</span></span></dt>
+                                        <dt id="reserv">이벤트추가할인<span id="reservEmail"><span class="conclusion"><strong class="won cl-point2" id="eventAmt">-0</strong>원</span></span></dt>
                                     </dl>
-                                    <p class="p_point">* 차량손해면책제도는 할인 적용 제외</p>
+                                    <p class="p_point"  >* 차량손해면책제도는 할인 적용 제외</p>
                                 </div>
                                 <!-- state//end -->
                             </div>
@@ -1265,7 +1319,7 @@ function btnSlide(id){
                     </div>
                 <div class="ticker-info">
                     <div class="ticker-head">
-                        <a href="#none" id="tickerHeadBtn" class="ticker-btn" onclick="tickerHead();" style="text-align: center;"><span id="tH"><br><span class="glyphicon glyphicon-menu-up"></span><br>더보기</span></a>
+                        <a href="#none" id="tickerHeadBtn" class="ticker-btn" onclick="tickerHead();" style="text-align: center;"><span id="tH"><br><span class="glyphicon glyphicon-menu-up glyphicons"></span><br>더보기</span></a>
                         <dl class="dl-horizontal">
                             <dt style="text-align: left; font-size: 20px; border: none;">총 결제금액</dt>
                             <dd class="text-r"><strong id="rentPayment">0</strong>원</dd>
@@ -1286,7 +1340,6 @@ function btnSlide(id){
             </div>
           </div>
         </div>
-            <!-- btn-box//end -->
         </form>
     <!-- container//end -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -1338,13 +1391,15 @@ function daumZipCode(){
 </script>
 
 <script type="text/javascript">
-//스크롤 값을 구함
-$(document).scrollTop();
-
-//1947값 이상일시 class를 바꾼다
+//footerSHeight값 이상일시 class를 바꾼다
 $(window).scroll(function () {
+    var windowHeight = $(window).height();				// Viewport Height
+    var documentHeight = $(document).height();			// Viewport Height
+    var footerHeight = $('#footers').height();
+    var footerSHeight = documentHeight - windowHeight - footerHeight - 274;
 	var scrollValue = $(document).scrollTop();
-	if(scrollValue > 1947)
+	console.log(scrollValue + ' ' + footerSHeight + ' ' + documentHeight + ' ' +  windowHeight + ' ' + footerHeight );
+	if(scrollValue > footerSHeight)
 		$('.ticker-info').addClass("off");
 	else
 		$('.ticker-info').removeClass("off");

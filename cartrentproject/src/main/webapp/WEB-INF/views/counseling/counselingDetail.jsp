@@ -16,11 +16,17 @@ tbody tr:hover {
 </style>
 </head>
 <body>
+<div style="height: 150px;"></div>
 <h2 align=center>${detail.name}님의 상담 상세조회(${detail.id})</h2>
 <div class="container">
 	<form method="post" name="form1">
 	<table class="table">
-	
+		
+		<tr>
+			<th>상담 자동차 이름</th>
+			<td align="left">${car.car_name}</td>
+		</tr>
+		
 		<tr>
 			<th>상담 렌트 번호</th>
 			<td align="left">${detail.rent_id}</td>

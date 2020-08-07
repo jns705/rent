@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>솔렌트카 로그인 페이지s</title>
+<title>솔렌트카 로그인 페이지</title>
 </head>
 <body>
 	<c:if test="${sessionScope.id != null}">

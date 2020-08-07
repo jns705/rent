@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.rent.domain.BuyVO;
+import com.rent.domain.MemberVO;
+import com.rent.domain.PagingVO;
 import com.rent.mapper.BuyMapper;
 
 @Service("com.rent.service.BuyService")
@@ -26,8 +28,13 @@ public class BuyService {
 }
 	
 	//구매목록
-	public List<BuyVO> buyList() throws Exception { 
-		return mapper.buyList();
+	public List<BuyVO> buyList(PagingVO paging) throws Exception { 
+		return mapper.buyList(paging);
+	}
+	
+	//구매목록 총 갯수
+	public int buyCount() throws Exception{
+		return mapper.buyCount();	
 	}
 	
 	//예약삭제
@@ -40,4 +47,28 @@ public class BuyService {
 		return mapper.buyDetail(buy_id);
 	}
 	
+	//rent_id를 구매한 사람들의 id를 가져온다
+	public List<BuyVO> buyListMember(String rent_id) throws Exception {
+		return mapper.buyListMember(rent_id);
+	}
+	
+	//차량 구매한사람들의 아이디로 성별과 나이를 찾는다.
+	public MemberVO memberInformation(String id) throws Exception {
+		return mapper.memberInformation(id);
+	}
+	
+	//비회원 이름, 전화번호로 조회
+	public List<BuyVO> getDetail(BuyVO buy) throws Exception{
+		return mapper.getDetail(buy);
+	}
+	
+	//바이아이디로 리스트 조회
+	public List<BuyVO> buyListBuyId(String buy_id)throws Exception{
+		return mapper.buyListBuyId(buy_id);
+	}
+	
+	//전화번호로 리스트 출력
+	public List<BuyVO> buyListTel(String tel)throws Exception{
+		return mapper.buyListTel(tel);
+	}
 }
