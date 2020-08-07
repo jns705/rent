@@ -829,42 +829,34 @@ $('.white_div').hover(function() {
 	    		<div class="a">
 	    			<ul class="list">
 	    			
-	    				<li>
+	    				<li style="background-image:url(http://localhost:8082/static/img/fut.gif); background-size: 1000px 380px;">
 		    				<h4>We Redesign Our Mobility Life</h4>
 		    				<br>
-		    				<p style="font-size:35px;">매일매일의 Mobility Life를 보다 가치있게 Redesing 하는일,</p>
+		    				<p>매일매일의 Mobility Life를 보다 가치있게 Redesing 하는일,</p>
 		    				<br>
-							<p style="font-size:35px;">미래를 준비하는 KS렌터카의 다음 미션입니다.</p>
+							<p>미래를 준비하는 KS렌터카의 다음 미션입니다.</p>
 						</li>
 						
-						<li>
+						<li id="e5" style="background-image:url(http://localhost:8082/static/img/KsAirLogo.png); background-size: 150px 150px;
+						background-repeat:no-repeat; background-position: 60% 0%; ">
 		    				<h4>"Smart Way"</h4>
+		    				<br>
 		    				<h3>고객을 위한 똑똑한 길잡이</h3>
 		    				<br>
-		    				<p style="font-size:30px;">KS렌터카의 Visual Identiyu인 "SMART WAY"는 앞으로 나아가는 '길'의 모습을 형상화하였습니다.</p>
-		    				<br>
-							<p style="font-size:30px;">KS렌터카가 제안드리는 Smaert한 가격과 Total Car Care 프로그램이 역동적인 길 위에 얹어지고,</p>
-							<br>
-		    				<p style="font-size:30px;">끊임없는 도전과 열정의 Red 따뜻한 고객 사랑의 Orange Color를 더하여</p>
-		    				<br>
-		    				<p style="font-size:30px;">'고객 만족을 위한 똑똑한 길잡이'가 되기 위해 끊임없이 노력하는 KS렌터카의 의지를 표현하고 있습니다.</p>
+		    				<p>KS렌터카의 Visual Identiyu인 "SMART WAY"는 앞으로 나아가는 '길'의 모습을 형상화하였습니다.</p>
+							<p>KS렌터카가 제안드리는 Smaert한 가격과 Total Car Care 프로그램이 역동적인 길 위에 얹어지고,</p>
+		    				<p>끊임없는 도전과 열정의 Red 따뜻한 고객 사랑의 Orange Color를 더하여</p>
+		    				<p>'고객 만족을 위한 똑똑한 길잡이'가 되기 위해 끊임없이 노력하는 KS렌터카의 의지를 표현하고 있습니다.</p>
 		    				
 						</li>
 						
-						<li>
-		    				<h4>3333333333</h4>
-		    				<br>
-		    				<p style="font-size:35px;">33333333333</p>
-		    				<br>
-							<p style="font-size:35px;">33333</p>
+						<li style="background-image:url(http://localhost:8082/static/img/ATo.png); top:10px;">
 						</li>
 						
 						<li>
-		    				<h4>W444</h4>
-		    				<br>
-		    				<p style="font-size:35px;">4</p>
-		    				<br>
-							<p style="font-size:35px;">44</p>
+							<div style="float:left; width: 1000px; height: 300px;"></div>
+							<div class="Advertising" style="background-image:url(http://localhost:8082/static/img/Advertising1.gif);"></div>
+							<div class="Advertising" style="background-image:url(http://localhost:8082/static/img/Advertising2.gif);"></div>
 						</li>
 	    			</ul>
 	    		</div>
@@ -874,38 +866,58 @@ $('.white_div').hover(function() {
 	    		<div class="b">
 	    			<button class="prev">이전</button>
 	    			<button class="next">다음</button>
-	    			<button onclick="black()">ㅋㅋ</button>
+	    			<button onclick="black()">X</button>
 	    		</div>
+				
 	    	</div>
 		</div>
     
 </div>
 <style>
+.Advertising{
+float:left;
+width:500px ;
+height: 300px;
+background-size: 500px 300px;
+}
+#section-4{
+    background-color: #fec401;
+    background-image: url(http://localhost:8082/static/img/touch.png);
+    background-position: 50% 100%;
+    background-repeat: no-repeat;
+}
 h4{
 color: #FF0000;
-font-size:55px;
+font-size:50px;
 top:10px;
 }
 h3 {
-color: #282828;
-font-size:40px;
+color: #2F4F4F;
+font-size:30px;
+}
+li p {
+font-size:35px;
+color:#FF4500;
+}
+li#e5 p {
+font-size:20px;
 }
 .b{
 	position: relative;
     margin-left: 300px;
-    width: 600px;
+    width: 200px;
     height: 100px;
-    top: 0x;
+    top: -50px;
     right: -380px;
+    color: black;
 }
 .a {
 	position: relative;
     margin-left: 300px;
-    width: 1400px;
-    height: 380px;
-    top: -100px;
-    right: 0;
-	border:1px solid;
+    width: 1000px;
+    height: 300px;
+    top: -60px;
+    right: 0px;
   	overflow: hidden;
 }
 
@@ -913,8 +925,8 @@ ul {
   list-style: none;
 }
 .a .list {
-  width: 5600px;
-  margin-left: -1400px;
+  width: 4000px;
+  margin-left: -1000px;
 }
 
 .a .list:after {
@@ -925,8 +937,8 @@ ul {
 
 .a .list li {
   float: left;
-  height: 380px;
-  width: 4200px;
+  height: 300px;
+  width: 3000px;
 }
 h2 {
   font-family: 'Arial';
@@ -936,28 +948,35 @@ h2 {
   font-size: 3rem;
   line-height: 0.75;
 }
-
-span {
+div.sp {
+position: relative;
+margin-left:300px;
+width:30px;
+height: 30px;
+top : 480px;
+right: -455px;
+overflow: hidden;
+border-radius: 12px;
+}
+div.sp span {
   display: block;
 }
-
-span:not(.light) {
-  opacity: 0;
-  -webkit-animation: flashText .5s ease-out alternate infinite;
-          animation: flashText .5s ease-out alternate infinite;
+div.sp span a#NRC {
+position: relative;
+color:black;
 }
 
-span.light {
+div.sp span.light {
   position: relative;
   display: inline-block;
 }
-span.light:before {
+div.sp span.light:before {
   position: absolute;
   left: 0;
   top: -10%;
   width: 100%;
   height: 120%;
-  background: red;
+  background: white;
   -webkit-filter: blur(10px);
           filter: blur(10px);
   content: "";
@@ -965,7 +984,6 @@ span.light:before {
   -webkit-animation: flash .5s ease-out alternate infinite;
           animation: flash .5s ease-out alternate infinite;
 }
-
 @-webkit-keyframes flash {
   to {
     opacity: 1;
@@ -1042,11 +1060,11 @@ span.light:before {
             
         	  $('.next').click(function() {
         	    $('.list').stop().animate({
-        	      'margin-left': '-2800px'
+        	      'margin-left': '-2000px'
         	    }, function() {
         	      $('.list li:first-child').appendTo('.list');
         	      $('.list').css({
-        	        'margin-left': '-1400px'
+        	        'margin-left': '-1000px'
         	      });
         	    });
         	  });
@@ -1057,28 +1075,42 @@ span.light:before {
         	    }, function() {
         	      $('.list li:last-child').prependTo('.list');
         	      $('.list').css({
-        	        'margin-left': '-1400px'
+        	        'margin-left': '-1000px'
         	      });
         	    });
         	  });
 
           	   var auto = setInterval(function(){
-          	   		$('.list').stop().animate({'margin-left':'-2800px'},function(){
+          	   		$('.list').stop().animate({'margin-left':'-2000px'},function(){
           	   			$('.list li:first-child').appendTo('.list');
-          	            $('.list').css({'margin-left':'-1400px'});
+          	            $('.list').css({'margin-left':'-1000px'});
           	       });
           	   },4000);
+
+          	   /* 마우스 올렸을때 캐러셀 자동 멈춤 */
+          	   $('.list').mouseenter(function(){
+          	        clearInterval(auto);  
+          	   });
+          	   
+          	   /* 마우스 내렸을때 캐러셀 자동 다시실행 */
+          	   $('.list').mouseleave(function(){
+          	        auto = setInterval(function(){
+          	         		$('.list').stop().animate({'margin-left':'0px'},function(){
+          	         			$('.list li:first-child').appendTo('.list');
+          	           $('.list').css({'margin-left':'-1000px'});
+          	        });
+          	    },4000);
+          	   });
 
         	  
         	});
 function black() {
 	var str ='';
-	str +='<span>Theres</span>';
-	str +='<span class="light">light</span>';
-	str +='<span> even in</span>';
-	str +='<span>the darkest</span>';
-	str +='<span>places</span>';
-	$('.a').html(str);
+	str +='<div class="sp">';
+	str +='<span class="light"><a href="${path}/rent/NewRentList" id="NRC">　　ㅋㅋㅋ</a></span>';
+	str +='</div>';
+	$('#section-4').css('background-color','black');
+	$('#section-4').html(str);
 }
 </script>
 
