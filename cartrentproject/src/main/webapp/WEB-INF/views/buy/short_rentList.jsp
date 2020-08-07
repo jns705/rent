@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <head>
 <style>
+header img{margin-top:0px;}
 th{text-align: center;}
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> 

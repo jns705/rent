@@ -13,6 +13,7 @@
 <title>상세정보</title>
 <head>
 <style>
+header img{margin-top:0px;}
 * {
 	margin: 0;
 	padding: 0;
@@ -870,6 +871,11 @@ ul, li {
 							</fieldset>
 						</article>
 <article>
+<div class="quick-top" style="z-index: 10000;">
+	<a id="aaaaaa" class="btn-top">TOP</a>
+</div>
+
+
 <div class="ticker-info ticker-info--direct">
 <div class="ticker-head">
 <dl class="dl-horizontal">
@@ -996,32 +1002,33 @@ function driving(e) {
 
 	
 		//footerSHeight값 이상일시 class를 바꾼다
-		$(window).scroll(
-				function() {
-					var windowHeight = $(window).height(); // Viewport Height
-					var documentHeight = $(document).height(); // Viewport Height
-					var footerSHeight = 0;
-					if	(documentHeight == 2319)     footerSHeight = 919;
-				    else if(documentHeight == 2275)  footerSHeight = 1065;
-				    else if(documentHeight == 2267)  footerSHeight = 1161;
-				    else if(documentHeight == 2287)  footerSHeight = 1265;
-				    else if(documentHeight == 2279)  footerSHeight = 1324;
+$(window).scroll(
+		function() {
+			var windowHeight = $(window).height() - window.innerHeight-$('#footer').height(); // Viewport Height
+			var scrollValue = $(document).scrollTop();
+			if (scrollValue > windowHeight){
+				$('.ticker-info').addClass("off");
+				$('.quick-top').attr('style','position:absolute');
+				$('#aaaaaa').css('margin-top','70px');
 					
-					var scrollValue = $(document).scrollTop();
-					var a = documentHeight - $('#footer').height() -945; //264
-					var a = documentHeight - $('#footer').height() -945; //264
-					console.log( a + '스크롤'+scrollValue + ' 푸터' + footerSHeight + ' 도큐' + documentHeight + ' 윈도우' +  windowHeight + ' ' );
-					if (scrollValue > footerSHeight)
-						$('.ticker-info').addClass("off");
-					else
-						$('.ticker-info').removeClass("off");
-				});
+			}else{
+				$('.ticker-info').removeClass("off");
+				$('.quick-top').css('position','fixed');
+				$('#aaaaaa').css('margin-top','');
+			}
+		});
 
-		var abr = Math.floor(Math.random() * 50) + 1;
-		document.getElementById('abr').innerHTML = abr;
 
-		var dbr = Math.floor(Math.random() * 10) + 1;
-		document.getElementById('dbr').innerHTML = dbr;
+	$('#aaaaaa').css('display', 'none');
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 400) {$('#aaaaaa').fadeIn();} 
+		else {$('#aaaaaa').fadeOut();}
+	});
+
+	$('#aaaaaa').click(function() {
+		$('html, body').animate({scrollTop : 0}, 400);
+		return false;
+	});
 
 		//모두 동의 체크박스
 		function checkBox() {

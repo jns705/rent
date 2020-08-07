@@ -6,6 +6,7 @@
 <layoutTag:layout>
 <!DOCTYPE html>
 <head>
+<style type="text/css">header img{margin-top:0px;}</style>
 <%@ include file="short_rentAction.jsp" %>
 <style>
 </style>
@@ -950,6 +951,10 @@
                         <!-- clearfix//end -->
                     	</div>
                     </div>
+                    
+<div class="quick-top" style="z-index: 10000;">
+	<a id="aaaaaa" class="btn-top" onclick="topaa();">TOP</a>
+</div>
                 <div class="ticker-info">
                     <div class="ticker-head">
                         <a href="#none" id="tickerHeadBtn" class="ticker-btn" onclick="tickerHead();" style="text-align: center;"><span id="tH"><br><span class="glyphicon glyphicon-menu-up glyphicons"></span><br>더보기</span></a>

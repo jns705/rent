@@ -372,8 +372,10 @@ function colorName(data){
 								<div class="form-group__body" id="f3">
 								
 				<style>
+				header img{margin-top:0px;}
 <!--
 .radio.v7 input[type=radio]:checked+label {
+
     display: block !important;
     position: absolute !important;
     top: -1px !important;
@@ -516,7 +518,13 @@ function colorName(data){
 					</fieldset>
 				</article>
 				<article>
+					<div class="quick-top" style="z-index: 10000;">
+						<a id="aaaaaa" class="btn-top">TOP</a>
+					</div>
 					<div class="ticker-info ticker-info--direct">
+						
+						
+						
 						
 						<!-- ticker-body//end -->
 						<div class="ticker-head" style="z-index: 10000">
@@ -1361,22 +1369,37 @@ function sMonth(data){
 
 
 //footerSHeight값 이상일시 class를 바꾼다
-$(window).scroll(function () {
-    var windowHeight = $(window).height();				// Viewport Height
-    var documentHeight = $(document).height();			// Viewport Height
-    var footerHeight = $('#footers').height();
-    if(documentHeight > 1641) var footerSHeight = windowHeight - 1206;
-    else if(documentHeight > 1538) var footerSHeight = windowHeight - 1206;
-	var scrollValue = $(document).scrollTop();
-	console.log(scrollValue + ' ' + documentHeight + ' ' + footerSHeight + ' ' +  windowHeight);
-	if(scrollValue > footerSHeight)
-		$('.ticker-info').addClass("off");
-	else
-		$('.ticker-info').removeClass("off");
-});
+$(window).scroll(
+		function() {
+			var windowHeight = $(window).height() - window.innerHeight-$('#footer').height(); // Viewport Height
+			var scrollValue = $(document).scrollTop();
+			if (scrollValue > windowHeight){
+				$('.ticker-info').addClass("off");
+				$('.quick-top').attr('style','position:absolute');
+				if($(window).height() < 2000)
+				$('#aaaaaa').css('margin-top','33px');
+				else
+				$('#aaaaaa').css('margin-top','105px');
+					
+			}else{
+				$('.ticker-info').removeClass("off");
+				$('.quick-top').css('position','fixed');
+				$('#aaaaaa').css('margin-top','');
+			}
+		});
 
+
+	$('#aaaaaa').css('display', 'none');
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 400) {$('#aaaaaa').fadeIn();} 
+		else {$('#aaaaaa').fadeOut();}
+	});
+
+	$('#aaaaaa').click(function() {
+		$('html, body').animate({scrollTop : 0}, 400);
+		return false;
+	});
 </script>
-
 
 
 </html>

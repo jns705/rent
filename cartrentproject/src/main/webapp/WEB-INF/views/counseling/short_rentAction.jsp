@@ -368,6 +368,20 @@ function daumZipCode(){
 </script>
 
 <script type="text/javascript">
+function topaa() {
+	$('html, body').animate({scrollTop : 0}, 400);
+	return false;
+}
+
+
+$(window).scroll(function() {
+	if ($(this).scrollTop() > 400) $('#aaaaaa').fadeIn();
+	else $('#aaaaaa').fadeOut();
+});
+
+
+
+
 //footerSHeight값 이상일시 class를 바꾼다
 $(window).scroll(function () {
     var windowHeight = $(window).height();				// Viewport Height
@@ -376,11 +390,17 @@ $(window).scroll(function () {
     var footerSHeight = documentHeight - windowHeight - 274;
 	var scrollValue = $(document).scrollTop();
 	console.log('스크롤'+scrollValue + ' 푸터' + footerSHeight + ' 도큐' + documentHeight + ' 윈도우' +  windowHeight + ' ' );
-	if(scrollValue > footerSHeight)
+	if(scrollValue > footerSHeight){
 		$('.ticker-info').addClass("off");
-	else
+		$('.quick-top').attr('style','position:absolute');
+		$('#aaaaaa').css('margin-top','110px');
+	}else{
 		$('.ticker-info').removeClass("off");
+		$('.quick-top').attr('style','position:fixed');
+		$('#aaaaaa').css('margin-top','');
+	}
 });
+
 
 
 
