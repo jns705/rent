@@ -1,8 +1,10 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-
+<!-- 현재 URL -->
 <c:set var="URL" value="${pageContext.request.requestURL}" />
+ 
+ <!-- 메인이 아닐 시 보여준다 -->
  <c:if test="${URL.substring(36) != 'main.jsp'}">
 	<footer id="footer">
     <div class="footer-wrapper">

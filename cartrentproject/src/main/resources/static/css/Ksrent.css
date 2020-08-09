@@ -1,5 +1,10 @@
 @CHARSET "UTF-8";
-
+.aa1{text-decoration: none;}
+.aa1:hover{color:#eb444b!important; text-decoration: none;}
+.aa2:hover{color:#f68121!important; text-decoration: none;}
+.aa1:visited{text-decoration: none;}
+.aa2:visited{text-decoration: none;}
+	
 .dropdown-menu li a {color:#333333 !important;}
 
 header img {margin-top:-20px;}

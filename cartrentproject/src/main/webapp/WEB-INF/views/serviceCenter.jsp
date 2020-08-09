@@ -87,11 +87,11 @@
 					                    <td>${list.division}</td>
 					                    <td class="text-l pal0" onclick="location.href='${path}/serviceCenter/noticeDetail/${list.no}?number=${index}&moVal=${moVal}&moKind=${moKind}'">
 					                    	 ${list.subject}
-<fmt:parseNumber var="reg_date" value="${list.reg_date.time / (1000*60*60*24)}" integerOnly="true"/>
-				                    	 <c:if test="${today+6 > reg_date}"> 
-				                    	 
+					                    <!-- 날짜를 계산하기 위한 수치화 -->
+										<fmt:parseNumber var="reg_date" value="${list.reg_date.time / (1000*60*60*24)}" integerOnly="true"/>
+				                    	 <!-- 7일 전이면 N을 붙인다 -->
+				                    	 <c:if test="${today < reg_date + 8}"> 
 				                    	 <span class="ico ico-new">N</span> 
-				                    	 
 				                    	 </c:if>
 					                    </td>
 					                    <td>${list.reg_date}</td>

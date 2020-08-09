@@ -97,7 +97,7 @@ public class MemberController {
 		System.out.println("loginProc : " + check);
 		//아이디, 비밀번호가 있으면 세션을 등록한다
 		session.setAttribute("id", id);
-		if(Referer.equals("http://localhost:8082/buy/memberCheckForm")) return "redirect:/counseling/userList";
+		if(Referer.equals("http://localhost:8082/buy/memberCheckForm")) return "redirect:/buy/short_rentList";
 		if(Referer.equals("http://localhost:8082/buy/memberCheckForm?check=1")) return "redirect:/counseling/userList";
 		return "redirect:" + Referer.substring(21);
 	}
@@ -112,8 +112,11 @@ public class MemberController {
 	//로그아웃
 	@RequestMapping("/logOut")
 	public String logOut(HttpSession session, HttpServletRequest request) {
+		String referer = request.getHeader("Referer");
 		session.invalidate();
-		return "redirect:" + request.getHeader("Referer").substring(21);
+		if(referer.contains("/buy/short_rentList")) return "redirect:/buy/memberCheckForm";
+		if(referer.contains("/counseling/userList") || referer.contains("/buy/userBuyList")) return "redirect:/buy/memberCheckForm?check=1";
+		return "redirect:" + referer.substring(21);
 	}
 	
 	//아이디 중복검사

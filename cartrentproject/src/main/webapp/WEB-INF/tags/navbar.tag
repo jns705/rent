@@ -2,6 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="URL" value="${pageContext.request.requestURL}" />
+<!-- 관리자 메뉴에 마스터가 아닌 다른 계정이 올 시 메인으로 보낸다 -->
+<c:if test="${sessionScope.id != 'master' and (fn : contains(URL, 'admin') or fn : contains(URL, 'accident') or fn : contains(URL, 'buy/list'))}">
+	<script type="text/javascript">
+		location.href='/main';
+	</script>
+</c:if>
+
 
 <!-- header 시작 -->
 <header id="menuHeader11"
@@ -25,8 +32,7 @@
 					</li>
 				</c:if>
 				<li><a href="/serviceCenter" class="awaw">고객센터</a></li>
-				
-				
+
 				<!-- 관리자일 경우 보여짐 -->
 				<c:if test="${sessionScope.id eq 'master'}">
 					<li class="nav-menu nav-estimate primary dropdown"
@@ -49,7 +55,7 @@
 		</nav>
 		
 		
-		<nav class="gnb hc " id="menuHeader12" tabindex="0">
+		<nav class="gnb hc " id="menuHeader12" >
 			<h2 class="sr-only ">메인 메뉴</h2>
 			<div class="gnb-wrapper">
 				<ul class="gnb-listbox">
@@ -112,10 +118,9 @@
 		</div>
 	</div>
 </header>
-
-
-
 <!-- header 끝 -->
+
+
 
 <!-- 퀵메뉴 메인이 아닐 시 보여짐 -->
 <c:if test="${!fn : contains(URL, 'main') and !fn : contains(URL, 'admin') and !fn : contains(URL, 'accident') and !fn : contains(URL, 'buy/list')}">
@@ -132,8 +137,6 @@
 
 
 
-<!-- top 버튼 스크립트 -->
-
 
 <c:if test="${!fn : contains(URL, 'main.do')}"> <style>body {margin-top: 100 !important;}</style> </c:if>
 
@@ -148,3 +151,28 @@
 </style> </c:if>
 		
 		
+<!-- 메인 헤더 CSS -->
+<c:if test="${fn : contains(URL, 'main')}">
+<script type="text/javascript">
+$('.awaw').hover(function() {
+	$('#menuHeader11').css('background-color','white');
+	$('#menuHeader12').css('background-color','white');
+	$('.plh').removeClass('hidden');
+	$('.awaw').attr('style','color:black !important; text-decoration: none;' )
+	$('.aa1').attr('style','color:black !important; left: auto; right: 0px; text-decoration: none;')
+	$('.aa2').attr('style','color:black !important; left: 60px; width: 100px; text-decoration: none;') 
+});
+$('.aa1').hover(function() {$('.aa1').attr('style','color:#eb444b !important; left: auto; right: 0px; text-decoration: none;')});
+$('.aa2').hover(function() {$('.aa2').attr('style','color:#f68121 !important; left: 60px; width: 100px; text-decoration: none;')});
+	
+$('#menuHeader11').hover(function() {}, function(){
+	$('#menuHeader11').css('background-color','transparent');
+	$('#menuHeader12').css('background-color','transparent');
+	$('#menuHeader12').css('background-color','transparent');
+	$('.plh').addClass('hidden');
+	$('.awaw').attr('style','color:white !important text-decoration: none;')
+	$('.aa1').attr('style','color:white !important; left: auto; right: 0px; text-decoration: none;')
+	$('.aa2').attr('style','color:white !important; left: 60px; width: 100px; text-decoration: none;')
+});
+</script>
+</c:if>

@@ -3,6 +3,7 @@
 <!-- JQuery -->
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+<!-- 알럿창 꾸며주는 CSS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -14,6 +15,7 @@
 <link rel="shortcut icon" href="http://localhost:8082/static/img/favicon1.ico"/>
 <!-- 부트스트랩 슬라이더 -->
 <link href="http://localhost:8082/static/css/bootstrap-slider.css" rel="stylesheet" type="text/css"/>
+<!-- 기타CSS -->
 <link href="http://localhost:8082/static/css/total.css" rel="stylesheet" type="text/css"/>
 <link href="http://localhost:8082/static/css/ksrent.css" rel="stylesheet" type="text/css"/>
 

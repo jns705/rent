@@ -75,6 +75,7 @@ th{text-align: center;}
         
       	<c:if test="${sessionScope.id == null}">
         <style>
+        header img{margin-top:0px;}
         .reserve-check li {width: 430px;}
 		</style>
       	<article>
