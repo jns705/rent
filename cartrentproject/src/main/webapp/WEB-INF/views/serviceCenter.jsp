@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:useBean id="now" class="java.util.Date" scope="request" />
-<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
 <fmt:parseNumber var="today" value="${now.time / (1000*60*60*24)}" integerOnly="true" scope="request" />
 
 <%@ page session="true"%>
@@ -11,6 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="service/serviceHeader.jsp" %>
 <style>
 .inputTime{
     padding-left: 10px;
@@ -24,7 +24,6 @@
 }
 </style>
 <link href="http://localhost:8082/static/css/ss.css" rel="stylesheet" type="text/css" >
-<%@ include file="service/serviceHeader.jsp" %>
 	<meta charset="UTF-8">
 	<title>렌트의 기준 - 솔렌트카</title>
 </head>
@@ -32,7 +31,7 @@
 <div id="content">
     <div id="container">
         <div class="breadcrumbs">
-            <h2 class="tit">공지사항</h2>
+            <h2 class="tit	">공지사항</h2>
             <div class="clearfix">
                 <span>홈</span>
                 <span>고객센터</span>
@@ -54,11 +53,7 @@
                         <span class="input fl">
                             <label><input id="schWord" name="moVal" type="text" value="" placeholder="검색어를 입력해 주세요."></label>
                         </span>
-                        <button class="btn btn-default btn-fix1 fr" onclick="getClientNoticeList();" style="background-color: F68121;">검색하기</button>
-                        <c:if test="${sessionScope.id eq 'master'}">
-                        <button class="btn btn-default btn-fix1 fr" onclick="getClientNoticeList();">작성하기</button>
-                        </c:if>	
-                        
+                        <button class="btn  btn-fix1 fr" onclick="getClientNoticeList();" style="background-color: F68121; color:white;">검색하기</button>
                     </div>
                 </div>
             </div>
@@ -86,7 +81,7 @@
 					                    <td>${SSize - status.index - (showNum*(number-1))}</td>
 					                    <td>${list.division}</td>
 					                    <td class="text-l pal0" onclick="location.href='${path}/serviceCenter/noticeDetail/${list.no}?number=${index}&moVal=${moVal}&moKind=${moKind}'">
-					                    	 ${list.subject}
+					                    	 <a href="#">${list.subject}</a>
 					                    <!-- 날짜를 계산하기 위한 수치화 -->
 										<fmt:parseNumber var="reg_date" value="${list.reg_date.time / (1000*60*60*24)}" integerOnly="true"/>
 				                    	 <!-- 7일 전이면 N을 붙인다 -->

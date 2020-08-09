@@ -62,11 +62,11 @@
 					<li class="gnb-listitem gnb-listitem-long"><a
 						<c:if test="${URL.substring(36) == 'main.jsp'}">href="/main#page2"</c:if>
 						href="/main.doa" class="gnb-anchor awaw aa1 serviceLong"
-						style="left: auto; right: 0px;">장기렌터카</a></li>
+						style="left: auto; right: 50px;">장기렌터카</a></li>
 					<li class="gnb-listitem gnb-listitem-short"><a
 						<c:if test="${URL.substring(36) == 'main.jsp'}">href="/main#page3"</c:if>
 						href="/rent/main.do" class="gnb-anchor awaw aa2 serviceShort"
-						style="left: 60px; width: 100px;">단기렌터카</a></li>
+						style="left: 40px; width: 100px;">단기렌터카</a></li>
 				</ul>
 			</div>
 			<div class="service">
@@ -159,11 +159,11 @@ $('.awaw').hover(function() {
 	$('#menuHeader12').css('background-color','white');
 	$('.plh').removeClass('hidden');
 	$('.awaw').attr('style','color:black !important; text-decoration: none;' )
-	$('.aa1').attr('style','color:black !important; left: auto; right: 0px; text-decoration: none;')
-	$('.aa2').attr('style','color:black !important; left: 60px; width: 100px; text-decoration: none;') 
+	$('.aa1').attr('style','color:black !important; left: auto; right: 50px; text-decoration: none;')
+	$('.aa2').attr('style','color:black !important; left: 40px; width: 100px; text-decoration: none;') 
 });
-$('.aa1').hover(function() {$('.aa1').attr('style','color:#eb444b !important; left: auto; right: 0px; text-decoration: none;')});
-$('.aa2').hover(function() {$('.aa2').attr('style','color:#f68121 !important; left: 60px; width: 100px; text-decoration: none;')});
+$('.aa1').hover(function() {$('.aa1').attr('style','color:#eb444b !important; left: auto; right: 50px; text-decoration: none;')});
+$('.aa2').hover(function() {$('.aa2').attr('style','color:#f68121 !important; left: 40px; width: 100px; text-decoration: none;')});
 	
 $('#menuHeader11').hover(function() {}, function(){
 	$('#menuHeader11').css('background-color','transparent');
@@ -171,8 +171,8 @@ $('#menuHeader11').hover(function() {}, function(){
 	$('#menuHeader12').css('background-color','transparent');
 	$('.plh').addClass('hidden');
 	$('.awaw').attr('style','color:white !important text-decoration: none;')
-	$('.aa1').attr('style','color:white !important; left: auto; right: 0px; text-decoration: none;')
-	$('.aa2').attr('style','color:white !important; left: 60px; width: 100px; text-decoration: none;')
+	$('.aa1').attr('style','color:white !important; left: auto; right: 50px; text-decoration: none;')
+	$('.aa2').attr('style','color:white !important; left: 40px; width: 100px; text-decoration: none;')
 });
 </script>
 </c:if>

@@ -174,8 +174,8 @@ $(window).scroll(function () {
 		$('#menuHeader12').css('background-color','white');
 		$('.plh').removeClass('hidden');
 		$('.awaw').attr('style','color:black !important; text-decoration: none;' )
-		$('.aa1').attr('style','color:black !important; left: auto; right: 0px; text-decoration: none;')
-		$('.aa2').attr('style','color:black !important; left: 60px; width: 100px; text-decoration: none;')
+		$('.aa1').attr('style','color:black !important; left: auto; right: 50px; text-decoration: none;')
+		$('.aa2').attr('style','color:black !important; left: 40px; width: 100px; text-decoration: none;')
 
 	}else{
 		$('#menuHeader11').css('background-color','transparent');
@@ -183,8 +183,8 @@ $(window).scroll(function () {
 		$('#menuHeader12').css('background-color','transparent');
 		$('.plh').addClass('hidden');
 		$('.awaw').attr('style','color:white !important text-decoration: none;')
-		$('.aa1').attr('style','color:white !important; left: auto; right: 0px; text-decoration: none;')
-		$('.aa2').attr('style','color:white !important; left: 60px; width: 100px; text-decoration: none;')
+		$('.aa1').attr('style','color:white !important; left: auto; right: 50px; text-decoration: none;')
+		$('.aa2').attr('style','color:white !important; left: 40px; width: 100px; text-decoration: none;')
 		
 	}});
 

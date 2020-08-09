@@ -318,6 +318,7 @@ public class BuyController {
 		
 		buy.setId(id);
 		buy.setColor(rentService.rentDetail(rent_id).getColor());
+		buy.setBuy_situation("확인중");
 		buy.setRent_id(rent_id);
 		buy.setOption_name("null");
 		buy.setMonth("00");

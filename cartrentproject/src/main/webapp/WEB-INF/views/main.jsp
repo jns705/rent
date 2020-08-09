@@ -920,7 +920,6 @@ $(window).scroll(function () {
     </div>
     </div>
     
-</div>
 
 <ul id="menu">
     <li class="menu-active menu-wordpress">

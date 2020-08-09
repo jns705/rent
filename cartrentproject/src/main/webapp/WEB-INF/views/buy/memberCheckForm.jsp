@@ -140,27 +140,29 @@ th{text-align: center;}
 		}
 		}
 	}
+	
+	
+	//영역밖 클릭 시
+	$('html').click(function(e) { 
+		if(!$(e.target).hasClass("name")) { 
+			if(!$(e.target).hasClass("btn-block")) { 
+	        	$('#msg-nm').css('font-size','0px');
+	        	$('[name=name]').css('border-color','');
+			}
+		} 
+		if(!$(e.target).hasClass("tel")) { 
+			if(!$(e.target).hasClass("btn-block")) { 
+	        	$('#msg-hpNo').css('font-size','0px');
+	        	$('[name=tel]').css('border-color','');
+			}
+		} 
+	});
 </script>
 
 
         <c:if test="${check == 1}">
         <script type="text/javascript">
 
-		//영역밖 클릭 시
-		$('html').click(function(e) { 
-			if(!$(e.target).hasClass("name")) { 
-				if(!$(e.target).hasClass("btn-block")) { 
-		        	$('#msg-nm').css('font-size','0px');
-		        	$('[name=name]').css('border-color','');
-				}
-			} 
-			if(!$(e.target).hasClass("tel")) { 
-				if(!$(e.target).hasClass("btn-block")) { 
-		        	$('#msg-hpNo').css('font-size','0px');
-		        	$('[name=tel]').css('border-color','');
-				}
-			} 
-		});
 
 
         //전체 유효성 검사
@@ -213,7 +215,7 @@ th{text-align: center;}
                     <div class="input-row">
                     <span class="input essential input-large" id="span-nm">
                         <strong class="check">필수</strong>
-                        <label><input type="text" placeholder="이름을 입력해주세요." class="onlyKorEng name" name="name" id="nm" onfocus="checka('name' <c:if test="${check!=1}">, 'a'</c:if>);" ></label>
+                        <label><input type="text" placeholder="이름을 입력해주세요." class="onlyKorEng name" name="name" id="nm" onfocus="checka('name' <c:if test="${check!=1}">, 'a'</c:if>);" /></label>
                     </span>
                     <span style="color:<c:if test="${check == 1}">#eb444b !important;</c:if>" class="msg-txt 	cl-point1" id="msg-nm">이름을 입력해주세요.</span>
                     </div>

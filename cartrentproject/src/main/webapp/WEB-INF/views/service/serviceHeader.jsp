@@ -18,8 +18,8 @@ $(window).scroll(function () {
 	}else { //스크롤 맨위 (0)
 		$('.extend').removeClass('fixed');
 		$('.serviceHide').addClass('header-placeholder');
-		$('.serviceLong').css({left : "auto", right : "0px"});
-		$('.serviceShort').css({left : "60px", width : "100px"});
+		$('.serviceLong').css({left : "auto", right : "50px"});
+		$('.serviceShort').css({left : "40px", width : "100px"});
 		$('.gnb-listbox').css({"background-color" : "#fff"});
 		$('#logoImg').attr('style', 'margin-top:0px;');
 	}

@@ -95,7 +95,7 @@
         	<c:if test="${sessionScope.id eq 'master'}">
         		<a href="${path}/serviceCenter/noticeUpdateForm" class="btn btn-danger btn-fix3 btn-large">수정</a>
         	</c:if>
-            <a href="${path}/serviceCenter" class="btn btn-default btn-fix3 btn-large">목록</a>
+            <a href="${path}/serviceCenter" style="background-color: #444444; color:white;" class="btn btn-fix3 btn-large">목록</a>
         </div>
         <!-- btn-box//end -->
         

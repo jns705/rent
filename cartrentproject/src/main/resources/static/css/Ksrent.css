@@ -53,8 +53,6 @@ label {
   padding-left: 15px !important;
   padding-right: 15px !important; }
 
-.nav > li > a.hover, .nav > li > a:hover {
-  color: #22B500 !important; }
 
 .navbar-right > li {
   height: 60px !important; }
@@ -3143,7 +3141,7 @@ select[multiple].input-lg,
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px; }
   .btn:hover, .btn:focus, .btn.focus {
-    color: #22B500;
+    color: #eb444b;
     text-decoration: none; }
   .btn:active, .btn.active {
     outline: 0;
