@@ -19,16 +19,6 @@
 				<br><br><br>
 				
 				
-				<div class="form-group">
-					<label class="control-label col-sm-2">차량 선택</label>
-						<div class="col-sm-4">
-						<select class="form-control" name="car_id">
-							<c:forEach items="${list}" var="list">
-								<option value="${list.car_id}" <c:if test="${car_id eq list.car_id}">selected</c:if> >${list.car_name}</option>
-							</c:forEach>
-						</select>
-						</div>
-				</div>
 				
 				<div class="form-group">
 					<label class="control-label col-sm-2">옵션</label>
@@ -37,7 +27,7 @@
 						</div>
 				</div>
 				
-				<div class="form-group">
+					<div class="form-group">
 					<label class="control-label col-sm-2">가격</label>
 						<div class="col-sm-4">
 							<input type="text" class="form-control" name="option_price" size="10" placeholder="차량이름을 입력하세요"/>
@@ -63,13 +53,19 @@
 			</div>
 		</form>
 				<div align="center">
-					<button class="btn btn-lg" type="button">옵션등록</button>
+					<button class="btn btn-lg" type="button" onclick="insertOption();">옵션등록</button>
 				</div><br><br><br>
 				
 	</div>
 
 </body>
+<script type="text/javascript">
+	function insertOption(){
+		opener.option();
+		window.close();
+	}
 
+</script>
 	
 </html>
 </layoutTag:layout>

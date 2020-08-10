@@ -10,11 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-.list{
-	    height: 50px;
-}
-</style>
+<style>.list{ height: 50px;}</style>
 <meta charset="UTF-8">
 <title>공지사항 작성 페이지</title>
 <%@ include file="serviceHeader.jsp" %>
@@ -93,9 +89,10 @@
         
         <div class="btn-box text-c">
         	<c:if test="${sessionScope.id eq 'master'}">
-        		<a href="${path}/serviceCenter/noticeUpdateForm" class="btn btn-danger btn-fix3 btn-large">수정</a>
+        		<a href="${path}/serviceCenter/noticeUpdateForm?no=${list.a.no}" class="btn btn-danger btn-fix3 btn-large">수정</a>
+        		<a href="${path}/serviceCenter/noticeDelete?no=${list.a.no}" class="btn btn-danger btn-fix3 btn-large">삭제</a>
         	</c:if>
-            <a href="${path}/serviceCenter" class="btn btn-default btn-fix3 btn-large">목록</a>
+            <a href="${path}/serviceCenter" style="background-color: #444444; color:white;" class="btn btn-fix3 btn-large">목록</a>
         </div>
         <!-- btn-box//end -->
         

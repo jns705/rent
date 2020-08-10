@@ -31,7 +31,7 @@ function resizeContents() {
     $('.main').css("background-size", $(window).width()+50+"px "+ $(window).height() + "px");
 }
 </script>
-					<div class="spot-wrapper">
+					<div class="spot-wrapper" >
 						<div class="heading">
 							<h2 class="tit">즐거운 여행의 시작</h2>
 							<p class="descp">안전하고 즐거운 여행은 솔렌터카에서 시작됩니다.</p>
@@ -336,8 +336,8 @@ function jeju(){
   		$('#menuHeader12').css('background-color','white');
   		$('.plh').removeClass('hidden');
   		$('.awaw').attr('style','color:black !important; text-decoration: none;' )
-  		$('.aa1').attr('style','color:black !important; left: auto; right: 0px; text-decoration: none;')
-  		$('.aa2').attr('style','color:black !important; left: 60px; width: 100px; text-decoration: none;')
+  		$('.aa1').attr('style','color:black !important; left: auto; right: 50px; text-decoration: none;')
+  		$('.aa2').attr('style','color:black !important; left: 40px; width: 100px; text-decoration: none;')
 
   	}else{
   		$('#menuHeader11').css('background-color','transparent');
@@ -345,8 +345,8 @@ function jeju(){
   		$('#menuHeader12').css('background-color','transparent');
   		$('.plh').addClass('hidden');
   		$('.awaw').attr('style','color:white !important text-decoration: none;')
-  		$('.aa1').attr('style','color:white !important; left: auto; right: 0px; text-decoration: none;')
-  		$('.aa2').attr('style','color:white !important; left: 60px; width: 100px; text-decoration: none;')
+  		$('.aa1').attr('style','color:white !important; left: auto; right: 50px; text-decoration: none;')
+  		$('.aa2').attr('style','color:white !important; left: 40px; width: 100px; text-decoration: none;')
   		
   	}});
 

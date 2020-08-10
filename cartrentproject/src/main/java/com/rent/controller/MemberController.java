@@ -60,9 +60,9 @@ public class MemberController {
 	
 	//로그인 홈페이지
 	@RequestMapping("/loginForm")
-	public String loginForm(@RequestParam(defaultValue = "0") int check, Model model) throws Exception{
-		model.addAttribute("check", check);
-		System.out.println("loginFormcheck : "+check);
+	public String loginForm(@RequestParam(defaultValue = "0") int check, Model model, HttpServletRequest request) throws Exception{
+		model.addAttribute("check"		, check);
+		model.addAttribute("Referer"	, request.getHeader("Referer"));
 		return "/member/loginForm";
 	}
 	
@@ -75,26 +75,38 @@ public class MemberController {
 	//회원가입
 	@RequestMapping("/insertProc")
 	public String insertProc(HttpServletRequest request, MemberVO member) throws Exception{
-		member.setAddress(request.getParameter("zipcode")+"-"+request.getParameter("address")+"-"+request.getParameter("addressDetail"));
+		String [] bir = member.getDate_of_birth().split("-");
+		System.out.println(bir[0] + bir[1]);
+		member.setDate_of_birth(bir[0] + bir[1] + bir[2]);
+		member.setAddress(request.getParameter("zipcode")+"/"+request.getParameter("address")+"/"+request.getParameter("addressDetail"));
 		mMemberService.insertProc(member);
 		return "/member/loginForm";
 	}
 	
+	//계정검사 AJAX
+	@RequestMapping("/loginProcAjax")
+	@ResponseBody
+	public int loginProcAjax(MemberVO member, Model model)throws Exception{
+		int check = 0;
+		if		(mMemberService.accountCheck(member.getId())==null) check = 0;
+		else if	(!mMemberService.accountCheck(member.getId()).equals(member.getPassword())) check = 1;
+		else if	(mMemberService.accountCheck(member.getId()).equals(member.getPassword()))  check = 2;
+		return check;
+	}
+	
 	//계정 검사
 	@RequestMapping("/loginProc")
-	public String loginProc(@RequestParam(defaultValue = "0") int check, @RequestParam String id, @RequestParam String password, HttpSession session, Model model)throws Exception{
+	public String loginProc(@RequestParam(defaultValue = "0") int check, @RequestParam String Referer , @RequestParam String id, HttpSession session, Model model)throws Exception{
 		System.out.println("loginProc : " + check);
-		String login_msg = "";
-		if		(mMemberService.accountCheck(id)==null) login_msg = "아이디가 틀렸습니다.";
-		else if	(!mMemberService.accountCheck(id).equals(password)) login_msg = "비밀번호가 틀렸습니다.";
-		
 		//아이디, 비밀번호가 있으면 세션을 등록한다
-		else if	(mMemberService.accountCheck(id).equals(password))  
-			session.setAttribute("id", id);
-		model.addAttribute("msg", login_msg);
-		model.addAttribute("check", check);
-		
-		return "/member/memberAlert";
+		session.setAttribute("id", id);
+		if(Referer.equals("http://localhost:8082/buy/memberCheckForm")) 		
+			return "redirect:/buy/short_rentList";
+		if(Referer.equals("http://localhost:8082/buy/memberCheckForm?check=1")) 
+			return "redirect:/counseling/userList";
+		if(Referer.equals(""))
+			return "/main";
+		return "redirect:" + Referer.substring(21);
 	}
 	//맴버 알람 페이지 
 	@RequestMapping("/memberAlert")
@@ -106,36 +118,35 @@ public class MemberController {
 	
 	//로그아웃
 	@RequestMapping("/logOut")
-	public String logOut(HttpSession session) {
+	public String logOut(HttpSession session, HttpServletRequest request) {
+		String referer = request.getHeader("Referer");
 		session.invalidate();
-		return "/main";
+		if(referer.contains("/buy/short_rentList")) return "redirect:/buy/memberCheckForm";
+		if(referer.contains("/counseling/userList") || referer.contains("/buy/userBuyList")) return "redirect:/buy/memberCheckForm?check=1";
+		return "redirect:" + referer.substring(21);
 	}
 	
 	//아이디 중복검사
 	@RequestMapping("/idCheck")
 	@ResponseBody
-	public int idCheck(@RequestParam String id) throws Exception {
-		return mMemberService.idCheck(id);
-	}
-	
-	@RequestMapping("/main")
-	public String main()throws Exception{
-		return "/main";
-	}
+	public int idCheck(@RequestParam String id) throws Exception { return mMemberService.idCheck(id); }
 	
 	//비회원 조회
 	@RequestMapping("/checkId")
 	public String checkId(BuyVO buyList, Model model)throws Exception{
-			List<BuyVO> Buy = buyService.getDetail(buyList);
-			if(Buy.isEmpty()) return "/buy/buyAlert";
-			List<CarVO> Car = new ArrayList<CarVO>();
-			List<ShortRentVO> SRent = new ArrayList<ShortRentVO>();
-			List<String> situation = new ArrayList<String>();
-			for(BuyVO buy : Buy ) {
-				Car.add(carService.carDetail(Integer.toString(rentService.rentDetail(buy.getRent_id()).getCar_id())));
-				SRent.add(shortService.shortDetail(buy.getBuy_id()));
-				situation.add(rentService.rentDetail(buy.getRent_id()).getSituation());
-			}
+		//바이테이블에 리스트가 없을 시 알럿을 띄운다
+		List<BuyVO> Buy = buyService.getDetail(buyList);
+		if(Buy.isEmpty()) return "/buy/buyAlert";
+		
+		List<ShortRentVO> SRent = new ArrayList<ShortRentVO>();
+		List<String> situation 	= new ArrayList<String>();
+		List<CarVO> Car 		= new ArrayList<CarVO>();
+		for(BuyVO buy : Buy ) {
+			Car.add(carService.carDetail(Integer.toString(rentService.rentDetail(buy.getRent_id()).getCar_id())));
+			SRent.add(shortService.shortDetail(buy.getBuy_id()));
+			situation.add(rentService.rentDetail(buy.getRent_id()).getSituation());
+		}
+		
 		model.addAttribute("Buy", Buy);
 		model.addAttribute("Car", Car);
 		model.addAttribute("SRent", SRent);
@@ -147,11 +158,10 @@ public class MemberController {
 	@RequestMapping("/checkId1")
 	public String checkId1(BuyVO buyList, Model model)throws Exception{
 		List<BuyVO> Buy = buyService.getDetail(buyList);
-		if(Buy.isEmpty()) {
-			return "redirect:/buy/buyAlert?check=1";
-		}
-		List<CarVO> Car = new ArrayList<CarVO>();
-		List<String> situation = new ArrayList<String>();
+		if(Buy.isEmpty())  return "redirect:/buy/buyAlert?check=1";
+		
+		List<String> situation 	= new ArrayList<String>();
+		List<CarVO> Car 		= new ArrayList<CarVO>();
 		for(BuyVO buy : Buy ) {
 			Car.add(carService.carDetail(Integer.toString(rentService.rentDetail(buy.getRent_id()).getCar_id())));
 			situation.add(rentService.rentDetail(buy.getRent_id()).getSituation());
@@ -189,13 +199,12 @@ public class MemberController {
 	 */
 	@RequestMapping("/update")
 	public String memberUpdate(MemberVO member, HttpServletRequest rq) throws Exception {
-		String zipcode = rq.getParameter("address0");
-		String address = rq.getParameter("address1");
-		String detailedAddress = rq.getParameter("address2");
+		String zipcode 			= rq.getParameter("address0");
+		String address 			= rq.getParameter("address1");
+		String detailedAddress 	= rq.getParameter("address2");
 		
 		member.setAddress(zipcode +"/"+ address +"/"+ detailedAddress);
 		mMemberService.memberUpdate(member);
-		System.out.println(member.getId()+"회원 정보수정");
 		return "redirect:/member/detail/"+member.getId();
 	}
 	

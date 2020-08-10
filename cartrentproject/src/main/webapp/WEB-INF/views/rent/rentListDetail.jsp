@@ -7,280 +7,28 @@
 	<!DOCTYPE html>
 	<html>
 <head>
-<link href="http://localhost:8082/static/css/total.css" rel="stylesheet"
-	type="text/css" />
+<style>
+.img {
+   transform:scale(1.0);        
+   transition: transform .5s; 
+}
+
+.img:hover{
+   transform:	scale(1.1);           
+   transition: 	transform .2s;           
+}
+</style>
+<link href="http://localhost:8082/static/css/total.css" rel="stylesheet"type="text/css" />
+<link href="http://localhost:8082/static/css/rentListDetail.css" rel="stylesheet"type="text/css" />
 <meta charset="UTF-8">
 <title>상세정보</title>
 <head>
-<style>
-* {
-	margin: 0;
-	padding: 0;
-}
-
-ul, li {
-	list-style: none;
-}
-
-#slide {
-	height: 300px;
-	position: relative;
-	overflow: hidden;
-}
-
-#slide ul {
-	width: 400%;
-	height: 100%;
-	transition: 1s;
-}
-
-#slide ul:after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-#slide li {
-	float: left;
-	width: 25%;
-	height: 100%;
-}
-
-#slide li:nth-child(1) {
-	background: #faa;
-}
-
-#slide li:nth-child(2) {
-	background: #ffa;
-}
-
-#slide li:nth-child(3) {
-	background: #faF;
-}
-
-#slide li:nth-child(4) {
-	background: #aaf;
-}
-
-#slide input {
-	display: none;
-}
-
-#slide label {
-	display: inline-block;
-	vertical-align: middle;
-	width: 10px;
-	height: 10px;
-	border: 2px solid #666;
-	background: #fff;
-	transition: 0.3s;
-	border-radius: 50%;
-	cursor: pointer;
-}
-
-#slide .pos {
-	text-align: center;
-	position: absolute;
-	left: 0;
-	width: 100%;
-	text-align: center;
-}
-
-#pos1:checked ~ul{
-	margin-left: 0%;
-}
-
-#pos2:checked ~ul{
-	margin-left: -100%;
-}
-
-#pos3:checked ~ul{
-	margin-left: -200%;
-}
-
-#pos4:checked ~ul{
-	margin-left: -300%;
-}
-
-#pos1:checked ~.pos>label:nth-child(1) {
-	background: #666;
-}
-
-#pos2:checked ~.pos>label:nth-child(2) {
-	background: #666;
-}
-
-#pos3:checked ~.pos>label:nth-child(3) {
-	background: #666;
-}
-
-#pos4:checked ~.pos>label:nth-child(4) {
-	background: #666;
-}
-
-.pd {
-	padding-bottom: 7px !important;
-}
-
-.car-list__caption-title-jg {
-	font-size: 22px !important;
-	width: 464px;
-	line-height: 32px;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	color: #333;
-}
-
-.car-list__caption-jg {
-	padding-bottom: 20px;
-}
-
-.pd {
-	padding-top: 20px
-}
-
-.pb {
-	padding-bottom: 20px;
-}
-
-.rentalPrice {
-	padding: 5px 5px;
-	margin-top: 30px;
-	margin-right: 0px;
-	border: 1px solid #333;
-	color: #333;
-	width: 100px;
-	text-align: center;
-	height: 50px;
-}
-
-.pos {
-	height: 30px;
-	background-color: rgba(0, 0, 0, 0.5);
-	text-align: center;
-	position: absolute;
-	bottom: 0;
-	color: white;
-}
-
-.font {
-	position: relative;
-	font-size: 13px;
-	color: #fff;
-	margin-left: 5px;
-	line-height: 31px;
-}
-
-.table>thead>tr>th, .table>thead>tr>td, .table>tbody>tr>th, .table>tbody>tr>td,
-	.table>tfoot>tr>th, .table>tfoot>tr>td {
-	vertical-align: middle;
-}
-img {
-	margin-right: 30px;
-	margin-top: 15px;
-	margin-bottom: 15px;
-}
-
-.table th {
-	text-align: center !important;
-	height: 44px !important;
-	width: 200px;
-	padding: 0px;
-	margin: 0px;
-}
-
-.table td {
-	width: 200px;
-	height: 44px;
-	padding: 0px;
-	margin: 0px;
-}
-.age-prefer__graph-num {
-	top: -20px;
-}
-
-.checkgl {
-	style ="content: '';
-	display: inline-block;
-	position: absolute;
-	left: -15px;
-	top: 1px;
-	width: 15px;
-	height: 15px;
-	background-image:
-		url(http://localhost:8082/static/img/pc_check_white.png);
-	background-size: 11px;
-	background-repeat: no-repeat;
-	"
-}
-
-.next-img-btn {
-	right: -40px !important;
-	height: 21px !important;
-	background-image: url(http://localhost:8082/static/img/spr-common.png);
-	background-repeat: no-repeat;
-	background-position: -1333px -590px;
-	-webkit-background-size: 1347px 1290px;
-	background-size: 1347px 1290px;
-	text-indent: 1000%;
-	white-space: nowrap;
-	overflow: hidden;
-}
-
-.imgbtn-box>div {
-	position: absolute !important;
-	width: 20px !important;
-	cursor: pointer !important;
-}
-
--->
-.gly {
-	position: absolute;
-	width: 41px;
-	right: -40px !important;
-	background-image: url(http://localhost:8082/static/img/spr-common.png);
-	background-repeat: no-repeat;
-	background-position: -1333px -590px;
-	-webkit-background-size: 1347px 1290px;
-	background-size: 1347px 1290px;
-	text-indent: 1000%;
-	white-space: nowrap;
-	margin-top: 300;
-	margin-right: 40;
-}
-
-.glya {
-	position: absolute;
-	width: 41px;
-	left: -40px;
-	background-image: url(http://localhost:8082/static/img/spr-common.png);
-	background-repeat: no-repeat;
-	background-position: -1334px -802px;
-	-webkit-background-size: 1347px 1290px;
-	background-size: 1347px 1290px;
-	text-indent: 1000%;
-	white-space: nowrap;
-	overflow: hidden;
-	text-indent: 1000%;
-	white-space: nowrap;
-	margin-top: 300;
-	margin-left: 70;
-}
-
-.modal-pop {
-	position: fixed;
-	box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px, rgba(0, 0, 0, 0.5) 2px 2px
-		3px 3px;
-	z-index: 10000;
-}
-</style>
 </head>
 
 
-<body id="" class="longterm-section type-reverse">
+<body  class="longterm-section type-reverse" style="overflow-y: auto;">
 	<div id="content">
-		<div id="container">
+		<div id="container" style="margin-top:20px;">
 			<div class="breadcrumbs">
 				<h2 class="tit">솔렌트카 상세정보</h2>
 
@@ -309,7 +57,7 @@ img {
 
 								<div id="slide" style="width: 350px; height: 250px">
 									<a href="#"><ul>
-											<li
+											<li class="img"
 												style="background-repeat:no-repeat;  background-size: 350px 250px; cover; background-image: url('${rentImage[0].rent_url}');">
 											<li>
 										</ul></a>
@@ -640,7 +388,7 @@ img {
 					<div class="header-group estimate-type mab0">
 						<h4>옵션 정보</h4>
 					</div>
-					<div>
+					<div class="img">
 						<img
 							src="http://localhost:8082/static/img/icon_가죽시트_${count[0]}.png">
 						<img
@@ -870,6 +618,11 @@ img {
 							</fieldset>
 						</article>
 <article>
+<div class="quick-top" style="z-index: 10000;">
+	<a id="aaaaaa" class="btn-top">TOP</a>
+</div>
+
+
 <div class="ticker-info ticker-info--direct">
 <div class="ticker-head">
 <dl class="dl-horizontal">
@@ -904,6 +657,7 @@ img {
 </div></div></article>
 
 </div></form></div></div></div>
+<div id="sds"></div>
 </body>
 	</html>
 	</body>
@@ -990,35 +744,38 @@ function driving(e) {
 		}
 	</script>
 	<script>
-		var isVisible = false;
 
+
+
+	
 		//footerSHeight값 이상일시 class를 바꾼다
-		$(window).scroll(
-				function() {
-					var windowHeight = $(window).height(); // Viewport Height
-					var documentHeight = $(document).height(); // Viewport Height
-					var footerHeight = $('#ssss').height();
-
-					if(documentHeight > 2457) 
-				        var footerSHeight = 1050;
-				    else if(documentHeight > 2421) var footerSHeight = 1136;
-				    else if(documentHeight > 2411) var footerSHeight = 1195;
-				    else if(documentHeight > 2400) var footerSHeight = 1308;
+$(window).scroll(
+		function() {
+			var windowHeight = $(window).height() - window.innerHeight-$('#footer').height(); // Viewport Height
+			var scrollValue = $(document).scrollTop();
+			if (scrollValue > windowHeight){
+				$('.ticker-info').addClass("off");
+				$('.quick-top').attr('style','position:absolute');
+				$('#aaaaaa').css('margin-top','70px');
 					
-					var scrollValue = $(document).scrollTop();
+			}else{
+				$('.ticker-info').removeClass("off");
+				$('.quick-top').css('position','fixed');
+				$('#aaaaaa').css('margin-top','');
+			}
+		});
 
-					console.log('스크롤'+scrollValue + ' 푸터' + footerSHeight + ' 도큐' + documentHeight + ' 윈도우' +  windowHeight + ' ' );
-					if (scrollValue > footerSHeight)
-						$('.ticker-info').addClass("off");
-					else
-						$('.ticker-info').removeClass("off");
-				});
 
-		var abr = Math.floor(Math.random() * 50) + 1;
-		document.getElementById('abr').innerHTML = abr;
+	$('#aaaaaa').css('display', 'none');
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 400) {$('#aaaaaa').fadeIn();} 
+		else {$('#aaaaaa').fadeOut();}
+	});
 
-		var dbr = Math.floor(Math.random() * 10) + 1;
-		document.getElementById('dbr').innerHTML = dbr;
+	$('#aaaaaa').click(function() {
+		$('html, body').animate({scrollTop : 0}, 400);
+		return false;
+	});
 
 		//모두 동의 체크박스
 		function checkBox() {

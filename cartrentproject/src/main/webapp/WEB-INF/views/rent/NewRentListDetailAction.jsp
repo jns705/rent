@@ -5,6 +5,7 @@
 <script type="text/javascript">
 //유효성 검사
 function checkForm(data){
+	
 	var ck = true;
 
 if(!$('input:checkbox[id=term-check-all]').is(':checked')){
@@ -108,11 +109,22 @@ if(!$('[name=address]').val()){
 $('.spamS').css('font-size','14px');
 
 if(ck==true){
+	
 	if(data=='1'){
-		$("#newCarForm").attr("action", "${path}/buy/newRent");
-		$("#newCarForm").submit();
+		$('#loading').css('display','block');
+		$('#aaaa').css('display','block');
+		setTimeout(function() {
+			$("#newCarForm").attr("action", "${path}/buy/newRent");
+			$("#newCarForm").submit();
+		}, 3000);
+		
 	}else
-		formsol.submit();
+	$('#loading').css('display','block');
+	$('#aaaa').css('display','block');
+		setTimeout(function() {
+			formsol.submit();
+		}, 3000);
+		
 }
 }
 
@@ -147,7 +159,7 @@ function idCheck(){
 		$('#span-name').html('이름은 세자리 이상 입력해주세요');
 	}else{
 		$('[name=name]').css('border-color','#ddd');
-		if($('[name=birthday]').css('border-top') != '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=birthday]').css('border-top') != '1px solid rgb(246, 129, 33)')
 		$('[name=birthday]').css('border-left','1px solid #ddd');
 		$('#span-name').html('');
 	}
@@ -161,12 +173,12 @@ function birthCheck(){
 		$('#span-birth').html('생년월일은 여덟자리를 입력해주세요');
 	}else{
 		$('[name=birthday]').css('border-color','#ddd');
-		if($('[name=name]').css('border-top') != '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=name]').css('border-top') != '1px solid rgb(246, 129, 33)')
 			$('[name=birthday]').css('border-left','1px solid #ddd');
 		else $('[name=birthday]').css('border-left','1px solid #f68121');
 
 
-		if($('[name=tel]').css('border-top') != '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=tel]').css('border-top') != '1px solid rgb(246, 129, 33)')
 			$('[name=tel]').css('border-left','1px solid #ddd');
 		else $('[name=tel]').css('border-left','1px solid #f68121');
 		$('#span-birth').html('');
@@ -183,7 +195,7 @@ function telCheck(){
 		$('#span-mobile').html('전화번호는 9자리 이상 입력해주세요');
 	}else{
 		$('[name=tel]').css('border-color','#ddd');
-		if($('[name=birthday]').css('border-top') != '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=birthday]').css('border-top') != '1px solid rgb(246, 129, 33)')
 		$('[name=tel]').css('border-left','1px solid #ddd');
 		else  
 		$('[name=tel]').css('border-left','1px solid #f68121');
@@ -201,7 +213,7 @@ function emailCheck(){
 		$('#span-email').html('이메일은 5자리 이상 입력해주세요');
 	}else{
 			$('[name=emailId]').css('border-color','#ddd');
-			if($('[name=domain]').css('border-top') != '1.11111px solid rgb(246, 129, 33)')
+			if($('[name=domain]').css('border-top') != '1px solid rgb(246, 129, 33)')
 		$('[name=domain]').css('border-left','1px solid #ddd');
 		$('#span-email').html('');
 	}
@@ -217,7 +229,7 @@ function emailCheck1(){
 		$('#span-email').html('이메일은 5자리 이상 입력해주세요');
 	}else{
 		$('[name=domain]').css('border-color','#ddd');
-		if($('[name=emailId]').css('border-top') == '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=emailId]').css('border-top') == '1px solid rgb(246, 129, 33)')
 		$('[name=domain]').css('border-left','1px solid #f68121');
 		$('#span-email').html('');
 	}
@@ -230,14 +242,14 @@ function addressCheck(){
 		$('#span-address').html('상세주소는 5자리 이상 입력해주세요');
 	}else{
 		$('[name=addressDetail]').css('border-color','#ddd');
-		if($('[name=address]').css('border-top') == '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=address]').css('border-top') == '1px solid rgb(246, 129, 33)')
 		$('[name=addressDetail]').css('border-left','1px solid #f68121');
 		$('#span-address').html('');
 	}
 
 	if($('[name=address]').val()){
 		$('[name=address]').css('border-color','#ddd');
-		if($('[name=addressDetail]').css('border-top') != '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=addressDetail]').css('border-top') != '1px solid rgb(246, 129, 33)')
 		$('[name=addressDetail]').css('border-left','1px solid #ddd');
 	}
 	

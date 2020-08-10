@@ -20,7 +20,7 @@
 				
 				
 				<div class="form-group">
-					<label class="control-label col-sm-2">차량 선택${car_id}</label>
+					<label class="control-label col-sm-2">차량 선택</label>
 						<div class="col-sm-4">
 						<select class="form-control" name="car_id">
 							<c:forEach items="${list}" var="list">
@@ -28,6 +28,11 @@
 							</c:forEach>
 						</select>
 						</div>
+				
+					<div class="col-sm-2">
+						<button class="btn">이미지등록</button>
+					</div>
+				
 				</div>
 				
 				<div class="form-group">
@@ -44,13 +49,21 @@
 						</div>
 				</div>
 				
-				<div class="form-group">
-					<div class="col-sm-offset-1 col-sm-2">
-						<button class="btn">이미지등록</button>
-					</div>
+				<div>
+					<table class="table">
+						<thead>
+							<tr class="info" align="center">
+								<th align="center">색상</th>
+								<th align="center">파일이름</th>
+								<th align="center">사진</th>
+							</tr>
+						</thead>
+						<tbody class="image">
+						</tbody>
+					</table>
 				</div>
 				
-				<div></div>
+
 				
 				
 				<br><br>
@@ -65,6 +78,28 @@
 
 </body>
 
-	
+	<script type="text/javascript">
+	option();
+	function option(){
+		var car_id = $('[name=car_id]').val();
+		$.ajax({
+			url 	: '${path}/admin/colorList',
+			data    : {'car_id' : car_id},
+			type 	: 'get',
+			success : function(data){
+				var str = "";
+				$.each(data, function(key, value){
+					str += '<tr align=center><td>'+ value.color +'</td><td>'+ value.color_image.substring(32);
+					str += '</td><td><img src="' + value.color_url + value.color_image + '"with=150 height=70></td></tr>';
+				});
+				$('.image').html(str);
+			},
+			error   : function(data){alert("오류");}
+		});
+	}
+		$('[name=car_id]').change(function(){
+			option();
+		});
+	</script>
 </html>
 </layoutTag:layout>

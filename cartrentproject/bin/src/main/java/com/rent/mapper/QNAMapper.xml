@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rent.mapper.QNAMapper">
+		
+	<!-- QNA 등록 -->
+	<insert id="qnaInsert" parameterType="com.rent.domain.QNAVO">
+		insert into qna
+			(qna_id, subject, content, writer, qna_date, qne_password, rent_id)
+		values (#{qna_id}, #{subject}, #{content}, #{writer}, now(), #{qne_password}, #{rent_id})
+	</insert>
+	
+	<!-- QNA 수정 -->
+	<update id="qnaUpdate" parameterType="com.rent.domain.QNAVO">
+		update qna
+		set	   subject = #{subject}, content = #{content}
+		where qna_id = #{qna_id}
+	</update>
+	
+	<!-- QNA 삭제 -->
+	<delete id="qnaDelete" parameterType="int">
+		delete from qna
+		where qna_id = #{qna_id}
+	</delete>
+	
+	<!-- QNA 목록 -->
+	<select id="qnaList"  resultType="com.rent.domain.QNAVO">
+		select *
+		from qna
+	</select>
+	
+	<!-- QNA 상세정보 -->
+	<select id="qnaDetail" parameterType="int" resultType="com.rent.domain.QNAVO">
+		select *
+		from qna
+		where qna_id = #{qna_id}
+	</select>
+	
+	
+</mapper>

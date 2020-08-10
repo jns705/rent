@@ -22,11 +22,13 @@ select {
 	-moz-appearance: none; 
 	appearance: none; 
  }
+ 
 </style>
 </head>
 <body>
 <br><br><br><br>
-<div class="col-sm-9 col-lg-9">
+
+<div class="container">
         <div class="breadcrumbs">
             <h2 class="tit">관리자 공지사항</h2>
             <div class="clearfix">
@@ -38,8 +40,7 @@ select {
             
             <div class="table-responsive">
                 <div class="well">
-                    <form class="bs-example form-horizontal" action="${path}/serviceCenter/noticeInsert" method="post">
-                        <fieldset>
+                    <form class="bs-example form-horizontal" action="${path}/serviceCenter/noticeInsert" method="get">
                        		<div class="form-group">
 								<label class="col-lg-2 control-label">구분</label>
 								 <div class="col-lg-10">
@@ -48,12 +49,6 @@ select {
 										<option value="장기렌터카">장기렌터카</option>
 										<option value="단기렌터카">단기렌터카</option>
 									</select>
-<script type="text/javascript">
-$("#division").change(function() {
-	//alert(document.getElementById('division').value);
-});
-
-</script>
 								 </div>
 							</div>
                         
@@ -79,12 +74,18 @@ $("#division").change(function() {
                                     <button type="reset" class="btn btn-default">취소</button>
                                 </div>
                             </div>
-                        </fieldset>
                     </form>
                 </div>
             </div>
             
         </div>
+        
+        <script type="text/javascript">
+$("#division").change(function() {
+	//alert(document.getElementById('division').value);
+});
+
+</script>
 </body>
 </html>
 </layoutTag:layout>

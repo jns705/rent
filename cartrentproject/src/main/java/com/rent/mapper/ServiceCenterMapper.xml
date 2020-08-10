@@ -18,17 +18,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
     	FROM	NOTICE
     	WHERE
    		<if test="moKind == '전체'"> 
-			subject like '%${moVal}%' 
-			or content like '%${moVal}%' 
-			or division like '%${moVal}%' 
-			or reg_date like '%${moVal}%' 
+			subject like 		'%${moVal}%' 
+			or content like 	'%${moVal}%' 
+			or division like 	'%${moVal}%' 
+			or reg_date like 	'%${moVal}%' 
 		</if>
    		<if test="moKind != '전체'"> 
    		<if test="moKind == '제목'"> subject </if>	
    		<if test="moKind == '내용'"> content </if>
 		like '%${moVal}%' 
 		</if>
+		
+		order by reg_date desc
+		
 		<if test="aaaa != 1">limit ${startNum}, ${showNum}</if>
+		
+		
     	
     </select>
     
@@ -49,6 +54,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
    		<if test="moKind == '내용'"> content </if>
 		like '%${moVal}%' 
 		</if>
+		
+		order by reg_date desc
     </select>
+    
+    
+    <!-- 공지사항 글쓰기 -->
+    <insert id="noticeInsert" parameterType="com.rent.domain.ServiceVO">
+    	INSERT INTO NOTICE
+    	(division, subject, content, reg_date)
+    	VALUES
+    	(#{division}, #{subject}, #{content}, now())
+    </insert>
+    
+    <update id="noticeUpdate" parameterType="com.rent.domain.ServiceVO">
+    	UPDATE  NOTICE
+    	SET
+    	division	= #{division},
+    	subject	 	= #{subject},
+    	content 	= #{content}
+    	WHERE	NO = #{no}
+    </update>
+    
+    <!-- 공지사항 상세정보 -->
+    <select id="noticeDetail" parameterType="int" resultType="com.rent.domain.NoticeVO">
+    	SELECT	*
+    	FROM	NOTICE
+    	WHERE	NO = #{no}
+    </select>
+    
+    <!-- 공지사항 삭제 -->
+    <delete id="noticeDelete" parameterType="int">
+    	DELETE 
+    	FROM	NOTICE
+    	WHERE	NO = #{no}
+    </delete>
 </mapper>
 

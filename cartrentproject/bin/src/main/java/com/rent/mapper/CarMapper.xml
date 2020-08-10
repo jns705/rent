@@ -6,20 +6,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 <mapper namespace= "com.rent.mapper.CarMapper">
 		
 	
-	<!-- 차량 인서트 -->	
+	<!-- 차량 등록 -->	
 	<insert id="carInsert" parameterType="com.rent.domain.CarVO" useGeneratedKeys="true" keyProperty="car_id">
 		INSERT INTO CAR
 		(manufacturer, car_name, exhaust_volume, car_kind, fuel, transmission, car_price, made_country, content, car_year)
 		VALUES
 		(#{manufacturer}, #{car_name}, #{exhaust_volume}, #{car_kind}, #{fuel}, #{transmission}, #{car_price}, #{made_country}, #{content}, #{car_year})
-	</insert>
-	
-	<!-- 차량 색상 인서트 -->
-	<insert id="colorInsert" parameterType="com.rent.domain.CarColor" useGeneratedKeys="true" keyProperty="car_id">
-		INSERT INTO COLOR
-		(car_id, color, color_image, color_url)
-		VALUES
-		(#{car_id}, #{color}, #{color_image}, #{color_url})
 	</insert>
 	
 	<!-- 차량 리스트 전체 조회 -->
@@ -28,46 +20,64 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 		FROM	CAR
 	</select>
 	
-	<!-- 옵션 인서트 -->
-	<insert id="optionInsert" parameterType="com.rent.domain.OptionCarVO">
-		INSERT INTO OPTIONCAR
-		(car_id, option_name, option_price, option_content)
-		VALUES
-		(#{car_id}, #{option_name}, #{option_price}, #{option_content})
-	</insert>
-	
-		<!-- 차량 세부 조회 -->
+	<!-- 차량 세부 조회 -->
 	<select id="carDetail" parameterType="String" resultType="com.rent.domain.CarVO">
 		SELECT	*
 		FROM	CAR
 		WHERE	CAR_ID = #{car_id}
 	</select>
 	
-		<!-- 차량 색상 세부 조회 -->
-	<select id="carColorDetail" parameterType="String" resultType="com.rent.domain.CarColor">
-		SELECT	*
-		FROM	COLOR
+	<!-- 차량 삭제 -->
+	<delete id="carDelete" parameterType="String">
+		DELETE	
+		FROM	CAR
 		WHERE	CAR_ID = #{car_id}
+	</delete>
+	
+	<!-- 차정보 수정 -->
+	<update id="carUpdate" parameterType="com.rent.domain.CarVO">
+		UPDATE	CAR
+		SET		manufacturer 	= #{manufacturer}
+				,car_name	  	= #{car_name} 
+				,exhaust_volume = #{exhaust_volume} 
+				,car_kind 		= #{car_kind} 
+				,fuel 			= #{fuel} 
+				,transmission 	= #{transmission} 
+				,car_price 		= #{car_price} 
+				,made_country 	= #{made_country} 
+				,content 		= #{content} 
+				,car_year 		= #{car_year}
+		WHERE	CAR_ID 			= #{car_id}
+	</update>
+	
+	<select id="manufacturer" resultType="hashMap">
+		select 	distinct manufacturer 
+		from 	car;
 	</select>
 	
-		<!-- 차량 옵션 세부 조회 -->
-	<select id="carOptionDetail" parameterType="String" resultType="com.rent.domain.OptionCarVO">
-		SELECT	*
-		FROM	OPTIONCAR
-		WHERE	CAR_ID = #{car_id}
+	<select id="carKind" resultType="hashMap">
+		select 	distinct car_kind 
+		from 	car 
+		where 	manufacturer = #{manufacturer}
 	</select>
 	
-		<!-- 차량 색상 세부 조회 -->
-	<select id="carColorList" resultType="com.rent.domain.CarColor">
-		SELECT	*
-		FROM	COLOR
+	<select id="selectCar" resultType="hashMap" parameterType="com.rent.domain.OptionCarVO">
+		select 	distinct car_name 
+		from 	car 
+		where 	car_kind = #{car_kind} and manufacturer = #{manufacturer}	
 	</select>
 	
-		<!-- 차량 옵션 세부 조회 -->
-	<select id="carOptionList" resultType="com.rent.domain.OptionCarVO">
-		SELECT	*
-		FROM	OPTIONCAR
+	<select id="fuel" resultType="hashMap">
+		SELECT	distinct FUEL
+		FROM	CAR
 	</select>
+	
+	<!-- 차가 팔려서 사용횟수 증가시키기 -->
+	<update id="carNumberAdding" parameterType="com.rent.domain.CarVO">
+		update car
+		set car_number = #{car_number}
+		where car_id = #{car_id}
+	</update>
 	
 	
 </mapper>

@@ -71,7 +71,7 @@
 			</div>
 		</form>
 				<div align="center">
-					<button class="btn btn-lg" type="button" onclick="location.href='${path}/admin/optionForm/${car_id}'">옵션등록</button>
+					<button class="btn btn-lg" type="button" onclick="location.href='${path}/admin/carColorProc'">색상등록</button>
 				</div><br><br><br>
 				
 	</div>
@@ -80,6 +80,7 @@
 
 	<script type="text/javascript">
 	option();
+	//옵션 선택 AJAX
 	function option(){
 		var car_id = $('[name=car_id]').val();
 		$.ajax({

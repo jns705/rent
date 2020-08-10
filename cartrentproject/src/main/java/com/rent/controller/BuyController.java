@@ -37,7 +37,6 @@ import com.rent.service.ShortRentService;
 @Controller
 @RequestMapping("/buy")
 public class BuyController {
-	//
 	@Resource(name="com.rent.service.BuyService")
 	BuyService buyService;
 	
@@ -77,14 +76,12 @@ public class BuyController {
 		
 		String id = request.getParameter("id");
 		
-		if(id != "") {
-			model.addAttribute("member" ,memService.memberDetail(id));
-		}
+		if(id != "") model.addAttribute("member" ,memService.memberDetail(id));
 		
 		String totalPrice = request.getParameter("totalPrice"); // 총합 비용
-		String deposit = request.getParameter("deposit"); //보증금
-		String month = request.getParameter("term"); // 계약날짜
-		String km = request.getParameter("km"); // 주행거리
+		String deposit = request.getParameter("deposit"); 		//보증금
+		String month = request.getParameter("term"); 			// 계약날짜
+		String km = request.getParameter("km"); 				// 주행거리
 
 		model.addAttribute("month", month);
 		model.addAttribute("totalPrice", totalPrice);
@@ -99,27 +96,19 @@ public class BuyController {
 		model.addAttribute("rent", rent);
 		
 		String onOff[] = new String [8]; 
-		for(int i = 0; i < 8; i++) {
-			onOff[i] = "off";
-		}
+		
+		for(int i = 0; i < 8; i++) { onOff[i] = "off"; }
+		
 		List<OptionCarVO> list = optService.optionDetail(rent_id);
 		for(int i = 0; list.size() > i ; i++) {
 			OptionCarVO List = list.get(i);
-			
-			if(List.getOption_name().equals("가죽시트"))
-				onOff[0] = "on";
-			if(List.getOption_name().equals("네비게이션"))
-				onOff[1] = "on";
-			if(List.getOption_name().equals("ECM룸미러 "))
-				onOff[2] = "on";
-			if(List.getOption_name().equals("스마트키"))
-				onOff[3] = "on";
-			if(List.getOption_name().equals("썬루프"))
-				onOff[4] = "on";
-			if(List.getOption_name().equals("통풍시트"))
-				onOff[5] = "on";
-			if(List.getOption_name().equals("후방카메라"))
-				onOff[6] = "on";
+			if(List.getOption_name().equals("가죽시트"))  	onOff[0] = "on";
+			if(List.getOption_name().equals("네비게이션")) 	onOff[1] = "on";
+			if(List.getOption_name().equals("ECM룸미러 ")) 	onOff[2] = "on";
+			if(List.getOption_name().equals("스마트키")) 	onOff[3] = "on";
+			if(List.getOption_name().equals("썬루프")) 		onOff[4] = "on";
+			if(List.getOption_name().equals("통풍시트")) 	onOff[5] = "on";
+			if(List.getOption_name().equals("후방카메라")) 	onOff[6] = "on";
 		}
 		model.addAttribute("rentImage" , rentImageService.imageList(Integer.parseInt(rent_id)));
 		model.addAttribute("count"  , onOff);
@@ -141,9 +130,9 @@ public class BuyController {
 	@RequestMapping("/insertProc")
 	private String rentBuyInsertProc(HttpServletRequest request, BuyVO buy) throws Exception {
 		
-		String car_id = request.getParameter("car_id");
-		String id = request.getParameter("id");
-		String rent_id = request.getParameter("rent_id");
+		String car_id 	= request.getParameter("car_id");
+		String id 		= request.getParameter("id");
+		String rent_id 	= request.getParameter("rent_id");
 		List<OptionCarVO> optionList = optService.optionDetail(rent_id);
 		//rent_id에 해당하는 option_name들을 합친다.
 		String options = "";
@@ -366,6 +355,8 @@ public class BuyController {
 		rentService.rentStandby(rent);
 		return "redirect:/buy/list";
 	}
+	
+	
 	@RequestMapping("/short_rentProc")
 	public String short_rentProc(@RequestParam String rent_id, ShortRentVO sRent, BuyVO buy, Model model, HttpSession session, HttpServletRequest request) throws Exception{
 		String id = (String)(session.getAttribute("id"));
@@ -378,6 +369,7 @@ public class BuyController {
 		
 		buy.setId(id);
 		buy.setColor(rentService.rentDetail(rent_id).getColor());
+		buy.setBuy_situation("확인중");
 		buy.setRent_id(rent_id);
 		buy.setOption_name("null");
 		buy.setMonth("00");
@@ -420,6 +412,7 @@ public class BuyController {
 	public String newRent(BuyVO list, HttpSession session) throws Exception{
 		list.setId((String)session.getAttribute("id"));
 		if(session.getAttribute("id")==null || session.getAttribute("id").equals("")) list.setId("비회원");
+		list.setBuy_situation("확인중");
 		list.setOption_name("파퓰러 패키지,빌트인 캠 패키지");
 		buyService.rentBuyInsert(list);
 		return "redirect:/buy/userBuyList?tel="+list.getTel();

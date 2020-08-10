@@ -77,6 +77,7 @@
 </body>
 </html>
 <script type="text/javascript">
+//현재 상황 변경 AJAX
 function situation(i){
 	var situation 	= $('.situation'+i).val();
 	var rent_id 	= $('.rent_id'+i).val();
@@ -88,7 +89,6 @@ function situation(i){
 			alert("변경되었습니다.");
 		}
 	});
-	
 }
 </script>
 </layoutTag:layout>

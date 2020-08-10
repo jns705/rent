@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.rent.domain.CounselingVO;
+import com.rent.domain.NoticeVO;
 import com.rent.domain.PagingVO;
 import com.rent.mapper.CounselingMapper;
 
@@ -82,5 +83,6 @@ public class CounselingService {
 	public int secessionDelete(String id) throws Exception {
 		return mapper.secessionDelete(id);
 	}
+	
 	
 }

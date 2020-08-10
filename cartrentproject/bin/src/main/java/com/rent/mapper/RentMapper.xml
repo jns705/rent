@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rent.mapper.RentMapper">
+		
+	
+	<!-- 렌트카 등록 -->	
+	<insert id="rentCarInsert" parameterType="com.rent.domain.RentVO" useGeneratedKeys="true" keyProperty="rent_id">
+		INSERT INTO RENT
+		(car_id, color, milage, REG_DATE, location, special_note, Max_month, price, car_number)
+		VALUES
+		(#{car_id}, #{color}, #{milage}, now(), #{location}, #{special_note}, #{Max_month}, #{price}, #{car_number})
+	</insert>
+	
+	<!-- 렌트 리스트 -->
+	<select id="rentList" resultType="com.rent.domain.RentVO">
+		SELECT	*
+		FROM	RENT
+	</select>
+	
+	<!-- id에 따른 렌트 리스트 -->
+	<select id="rentListId" parameterType="String" resultType="com.rent.domain.RentVO">
+		SELECT	*
+		FROM	RENT
+		WHERE	RENT_ID = #{rent_id}
+	</select>
+	
+	<!-- 렌트 업데이트 -->
+	<update id="rentCarUpdate" parameterType="com.rent.domain.RentVO">
+		UPDATE	RENT
+		SET		color 				= #{color},
+				car_id 				= #{car_id},
+				milage 				= #{milage},
+				location 			= #{location},
+				special_note 		= #{special_note},
+				Max_month 			= #{Max_month},
+				standby_personnel 	= #{standby_personnel},
+				price 				= #{price},
+				car_number 			= #{car_number}
+		WHERE	rent_id 			= #{rent_id}
+	</update>
+	
+	<!-- 렌트삭제 -->
+	<update id="rentCarDelete" parameterType="String">
+		DELETE	
+		FROM	RENT
+		WHERE	RENT_ID = #{rent_id}
+	</update>
+	
+	<!-- 예약여부 조회 -->
+	<update id="situation" parameterType="com.rent.domain.RentVO">
+		UPDATE	RENT	
+		SET		situation 	= #{situation}
+		WHERE	RENT_ID 	= #{rent_id}
+	</update>
+	
+	<!-- 렌트 조회 -->
+	<select id="rentDetail" parameterType="String" resultType="com.rent.domain.RentVO">
+		SELECT	*
+		FROM	RENT
+		WHERE	RENT_ID = #{rent_id}
+	</select>
+	
+	<!-- 지역 정보 출력 -->
+	<select id="location" resultType="hashMap">
+		select 	distinct location 	
+		from 	rent
+	</select>
+	
+	<!-- 조건부 렌트 정보 출력 -->
+	<select id="rentListPro" parameterType="com.rent.domain.RentListVO" resultType="com.rent.domain.RentVO">
+        select	
+		<if test="temp == null"> count(*) rent_id </if>
+		<if test="temp != null"> r.rent_id, r.car_id, r.color, r.reg_date, reg_date , r.location, r.special_note, r.Max_month, r.situation, r.standby_personnel, r.price, r.car_number, l.rent_url, c.car_name, c.car_price</if> 
+        
+        from 	car c, rent r, rentimage l
+        where	c.car_id = r.car_id and r.rent_id = l.rent_id and l.rent_image = '앞' 
+        
+		<if test="manufacturer != ''"> 	and	manufacturer = #{manufacturer} 			  </if>
+		<if test="car_kind != ''"> 		and	car_kind = #{car_kind} 					  </if>
+		<if test="car_name != ''"> 		and	car_name = #{car_name} 					  </if>
+		<if test="Max_month != 0"> 	<![CDATA[and	Max_month >= #{Max_month}]]> 	  </if>
+		<if test="price1  != 0"> 	<![CDATA[and	price >= #{price1}]]> 			  </if>
+		<if test="price2  != 0"> 	<![CDATA[and	price <= #{price2}]]>		  	  </if>
+		<if test="milage1  != 0"> 	<![CDATA[and	milage >= #{milage1}]]> 		  </if>
+		<if test="milage2  != 0"> 	<![CDATA[and	milage <= #{milage2}]]> 		  </if>
+		<if test="reg_date1  != 0"> <![CDATA[and	YEAR(reg_date) >= #{reg_date1}]]> </if>
+		<if test="reg_date2  != 0"> <![CDATA[and	YEAR(reg_date) <= #{reg_date2}]]> </if>
+		
+		<if test="location != null"> 
+		<foreach collection="location" item="location" open=" and (" separator="or" close=")">
+			location = #{location}
+		</foreach> </if>
+		
+		<if test="fuel != null"> 
+		<foreach collection="fuel" item="fuel" open=" and (" separator="or" close=")">
+			fuel = #{fuel}
+		</foreach> </if>
+		
+		<if test="car_number  != ''"> and r.car_number = #{car_number}  </if>
+		
+		<if test="orderBy == 0"> order by r.price </if>
+		<if test="orderBy == 1"> order by r.price desc </if>
+		<if test="orderBy == 2"> order by r.milage  </if>
+		<if test="orderBy == 3"> order by r.reg_date </if>
+		<if test="orderBy == 4"> order by r.standby_personnel </if>
+		
+		<if test="temp != null"> limit 0, ${limit} </if>
+	</select>
+	
+	<select id="carKindList" resultType="com.rent.domain.CarVO" parameterType="com.rent.domain.CarVO">
+		select c.car_name, r.situation, r.price, r.rent_id
+		from car c, rent r
+		where 	c.car_id = r.car_id
+		and		r.location = #{location}
+		<if test="car_id == 1">
+		and		car_kind = '소형'
+		</if>
+		<if test="car_id == 2">
+		and		car_kind = '중형'
+		</if>
+		<if test="car_id == 3">
+		and		car_kind = '준중형'
+		</if>
+		<if test="car_id == 4">
+		and		car_kind = '대형'
+		</if>
+		<if test="car_id == 5">
+		and		car_kind = 'RV'
+		</if>
+		<if test="car_id == 6">
+		and		car_kind = '친환경차'
+		</if>
+	</select>
+	
+	<update id="rentStandby" parameterType="com.rent.domain.RentVO">
+		update rent
+		set standby_personnel = #{standby_personnel}, situation = #{situation}
+		where rent_id = #{rent_id}
+	</update>
+</mapper>

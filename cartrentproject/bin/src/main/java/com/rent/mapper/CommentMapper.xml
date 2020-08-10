@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.rent.mapper.CommentMapper">
+	
+	<!-- 댓글의 개수 -->
+	<select id="commentCount" parameterType="int">
+		select count(*)
+		from comment
+		where qna_id = #{qna_id}
+	</select>
+	
+	<!-- 댓글 목록 보기 -->
+	<select id="commentList" parameterType="int" resultType="com.rent.domain.CommentVO">
+		select *
+		from comment
+		where qna_id = #{qna_id}
+		order by recomment_id, comment_id
+	</select>
+    
+    <!-- 댓글 등록 -->
+    <insert id="commentInsert"  parameterType="com.rent.domain.CommentVO" >
+    	insert into comment
+    	 (comment_id, qna_id, content, writer, comment_date, recomment_id)
+    	values(#{comment_id}, #{qna_id}, #{content}, #{writer}, now(), #{recomment_id})
+    </insert>
+    
+    <!-- 댓글 수정 -->
+    <update id="commentUpdate"  parameterType="com.rent.domain.CommentVO" >
+    	update comment
+    	set content = #{content}
+    	where comment_id = #{comment_id}
+    </update>
+    
+    <!-- 댓글 삭제 -->
+    <delete id="commentDelete" parameterType="int">
+    	delete from comment
+    	where comment_id = #{comment_id}
+    </delete>
+    
+    <!-- 댓글 삭제 시 대댓글의 comment_id를 알아오는 메서드 -->
+    <select id="recommentDeleteList" parameterType="com.rent.domain.CommentVO" resultType="com.rent.domain.CommentVO">
+    	select *
+    	from comment
+    	where recomment_id = #{recomment_id}
+    </select>
+    
+    <!-- // 댓글 삭제 시 삭제하는 댓글의 recomment_id를 가져오는 메서드 -->
+    <select id="commentDetail" parameterType="int" resultType="com.rent.domain.CommentVO">
+    	select *
+    	from comment
+    	where comment_id = #{comment_id}
+    </select>
+    
+    
+    <!-- 대댓글 등록 -->
+    <insert id="recommentInsert" parameterType="com.rent.domain.CommentVO">
+    	insert into comment
+    		(comment_id, qna_id, writer, comment_date, recomment_id, comment_content, comment_writer)
+    	values (#{comment_id}, #{qna_id}, #{writer} ,now(), #{recomment_id}, #{comment_content}, #{comment_writer})
+    </insert>
+    
+    <!-- 대댓글 수정 -->
+    <update id="recommentUpdate" parameterType="com.rent.domain.CommentVO">
+  		update comment
+  		set comment_content = #{comment_content}
+  		where comment_id = #{comment_id}
+    </update>
+     
+</mapper>
+

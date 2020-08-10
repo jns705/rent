@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.rent.domain.NoticeVO;
 import com.rent.domain.ServiceVO;
 import com.rent.service.ServiceCenterService;
 
@@ -49,8 +50,7 @@ public class ServiceCenterController {
 		List<ServiceVO> sList = service.getTotal(map);
 		int SSize = service.getTotalSize(map);
 		
-		int pagingSize = SSize/listNum + (listNum%sSize != 0 ? 1 : 0);
-		
+		int pagingSize = SSize/listNum + (SSize%listNum != 0 ? 1 : 0);
 		model.addAttribute("number"	, number);
 		model.addAttribute("moVal"	, moVal);
 		model.addAttribute("moKind"	, moKind);
@@ -100,8 +100,10 @@ public class ServiceCenterController {
 	 * @return
 	 */
 	@RequestMapping("/serviceCenter/noticeInsert")
-	public String noticeInsert() {
-		return "/serviceCenter";
+	public String noticeInsert(NoticeVO notice) throws Exception {
+		System.out.println(notice);
+		service.noticeInsert(notice);
+		return "redirect:/serviceCenter";
 	}
 	
 	//공지사항 상세글
@@ -115,10 +117,16 @@ public class ServiceCenterController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("moVal"		, moVal);
 		map.put("moKind"	, moKind);
-		map.put("aaaa"	, 1);
+		//전체를 조회, 리미트 값 조회 구별하기 위한 식별자
+		map.put("aaaa"		, 1);
 		
 		List<ServiceVO> sList = service.getTotal(map);
+		
+		//검색에 따라 달라진 값을 조회하기 위해
+		//현재글, 다음글, 이전글을 구별하는 식별자
 		int temp = 0;
+		
+		//현재글
 		for(int i = 0; i < sList.size(); i++) {
 			ServiceVO sL = sList.get(i);
 			if(id == sL.getNo()) {
@@ -126,6 +134,8 @@ public class ServiceCenterController {
 				temp = i;
 			}
 		}
+		
+		//전번 글
 		if(temp != 0) {
 			for(int i = 0; i < sList.size(); i++) {
 				ServiceVO sL = sList.get(i);
@@ -135,6 +145,7 @@ public class ServiceCenterController {
 			}
 		}
 		
+		//다음글
 		if(temp != sList.size()) {
 			for(int i = 0; i < sList.size(); i++) {
 				ServiceVO sL = sList.get(i);
@@ -154,7 +165,8 @@ public class ServiceCenterController {
 	 * @return
 	 */
 	@RequestMapping("/serviceCenter/noticeUpdateForm")
-	public String noticeUpdateForm() {
+	public String noticeUpdateForm(@RequestParam int no, Model model) throws Exception{
+		model.addAttribute("list", service.noticeDetail(no));
 		return "/service/noticeUpdate";
 	}
 	/**
@@ -162,11 +174,17 @@ public class ServiceCenterController {
 	 * @return
 	 */
 	@RequestMapping("/serviceCenter/noticeUpdate")
-	public String noticeUpdate() {
-		return "/service/noticeDetaile";
+	public String noticeUpdate(NoticeVO list, Model model) throws Exception {
+		service.noticeUpdate(list);
+		return "redirect:/serviceCenter/noticeDetail/"+list.getNo();
 	}
 	
-	
+	//공지사항 삭제
+	@RequestMapping("/serviceCenter/noticeDelete")
+	public String noticeDelete(@RequestParam int no, Model model) throws Exception {
+		service.noticeDelete(no);
+		return  "redirect:/serviceCenter";
+	}
 	
 	
 	

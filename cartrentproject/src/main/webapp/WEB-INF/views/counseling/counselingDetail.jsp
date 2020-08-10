@@ -9,11 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상담 상세 페이지</title>
-<style>
-tbody tr:hover {
-	background-color : #F5F0C5;
-}
-</style>
+<style>tbody tr:hover {background-color : #F5F0C5;}</style>
 </head>
 <body>
 <div style="height: 150px;"></div>

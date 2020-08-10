@@ -100,28 +100,8 @@
 			</div>
 </body>
 <script type="text/javascript">
-
-	option();
-
-	function option(){
-		$.ajax({
-			url 	: '/admin/optionList',
-			type	: 'get',
-			success : function(data){
-				var str = "";
-				$.each(data, function(key, value){
-					str += '<div class="col-sm-1">' +
-							'<input class="checkbox col-sm-2" type="checkbox" name="'+ value.option_name +'" value="'+ value.option_name +'" />' +
-							'<label class="control-label col-sm-2">'+ value.option_name +'</label>'+
-						'</div>';
-				});
-				$('.op').html(str);
-			}
-		});
-	}
-
-
-
+	carChange();
+	//차량 선택 시 색상 변경 AJAX
 	function carChange(){
 		var car_id = $('.car').val();
 		var color =  $('.colorRent').val();
@@ -142,13 +122,6 @@
 		});
 	}
 
-	function addOption(){
-		window.open('/admin/optionForm'
-				,'left=200, top=170, width=900, height=250, scrollbars=no, status=no, resizable=no, fullscreen=no, channelmode=no');
-		return;
-	}
-
-	carChange();
 </script>
 </html>
 </layoutTag:layout>

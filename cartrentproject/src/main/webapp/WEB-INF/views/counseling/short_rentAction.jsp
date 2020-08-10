@@ -368,6 +368,20 @@ function daumZipCode(){
 </script>
 
 <script type="text/javascript">
+function topaa() {
+	$('html, body').animate({scrollTop : 0}, 400);
+	return false;
+}
+
+
+$(window).scroll(function() {
+	if ($(this).scrollTop() > 400) $('#aaaaaa').fadeIn();
+	else $('#aaaaaa').fadeOut();
+});
+
+
+
+
 //footerSHeight값 이상일시 class를 바꾼다
 $(window).scroll(function () {
     var windowHeight = $(window).height();				// Viewport Height
@@ -376,11 +390,17 @@ $(window).scroll(function () {
     var footerSHeight = documentHeight - windowHeight - 274;
 	var scrollValue = $(document).scrollTop();
 	console.log('스크롤'+scrollValue + ' 푸터' + footerSHeight + ' 도큐' + documentHeight + ' 윈도우' +  windowHeight + ' ' );
-	if(scrollValue > footerSHeight)
+	if(scrollValue > footerSHeight){
 		$('.ticker-info').addClass("off");
-	else
+		$('.quick-top').attr('style','position:absolute');
+		$('#aaaaaa').css('margin-top','110px');
+	}else{
 		$('.ticker-info').removeClass("off");
+		$('.quick-top').attr('style','position:fixed');
+		$('#aaaaaa').css('margin-top','');
+	}
 });
+
 
 
 
@@ -584,7 +604,7 @@ function idCheck(){
 		$('#span-name').html('이름은 세자리 이상 입력해주세요');
 	}else{
 		$('[name=name]').css('border-color','#ddd');
-		if($('[name=birthday]').css('border-top') != '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=birthday]').css('border-top') != '1px solid rgb(246, 129, 33)')
 		$('[name=birthday]').css('border-left','1px solid #ddd');
 		$('#span-name').html('');
 	}
@@ -598,12 +618,12 @@ function birthCheck(){
 		$('#span-birth').html('생년월일은 여덟자리를 입력해주세요');
 	}else{
 		$('[name=birthday]').css('border-color','#ddd');
-		if($('[name=name]').css('border-top') != '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=name]').css('border-top') != '1px solid rgb(246, 129, 33)')
 			$('[name=birthday]').css('border-left','1px solid #ddd');
 		else $('[name=birthday]').css('border-left','1px solid #f68121');
 
 
-		if($('[name=tel]').css('border-top') != '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=tel]').css('border-top') != '1px solid rgb(246, 129, 33)')
 			$('[name=tel]').css('border-left','1px solid #ddd');
 		else $('[name=tel]').css('border-left','1px solid #f68121');
 		$('#span-birth').html('');
@@ -620,7 +640,7 @@ function telCheck(){
 		$('#span-mobile').html('전화번호는 9자리 이상 입력해주세요');
 	}else{
 		$('[name=tel]').css('border-color','#ddd');
-		if($('[name=birthday]').css('border-top') != '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=birthday]').css('border-top') != '1px solid rgb(246, 129, 33)')
 		$('[name=tel]').css('border-left','1px solid #ddd');
 		else  
 		$('[name=tel]').css('border-left','1px solid #f68121');
@@ -638,7 +658,7 @@ function emailCheck(){
 		$('#span-email').html('이메일은 5자리 이상 입력해주세요');
 	}else{
 			$('[name=emailId]').css('border-color','#ddd');
-			if($('[name=domain]').css('border-top') != '1.11111px solid rgb(246, 129, 33)')
+			if($('[name=domain]').css('border-top') != '1px solid rgb(246, 129, 33)')
 		$('[name=domain]').css('border-left','1px solid #ddd');
 		$('#span-email').html('');
 	}
@@ -654,7 +674,7 @@ function emailCheck1(){
 		$('#span-email').html('이메일은 5자리 이상 입력해주세요');
 	}else{
 		$('[name=domain]').css('border-color','#ddd');
-		if($('[name=emailId]').css('border-top') == '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=emailId]').css('border-top') == '1px solid rgb(246, 129, 33)')
 		$('[name=domain]').css('border-left','1px solid #f68121');
 		$('#span-email').html('');
 	}
@@ -667,14 +687,14 @@ function addressCheck(){
 		$('#span-address').html('상세주소는 5자리 이상 입력해주세요');
 	}else{
 		$('[name=addressDetail]').css('border-color','#ddd');
-		if($('[name=address]').css('border-top') == '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=address]').css('border-top') == '1px solid rgb(246, 129, 33)')
 		$('[name=addressDetail]').css('border-left','1px solid #f68121');
 		$('#span-address').html('');
 	}
 
 	if($('[name=address]').val()){
 		$('[name=address]').css('border-color','#ddd');
-		if($('[name=addressDetail]').css('border-top') != '1.11111px solid rgb(246, 129, 33)')
+		if($('[name=addressDetail]').css('border-top') != '1px solid rgb(246, 129, 33)')
 		$('[name=addressDetail]').css('border-left','1px solid #ddd');
 	}
 	

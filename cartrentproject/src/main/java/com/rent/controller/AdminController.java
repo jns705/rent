@@ -251,6 +251,7 @@ public class AdminController {
 		 return "/admin/rentList";
 	 }
 	 
+	 //렌트 상세정보
 	 @RequestMapping("/rentDetail/{rent_id}")
 	 public String rentDetail(@PathVariable String rent_id, Model model)throws Exception{
 		 model.addAttribute("option", 	opService.optionDetail(rent_id));
@@ -259,6 +260,7 @@ public class AdminController {
 		 return "/admin/rentDetail";
 	 }
 	 
+	 //렌트 수정 폼
 	 @RequestMapping("/rentUpdateForm/{id}")
 	 public String rentUpdateForm(@PathVariable String id, Model model)throws Exception{
 		 model.addAttribute("rent",rentService.rentListId(id));
@@ -266,24 +268,26 @@ public class AdminController {
 		 return "/admin/rentUpdateForm";
 	 }
 	 
+	 //렌트 업데이트
 	 @RequestMapping("/rentUpdateProc")
 	 public String rentUpdateProc(RentVO rent)throws Exception{
 		 rentService.rentCarUpdate(rent);
 		 return "redirect:/admin/rentList";
 	 }
 	 
+	 //렌트 카 삭제
 	 @RequestMapping("/rentCarDelete/{id}")
 	 public String rentCarDelete(@PathVariable String id)throws Exception{
 		 rentService.rentCarDelete(id);
 		 return "redirect:/admin/rentList";
 	 }
 	 
+	 //상세정보 AJAX
 	 @RequestMapping("/situation")
 	 @ResponseBody
-	 public void situation(RentVO rent)throws Exception{
-		 rentService.situation(rent);
-	 }
+	 public void situation(RentVO rent)throws Exception{rentService.situation(rent);}
 	 
+	 //렌트 이미지 조회 폼
 	 @RequestMapping("/rentImageForm/{id}")
 	 public String rentImageForm(@PathVariable String id, Model model)throws Exception{
 		 model.addAttribute("rent", rentService.rentDetail(id));
@@ -291,8 +295,9 @@ public class AdminController {
 		 return "/admin/rentImageForm";
 	 }
 	 
-		@RequestMapping("/rentImageProc")
-		public String rentImageProc(@RequestParam int rent_id, @RequestParam String rent_image, Model model, @RequestPart MultipartFile files)throws Exception{
+	 //렌트 이미지
+	@RequestMapping("/rentImageProc")
+	public String rentImageProc(@RequestParam int rent_id, @RequestParam String rent_image, Model model, @RequestPart MultipartFile files)throws Exception{
 			
 			//게시글 등록 화면에서 입력한 값들을 실어나르기 위한 BoardVO를 생성한다.
 			RentImageVO file		=	new RentImageVO();
@@ -321,11 +326,12 @@ public class AdminController {
 			return "redirect:/admin/rentImageForm/"+rent_id;
 		}
 		
-		@RequestMapping("/rentImageList")
-		@ResponseBody
-		public List<RentImageVO> rentImageList(@RequestParam int rent_id)throws Exception{
-			return rentImageService.imageList(rent_id);
-		}
+	//렌트 이미지 리스트
+	@RequestMapping("/rentImageList")
+	@ResponseBody
+	public List<RentImageVO> rentImageList(@RequestParam int rent_id)throws Exception{
+		return rentImageService.imageList(rent_id);
+	}
 	 
 	 
 }

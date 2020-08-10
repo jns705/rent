@@ -3,21 +3,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags" %>
-      	<c:if test="${sessionScope.id != null and check == 0}">
-      		<script type="text/javascript">
-				location.href="/buy/short_rentList";
-      		</script>
-      	</c:if>
-      	<c:if test="${sessionScope.id != null and check == 1}">
-      		<script type="text/javascript">
-				location.href="/counseling/userList";
-      		</script>
-      	</c:if>
+<!-- 단기에서 넘어오거나 장기에서 넘어올 경우 -->
+<c:if test="${sessionScope.id != null and check == 0}">
+	<script type="text/javascript"> location.href="/buy/short_rentList"; </script>
+</c:if>
+<c:if test="${sessionScope.id != null and check == 1}">
+	<script type="text/javascript"> location.href="/counseling/userList"; </script>
+</c:if>
 <layoutTag:layout>
 <!DOCTYPE html>
 <head>
 <style>
 th{text-align: center;}
+.modal-pop {
+	position:fixed;
+	box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px, rgba(0,0,0,0.5) 2px 2px 3px 3px;
+	z-index : 10000;
+}
+.inputt{
+	width: 500;
+    height: 50;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+}
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> 
 <link rel="stylesheet" href="http://localhost:8082/static/css/ss.css" type="text/css" /> 
@@ -75,6 +83,7 @@ th{text-align: center;}
         
       	<c:if test="${sessionScope.id == null}">
         <style>
+        header img{margin-top:0px;}
         .reserve-check li {width: 430px;}
 		</style>
       	<article>
@@ -96,13 +105,48 @@ th{text-align: center;}
             </div>
         </article>
         </c:if>
-
                 
               </div>
           </div>
           
       </form>
       
+
+      <div id="modal-nomember-check" class="modal-pop" style="display: none;">
+    <div class="modal-box">
+        <div class="modal-header">
+            <a href="#" id="closeaa" class="modal-close" onclick="check('close');">레이어 닫기</a>
+            <h3>비회원 예약확인 </h3>
+        </div>
+        <!-- modal-header//end -->
+        <form name="myform" id="myform" method="post" action="/member/checkId">
+            <article>
+                <p class="text-c">등록하신 이름, 휴대폰 번호를 입력 하시면 확인 가능합니다.</p>
+                <div class="input-field field-large">
+                    <div class="input-row">
+                    <span class="input essential input-large" id="span-nm">
+                        <strong class="check">필수</strong>
+                        <label><input type="text" placeholder="이름을 입력해주세요." class="onlyKorEng name" name="name" id="nm" onfocus="checka('name' <c:if test="${check!=1}">, 'a'</c:if>);" /></label>
+                    </span>
+                    <span style="color:<c:if test="${check == 1}">#eb444b !important;</c:if>" class="msg-txt 	cl-point1" id="msg-nm">이름을 입력해주세요.</span>
+                    </div>
+                    <div class="input-row">
+                    <span class="input essential input-large" id="span-hpNo">
+                        <strong class="check">필수</strong>
+                        <label><input type="number" placeholder="휴대폰 번호를 입력해주세요.(-생략)" class="onlyNumber tel" name="tel" id="hpNo" onfocus="checka('tel' <c:if test="${check!=1}">, 'a'</c:if> );"></label>
+                    </span>
+                    <span style="color:<c:if test="${check == 1}">#eb444b !important;</c:if>"  class="msg-txt cl-point1" id="msg-hpNo">휴대폰 번호를 입력해주세요.</span>
+                    </div>
+                </div>
+                <div class="btn-box" id="div-btn">
+                    <button type="button" class="btn btn-color<c:if test="${check == 1}">2</c:if><c:if test="${check == 0}">1</c:if> btn-large btn-block" onclick="goConfirm();">예약확인</button>
+                </div>
+            </article>
+        </form>
+    </div>
+    <!-- modal-box//end -->
+</div>
+</body>
 <script type="text/javascript">
 	function check(data){
 		$('#modal-nomember-check').css('display','block');
@@ -139,29 +183,28 @@ th{text-align: center;}
 		}
 		}
 	}
+	
+	
+	//영역밖 클릭 시
+	$('html').click(function(e) { 
+		if(!$(e.target).hasClass("name")) { 
+			if(!$(e.target).hasClass("btn-block")) { 
+	        	$('#msg-nm').css('font-size','0px');
+	        	$('[name=name]').css('border-color','');
+			}
+		} 
+		if(!$(e.target).hasClass("tel")) { 
+			if(!$(e.target).hasClass("btn-block")) { 
+	        	$('#msg-hpNo').css('font-size','0px');
+	        	$('[name=tel]').css('border-color','');
+			}
+		} 
+	});
 </script>
 
 
-        <c:if test="${check == 1}">
-        <script type="text/javascript">
-
-		//영역밖 클릭 시
-		$('html').click(function(e) { 
-			if(!$(e.target).hasClass("name")) { 
-				if(!$(e.target).hasClass("btn-block")) { 
-		        	$('#msg-nm').css('font-size','0px');
-		        	$('[name=name]').css('border-color','');
-				}
-			} 
-			if(!$(e.target).hasClass("tel")) { 
-				if(!$(e.target).hasClass("btn-block")) { 
-		        	$('#msg-hpNo').css('font-size','0px');
-		        	$('[name=tel]').css('border-color','');
-				}
-			} 
-		});
-
-
+<c:if test="${check == 1}">
+	<script type="text/javascript">
         //전체 유효성 검사
         function goConfirm(){
         if(!$('[name=name]').val()){
@@ -172,7 +215,6 @@ th{text-align: center;}
 			checka('tel')
 	        	return false;
         } 
-
     	
         $('#myform').attr("action", "/member/checkId1");
         myform.submit();
@@ -193,59 +235,8 @@ th{text-align: center;}
 
             myform.submit(); 
         }
-
-
-        </script>
-        </c:if>
+	</script>
+</c:if>
         
-      <div id="modal-nomember-check" class="modal-pop" style="display: none;">
-    <div class="modal-box">
-        <div class="modal-header">
-            <a href="#" id="closeaa" class="modal-close" onclick="check('close');">레이어 닫기</a>
-            <h3>비회원 예약확인 </h3>
-        </div>
-        <!-- modal-header//end -->
-        <form name="myform" id="myform" method="post" action="/member/checkId">
-            <article>
-                <p class="text-c">등록하신 이름, 휴대폰 번호를 입력 하시면 확인 가능합니다.</p>
-                <div class="input-field field-large">
-                    <div class="input-row">
-                    <span class="input essential input-large" id="span-nm">
-                        <strong class="check">필수</strong>
-                        <label><input type="text" placeholder="이름을 입력해주세요." class="onlyKorEng name" name="name" id="nm" onfocus="checka('name' <c:if test="${check!=1}">, 'a'</c:if>);" ></label>
-                    </span>
-                    <span style="color:<c:if test="${check == 1}">#eb444b !important;</c:if>" class="msg-txt 	cl-point1" id="msg-nm">이름을 입력해주세요.</span>
-                    </div>
-                    <div class="input-row">
-                    <span class="input essential input-large" id="span-hpNo">
-                        <strong class="check">필수</strong>
-                        <label><input type="number" placeholder="휴대폰 번호를 입력해주세요.(-생략)" class="onlyNumber tel" name="tel" id="hpNo" onfocus="checka('tel' <c:if test="${check!=1}">, 'a'</c:if> );"></label>
-                    </span>
-                    <span style="color:<c:if test="${check == 1}">#eb444b !important;</c:if>"  class="msg-txt cl-point1" id="msg-hpNo">휴대폰 번호를 입력해주세요.</span>
-                    </div>
-                </div>
-                <div class="btn-box" id="div-btn">
-                    <button type="button" class="btn btn-color<c:if test="${check == 1}">2</c:if><c:if test="${check == 0}">1</c:if> btn-large btn-block" onclick="goConfirm();">예약확인</button>
-                </div>
-            </article>
-        </form>
-    </div>
-    <!-- modal-box//end -->
-</div>
-<style>
-.modal-pop {
-	position:fixed;
-	box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px, rgba(0,0,0,0.5) 2px 2px 3px 3px;
-	z-index : 10000;
-}
-
-.inputt{
-	width: 500;
-    height: 50;
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-}
-</style>
-</body>
 </html>
 </layoutTag:layout>

@@ -26,27 +26,25 @@ public class MainController {
 	@RequestMapping("/main")
 	public String main(Model model) throws Exception  {
 		String [] carKind = {"차량 선택", "소형", "중형", "준중형", "대형", "RV", "친환경차"};
-		model.addAttribute("carKind",  carKind);
-		model.addAttribute("location", rentService.location());
+		model.addAttribute("manufacturer"	, carService.manufacturer());
+		model.addAttribute("fuel"			, carService.fuel());
+		model.addAttribute("location"		, rentService.location());
+		model.addAttribute("location"		, rentService.location());
+		model.addAttribute("carKind"		,  carKind);
 		return "/main";
 	}
 	
+	//장기 렌트 메인
 	@RequestMapping("/main.do")
-	public String mainDo() {
-		return "/rent/main.do";
-	}
+	public String mainDo() { return "/rent/main.do"; }
 	
+	//단기 렌트 메인
 	@RequestMapping("/main.doa")
-	public String maindoa(Model model)throws Exception {	//제조사 정보 출력을 위한 정보
-		model.addAttribute("manufacturer", carService.manufacturer());
-		model.addAttribute("fuel", carService.fuel());
-		model.addAttribute("location", rentService.location());
+	public String maindoa(Model model)throws Exception {	
+		model.addAttribute("manufacturer"	, carService.manufacturer());
+		model.addAttribute("fuel"			, carService.fuel());
+		model.addAttribute("location"		, rentService.location());
 		return "/rent/main.doa";
-	}
-	
-	@RequestMapping("/mainma")
-	public String mainma(){
-		return "/mainma";
 	}
 	
 }

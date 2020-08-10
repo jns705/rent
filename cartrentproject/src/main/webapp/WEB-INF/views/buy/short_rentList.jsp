@@ -7,7 +7,17 @@
 <!DOCTYPE html>
 <head>
 <style>
+header img{margin-top:0px;}
 th{text-align: center;}
+th{border-left: none !important;}
+td{border-bottom: 1px solid #ddd;}
+.tr td{vertical-align: middle;}
+.inputt{
+	width: 500;
+    height: 50;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+}
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> 
 <link rel="stylesheet" href="http://localhost:8082/static/css/ss.css" type="text/css" /> 
@@ -70,15 +80,6 @@ th{text-align: center;}
             </ul>
         </div>
         <!-- tab-reservation-step//end -->
-<style>
-th{
- border-left: none !important;
- }
- 
- td{
- 	border-bottom: 1px solid #ddd;
- }
-</style>
                  <article>                
                 		<div class="header-group">
                         <h3>예약 확인 <p><span class="cl-point1">기간·지점·차량</span>은 순서와 관계없이 <span class="cl-point1">선택 예약이 가능</span>합니다.</p></h3><!-- 20180402 -->
@@ -99,15 +100,15 @@ th{
                  		</tr>
                  		<c:forEach items="${Buy}" var="Buy" varStatus="status">
                  		<tr class="tr" align="center">
-                 			<td style="vertical-align: middle;">${Buy.id}</td>
-                 			<td style="vertical-align: middle;">${Buy.name}</td>
-                 			<td style="vertical-align: middle;">${Car[status.index].car_name}</td>
-                 			<td style="vertical-align: middle;">${SRent[status.index].start_location}</td>
-                 			<td style="vertical-align: middle;">${SRent[status.index].end_location}</td>
-                 			<td style="vertical-align: middle;">${SRent[status.index].start_date}<br><span class="cl-point1">${SRent[status.index].start_time}</span></td>
-                 			<td style="vertical-align: middle;">${SRent[status.index].end_date}<br><span class="cl-point1">${SRent[status.index].end_time}</span></td>
-                 			<td style="vertical-align: middle;"><fmt:formatDate value="${Buy.buy_date}" var="date" pattern="yyyy-MM-dd"/>${date}</td>
-                 			<td style="vertical-align: middle;">${situation[status.index]}</td>
+                 			<td style="">${Buy.id}</td>
+                 			<td>${Buy.name}</td>
+                 			<td>${Car[status.index].car_name}</td>
+                 			<td>${SRent[status.index].start_location}</td>
+                 			<td>${SRent[status.index].end_location}</td>
+                 			<td>${SRent[status.index].start_date}<br><span class="cl-point1">${SRent[status.index].start_time}</span></td>
+                 			<td>${SRent[status.index].end_date}<br><span class="cl-point1">${SRent[status.index].end_time}</span></td>
+                 			<td><fmt:formatDate value="${Buy.buy_date}" var="date" pattern="yyyy-MM-dd"/>${date}</td>
+                 			<td>${situation[status.index]}</td>
                  		</tr>
                 			</c:forEach>
                  	</table>
@@ -170,14 +171,6 @@ th{
     </div>
     <!-- modal-box//end -->
 </div>
-<style>
-.inputt{
-	width: 500;
-    height: 50;
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-}
-</style>
 </body>
 </html>
 </layoutTag:layout>
