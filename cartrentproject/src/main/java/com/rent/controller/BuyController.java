@@ -62,6 +62,16 @@ public class BuyController {
 	@Resource(name="com.rent.service.RentImageService")
 	RentImageService rentImageService;
 	
+	/**
+	 * 렌트구매(예약)페이지
+	 * @param model
+	 * @param request
+	 * @param rent_id
+	 * @return
+	 * @throws Exception
+	 * 구매페이지에서 request를 이용해 총합비용, 보증금, 계약날짜, 주행거리를 사용자에게 보여주고
+	 * hidden으로 차옵션들을 숨겨준다.
+	 */
 	@RequestMapping("/insert/{rent_id}")
 	private String rentBuyInsert(Model model, HttpServletRequest request, @PathVariable String rent_id) throws Exception {
 		
@@ -117,6 +127,17 @@ public class BuyController {
 		return "/buy/rentBuyInsert";
 	}
 	
+	/**
+	 * 렌트구매(예약) 프로세스
+	 * @param request
+	 * @param buy
+	 * @return
+	 * @throws Exception
+	 * car_id, id, rent_id를 가져와서
+	 * car 테이블에 재고량 -1 해주고 
+	 * rent 테이블에 상담인원수를 0으로 초기화, 상담상태에 렌트완료를 넣어주고
+	 * buy 테이블에 값들을 넣어준다.
+	 */
 	@RequestMapping("/insertProc")
 	private String rentBuyInsertProc(HttpServletRequest request, BuyVO buy) throws Exception {
 		
@@ -176,7 +197,19 @@ public class BuyController {
 		return "redirect:/rent/rentList";
 	}
 	
-	//예약자 리스트(페이징)
+	/**
+	 * 구매자(예약) 리스트(페이징, 조건검색)
+	 * @param model
+	 * @param paging
+	 * @param nowPage
+	 * @param cntPerPage
+	 * @param buyKind
+	 * @param buySearch
+	 * @return
+	 * @throws Exception
+	 * 해당buy 테이블의 rent_id를 가지고
+	 * rent테이블의 car_id를 가져와 List<String> car_name에 차이름을 넣어준다.
+	 */
 	@RequestMapping("/list")
 	public String buyList(Model model, PagingVO paging
 			, @RequestParam(value="nowPage", required=false)String nowPage
@@ -210,6 +243,7 @@ public class BuyController {
 		for(int i = 0; i < buy.size(); i++) {
 			String rent_id = buy.get(i).getRent_id();
 			
+			//오류 방지
 			if(rent_id == null) {
 				car_name.add("선택차량없음");
 				System.out.println("if문들어온 차량 : "+car_name);
@@ -227,7 +261,17 @@ public class BuyController {
 		return "/buy/buyList";
 	}
 	
-	//예약자 상세조회
+	/**
+	 * 구매자(예약) 상세조회
+	 * @param buy_id
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 * car_name을 가져오기 위해 buy테이블 해당하는 rent_id를
+	 * rent 테이블 rent_id의 car_id로 car테이블의 이름을 가져온다
+	 * buy테이블(rent_id = rent테이블의 rent_id)
+	 * rent테이블(car_id - > car테이블 car_name조회)
+	 */
 	@RequestMapping("/detail/{buy_id}")
 	public String buyDetail(@PathVariable int buy_id, Model model) throws Exception {
 		BuyVO buy = buyService.buyDetail(buy_id);
@@ -245,7 +289,14 @@ public class BuyController {
 		return "/buy/buyDetail";
 	}
 	
-	//예약현황 수정 (대여중, 반납완료)
+	/**
+	 * 구매(예약)현황 수정 (대여중, 반납완료)
+	 * @param re
+	 * @param buy
+	 * @return
+	 * @throws Exception
+	 * buy테이블의 buy_situation(반납완료, 대여중)을 수정할 수 있다.
+	 */
 	@RequestMapping("/update")
 	public String buyUpdate(HttpServletRequest re, BuyVO buy) throws Exception {
 		String buy_situation = re.getParameter("buy_situation");
@@ -288,6 +339,13 @@ public class BuyController {
 	
 	
 	//예약 취소
+	/**
+	 * 구매(예약) 취소(삭제)
+	 * @param buy_id
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/delete/{buy_id}")
 	public String buyDelete(@PathVariable int buy_id, HttpServletRequest request) throws Exception {
 		

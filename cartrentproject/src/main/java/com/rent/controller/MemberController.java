@@ -161,7 +161,14 @@ public class MemberController {
 		model.addAttribute("situation", situation);
 		return "/buy/userBuyList";
 	}
-	//회원 상세 정보
+
+	/**
+	 * 회원 상세 정보
+	 * @param id
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/detail/{id}")
 	public String memberDetail(@PathVariable String id, Model model) throws Exception {
 		MemberVO member = mMemberService.memberDetail(id);
@@ -173,7 +180,13 @@ public class MemberController {
 		return "/member/memberDetail";
 	}
 	
-	//회원정보 수정
+	/**
+	 * 회원정보 수정
+	 * @param member
+	 * @param rq
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/update")
 	public String memberUpdate(MemberVO member, HttpServletRequest rq) throws Exception {
 		String zipcode = rq.getParameter("address0");
@@ -186,7 +199,14 @@ public class MemberController {
 		return "redirect:/member/detail/"+member.getId();
 	}
 	
-	//회원탈퇴
+	/**
+	 * 회원탈퇴
+	 * @param member
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * 회원탈퇴시 구매, 상담등등 전부 삭제한다
+	 */
 	@RequestMapping("/delete")
 	public String memberDelete(MemberVO member, HttpSession session) throws Exception {
 		System.out.println(member.getId()+"회원 탈퇴");

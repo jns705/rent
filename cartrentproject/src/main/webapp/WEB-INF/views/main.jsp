@@ -27,6 +27,8 @@ function resizeContents() {
     $('#section-1').css("background-size", width+"px "+ height + "px");
     $('#section-2').css("background-size", width+"px "+ height + "px");
     $('#section-3').css("background-size", width+"px "+ height + "px");
+
+	
 }
 </script>
 	<style>
@@ -825,7 +827,7 @@ $('.white_div').hover(function() {
 					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><a id="a" href="/main#page4"><span id="span" style=""></span>회사소개</a>
         </div>
 	    <div class="section" id="section-4">
-	    	<div>
+	    	<div class="container">
 	    		<div class="a">
 	    			<ul class="list">
 	    			
@@ -885,6 +887,7 @@ background-size: 500px 300px;
     background-image: url(http://localhost:8082/static/img/touch.png);
     background-position: 50% 100%;
     background-repeat: no-repeat;
+    background-size:15.7%;
 }
 h4{
 color: #FF0000;
@@ -908,7 +911,7 @@ font-size:20px;
     width: 200px;
     height: 100px;
     top: -50px;
-    right: -380px;
+    right: -180px;
     color: black;
 }
 .a {
@@ -917,7 +920,7 @@ font-size:20px;
     width: 1000px;
     height: 300px;
     top: -60px;
-    right: 0px;
+    right: 200px;
   	overflow: hidden;
 }
 
@@ -953,8 +956,8 @@ position: relative;
 margin-left:300px;
 width:30px;
 height: 30px;
-top : 480px;
-right: -455px;
+top : 510px;
+right: -460px;
 overflow: hidden;
 border-radius: 12px;
 }

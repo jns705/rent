@@ -65,27 +65,40 @@ public class ServiceCenterController {
 		return "/serviceCenter";
 	}
 	
-	//고객상담
+	/**
+	 * 고객상담 폼
+	 * @return
+	 */
 	@RequestMapping("/serviceCenter/customerConsultation")
 	public String customerConsultation() {
 		logger.info("customerConsultation");
 		return "/service/customerConsultation";
 	}
 	
-	//자주찾는질문
+	/**
+	 * 자주찾는질문
+	 * @return
+	 * 해당DB가 없어서 jsp에서 javascript를 사용해 보여주기식 으로 만듬
+	 */
 	@RequestMapping("/serviceCenter/faq")
 	public String frequentlyAskedQuestions() {
 		logger.info("frequentlyAskedQuestions");
 		return "/service/faq";
 	}
 	
-	//공지사항 등록폼
+	/**
+	 * 공지사항 등록폼
+	 * @return
+	 */
 	@RequestMapping("/serviceCenter/noticeInsertForm")
 	public String noticeInsertForm() {
 		logger.info("noticeInsertForm");
 		return "/service/noticeInsert";
 	}
-	//공지사항 등록
+	/**
+	 * 공지사항 등록 프로세스
+	 * @return
+	 */
 	@RequestMapping("/serviceCenter/noticeInsert")
 	public String noticeInsert() {
 		return "/serviceCenter";
@@ -136,12 +149,18 @@ public class ServiceCenterController {
 		return "/service/noticeDetail";
 	}
 	
-	//공지사항 업데이트폼
+	/**
+	 * 공지사항 업데이트폼
+	 * @return
+	 */
 	@RequestMapping("/serviceCenter/noticeUpdateForm")
 	public String noticeUpdateForm() {
 		return "/service/noticeUpdate";
 	}
-	//공지사항 업데이트
+	/**
+	 * 공지사항 업데이트 프로세스
+	 * @return
+	 */
 	@RequestMapping("/serviceCenter/noticeUpdate")
 	public String noticeUpdate() {
 		return "/service/noticeDetaile";

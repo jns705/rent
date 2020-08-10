@@ -48,7 +48,15 @@ public class AccidentController {
 		return "/accident/accidentList";
 	}
 	
-	//스크롤페이징
+	/**
+	 * 스크롤페이징
+	 * @param model
+	 * @param paging
+	 * @param nowPage
+	 * @param cntPerPage
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/pagingList")
 	@ResponseBody
 	public List<AccidentVO> accidentListPaging(Model model, PagingVO paging

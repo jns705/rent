@@ -25,6 +25,7 @@ public class CommentController {
 	/**
 	 * 댓글 등록
 	 * @param comment - domain
+	 * qna/commentAction.jsp 에서 ajax사용
 	 */
 	@RequestMapping("/insert")
 	@ResponseBody
@@ -49,6 +50,7 @@ public class CommentController {
 	/**
 	 * 댓글 수정
 	 * @param comment - domain
+	 * qna/commentAction.jsp 에서 ajax사용
 	 */
 	@RequestMapping("/update")
 	@ResponseBody
@@ -59,7 +61,8 @@ public class CommentController {
 	/**
 	 * 댓글 삭제
 	 * @param @PathVariable int comment_id
-	 *	 commentAction.jsp 에서 comment_id의 값을 받아온다.
+	 * commentAction.jsp 에서 comment_id의 값을 받아온다.
+	 * qna/commentAction.jsp 에서 ajax사용
 	 */
 	@RequestMapping("/delete/{comment_id}")
 	@ResponseBody
@@ -84,7 +87,8 @@ public class CommentController {
 	/**
 	 * 댓글 목록
 	 * @param @PathVariable int qna_id
-	 * 	commentAction.jsp 에서 qna_id의 값을 받아온다.
+	 * commentAction.jsp 에서 qna_id의 값을 받아온다.
+	 * qna/commentAction.jsp 에서 ajax사용
 	 */
 	@RequestMapping("/list/{qna_id}")
 	@ResponseBody
@@ -95,6 +99,7 @@ public class CommentController {
 	
 	/**
 	 * 대댓글 등록
+	 * qna/commentAction.jsp 에서 ajax사용
 	 */
 	@RequestMapping("/commentInsert")
 	@ResponseBody
@@ -105,6 +110,7 @@ public class CommentController {
 	
 	/**
 	 * 대댓글 수정
+	 * qna/commentAction.jsp 에서 ajax사용
 	 * @param comment - domain
 	 */
 	@RequestMapping("/commentUpdate")

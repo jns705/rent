@@ -75,6 +75,14 @@ public class CounselingController {
 	@Resource(name="com.rent.service.BuyService")
 	BuyService buyService;
 	
+	/**
+	 * 상담 등록페이지
+	 * @param model
+	 * @param request
+	 * @param rent_id
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/insert/{rent_id}")
 	public String counselingSend(Model model, HttpServletRequest request, @PathVariable String rent_id) throws Exception{
 		
@@ -104,6 +112,13 @@ public class CounselingController {
 		
 		return "/counseling/counselingInsert";
 	}
+	/**
+	 * 상담 등록 프로세스
+	 * @param counseling
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/insertProc")
 	private String counselingInsert(CounselingVO counseling, HttpServletRequest request) throws Exception{
 		
@@ -142,7 +157,15 @@ public class CounselingController {
 		return "redirect:/rent/rentList";
 	}
 	
-	//상담 전체 목록
+	/**
+	 * 상담 전체 목록
+	 * @param model
+	 * @param paging
+	 * @param nowPage
+	 * @param cntPerPage
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/list")
 	public String counselingList(Model model, PagingVO paging
 			, @RequestParam(value="nowPage", required=false)String nowPage
@@ -186,7 +209,16 @@ public class CounselingController {
 		return "/counseling/counselingList";
 	}
 	
-	//전체목록(조건검색)
+	/**
+	 * 전체목록(조건검색)
+	 * @param counseling_situation
+	 * @param model
+	 * @param paging
+	 * @param nowPage
+	 * @param cntPerPage
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/searchList/{counseling_situation}")
 	public String searchList(@PathVariable String counseling_situation, Model model, PagingVO paging
 			, @RequestParam(value="nowPage", required=false)String nowPage
@@ -235,7 +267,13 @@ public class CounselingController {
 		return "/counseling/counselingList";
 	}
 	
-	//상담글 상세보기
+	/**
+	 * 상담글 상세보기
+	 * @param counseling_id
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/detail/{counseling_id}")
 	public String counselingDetail(@PathVariable String counseling_id, Model model) throws Exception {
 		CounselingVO cou = couService.counselingDetail(counseling_id);
@@ -254,7 +292,13 @@ public class CounselingController {
 		return "/counseling/counselingDetail";
 	}
 	
-	//상담글 상태 현황 변경(상담완료, 예약완료)
+	/**
+	 * 상담글 상태 현황 변경(상담완료, 예약완료)
+	 * @param counseling
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/update")
 	public String counselingUpdate(CounselingVO counseling, HttpServletRequest request) throws Exception {
 		String counseling_id = request.getParameter("counseling_id");
@@ -290,7 +334,13 @@ public class CounselingController {
 		return "redirect:/counseling/detail/"+counseling_id;
 	}
 	
-	//상담글 삭제
+	/**
+	 * 상담글 삭제
+	 * @param counseling_id
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/delete/{counseling_id}")
 	public String counselingDelete(@PathVariable String counseling_id, HttpServletRequest request) throws Exception {
 		
@@ -498,7 +548,13 @@ try {
 		return "/counseling/userList";
 	}
 	
-	//고객센터->상담신청  등록해준다.
+	/**
+	 * 고객센터->상담신청  등록해준다
+	 * @param rq
+	 * @param counseling
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/asInsertProc")
 	public String asConsultationInsert(HttpServletRequest rq, CounselingVO counseling) throws Exception {
 		String zipcode = rq.getParameter("address0");
@@ -615,7 +671,7 @@ try {
 		System.out.println("60대수 : "+preference.getSixties());
 		System.out.println("buyIdList.size() : "+ buyIdList.size());
 		int percent;
-		//차를 구매했던 사람이 없으면 0값을 넣어 0을 나누지 못하게한다.
+		//차를 구매했던 사람이 없으면 0값을 넣어 0을 나누지 못하게한다. 오류방지
 		if(buyIdList.size() == 0) {
 			percent = 0;
 		}else {

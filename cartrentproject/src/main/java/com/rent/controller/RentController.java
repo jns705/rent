@@ -204,6 +204,10 @@ public class RentController {
 		
 		PreferenceVO preference = new PreferenceVO();
 		List<BuyVO> buyIdList = new ArrayList<BuyVO>();
+		/**
+		 * for
+		 * 해당 rent_id를 구매했던 사람들의 성별, 나이를 전부 가져와서 평균을 구한다.
+		 */
 		buyIdList = buyService.buyListMember(rent_id); //id가져옴
 		for(int i=0; i < buyIdList.size(); i++) {
 			String id = buyIdList.get(i).getId();
@@ -261,7 +265,7 @@ public class RentController {
 		System.out.println("60대수 : "+preference.getSixties());
 		System.out.println("buyIdList.size() : "+ buyIdList.size());
 		int percent;
-		//차를 구매했던 사람이 없으면 0값을 넣어 0을 나누지 못하게한다.
+		//차를 구매했던 사람이 없으면 0값을 넣어 0을 나누지 못하게한다. 오류방지
 		if(buyIdList.size() == 0) {
 			percent = 0;
 		}else {
