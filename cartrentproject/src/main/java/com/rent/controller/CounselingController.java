@@ -344,7 +344,7 @@ public class CounselingController {
 	@RequestMapping("/delete/{counseling_id}")
 	public String counselingDelete(@PathVariable String counseling_id, HttpServletRequest request) throws Exception {
 		
-		//고객센터에서 상담신청 했을경우 rent_id가 없다.
+		///고객센터에서 상담신청 했을경우 rent_id가 없다.
 		if(request.getParameter("rent_id_"+counseling_id) == "") {
 			couService.counselingDelete(counseling_id);
 			return "redirect:/counseling/list";
