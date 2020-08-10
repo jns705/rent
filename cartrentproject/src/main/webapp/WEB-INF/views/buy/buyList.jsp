@@ -36,29 +36,27 @@ input {
 <script>
 	function selChange() {
 		var sel = document.getElementById('cntPerPage').value;
-		location.href="/buy/list?nowPage=${paging.nowPage}&cntPerPage="+sel;
+		location.href="/buy/list?nowPage=${paging.nowPage}&cntPerPage="+sel+"&buyKind=${map.buyKind}&buySearch=${map.buySearch}";
 	}
 </script>
 </head>
 <body>
-<form method="post" name="form1">
 <div class="container">
 
  	<h2 align=center>예약 목록</h2>
- 	
+ <form action="#" method="get">
  	<div style="float: left;">
 	 	<select name="buyKind">
-	 		<option value="all">전체</option>
-	 		<option value="id">회원 아이디</option>
-	 		<option value="name">회원 이름</option>
-	 		<option value="tel">회원 전화번호</option>
+	 		<option value="all"  <c:if test="${map.buyKind eq 'all'}">selected</c:if> >전체</option>
+	 		<option value="id" <c:if test="${map.buyKind eq 'id'}">selected</c:if> >회원 아이디</option>
+	 		<option value="name" <c:if test="${map.buyKind eq 'name'}">selected</c:if> >회원 이름</option>
+	 		<option value="tel" <c:if test="${map.buyKind eq 'tel'}">selected</c:if> >회원 전화번호</option>
 	 	</select>
 	 	
 	 	<span>
-	 		<input type="text" name="buySearch" placeholder="검색어 입력">
+	 		<input type="text" name="buySearch" placeholder="검색어 입력" value="">
 	 	</span>
 	 	<button id="btnSearch">검색</button>
-	 	
  	</div>
  		<div style="float: right;">
 		<select id="cntPerPage" name="sel" onchange="selChange()">
@@ -72,6 +70,8 @@ input {
 				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
 		</select>
 	</div> <!-- 옵션선택 끝 -->
+ </form>
+<form method="post" name="form1">
 	<table class="table">
 		<thead style="background: #e7e6d2 ;">
 			<tr>
@@ -111,7 +111,7 @@ input {
 	
 	<div style="display: block; text-align: center;">		
 		<c:if test="${paging.startPage != 1 }">									<!-- &lt; 는 기호(<)의 코드값이다  -->
-			<a href="/buy/list?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+			<a href="/buy/list?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>
 		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 			<c:choose>
@@ -119,7 +119,7 @@ input {
 					<b>${p }</b>
 				</c:when>
 				<c:when test="${p != paging.nowPage }">
-					<a href="/buy/list?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+					<a href="/buy/list?nowPage=${p }&cntPerPage=${paging.cntPerPage}&buyKind=${map.buyKind}&buySearch=${map.buySearch}">${p }</a>
 				</c:when>
 			</c:choose>
 		</c:forEach>
@@ -127,11 +127,11 @@ input {
 			<a href="/buy/list?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 		</c:if>
 	</div>
+</form>
 	
 	
 </div>
 
-</form>
 </body>
 <script>
 function buyDelete(buy_id) {

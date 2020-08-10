@@ -217,7 +217,12 @@ public class BuyController {
 			, @RequestParam(defaultValue = "all") String buyKind //검색종류
 			, @RequestParam(defaultValue = "") String buySearch /*검색어*/) throws Exception {
 		
-		int total = buyService.buyCount();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		System.out.println("Search : "+buySearch);
+		map.put("buyKind", buyKind);
+		map.put("buySearch", buySearch);
+		int total = buyService.buyCount(map);
+		System.out.println("total : " + total);
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "5";
@@ -229,10 +234,6 @@ public class BuyController {
 		paging = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		paging.calcStartEnd(Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("buyKind", buyKind);
-		map.put("buySearch", buySearch);
 		map.put("start", paging.getStart());
 		map.put("end", paging.getEnd());
 		
@@ -255,6 +256,7 @@ public class BuyController {
 			car_name.add(car.getCar_name());
 		}
 		
+		model.addAttribute("map",map);
 		model.addAttribute("car",car_name);
 		model.addAttribute("paging", paging);
 		model.addAttribute("buyList", buyService.buyList(map));

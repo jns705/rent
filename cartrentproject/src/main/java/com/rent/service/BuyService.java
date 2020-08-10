@@ -38,8 +38,8 @@ public class BuyService {
 	}
 	
 	//구매목록 총 갯수
-	public int buyCount() throws Exception{
-		return mapper.buyCount();	
+	public int buyCount(HashMap<String, Object> map) throws Exception{
+		return mapper.buyCount(map);	
 	}
 	
 	//예약삭제

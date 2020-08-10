@@ -19,7 +19,7 @@ public interface BuyMapper {
 	public List<BuyVO> buyList(HashMap<String, Object> map) throws Exception;
 	
 	//구매목록 총 갯수
-	public int buyCount() throws Exception;
+	public int buyCount(HashMap<String, Object> map) throws Exception;
 	
 	//예약삭제
 	public int rentBuyDelete(int buy_id) throws Exception;

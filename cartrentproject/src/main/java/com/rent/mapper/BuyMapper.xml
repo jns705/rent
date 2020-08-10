@@ -37,9 +37,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
 	</select>
 	 -->
 	<!-- 렌트 구매자 목록 갯수 -->
-	<select id="buyCount" resultType="int">
+	<select id="buyCount" parameterType="hashMap" resultType="int">
 		select count(*)
 		from buy
+		where 
+		<if test="buyKind == 'all'"> 
+		id like '%${buySearch}%' 
+		or name like '%${buySearch}%' 
+		or tel like '%${buySearch}%' 
+		</if>
+   		<if test="buyKind != 'all'"> 
+	  		<if test="buyKind == 'id'">id </if>	
+	  		<if test="buyKind == 'name'">name </if>
+	  		<if test="buyKind == 'tel'">tel </if>
+			like '%${buySearch}%'
+		</if>
 	</select>
 	
 	<!-- 페이징 처리 후 렌트 목록 조회 -->
