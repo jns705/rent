@@ -100,7 +100,7 @@
 <script type="text/javascript">
 
 	colorChange();
-
+	//색상 변경 AJAX
 	function colorChange(){
 		var car_id = $('.car').val();
 		$.ajax({

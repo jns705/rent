@@ -334,6 +334,8 @@ public class CounselingController {
 		MemberVO list = mMemberService.accountDetail(id);
 		String [] address = list.getAddress().split("/");
 		String [] tel = list.getTel().split("\\|");
+		String [] date = list.getDate_of_birth().split("-");
+		list.setDate_of_birth(date[0]+date[1]+date[2]);
 		
 		model.addAttribute("address", address);
 		model.addAttribute("tel", tel);

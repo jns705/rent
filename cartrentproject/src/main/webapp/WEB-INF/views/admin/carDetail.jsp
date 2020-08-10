@@ -9,11 +9,7 @@
 <meta charset="UTF-8">
 <title>차량 상세정보</title>
 </head>
-<style>
-	#container label{
-		text-align: left;
-	}
-</style>
+<style> #container label{ text-align: left; } </style>
 <body>
 
 	<div class="container">

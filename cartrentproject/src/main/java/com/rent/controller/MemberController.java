@@ -61,8 +61,8 @@ public class MemberController {
 	//로그인 홈페이지
 	@RequestMapping("/loginForm")
 	public String loginForm(@RequestParam(defaultValue = "0") int check, Model model, HttpServletRequest request) throws Exception{
-		model.addAttribute("check", check);
-		model.addAttribute("Referer", request.getHeader("Referer"));
+		model.addAttribute("check"		, check);
+		model.addAttribute("Referer"	, request.getHeader("Referer"));
 		return "/member/loginForm";
 	}
 	
@@ -75,7 +75,10 @@ public class MemberController {
 	//회원가입
 	@RequestMapping("/insertProc")
 	public String insertProc(HttpServletRequest request, MemberVO member) throws Exception{
-		member.setAddress(request.getParameter("zipcode")+"-"+request.getParameter("address")+"-"+request.getParameter("addressDetail"));
+		String [] bir = member.getDate_of_birth().split("-");
+		System.out.println(bir[0] + bir[1]);
+		member.setDate_of_birth(bir[0] + bir[1] + bir[2]);
+		member.setAddress(request.getParameter("zipcode")+"/"+request.getParameter("address")+"/"+request.getParameter("addressDetail"));
 		mMemberService.insertProc(member);
 		return "/member/loginForm";
 	}
@@ -97,8 +100,12 @@ public class MemberController {
 		System.out.println("loginProc : " + check);
 		//아이디, 비밀번호가 있으면 세션을 등록한다
 		session.setAttribute("id", id);
-		if(Referer.equals("http://localhost:8082/buy/memberCheckForm")) return "redirect:/buy/short_rentList";
-		if(Referer.equals("http://localhost:8082/buy/memberCheckForm?check=1")) return "redirect:/counseling/userList";
+		if(Referer.equals("http://localhost:8082/buy/memberCheckForm")) 		
+			return "redirect:/buy/short_rentList";
+		if(Referer.equals("http://localhost:8082/buy/memberCheckForm?check=1")) 
+			return "redirect:/counseling/userList";
+		if(Referer.equals(""))
+			return "/main";
 		return "redirect:" + Referer.substring(21);
 	}
 	//맴버 알람 페이지 
@@ -122,28 +129,24 @@ public class MemberController {
 	//아이디 중복검사
 	@RequestMapping("/idCheck")
 	@ResponseBody
-	public int idCheck(@RequestParam String id) throws Exception {
-		return mMemberService.idCheck(id);
-	}
-	
-	@RequestMapping("/main")
-	public String main()throws Exception{
-		return "/main";
-	}
+	public int idCheck(@RequestParam String id) throws Exception { return mMemberService.idCheck(id); }
 	
 	//비회원 조회
 	@RequestMapping("/checkId")
 	public String checkId(BuyVO buyList, Model model)throws Exception{
-			List<BuyVO> Buy = buyService.getDetail(buyList);
-			if(Buy.isEmpty()) return "/buy/buyAlert";
-			List<CarVO> Car = new ArrayList<CarVO>();
-			List<ShortRentVO> SRent = new ArrayList<ShortRentVO>();
-			List<String> situation = new ArrayList<String>();
-			for(BuyVO buy : Buy ) {
-				Car.add(carService.carDetail(Integer.toString(rentService.rentDetail(buy.getRent_id()).getCar_id())));
-				SRent.add(shortService.shortDetail(buy.getBuy_id()));
-				situation.add(rentService.rentDetail(buy.getRent_id()).getSituation());
-			}
+		//바이테이블에 리스트가 없을 시 알럿을 띄운다
+		List<BuyVO> Buy = buyService.getDetail(buyList);
+		if(Buy.isEmpty()) return "/buy/buyAlert";
+		
+		List<ShortRentVO> SRent = new ArrayList<ShortRentVO>();
+		List<String> situation 	= new ArrayList<String>();
+		List<CarVO> Car 		= new ArrayList<CarVO>();
+		for(BuyVO buy : Buy ) {
+			Car.add(carService.carDetail(Integer.toString(rentService.rentDetail(buy.getRent_id()).getCar_id())));
+			SRent.add(shortService.shortDetail(buy.getBuy_id()));
+			situation.add(rentService.rentDetail(buy.getRent_id()).getSituation());
+		}
+		
 		model.addAttribute("Buy", Buy);
 		model.addAttribute("Car", Car);
 		model.addAttribute("SRent", SRent);
@@ -155,11 +158,10 @@ public class MemberController {
 	@RequestMapping("/checkId1")
 	public String checkId1(BuyVO buyList, Model model)throws Exception{
 		List<BuyVO> Buy = buyService.getDetail(buyList);
-		if(Buy.isEmpty()) {
-			return "redirect:/buy/buyAlert?check=1";
-		}
-		List<CarVO> Car = new ArrayList<CarVO>();
-		List<String> situation = new ArrayList<String>();
+		if(Buy.isEmpty())  return "redirect:/buy/buyAlert?check=1";
+		
+		List<String> situation 	= new ArrayList<String>();
+		List<CarVO> Car 		= new ArrayList<CarVO>();
 		for(BuyVO buy : Buy ) {
 			Car.add(carService.carDetail(Integer.toString(rentService.rentDetail(buy.getRent_id()).getCar_id())));
 			situation.add(rentService.rentDetail(buy.getRent_id()).getSituation());
@@ -184,13 +186,12 @@ public class MemberController {
 	//회원정보 수정
 	@RequestMapping("/update")
 	public String memberUpdate(MemberVO member, HttpServletRequest rq) throws Exception {
-		String zipcode = rq.getParameter("address0");
-		String address = rq.getParameter("address1");
-		String detailedAddress = rq.getParameter("address2");
+		String zipcode 			= rq.getParameter("address0");
+		String address 			= rq.getParameter("address1");
+		String detailedAddress 	= rq.getParameter("address2");
 		
 		member.setAddress(zipcode +"/"+ address +"/"+ detailedAddress);
 		mMemberService.memberUpdate(member);
-		System.out.println(member.getId()+"회원 정보수정");
 		return "redirect:/member/detail/"+member.getId();
 	}
 	

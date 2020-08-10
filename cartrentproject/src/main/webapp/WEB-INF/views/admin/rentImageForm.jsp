@@ -73,6 +73,7 @@
 
 	<script type="text/javascript">
 	option();
+	//렌트 이미지 AJAX
 	function option(){
 		var rent_id = $('[name=rent_id]').val();
 		$.ajax({
@@ -90,9 +91,11 @@
 			error   : function(data){alert("오류");}
 		});
 	}
-		$('[name=car_id]').change(function(){
-			option();
-		});
+
+	
+	$('[name=car_id]').change(function(){
+		option();
+	});
 	</script>
 </html>
 </layoutTag:layout>

@@ -1,63 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script type="text/javascript">
 $(document).ready(function(){
+	
+	
 	carKind();
 	selectCar();
 	//시간차를둬야 가능
 	setTimeout(function() {searchForm();}, 60);
+	
+	$('#ex1').slider({});  //대여기간
+	$("#ex2").slider({});  //월렌탈료
+	$("#ex3").slider({});  //주행거리
+	$("#ex4").slider({});  //차량등록
+
 });
 //숫자 세자리 , 찍는 정규식
 function numberFormat(inputNumber) {
 	   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-//제조사 선택
-function selectCar() {
-	var car_kind 	 = $('#usedCarSgmntTypeCd').val();
-	var manufacturer = $('#usedCarMakerId').val();
-	if(car_kind == '')
-		var car_kind 	 = '${ck}';
-	var cn = '${cn}';
-	$.ajax({
-		url		: '/rent/selectCar',
-		data	: {'car_kind' : car_kind, 'manufacturer' : manufacturer},
-		type	: 'post',
-		success : function(data){
-			var str = '<option value="">차량 선택</option>';
-			$.each(data.map, function(key, value){
-				str += '<option';
-				if(cn.replace(/(\s*)/g, "") === value.car_name.replace(/(\s*)/g, ""))
-					str += ' selected ';
-				str += '>'+ value.car_name + '</option>';
-			});
-			$('#usedCartypeId').html(str);
-		}
-	});
-}
+//footerSHeight값 이상일시 class를 바꾼다
+$(window).scroll(
+		function() {
+			var windowHeight = $(window).height() - window.innerHeight-$('#footer').height(); // Viewport Height
+			var scrollValue = $(document).scrollTop();
+			if (scrollValue > windowHeight){
+				$('.quick-top').attr('style','position:absolute');
+				$('#toptop').css('margin-top',windowHeight+'px');
+					
+			}else{
+				$('.quick-top').css('position','fixed');
+				$('#toptop').css('margin-top','');
+			}
+		});
 
-//차량 유형 선택
-function carKind(){
-	var manufacturer = $('#usedCarMakerId').val();
-	var ck = '${ck}';
-	$.ajax({
-		url		: '/rent/carKind',
-		data	: {'manufacturer' : manufacturer},
-		type	: 'post',
-		dataType : 'json',
-		success : function(data){
-			var str = '<option value="">차량 유형 선택</option>';
-			$.each(data.map, function(key, value){
-				str += '<option';
-				if(ck == value.car_kind)
-					str += ' selected ';
-				str += '>'+ value.car_kind + '</option>';
-			});
-			$('#usedCarSgmntTypeCd').html(str);
-			$('#usedCartypeId').html('<option value="">차량 선택</option>')
-		},
-		error : function(data){}
-	});
-}
+
+
 
 //버튼 클릭시 효과 & 값 입력
 function cc(index, data){
@@ -176,7 +152,7 @@ function more(count){
 	searchForm('click');
 }
 
-							
-</script>
 
 
+
+		

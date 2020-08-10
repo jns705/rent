@@ -28,7 +28,7 @@
 						<a href="/member/logOut" class="awaw">로그아웃  </a>
 					</c:if></li>
 				<c:if test="${sessionScope.id != null && sessionScope.id != 'master'}">
-					<li><a href="${path}/member/detail/${sessionScope.id}">회원정보</a>
+					<li><a  class="awaw" href="${path}/member/detail/${sessionScope.id}">회원정보</a>
 					</li>
 				</c:if>
 				<li><a href="/serviceCenter" class="awaw">고객센터</a></li>
@@ -139,6 +139,7 @@
 
 
 <c:if test="${!fn : contains(URL, 'main.do')}"> <style>body {margin-top: 100 !important;}</style> </c:if>
+<c:if test="${URL.substring(36) == 'main.jsp'}"> <style>.awaw{color:white !important;}</style></c:if>
 
 <c:if test="${fn : contains(URL, 'main.do')}"> <style>
 		header a img {margin-top: -20px !important;}

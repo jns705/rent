@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.rent.domain.NoticeVO;
 import com.rent.domain.ServiceVO;
 import com.rent.mapper.ServiceCenterMapper;
 
@@ -28,6 +29,26 @@ public class ServiceCenterService {
 	//페이징처리한 숫자
 	public int getTotalSize(Map<String, Object> map) throws Exception{
 		return mapper.getTotalSize(map);
+	}
+	
+	//공지사항 글쓰기 
+	public int noticeInsert(NoticeVO list) throws Exception{
+		return mapper.noticeInsert(list);
+	}
+	
+	//공지사항 상세정보
+	public NoticeVO noticeDetail(int no) throws Exception{
+		return mapper.noticeDetail(no);
+	}
+	
+	//공지사항 수정
+	public int noticeUpdate(NoticeVO list) throws Exception{
+		return mapper.noticeUpdate(list);
+	}
+	
+	//공지사항 삭제
+	public int noticeDelete(int no) throws Exception{
+		return mapper.noticeDelete(no);
 	}
 	
 }

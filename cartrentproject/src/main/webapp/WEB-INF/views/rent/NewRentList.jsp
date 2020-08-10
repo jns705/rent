@@ -10,20 +10,21 @@
 <html>
 <style>
 header img{margin-top:0px;}
-	.container {
-		width: 1030px; 
-	}
-	
-	#moreBtn {
-		margin-top: 30px;
-		background-color: #e0e0e0;
-	}
+.container {width: 1030px; }
+#moreBtn {margin-top: 30px; background-color: #e0e0e0;}
+.user_img {
+   transform:scale(1.0);        
+   transition: transform .5s; 
+}
+
+.user_img:hover{
+   transform:	scale(1.1);           
+   transition: 	transform .2s;           
+}
 </style>
 <head>
  <link href="http://localhost:8082/static/css/total.css" rel="stylesheet" type="text/css"/>
  <link href="http://localhost:8082/static/css/bootstrap-slider.css" rel="stylesheet" type="text/css"/>
-<%@ include file="slider.jsp" %>
-<%@ include file="skListAction.jsp" %>
 	<meta charset="UTF-8">
 	<title>중고차 or 신차 리스트 페이지</title>
 </head>
@@ -75,34 +76,25 @@ header img{margin-top:0px;}
 					</div>
 				</div>
 				
-<div class="quick-top off" style="z-index: 1000">
-    <a href="#top" id="aaaaaa" class="btn-top">TOP</a>
-</div>
-<style>
-.quick-top.off {    
-top: auto;
-    bottom: 235px !important;
-    height: 70px;
-    position: fixed;
-    top: 93%;
-    right: 50%;
-    margin-right: -580px;
-}
-
-</style>
 				
 		<div id="aa"></div>
 		
 		
 		
 		</article>
+<div class="quick-top" style="z-index: 10000;">
+	<a id="aaaaaa" class="btn-top">TOP</a>
+</div>
 	</div>
 </form>
 		<br><br>	
 </div>
 </body>
 <script type="text/javascript">
-
+//숫자 세자리 , 찍는 정규식
+function numberFormat(inputNumber) {
+	   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 searchForm();
 //최종 데이터 조회
@@ -187,10 +179,32 @@ function more(count){
 	searchForm('click');
 }
 
+//footerSHeight값 이상일시 class를 바꾼다
+$(window).scroll(
+		function() {
+			var windowHeight = $(window).height() - window.innerHeight-$('#footer').height(); // Viewport Height
+			var scrollValue = $(document).scrollTop();
+			if (scrollValue > windowHeight){
+				$('.quick-top').attr('style','position:absolute');
+				$('#aaaaaa').css('margin-top',windowHeight+'px');
+					
+			}else{
+				$('.quick-top').css('position','fixed');
+				$('#aaaaaa').css('margin-top','');
+			}
+		});
 
 
+	$('#aaaaaa').css('display', 'none');
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 400) {$('#aaaaaa').fadeIn();} 
+		else {$('#aaaaaa').fadeOut();}
+	});
 
-							
+	$('#aaaaaa').click(function() {
+		$('html, body').animate({scrollTop : 0}, 400);
+		return false;
+	});
 </script>
 
 </html>

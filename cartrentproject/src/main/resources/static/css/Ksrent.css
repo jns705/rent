@@ -1,4 +1,6 @@
 @CHARSET "UTF-8";
+.select2-selection {padding-left:10px;}
+
 .aa1{text-decoration: none;}
 .aa1:hover{color:#eb444b!important; text-decoration: none;}
 .aa2:hover{color:#f68121!important; text-decoration: none;}

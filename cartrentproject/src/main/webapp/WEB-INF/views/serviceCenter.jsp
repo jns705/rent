@@ -80,7 +80,7 @@
 					                <tr>
 					                    <td>${SSize - status.index - (showNum*(number-1))}</td>
 					                    <td>${list.division}</td>
-					                    <td class="text-l pal0" onclick="location.href='${path}/serviceCenter/noticeDetail/${list.no}?number=${index}&moVal=${moVal}&moKind=${moKind}'">
+					                    <td class="text-l pal0" onclick="location.href='${path}/serviceCenter/noticeDetail/${list.no}?number=${index}&moVal=${moVal}&moKind=${moKind}'" style="padding-left:6px !important;">
 					                    	 <a href="#">${list.subject}</a>
 					                    <!-- 날짜를 계산하기 위한 수치화 -->
 										<fmt:parseNumber var="reg_date" value="${list.reg_date.time / (1000*60*60*24)}" integerOnly="true"/>

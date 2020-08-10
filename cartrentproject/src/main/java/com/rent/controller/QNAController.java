@@ -19,9 +19,8 @@ public class QNAController {
 	QNAService service;
 	
 	@RequestMapping("/insert")
-	public String qnaInsert() throws Exception {
-		return "/qna/qnaInsert";
-	}
+	public String qnaInsert() throws Exception { return "/qna/qnaInsert"; }
+	
 	@RequestMapping("/insertProc")
 	private String qnaInsertProc(QNAVO qna) throws Exception {
 		service.qnaInsert(qna);

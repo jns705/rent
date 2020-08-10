@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css"> header img{margin-top:0px !important;} </style>
 <link href="http://localhost:8082/static/css/ss.css" rel="stylesheet" type="text/css" >
 <meta charset="UTF-8">
 <title>회원정보</title>

@@ -10,19 +10,13 @@
 <title>렌트 상세정보</title>
 </head>
 <style>
-	#container label{
-		text-align: left;
-	}
+	#container label{text-align: left;}
 	
-	thead	 th{
-		text-align: center;
-	}
+	thead	 th{text-align: center;}
 	
-	.naum	{
-		margin-left: 50px;
-		padding-left: 0px;
-		width: 1100px;
-	}
+	.naum	{margin-left: 50px;
+			padding-left: 0px;
+			width: 1100px;}
 </style>
 <body>
 
@@ -295,9 +289,7 @@ function accidentDelete() {
 
 	
 }
-</script>
 
-<script type="text/javascript">
 function addOption(){
 	window.open('${path}/admin/optionForm'
 			,'left=200, top=170, width=900, height=250, scrollbars=no, status=no, resizable=no, fullscreen=no, channelmode=no');

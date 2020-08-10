@@ -9,9 +9,9 @@
 <meta charset="UTF-8">
 <title>차량 리스트</title>
 <style type="text/css">
-	  thead td {
+	  thead td{
       position: sticky;
-      top: -1px;
+      top: 87px;
       background: red;
   }
 </style>
@@ -48,7 +48,7 @@
 						<c:forEach items="${list}" var="list" varStatus="status">
 						<tr align="center">
 							<td width="10">${status.index+1}</td>
-							<td>${list.car_name}</td>
+							<td onclick="location.href='${path}/admin/carDetail/${list.car_id}'">${list.car_name}</td>
 							<td>${list.manufacturer}</td>
 							<td>${list.car_kind}</td>
 							<td>${String.format('%,d',list.exhaust_volume)}CC</td>

@@ -10,9 +10,6 @@
 <title>상담신청</title>
 <link href="http://localhost:8082/static/css/ss.css" rel="stylesheet" type="text/css" >
 </head>
-<script>
-//ready 랑 같은거
-</script>
 <body>
 
 <div id="content">

@@ -31,13 +31,13 @@
 					<label class="control-label col-sm-2">제조사</label>
 					<div class="col-sm-4">
 						<select class="form-control" name="manufacturer">
-							<option value="현대" <c:if test="${car.manufacturer eq '현대'}">selected</c:if> >현대</option>
-							<option value="기아" <c:if test="${car.manufacturer eq '기아'}">selected</c:if> >기아</option>
-							<option value="삼성" <c:if test="${car.manufacturer eq '삼성'}">selected</c:if> >삼성</option>
-							<option value="Audi" <c:if test="${car.manufacturer eq 'Audi'}">selected</c:if> >Audi</option>
-							<option value="BMW" <c:if test="${car.manufacturer eq 'BMW'}">selected</c:if> >BMW</option>
-							<option value="Benz" <c:if test="${car.manufacturer eq 'Benz'}">selected</c:if> >Benz</option>
-							<option value="Tesla" <c:if test="${car.manufacturer eq 'Tesla'}">selected</c:if> >Tesla</option>
+							<option value="현대" 	<c:if test="${car.manufacturer eq '현대'}">selected</c:if> >현대</option>
+							<option value="기아" 	<c:if test="${car.manufacturer eq '기아'}">selected</c:if> >기아</option>
+							<option value="삼성" 	<c:if test="${car.manufacturer eq '삼성'}">selected</c:if> >삼성</option>
+							<option value="Audi" 	<c:if test="${car.manufacturer eq 'Audi'}">selected</c:if> >Audi</option>
+							<option value="BMW" 	<c:if test="${car.manufacturer eq 'BMW'}">selected</c:if> >BMW</option>
+							<option value="Benz" 	<c:if test="${car.manufacturer eq 'Benz'}">selected</c:if> >Benz</option>
+							<option value="Tesla" 	<c:if test="${car.manufacturer eq 'Tesla'}">selected</c:if> >Tesla</option>
 						</select>
 					</div>
 				</div>
@@ -53,12 +53,12 @@
 					<label class="control-label col-sm-2">차종</label>
 					<div class="col-sm-4">
 						<select class="form-control" name="car_kind">
-							<option value="소형" <c:if test="${car.car_kind eq '소형'}">selected</c:if> >소형</option>
-							<option value="준중형" <c:if test="${car.car_kind eq '준중형'}">selected</c:if> >준중형</option>
-							<option value="중형" <c:if test="${car.car_kind eq '중형'}">selected</c:if> >중형</option>
-							<option value="대형" <c:if test="${car.car_kind eq '대형'}">selected</c:if> >대형</option>
-							<option value="화물" <c:if test="${car.car_kind eq '화물'}">selected</c:if> >화물</option>
-							<option value="RV" <c:if test="${car.car_kind eq 'RV'}">selected</c:if> >RV</option>
+							<option value="소형" 	<c:if test="${car.car_kind eq '소형'}">selected</c:if> >소형</option>
+							<option value="준중형" 	<c:if test="${car.car_kind eq '준중형'}">selected</c:if> >준중형</option>
+							<option value="중형" 	<c:if test="${car.car_kind eq '중형'}">selected</c:if> >중형</option>
+							<option value="대형" 	<c:if test="${car.car_kind eq '대형'}">selected</c:if> >대형</option>
+							<option value="화물" 	<c:if test="${car.car_kind eq '화물'}">selected</c:if> >화물</option>
+							<option value="RV" 		<c:if test="${car.car_kind eq 'RV'}">selected</c:if> >RV</option>
 							<option value="친환경차" <c:if test="${car.car_kind eq '친환경차'}">selected</c:if> >친환경차</option>
 						</select>
 					</div>
@@ -68,11 +68,11 @@
 					<label class="control-label col-sm-2">연료</label>
 						<div class="col-sm-4">
 						<select class="form-control" name="fuel">
-							<option value="휘발유"<c:if test="${car.fuel eq '휘발유'}">selected</c:if> >휘발유</option>
-							<option value="경유"<c:if test="${car.fuel eq '경유'}">selected</c:if> >경유</option>
-							<option value="전기"<c:if test="${car.fuel eq '전기'}">selected</c:if> >전기</option>
-							<option value="하이브리드"<c:if test="${car.fuel eq '하이브리드'}">selected</c:if> >하이브리드</option>
-							<option value="LPG"<c:if test="${car.fuel eq 'LPG'}">selected</c:if> >LPG</option>
+							<option value="휘발유"		<c:if test="${car.fuel eq '휘발유'}">selected</c:if> >휘발유</option>
+							<option value="경유"		<c:if test="${car.fuel eq '경유'}">selected</c:if> >경유</option>
+							<option value="전기"		<c:if test="${car.fuel eq '전기'}">selected</c:if> >전기</option>
+							<option value="하이브리드"	<c:if test="${car.fuel eq '하이브리드'}">selected</c:if> >하이브리드</option>
+							<option value="LPG"			<c:if test="${car.fuel eq 'LPG'}">selected</c:if> >LPG</option>
 						</select>
 						</div>
 				</div>

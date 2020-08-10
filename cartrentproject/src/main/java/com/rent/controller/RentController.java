@@ -101,11 +101,13 @@ public class RentController {
 	public Map<String, Object> rentListProc(RentListVO list, Model model, HttpServletRequest request)throws Exception{
 		List<String> location 	= new ArrayList<String>();
 		List<String> fuel 		= new ArrayList<String>();
+		//location 정보 5개를 가져온다
 			for(int i = 0; i < 5; i ++) {
 				if(!request.getParameter("l"+i).equals(""))
 				location.add(request.getParameter("l"+i));
 				list.setLocation(location);
 			}
+		//fuel 정보 5개를 가져온다
 			for(int i = 0; i < 5; i ++) {
 				if(!request.getParameter("f"+i).equals(""))
 				fuel.add(request.getParameter("f"+i));
@@ -114,8 +116,6 @@ public class RentController {
 		
 		//조회한 정보 갯수
 		int listCount = rentService.rentListPro(list).get(0).getRent_id();
-		System.out.println(list);
-		System.out.println(listCount);
 		//보여질 아이템 갯수
 		int showCount = 6;
 		int temp  = listCount/showCount+1;
@@ -142,36 +142,36 @@ public class RentController {
 	}
 	
 	//신차 리스트 조건부 출력 ajax
-	@RequestMapping("/newRentListProc")
-	@ResponseBody
-	public Map<String, Object> newRentListProc(RentListVO list, Model model, HttpServletRequest request)throws Exception{
-		
-		//조회한 정보 갯수
-		int listCount = rentService.newRentListPro(list).get(0).getRent_id();
-		//보여질 아이템 갯수
-		int showCount = 6;
-		int temp  = listCount/showCount+1;
-		//총 페이지 수 = 전체 수 / 보여질 갯수
-		int count = temp;
-		
-		//더보기 버튼이 처음 눌려지는게 아닐 시 리미트 값을 가져온다
-		if(list.getLimit() != "" ) count = Integer.parseInt(list.getLimit());
-		//총 페이지 수에서 리미트값을 뺀 값에 보여질 아이템 수를 곱한다
-		int Ccount = (temp - count +1) * showCount;
-		list.setLimit(Integer.toString(Ccount));
-		//정보를 통해 출력할 리스트 값을 가져온다.
-		list.setTemp("list");
-		List<RentVO> rentList 	 = rentService.newRentListPro(list);
-		
-		
-		//보낼 값들을 map에 넣는다
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("rentList", rentList);
-		map.put("count", count);
-		map.put("total", listCount);
-		map.put("showCount", showCount);
-		return map;
-	}
+		@RequestMapping("/newRentListProc")
+		@ResponseBody
+		public Map<String, Object> newRentListProc(RentListVO list, Model model, HttpServletRequest request)throws Exception{
+			
+			//조회한 정보 갯수
+			int listCount = rentService.newRentListPro(list).get(0).getRent_id();
+			//보여질 아이템 갯수
+			int showCount = 6;
+			int temp  = listCount/showCount+1;
+			//총 페이지 수 = 전체 수 / 보여질 갯수
+			int count = temp;
+			
+			//더보기 버튼이 처음 눌려지는게 아닐 시 리미트 값을 가져온다
+			if(list.getLimit() != "" ) count = Integer.parseInt(list.getLimit());
+			//총 페이지 수에서 리미트값을 뺀 값에 보여질 아이템 수를 곱한다
+			int Ccount = (temp - count +1) * showCount;
+			list.setLimit(Integer.toString(Ccount));
+			//정보를 통해 출력할 리스트 값을 가져온다.
+			list.setTemp("list");
+			List<RentVO> rentList 	 = rentService.newRentListPro(list);
+			
+			
+			//보낼 값들을 map에 넣는다
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("rentList", rentList);
+			map.put("count", count);
+			map.put("total", listCount);
+			map.put("showCount", showCount);
+			return map;
+		}
 	
 	//차량 리스트 상세정보
 	@RequestMapping("/rentListDetail/{rent_id}")
@@ -180,11 +180,10 @@ public class RentController {
 		rent = rentService.rentDetail(rent_id);
 		
 		String onOff[] = new String [8]; 
-		for(int i = 0; i < 8; i++) {
-			onOff[i] = "off";
-		}
+		for(int i = 0; i < 8; i++) { onOff[i] = "off"; }
+		
+		//옵션이 있을 경우 해당 내용을 on으로 바꾼다
 		List<OptionCarVO> list = opService.optionDetail(rent_id);
-		System.out.println(list);
 		for(int i = 0; list.size() > i ; i++) {
 			OptionCarVO List = list.get(i);
 			
@@ -291,9 +290,7 @@ public class RentController {
 	}
 	
 	@RequestMapping("/NewRentList")
-	public String NewRentList(Model model) throws Exception{
-		return "/rent/NewRentList";
-	}
+	public String NewRentList(Model model) throws Exception{ return "/rent/NewRentList"; }
 	
 	@RequestMapping("/NewRentListDetail/{rent_id}")
 	public String NewRentListDetail(Model model, @PathVariable String rent_id, HttpSession session)throws Exception{		
@@ -301,8 +298,10 @@ public class RentController {
 	if(id != null) {
 	MemberVO list = mMemberService.accountDetail(id);
 	String [] address = list.getAddress().split("/");
+	//|는 기호라 앞에 \\을 써야함
 	String [] tel = list.getTel().split("\\|");
-	
+	String [] date = list.getDate_of_birth().split("-");
+	list.setDate_of_birth(date[0]+date[1]+date[2]);
 	model.addAttribute("address", address);
 	model.addAttribute("tel", tel);
 	model.addAttribute("detail", list);
@@ -318,14 +317,16 @@ public class RentController {
 		return "/rent/NewRentListDetail";
 	}
 	
+	//색상 AJAX
 	@ResponseBody
 	@RequestMapping("/rentColorProc")
 	public CarColor rentColorProc(Model model, @RequestParam String rent_id, @RequestParam int index)throws Exception{
-		RentVO rent 	= rentService.rentDetail(rent_id);
-		String car_id 	= Integer.toString(rent.getCar_id());
-		CarColor color = colorService.colorDetail(car_id).get(index);
+		RentVO 		rent 	= rentService.rentDetail(rent_id);
+		String 		car_id 	= Integer.toString(rent.getCar_id());
+		CarColor 	color 	= colorService.colorDetail(car_id).get(index);
+		
+		color.setColor	(rentService.getPrice(car_id));
 		color.setCar_id(Integer.parseInt(rent_id));
-		color.setColor(rentService.getPrice(car_id));
 		
 		return color;
 	}

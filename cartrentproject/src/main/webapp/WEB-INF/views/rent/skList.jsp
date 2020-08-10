@@ -10,14 +10,12 @@
 <html>
 <style>
 header img{margin-top:0px;}
-	.container {
-		width: 1030px; 
-	}
+.container { width: 1030px;  }
 	
-	#moreBtn {
-		margin-top: 30px;
-		background-color: #f5f5f5;
-	}
+#moreBtn {
+	margin-top: 30px;
+	background-color: #f5f5f5;
+}
 
 
 .howmany_box_span{
@@ -37,12 +35,22 @@ header img{margin-top:0px;}
 .select-box {
 	height: 60px; 
 }
+
+.user_img {
+   transform:scale(1.0);        
+   transition: transform .5s; 
+}
+
+.user_img:hover{
+   transform:	scale(1.1);           
+   transition: 	transform .2s;           
+}
 </style>
 <head>
+<script src="http://localhost:8082/static/js/bootstrap-slider.js"></script>
+<script src="http://localhost:8082/static/js/ksList.js"></script>
 <link rel="shortcut icon" href="http://localhost:8082/static/img/favicon.ico"/>
  <link href="http://localhost:8082/static/css/total.css" rel="stylesheet" type="text/css"/>
-<%@ include file="slider.jsp" %>
-<%@ include file="skListAction.jsp" %>
 	<meta charset="UTF-8">
 	<title>중고차 or 신차 리스트 페이지</title>
 </head>
@@ -202,7 +210,7 @@ header img{margin-top:0px;}
 		</article>
 	</div>
 	
-	
+
 	<article id="artcleCarModlList" >
 				<div class="header-group clearfix">
 						<h3>
@@ -220,8 +228,9 @@ header img{margin-top:0px;}
 						</span>
 					</div>
 				</div>
-				
-			
+<div class="quick-top" style="z-index: 10000;">
+	<a id="toptop" class="btn-top">TOP</a>
+</div>				
 		<div id="aa"></div>
 		
 		
@@ -235,12 +244,6 @@ header img{margin-top:0px;}
 </body>
 <script type="text/javascript">
 
-
-
-$('#ex1').slider({});  //대여기간
-$("#ex2").slider({});  //월렌탈료
-$("#ex3").slider({});  //주행거리
-$("#ex4").slider({});  //차량등록
 
 //대여기간
 $('#ex1').on('slide',function(data){
@@ -268,7 +271,66 @@ $('#ex4').on('slide',function(data){
 	$( "#reg_date1" ).val(data.value[0]);
 	$( "#reg_date2" ).val(data.value[1]);
 });
-</script>
 
+//제조사 선택
+function selectCar() {
+	var car_kind 	 = $('#usedCarSgmntTypeCd').val();
+	var manufacturer = $('#usedCarMakerId').val();
+	if(car_kind == '')
+		var car_kind 	 = '${ck}';
+	var cn = '${cn}';
+	$.ajax({
+		url		: '/rent/selectCar',
+		data	: {'car_kind' : car_kind, 'manufacturer' : manufacturer},
+		type	: 'post',
+		success : function(data){
+			var str = '<option value="">차량 선택</option>';
+			$.each(data.map, function(key, value){
+				str += '<option';
+				if(cn.replace(/(\s*)/g, "") === value.car_name.replace(/(\s*)/g, ""))
+					str += ' selected ';
+				str += '>'+ value.car_name + '</option>';
+			});
+			$('#usedCartypeId').html(str);
+		}
+	});
+}
+
+//차량 유형 선택
+function carKind(){
+	var manufacturer = $('#usedCarMakerId').val();
+	var ck = '${ck}';
+	$.ajax({
+		url		: '/rent/carKind',
+		data	: {'manufacturer' : manufacturer},
+		type	: 'post',
+		dataType : 'json',
+		success : function(data){
+			var str = '<option value="">차량 유형 선택</option>';
+			$.each(data.map, function(key, value){
+				str += '<option';
+				if(ck == value.car_kind)
+					str += ' selected ';
+				str += '>'+ value.car_kind + '</option>';
+			});
+			$('#usedCarSgmntTypeCd').html(str);
+			$('#usedCartypeId').html('<option value="">차량 선택</option>')
+		},
+		error : function(data){}
+	});
+}
+
+
+$('#toptop').css('display', 'none');
+$(window).scroll(function() {
+	if ($(this).scrollTop() > 400) {$('#toptop').fadeIn();} 
+	else {$('#toptop').fadeOut();}
+});
+
+$('#toptop').click(function() {
+	$('html, body').animate({scrollTop : 0}, 400);
+	return false;
+});
+</script>
 </html>
 </layoutTag:layout>

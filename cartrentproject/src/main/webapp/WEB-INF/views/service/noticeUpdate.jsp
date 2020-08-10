@@ -25,7 +25,7 @@ select {
 </style>
 </head>
 <body>
-
+<form action="/serviceCenter/noticeUpdate" method="get" name="Upform">
 <div id="content">
     <div id="container">
         <div class="breadcrumbs">
@@ -38,19 +38,20 @@ select {
         </div>
         <!-- breadcrumbs//end -->
         <div class="view-type v2">
-            <div class="view-header">
-                <h4><span class="cl-point1">
+            <div class="view-header form-group">
+               <span class="cl-point1">
 					<select name="division" id="division">
-						<option value="공통">공통</option>
-						<option value="장기렌터카">장기렌터카</option>
-						<option value="단기렌터카">단기렌터카</option>
+						<option value="공통" 	   <c:if test="${list.division eq '공통'}">selected</c:if>>공통</option>
+						<option value="장기렌터카" <c:if test="${list.division eq '장기렌터카'}">selected</c:if>>장기렌터카</option>
+						<option value="단기렌터카" <c:if test="${list.division eq '단기렌터카'}">selected</c:if>>단기렌터카</option>
 					</select>					
-                </span> <input type="text" class="form-control" id="subject" name="subject" value="제목"> </h4><!-- 이벤트 카테고리가 지점일 경우 cl-point5, 특별일 경우 cl-point2, 장기렌터카일 경우 cl-point2 -->
-                <span class="time">2020-07-28 등록날짜</span>
+                </span> 
+                <input type="text" id="subject" name="subject" value="${list.subject}" style="width:500px; height:47.95">
+                <input name="no" value="${list.no}" hidden>
             </div>
             <!-- view-header//end -->
             <div class="view-content">
-                 <textarea class="form-control" rows="10" id="content" name="content">내용</textarea>
+                 <textarea class="form-control" rows="10" id="content" name="content">${list.content}</textarea>
             </div>
             <!-- view-content//end -->
             
@@ -58,13 +59,14 @@ select {
         </div>
         <!-- view-type//end -->
         <div class="btn-box text-c">
-       		<a href="#" class="btn btn-danger btn-fix3 btn-large">수정</a>
+       		<a href="#" class="btn btn-danger btn-fix3 btn-large" onclick="Upform.submit();">수정</a>
             <a href="${path}/serviceCenter" class="btn btn-primary btn-fix3 btn-large">목록</a>
         </div>
         <!-- btn-box//end -->
     </div>
     <!-- container//end -->
 </div>
+</form>
 
 </body>
 </html>
