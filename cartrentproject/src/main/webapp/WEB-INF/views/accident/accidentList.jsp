@@ -69,7 +69,7 @@ tbody td#a:hover {
 </body>
 <script>
 var now = 1;	//시작
-var cntPerPage = 8;	//화면에 보여줄 갯수
+var cntPerPage = 10;	//화면에 보여줄 갯수
 
 $(function() {
 	loadNext();
