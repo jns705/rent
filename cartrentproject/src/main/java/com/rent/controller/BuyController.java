@@ -158,7 +158,6 @@ public class BuyController {
 			buy.setCounseling_date(format1.format(time.getTime()));
 		}
 		
-		
 		buy.setOption_name(options);
 		buy.setBuy_situation("대여중");
 		
